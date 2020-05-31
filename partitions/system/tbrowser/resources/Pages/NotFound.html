@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0043)http://hi.baidu.com/com/error/?from=oldblog -->
+<HTML><HEAD><TITLE>404错误页面</TITLE><!--STATUS OK-->
+<META http-equiv=Content-Type content="text/html; charset=utf-8"><LINK 
+href="http://www.leadto.com.cn/files/image/favicon.ico" 
+type=image/x-icon rel="shortcut icon">
+<script type="text/javascript" src="language.js"></script>
+<SCRIPT>
+window.wpo={start:new Date*1,pid:109,page:'qing'}
+</SCRIPT>
+<STYLE type=text/css>
+body{
+	width: 100%;
+	height: 100%;
+	margin:0px; 
+	padding:0px;
+}
+.mod-notfound {
+	TEXT-ALIGN: center; position: absolute;z-index:99;width:100%;
+}
+</STYLE>
+
+<META content="MSHTML 6.00.6000.17117" name=GENERATOR></HEAD>
+<BODY>
+<img src="errorPage.jpg" id="bg_img" style="position: absolute; margin: 0 auto;z-index:9; " />
+<DIV  class="mod-notfound">
+<h1 id="demo" style="color:#c01410;font-family: Arial, Helvetica, sans-serif;"></h1>
+<h1 id = "demo2" style="color:#222222;font-family:Arial, Helvetica, sans-serif;"></h1>
+<h1 id = "demo3" style="color:#222222;font-family:Arial, Helvetica, sans-serif;"></h1>
+</DIV>
+
+</BODY>
+<script lauguage="JavaScript" type="text/javascript">
+function strToArray(str){
+	var arr = str.split("?");
+	var info = arr[1].split("&");
+	var code = info[0].split("=");
+	var des = info[1].split("=");
+	if(info.length > 2) {
+		var errorUrl;
+		errorUrl = info[2].split("=");
+	}
+	console.log(tcl.setting.menuLanguage);
+	var currentLanguage = tcl.setting.menuLanguage;
+	var i = mlmLangIndex.indexOf(currentLanguage);
+	document.getElementById("demo").innerHTML = ErrorCodeLang + " (" + code[1] + ")";
+	if(code[1] == 7 || code[1] == 6 || code[1] == 28){
+		document.getElementById("demo2").innerHTML = desLang;
+	}else{
+		document.getElementById("demo2").innerHTML = des[1];
+	}
+	if(info.length > 2)
+		document.getElementById("demo3").innerHTML = failLoadDes + errorUrl[1];	
+}
+
+document.getElementById("bg_img").width = window.screen.width;
+document.getElementById("bg_img").height = window.screen.height;
+document.getElementsByClassName("mod-notfound").item(0).style.marginTop = 723*window.screen.height/1080 + "px";
+document.getElementById("demo").style.fontSize = 32*window.screen.height/1080 + "px";
+document.getElementById("demo2").style.fontSize = 32*window.screen.height/1080 + "px";
+document.getElementById("demo3").style.fontSize = 32*window.screen.height/1080 + "px";
+var url =window.location.href;
+strToArray(decodeURI(url));
+</script>
+</HTML>

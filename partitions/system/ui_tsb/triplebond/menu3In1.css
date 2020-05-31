@@ -1,0 +1,334 @@
+
+ul
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.menu3In1
+{
+	width: 1920px;
+	height: 1080px;
+	position: absolute;
+}
+
+.menu3In1Panel
+{
+	border: 0px solid #000;
+	margin-top: 674px;
+	margin-left:760px;
+	height: 406px;
+	width: 400px;
+	background-image: url("../images/overallbg.png");
+	background-repeat: no-repeat;
+	display: none;
+	
+}
+
+.guide
+{
+	position: relative;
+	height: 94px;
+	width: 400px;
+	text-align: center;
+	border: 0px solid #ddd123;
+	float:left; 
+}
+
+.guide_pic
+{
+	position:absolute;
+	height:86px;
+	width: 400px;
+	border: 0px solid #345ddd;
+	left: 751px;
+	top:0px;
+}
+
+
+
+
+.guideTitle
+{
+	position:absolute;
+	height:22px;
+	width: 400px;
+	border: 0px solid #a1fccc;
+	left: 0px;
+	top:0px;
+	
+}
+
+.guideTitle_text
+{
+	position:absolute;
+	color: white;
+	left: 189px;
+	top:4px;
+	font-size: 14px;
+}
+
+
+
+.guideContent
+{
+	position:relative;
+	height:64px;
+	width: 400px;
+	border: 0px solid #888aaa;
+	text-align: center;
+	vertical-align:middle;
+	margin-top: 22px;
+	float:left;
+}
+
+.guideContent_pic
+{
+	position:relative;
+	color: white;
+	height:64px;
+	width: 400px;
+	border: 0px solid #000;
+}
+
+#guideContent_middle_div
+{
+	position: absolute;
+	width:165px;
+	border: 0px solid #111fff;
+	left: 130px;
+	top:3.5px;
+}
+		.guideContent_pic_middle
+		{
+			position: relative;
+			border: 0px solid #fff;
+			float: left;
+		}
+		.guideContent_text_middle
+		{
+			position: relative;
+			color: white;
+			font-size: 16px;
+			border: 0px solid #fff;
+			margin-top: 9px;
+			margin-left:0px;
+			text-align:left;
+			float: left;
+			width:100px;
+			overflow:hidden;
+		}
+		
+		
+		
+		
+		
+		
+#guideContent_left_div
+{
+	position: absolute;
+	border: 0px solid #111fff;
+	left: 60px;
+	top:3.5px;
+	
+}
+		.guideContent_pic_left
+		{
+			position: relative;
+			border: 0px solid #fff;
+			float: left;
+		}
+		
+		.guideContent_text_left
+		{
+			position: relative;
+			color: white;
+			font-size: 16px;
+			border: 0px solid #fff;
+			margin-top: 9px;
+			margin-left:0px;
+			float: left;
+		}
+
+
+
+
+#guideContent_right_div
+{
+	position: absolute;
+	border: 0px solid #111fff;
+	left: 260px;
+	top:3.5px;
+}
+		.guideContent_pic_right
+		{
+			position: relative;
+			border: 0px solid #fff;
+			float: left;
+		}
+		.guideContent_text_right
+		{
+			position: relative;
+			color: white;
+			font-size: 16px;
+			border: 0px solid #fff;
+			margin-top: 9px;
+			margin-left:0px;
+			float: left;
+		}
+
+.guideContent_text
+{
+	position:absolute;
+	color: white;
+	left: 189px;
+	top:20px;
+	font-size: 16px;
+}
+
+
+
+
+
+
+.imgs_div
+{
+	width: 90px;
+	height: 90px;
+	font-size: 0px;
+	border: 0px solid #fff;
+	margin-top:94px;
+	margin-left:155px;
+	overflow:hidden;
+}
+
+.imgs  
+{
+	width:1920px;
+	height:100px;
+	font-size: 0px;
+	border: 0px solid #fff;
+	overflow:hidden;
+	position: relative;
+	left: 0px;
+}
+.imgs li
+{
+	border: 0px solid #fff;
+	display: inline-table;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.text
+{
+	display:block;
+	border: 0px solid #000;
+	font-size: 24px;
+	color: white;
+	position: relative;
+	text-align:center;
+	top:0px;
+}
+
+
+
+
+
+
+#dots_div
+{
+	width: 406px;
+	height: 12px;
+	font-size: 0px;
+	border: 0px solid #123dcd;
+	margin: 0px auto;
+	position: relative;
+	overflow:hidden;
+	margin-top: 30px;
+	text-align: center;
+}
+
+
+
+.dots
+{
+	font-size: 0px;
+	border: 0px solid #fff;
+	margin-left: 0px;
+	
+}
+.dots li
+{
+	border: 0px solid #fff;
+	display: inline-table;
+	width: 10px;
+	height: 10px;
+	margin: 0 8px;
+}
+
+
+
+
+
+
+.powerOff
+{
+	position: absolute;
+	top:783px;
+	left:710px;
+	border: px solid #fff;
+	width: 500px;
+	height: 139px;
+	background-image: url("../images/alertdialog_content_bg.png");
+	background-repeat: no-repeat;
+	display: none;
+}
+
+.powerOffNum
+{
+	top:50px;
+	left:120px;
+	position: absolute;
+	border: 0px solid #fff;
+	font-size: 24px;
+	color: white;
+}
+.powerOffText
+{
+	top:50px;
+	left:140px;
+	position: absolute;
+	border: 0px solid #fff;
+	font-size: 24px;
+	color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

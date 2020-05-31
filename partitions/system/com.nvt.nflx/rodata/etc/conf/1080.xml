@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <ui_width>1920</ui_width>
+    <ui_height>1080</ui_height>
+    <screen_width>1920</screen_width>
+    <screen_height>1080</screen_height>
+    <!-- <inject_js>http://localcontrol.netflix.com/js/inject/1080_boxshots.js</inject_js> -->
+  </config_data>
+</config_root>

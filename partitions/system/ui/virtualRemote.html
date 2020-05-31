@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>virtualRemote.html</title>
+
+    <meta name="keywords" content="virtualRemote">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+	<script  type="text/javascript" src = "virtualRemote/js/virtualRemoteForALL.js"></script>
+    <link rel="stylesheet" type="text/css" href="virtualRemote/css/virtualRemoteForDefault.css"></link>
+    
+    <script  type="text/javascript" src = ""></script>
+    <link rel="stylesheet" type="text/css" href=""></link>
+    
+</head>
+
+<body >
+
+<div id = "virtualremoteId" class = "virtualremotediv">
+ 
+  	<!-- 1、基础table，是数字1-9的 -->
+	<table id = "t01_number" class = "t01_number"  >
+	
+	    <!-- 1、2、3 -->
+		<tr >
+			<td ><span id = "t01_1" class = "span_number" ></span></td>
+			<td ><span id = "t01_2" class = "span_number" ></span></td>
+			<td ><span id = "t01_3" class = "span_number" ></span></td>
+		</tr>
+		
+		<!-- 4、5、6 -->
+		<tr >
+			<td ><span id = "t01_4" class = "span_number" ></span></td>
+			<td ><span id = "t01_5" class = "span_number" ></span></td>
+			<td ><span id = "t01_6" class = "span_number" ></span></td>
+		</tr>
+		
+		<!-- 7、8、9 -->
+		<tr >
+			<td ><span id = "t01_7" class = "span_number" ></span></td>
+			<td ><span id = "t01_8" class = "span_number" ></span></td>
+			<td ><span id = "t01_9" class = "span_number" ></span></td>
+		</tr>
+
+	</table>
+
+
+	<!-- 2、基础table，是数字和zoom的 -->
+	<table id = "t02_zero" class = "t02_zero"  >
+
+
+		<!-- Zoom1、0、Zoom+ -->
+		<tr>
+			<td ><span id = "t02_zoomL"    class = "span_text"  style="display: none" ></span></td>
+			<td ><span id = "t02_0"        class = "span_number">0</span></td>
+			<td ><span id = "t02_zoomR"    class = "span_text"  style="display: none" ></span></td>
+		</tr>
+
+
+	</table>
+	
+	<!-- 13新、基础table，是数字0和exit的 -->
+	<table id = "t13_zero" class = "t13_zero"  >
+
+
+		<!-- exit、0、 、 -->
+		<tr>
+			<td ><span id = "t13_exit"     class = "span_text"  ></span></td>
+			<td ><span id = "t13_0"        class = "span_number"></span></td>
+			<td ><span id = "t13_null"     class = "span_text"  style="display: none" ></span></td>
+		</tr>
+
+
+	</table>
+
+	
+	
+	<!-- 3、是文字相关的 一 -->
+	<table id = "t03_tvtext" class = "t03_tvtext"  >
+	
+		<!-- List、0、text -->
+		<tr >
+			<td ><span id = "t03_list"    class = "span_text"   ></span></td>
+			<td ><span id = "t03_0"       class = "span_number" ></span>   </td>
+			<td ><span id = "t03_text"    class = "span_text"   ></span></td>
+		</tr>
+
+	</table>
+
+
+	<!-- 4、是文字相关的 二 -->
+	<table id = "t04_tvtext" class = "t04_tvtext"  >
+
+
+		<!-- Guide、Enter、Exit -->
+		<tr >
+			<td ><span id = "t04_guide"      class = "span_text"   ></span></td>
+			<td ><span id = "t04_enter"      class = "span_text"   ></span></td>
+			<td ><span id = "t04_exit"       class = "span_text"   ></span> </td>
+		</tr>
+
+
+	</table>
+
+	<!-- 5、是文字相关的 三 -->
+	<table id = "t05_tvtext" class = "t05_tvtext"  >
+
+		<!-- Menu、Subtitle 、Info -->
+		<tr >
+			<td ><span id = "t05_menu"       class = "span_text"   ></span></td>
+			<td ><span id = "t05_subtitle"   class = "span_text"   ></span></td>
+			<td ><span id = "t05_info"       class = "span_text"   ></span></td>
+		</tr>
+
+	</table>
+
+
+
+	<!-- 6、 PVR的table -->
+	<table id = "t06_pvr" class = "t06_pvr" >
+
+		<!-- stop、 PVR、blue -->
+		<tr >
+			<td><span id = "t06_stop"  class = "span_text"></span></td>
+			<td  id = "t06_reddot"     class = "pic_reddot"></td>
+			<td  id = "t06_blue"       class = "pic_blue"></td>
+		</tr>
+
+	</table>
+
+	<!-- 7、HDMI文字 新增 -->
+	<table id = "t07_hdmi" class = "t07_hdmi"  >
+
+		<!-- Info、Menu、Exit -->
+		<tr >
+			<td ><span id = "t07_info"     class = "span_text"   ></span></td>
+			<td ><span id = "t07_menu"     class = "span_text"   ></span></td>
+			<td ><span id = "t07_exit"     class = "span_text"   ></span></td>
+		</tr>
+
+	</table>
+
+
+
+
+	<!-- 8、是播放按键的1 -->
+	<table class = "t08_play"  >
+		<!-- Play、Stop、Pause -->
+		<tr >
+			<td id = "t08_play"  class = "pic_play"  ></td>
+			<td id = "t08_stop"  class = "pic_stop"  ></td>
+			<td id = "t08_pause" class = "pic_pause" ></td>
+		</tr>
+
+	</table>
+	
+	<!-- 14新、是播放按键的 ，没有停止键-->
+	<table class = "t14_play"  >
+		<!-- Play、    、Pause -->
+		<tr >
+			<td id = "t14_play"  class = "pic_play"  ></td>
+			<td ></td>
+			<td id = "t14_pause" class = "pic_pause" ></td>
+		</tr>
+
+	</table>
+
+	<!-- 9、是播放按键的2 -->
+	<table class = "t09_play"  >
+
+		<!-- FB、 、FF -->
+		<tr >
+			<td id = "t09_fb"  class = "pic_fb"  ></td>
+			<td id = "t09_f"   class = "pic_f"   ></td>
+			<td id = "t09_ff"  class = "pic_ff"  ></td>
+		</tr>
+
+
+	</table>
+	
+	
+	<!-- 12新、是播放按键的3,增加了exit键 -->
+	<table class = "t12_play"  >
+
+		<!-- FB、exit、FF -->
+		<tr >
+			<td 	   id = "t12_fb"     class = "pic_fb"      ></td>
+			<td ><span id = "t12_exit"   class = "span_text" ></span></td>
+			<td 	   id = "t12_ff"     class = "pic_ff"      ></td>
+		</tr>
+
+
+	</table>
+
+
+	<!-- 10、媒体中心的 -->
+	<table class = "t10_media" >
+
+		<!-- FB、 、FF -->
+		<tr >
+			<td id = "t10_fb"    class = "pic_fb"    ></td>
+			<td id = "t10_stop"  class = "pic_stop"  ></td>
+			<td id = "t10_ff"    class = "pic_ff"    ></td>
+		</tr>
+
+	</table>
+
+	<!-- 11、颜色快捷键的 -->
+	<table class = "t11_short">
+		
+		<!-- 红色、绿色、黄色、蓝色  -->
+		<tr >
+			
+			<td id = "t11_r"  class = "pic_r"  ></td>
+			<td id = "t11_g"  class = "pic_g"  ></td>
+			<td id = "t11_y"  class = "pic_y"  ></td>
+			<td id = "t11_b"  class = "pic_b"  ></td>
+		</tr>
+		
+	</table>
+	
+	
+
+	
+	
+	
+
+</div>
+
+<!-- 焦点的DIV，采用绝对布局 -->
+<div id = "focusForRemote" class = "focusForRemote" ></div>
+    
+</body>
+
+</html>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

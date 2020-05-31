@@ -1,0 +1,135 @@
+﻿@CHARSET "UTF-8";
+
+
+.smart_item{
+    position: relative;
+    top: 30px;
+    width: 224px;
+    height: 183px;
+    float:left;
+    /*text-align: center;*/
+}
+
+.smart_item span {
+    position: absolute;
+    top: 123px;
+    left:0px;
+    overflow: hidden;
+    font-family: Arial;
+    color: #D1DEF0;
+    font-size: 31px;
+    width: 224px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+#onlyListenTime {
+    color: #0ECAF9;
+    font-family: Arial;
+    font-size: 155px;
+}
+
+#onlyListenUnit {
+    color: #0ECAF9;
+    font-family: Arial;
+    font-size: 63px;
+}
+
+#onlyListenRemindSpan1 {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 28px;
+}
+
+#onlyListenRemindSpan2 {
+    text-align: center;
+    color: #ECECEC;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.spin {
+    -webkit-animation-name: spinCircle;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-iteration-count:infinite ;
+    -webkit-animation-direction: normal;
+}
+@-webkit-keyframes spinCircle {
+    0%{
+        -webkit-transform: rotate(0deg);}
+    50%{
+        -webkit-transform: rotate(180deg);}
+    100%{
+        -webkit-transform: rotate(360deg);}
+}
+
+.onOffSpan{
+    color:#CBCBCB;
+    font-family: Arial;
+    font-size: 28px;
+}
+
+.sleep_elem{
+    position: absolute;
+    top:5px;
+    width: 165px;
+    height: 114px;
+}
+
+.sleep_elem span{
+    display:block;
+    text-align:center;
+    line-height: 114px;
+    font-family: Arial;
+    font-size: 25px;
+    color:#C0BCBC
+}
+
+.sleep_elem img{
+    position: absolute;
+    top:0px;
+}
+
+#remindTime{
+    position:absolute;
+    line-height: 123px;
+    font-family: Arial;
+    left:40px;
+    font-size: 20px;
+    color:#C0BCBC;
+}
+
+#popGuideMenu
+{
+    position: absolute;
+    left: 0px;
+    top: 380px;
+    height: 700px;
+    width: 340px;
+}
+#smartOption
+{
+    top:867px;
+    margin: 0 auto;
+    z-index: 5;
+    position: relative;
+}
+
+.smart_img
+{
+    position:absolute;
+    left: 63px;
+    top: 0px;
+}
+
+.smart_focus
+{
+    position:absolute;
+    left: 28px;
+    top: 105px;
+    visibility: hidden;
+}

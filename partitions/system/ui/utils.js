@@ -1,0 +1,13 @@
+var E_INPUT_ATV = 0;
+var E_INPUT_DTV = 1;
+var E_INPUT_AV_I =2;
+var E_INPUT_AV_II =3;
+var E_INPUT_YPBPR =4;
+var E_INPUT_PC =5;
+var E_INPUT_HDMI_I= 6;
+var E_INPUT_HDMI_II = 7;
+var E_INPUT_HDMI_III = 8;
+var E_INPUT_KTV= 9;
+var E_INPUT_STORAGE = 10;
+var E_INPUT_SCART =11;
+var E_INPUT_HDMI_IV =12;

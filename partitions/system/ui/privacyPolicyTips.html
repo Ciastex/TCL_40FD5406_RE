@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="privacyPolicyTips.js"></script>
+<style>
+/*---------------------分割----------------------------------*/
+
+    #smartTvPolicyDiv
+    {
+        position: absolute;
+        top: 135px;
+        left: 420px;
+        width: 1080px;
+        height: 810px;
+        padding: 0px; /*必须有，因为ul默认的padding是40px*/
+        opacity: 0.92;
+        background: url(./images/Bg-SmartTvPolicy.png);
+        display: none;
+    }
+    #policyText
+    {
+        position: absolute;
+        width: 450px;
+        height: 600px;
+        top: 140px;
+        left: 90px;
+        font-size: 28px;
+        color: #ffffff;
+        overflow: auto;
+    }
+    #titleName {
+        position: absolute;
+        color: #ffffff;
+        font-size: 32px;
+        font-weight:bold;
+        top: 30px;
+        left: 60px;
+        right:60px;
+    }
+    #ScrollBar
+    {
+        position:absolute;
+        width:10px;
+        height:70px;
+        left:550px;
+        top:150px;
+    }
+    #policyTextTable
+    {
+        position: absolute;
+        top: 270px;
+        left: 1000px;
+        width: 450px;
+    }
+    #policyTextTable span
+    {
+        font-size: 25px;
+        color: #ffffff;
+        overflow: auto;
+    }
+    #policyTextTable li
+    {
+        list-style-type:none;
+    }
+    #policyTips
+    {
+        position:absolute;
+        left:550px;
+        top:300px;
+        width:830px;
+        height:410px;
+        background-image:url(./images/Bg-Pop_up_box-03.png);
+        background-size:100% 100%;
+        display:none;
+    }
+    #tipsContent
+    {
+        position:absolute;
+        left:60px;
+        top:126px;
+        width:710px;
+        font-size:28px;
+        color:#bbb;
+    }
+    .tipsButton
+    {
+        position:absolute;
+        top:328px;
+        background:url(./images/Focus-02-no.png) no-repeat;
+        width:204px;
+        height:64px;
+        line-height:64px;
+        text-align:center;
+        color:#FFF;
+        font-size:28px;
+        font-weight:bold;
+    }
+    #tipsTitle
+    {
+        position:absolute;
+        left:60px;
+        top:30px;
+        font-size:32px;
+        color:#fff;
+        right:60px;
+    }
+    #tipsButtonFocus
+    {
+        position:absolute;
+        top:328px;
+    }
+#policyNoticeTable
+{
+    position: absolute;
+    top: 245px;
+    left: 1000px;
+    width: 450px;
+    height: 610px;
+    overflow: hidden;
+}
+#policyNoticeTable span
+{
+    font-size: 22px;
+    color: #ffffff;
+    overflow: auto;
+}
+</style>
+</head>
+
+<body onload="init()">
+
+        <!-----------------------主页面内容---------------------------------->
+        <div id="smartTvPolicyDiv">
+            <img id="ScrollBar" src="./images/Scroll_bar-Vertical.png"/>
+            <div id="titleName"></div>
+            <div id="policyText" ></div>
+        </div>
+
+        <div id="policyTextContainer">
+            <!--<ul id="policyTextTable">
+                <li>
+                    <img class="checkImg" id="checkList1" src="./images/option/check_3.png"/>
+                    <span id="PolicyText1"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList2" src="./images/option/check_3.png"/>
+                    <span id="PolicyText2"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList3" src="./images/option/check_3.png"/>
+                    <span id="PolicyText3"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList4" src="./images/option/check_3.png"/>
+                    <span id="PolicyText4"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList5" src="./images/option/check_3.png"/>
+                    <span id="PolicyText5"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList6" src="./images/option/check_3.png"/>
+                    <span id="PolicyText6"></span>
+                </li>
+            </ul>-->
+
+            <div id="policyNoticeTable">
+                <span id="policyNoticeText1"></span>
+                <div class="policyNoticeCheckbox">
+                    <img class="checkImg" src="../images/option/check_3.png"/>
+                    <span id="checkboxText1"></span>
+                </div>
+                <div class="policyNoticeCheckbox">
+                    <img class="checkImg" src="../images/option/check_3.png"/>
+                    <span id="checkboxText2"></span>
+                </div>
+                <span id="policyNoticeText2"></span>
+                <div class="policyNoticeCheckbox">
+                    <img class="checkImg" src="../images/option/check_3.png"/>
+                    <span id="checkboxText3"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="policyTips">
+            <img id="tipsButtonFocus" src="./images/Focus-02.png"/>
+            <span id="tipsTitle"></span>
+            <span id="tipsContent"></span>
+            <div class="tipsButton" style="left:150px;"></div>
+            <div class="tipsButton" style="left:476px;"></div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<root>
+	<static_icon id = "TCL">
+		<img>../images/esticker/Logo_HITACHI.png</img>
+	</static_icon>
+	<static_icon id = "TCL_right">
+		<img>../images/esticker/Logo_HITACHI.png</img>
+	</static_icon>
+
+	<icon id = "Smart">
+		<img_L>../images/esticker/Esticker_SMART_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_SMART_B_r.png</img_R>
+		<img_S>../images/esticker/Esticker_SMART_H.png</img_S>
+		<title>
+			<Arabic>SMART</Arabic>
+			<ArabicEgypt>SMART</ArabicEgypt>
+			<English>SMART</English>
+			<English_LA>SMART</English_LA>
+			<English_NA>SMART</English_NA>
+			<English_CA>SMART</English_CA>
+			<Chinese>SMART</Chinese>
+			<ChineseTraditional>SMART</ChineseTraditional>
+			<Bulgarian>SMART</Bulgarian>
+			<Croatian>SMART</Croatian>
+			<Czech>SMART</Czech>
+			<Danish>SMART</Danish>
+			<Dutch>SMART</Dutch>
+			<Estonian>SMART</Estonian>
+			<Finnish>DSMART</Finnish>
+			<French>SMART</French>
+			<German>SMART</German>
+			<Greek>SMART</Greek>
+			<Hungarian>SMART</Hungarian>
+			<Hebrew>SMART</Hebrew>
+			<Indonesian>SMART</Indonesian>
+			<Italian>SMART</Italian>
+			<Latvian>SMART</Latvian>
+			<Lithuanian>SMART</Lithuanian>
+			<Mongolian>SMART</Mongolian>
+			<Norwegian>SMART</Norwegian>
+			<Persian>SMART</Persian>
+			<Polish>SMART</Polish>
+			<Portuguese>SMART</Portuguese>
+			<Portuguese_LA>SMART</Portuguese_LA>
+			<Romanian>SMART</Romanian>
+			<Russian>SMART</Russian>
+			<Serbian>SMART</Serbian>
+			<Slovak>SMART</Slovak>
+			<Slovenian>SMART</Slovenian>
+			<Spanish>SMART</Spanish>
+			<Spanish_LA>SMART</Spanish_LA>
+			<Spanish_NA>SMART</Spanish_NA>
+			<Spanish_CA>SMART</Spanish_CA>
+			<Swedish>SMART</Swedish>
+			<Turkish>SMART</Turkish>
+			<Ukrainian>SMART</Ukrainian>
+			<Thai>SMART</Thai>
+			<Uzbek>SMART</Uzbek>
+			<Vietnamese>SMART</Vietnamese>
+		</title>
+		<description>
+			<Arabic>يحتوي التليفزيون الذكي على وظائف متقدمة وخيارات محتوى غنية ليتناسب مع نمط حباتك اليومية. طريقة أسرع وأيسر وأكثر ذكاءً لمساعدتك على تصفح المحتوى.</Arabic>
+			<ArabicEgypt>يحتوي التلفاز الذكي على وظائف متطورة وخيارات محتوى متعددة لتناسب نمط حياتك اليومية. طريقة أكثر ذكاءً وأسهل وأسرع مخصصة لك لتصفح المحتوى.</ArabicEgypt>
+			<English>Smart TV contains upgraded functions and rich content options to fit your daily lifestyle. Smarter, easier, faster and a more intelligent way for you to surf content.</English>
+			<English_LA>Smart TV contains upgraded functions and rich content options to fit your daily lifestyle. Smarter, easier, faster and a more intelligent way for you to surf content.</English_LA>
+			<English_NA>Smart TV contains upgraded functions and rich content options to fit your daily lifestyle. Smarter, easier, faster and a more intelligent way for you to surf content.</English_NA>
+			<English_CA>Smart TV contains upgraded functions and rich content options to fit your daily lifestyle. Smarter, easier, faster and a more intelligent way for you to surf content.</English_CA>
+			<Chinese>Smart,easier,faster and a more intelligent way to surf content on a single device or across multiple devices. Smart TVs contain upgraded functions designed with rich content to completely suit your lifestyle.</Chinese>
+			<ChineseTraditional>Smart,easier,faster and a more intelligent way to surf content on a single device or across multiple devices. Smart TVs contain upgraded functions designed with rich content to completely suit your lifestyle.</ChineseTraditional>
+			<Bulgarian>Абонирайте се да гледате хиляди нови, стари и класически телевизионни предавания и филми с натискане на един бутон.</Bulgarian>
+			<Croatian>Pretplatite se i gledajte na tisuće novih, starih i klasičnih TV emisija i filmova na dohvat ruke.</Croatian>
+			<Czech>Přihlaste se a na dosah ruky budete mít sledování tisíců nových, starých i klasických televizních show a filmů.</Czech>
+			<Danish>Registrer dig for at se tusinder af nye, gamle og klassiske tv-shows og film, lige når du har lyst.</Danish>
+			<Dutch>Neem een abonnement en bekijk duizenden nieuwe, oude en klassieke TV-shows en films wanneer u maar wilt.</Dutch>
+			<Estonian>Registreeru tuhandete uute, vanade ja klassikaks saanud telesaadete ning filmide vaatamiseks.</Estonian>
+			<Finnish>Tilaa katseluoikeus tuhansiin uusiin, vanhoihin ja perinteisiin TV-ohjelmiin ja elokuviin, jotka ovat käden ulottuvilla.</Finnish>
+			<French>Avec ses fonctionnalités améliorées et ses options de contenu riche, le téléviseur Smart saura convenir à votre mode de vie quotidien. Une façon plus intelligente, plus facile et plus rapide de naviguer le contenu.</French>
+			<German>Abonnieren Sie Tausende neuer, alter und klassischer Fernsehsendungen und Filme mit den Fingerspitzen.</German>
+			<Greek>Εγγραφείτε για να παρακολουθείτε εύκολα και γρήγορα χιλιάδες καινούργιες, παλιές και κλασικές τηλεοπτικές εκπομπές και ταινίες.</Greek>
+			<Hungarian>Előfizetve több ezer új, régi és klasszikus, Önnek csak karnyújtásnyira lévő TV-műsort és filmet tekinthet meg.</Hungarian>
+			<Hebrew>הטלוויזיה החכמה כוללת שדרוגים ואפשרויות תוכן מועשר שיתאימו לאורח החיים היומיומי שלך. זו דרך חכמה יותר, קלה יותר לשימוש, מהירה יותר ואינטליגנטית יותר עבורך לגלוש בין תכנים.</Hebrew>
+			<Indonesian>TV Pintar dilengkapi fungsi yang lebih baik dan pilihan konten yang lebih kaya untuk memenuhi gaya hidup keseharian Anda. Sekarang, Anda dapat menavigasi konten dengan lebih pintar, lebih mudah, lebih cepat, dan lebih cerdas.</Indonesian>
+			<Italian>Iscriviti per avere sempre a portata di mano migliaia di film e programmi TV nuovi, vecchi e i classici.</Italian>
+			<Latvian>Abonējiet un skatieties tūkstošiem jaunu, vecu un klasisku TV šovu un filmu, kas pieejami nekavējoties.</Latvian>
+			<Lithuanian>Užsiprenumeruokite ir žiūrėkite tūkstančius naujų, senų ir klasikinių TV laidų ir filmų – tai ranka pasiekiama.</Lithuanian>
+			<Mongolian>Ухаалаг ТВ нь таны өдөр тутмын амьдралд зохицсон сайжруулсан үйлдлүүд, өргөн контентын сонголттой. Хөтөлбөрөө илүү ухаалаг, илүү хялбар, илүү хурдан сонгон үзэх арга.</Mongolian>
+			<Norwegian>Abonner for å se tusenvis av nye, gamle og klassiske TV-show og filmer der du er.</Norwegian>
+			<Persian>تلویزیون هوشمند دارای قابلیت های ارتقایافته و برنامه های متنوعی است که با سبک زندگی روزانه شما مطابقت خواهد داشت. روشی هوشمندانه تر، آسان تر و سریعتر برای مشاهده برنامه ها و محتواها.</Persian>
+			<Polish>Zasubskrybuj, aby uzyskać dostęp do tysięcy nowych, starych i klasycznych seriali i filmów.</Polish>
+			<Portuguese>A Smart TV contêm funções atualizadas e opções com conteúdos ricos que se adaptam ao seu estilo de vida diário. Uma forma mais fácil, rápida e inteligente de navegar pelos conteúdos.</Portuguese>
+			<Portuguese_LA>As Smart TVs contêm funções aprimoradas e opções com conteúdo rico para atender ao seu estilo de vida no dia a dia. Uma maneira mais moderna, fácil, rápida e inteligente para você navegar por conteúdos.</Portuguese_LA>
+			<Romanian>Abonaţi-vă şi urmăriţi mii de seriale şi filme TV vechi şi clasice, toate la îndemâna dvs.</Romanian>
+			<Russian>Смарт-телевизоры обладают новейшими функциями и средствами отображения контента, разработанными для полного удовлетворения возросших потребностей вашего повседневного образа жизни. Вам предоставляется более интеллектуальный, простой и быстрый способ поиска контента.</Russian>
+			<Serbian>Prijavite se i moći ćete da gledate hiljade novih, starih i klasičnih TV emisija, serija i filmova – sve će vam biti nadohvat ruke.</Serbian>
+			<Slovak>Odoberanie tisícok nových, starých a klasických TV relácií a filmov na dosah rúk.</Slovak>
+			<Slovenian>Prijavite se za gledanje novih, starih in klasičnih TV oddaj in filmov, ki so vam na dosegu roke.</Slovenian>
+			<Spanish>El Smart TV contiene funciones actualizadas y una variedad de opciones de contenido que se adaptan a tu estilo de vida diario. Más inteligente, más fácil, más rápido. Una forma más inteligente de navegar por los contenidos.</Spanish>
+			<Spanish_LA>El Smart TV contiene funciones actualizadas y una variedad de opciones de contenido que se adaptan a tu estilo de vida diario. Más inteligente, más fácil, más rápido. Una forma más inteligente de navegar por los contenidos.</Spanish_LA>
+			<Spanish_NA>El Smart TV contiene funciones actualizadas y una variedad de opciones de contenido que se adaptan a tu estilo de vida diario. Más inteligente, más fácil, más rápido. Una forma más inteligente de navegar por los contenidos.</Spanish_NA>
+			<Spanish_CA>El Smart TV contiene funciones actualizadas y una variedad de opciones de contenido que se adaptan a tu estilo de vida diario. Más inteligente, más fácil, más rápido. Una forma más inteligente de navegar por los contenidos.</Spanish_CA>
+			<Swedish>Prenumerera för att visa tusentals nya, gamla och klassiska TV-program och filmer genom bara en fingertoppstryckning.</Swedish>
+			<Turkish>İyi bildiğiniz binlerce yeni, eski ve klasik TV gösterilerini ve filmlerini izlemek için abone olun.</Turkish>
+			<Thai>Smart TV มีตัวเลือกฟังก์ชั่นที่อัพเกรดแล้วและเนื้อหาหลากหลายที่เหมาะกับไลฟ์สไตล์ในแต่ละวันของคุณ ด้วยวิธีการที่ฉลาด ง่าย เร็ว และอัจฉริยะยิ่งขึ้นสำหรับคุณในการเปิดดูเนื้อหา</Thai>
+			<Ukrainian>Здійсніть передплату для простого перегляду тисяч нових, старих та класичних телешоу і кінофільмів.</Ukrainian>
+			<Uzbek>Smart TV kundalik yashash tarzingizga mos kelishi uchun yangilangan funksiyalar va boy kontent opsiyalariga egadir. Kontentlarni ko‘rib chiqishingiz uchun tartibliroq, osonroq, tezroq va aqlliroq usul.</Uzbek>
+			<Vietnamese>TV thông minh có các chức năng nâng cao và nhiều lựa chọn nội dung phong phú phù hợp với cách sống của bạn. Là phương tiện giúp lưới nội dung của bạn thông minh, dễ dàng, nhanh chóng và tiện lợi hơn.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Netflix">
+		<img_L>../images/esticker/Esticker_Netflix_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Netflix_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_netflix.png</img_S>
+		<title>
+			<Arabic>NETFLIX</Arabic>
+			<ArabicEgypt>NETFLIX</ArabicEgypt>
+			<English>NETFLIX</English>
+			<English_LA>NETFLIX</English_LA>
+			<English_NA>NETFLIX</English_NA>
+			<English_CA>NETFLIX</English_CA>
+			<Chinese>NETFLIX</Chinese>
+			<ChineseTraditional>NETFLIX</ChineseTraditional>
+			<Bulgarian>NETFLIX</Bulgarian>
+			<Croatian>NETFLIX</Croatian>
+			<Czech>NETFLIX</Czech>
+			<Danish>NETFLIX</Danish>
+			<Dutch>NETFLIX</Dutch>
+			<Estonian>NETFLIX</Estonian>
+			<Finnish>DNETFLIX</Finnish>
+			<French>NETFLIX</French>
+			<German>NETFLIX</German>
+			<Greek>NETFLIX</Greek>
+			<Hungarian>NETFLIX</Hungarian>
+			<Hebrew>נטפליקס</Hebrew>
+			<Indonesian>NETFLIX</Indonesian>
+			<Italian>NETFLIX</Italian>
+			<Latvian>NETFLIX</Latvian>
+			<Lithuanian>NETFLIX</Lithuanian>
+			<Mongolian>NETFLIX</Mongolian>
+			<Norwegian>NETFLIX</Norwegian>
+			<Persian>NETFLIX</Persian>
+			<Polish>NETFLIX</Polish>
+			<Portuguese>NETFLIX</Portuguese>
+			<Portuguese_LA>NETFLIX</Portuguese_LA>
+			<Romanian>NETFLIX</Romanian>
+			<Russian>NETFLIX</Russian>
+			<Serbian>NETFLIX</Serbian>
+			<Slovak>NETFLIX</Slovak>
+			<Slovenian>NETFLIX</Slovenian>
+			<Spanish>NETFLIX</Spanish>
+			<Spanish_LA>NETFLIX</Spanish_LA>
+			<Spanish_NA>NETFLIX</Spanish_NA>
+			<Spanish_CA>NETFLIX</Spanish_CA>
+			<Swedish>NETFLIX</Swedish>
+			<Turkish>NETFLIX</Turkish>
+			<Ukrainian>NETFLIX</Ukrainian>
+			<Thai>NETFLIX</Thai>
+			<Uzbek>NETFLIX</Uzbek>
+			<Vietnamese>NETFLIX</Vietnamese>
+		</title>
+		<description>
+			<Arabic>ضم نتفليكس (Netflix) مجموعة واسعة من المحتوى الشائع حيث يمكن تحقيق المتعة للجميع. يمكنك مشاهدة العروض التليفزيونية الموصى بها، و أحدث الأفلام الوثائقية والمسلسلات وأفلام نتفليكس (Netflix) الأصلية الحاصلة على الجوائز. </Arabic>
+			<ArabicEgypt>تمتلك نتفليكس مجموعة كبيرة من المحتوى الشائع الذي يناسب الجميع. يمكنك مشاهدة البرامج التلفزيونية الموصى بها، ومسلسلات نتفليكس الأصلية الحائزة على جوائز، وأحدث الأفلام، والأفلام الوثائقية.</ArabicEgypt>
+			<English>Netflix has a huge range of popular content for everyone. You can watch recommended TV shows, award-winning Netflix original series, latest movies, and documentaries.</English>
+			<English_LA>Netflix has a huge range of popular content for everyone. You can watch recommended TV shows, award-winning Netflix original series, latest movies, and documentaries.</English_LA>
+			<English_NA>Netflix has a huge range of popular content for everyone. You can watch recommended TV shows, award-winning Netflix original series, latest movies, and documentaries.</English_NA>
+			<English_CA>Netflix has a huge range of popular content for everyone. You can watch recommended TV shows, award-winning Netflix original series, latest movies, and documentaries.</English_CA>
+			<Chinese>As one of the world's leading internet television with a huge range of popular content, Netflix has something for everyone. You can watch TV shows recommended just for you, including award-winning Netflix original series, movies, and documentaries.</Chinese>
+			<ChineseTraditional>As one of the world's leading internet television with a huge range of popular content, Netflix has something for everyone. You can watch TV shows recommended just for you, including award-winning Netflix original series, movies, and documentaries.</ChineseTraditional>
+			<Bulgarian>Абонирайте се да гледате хиляди нови, стари и класически телевизионни предавания и филми с натискане на един бутон.</Bulgarian>
+			<Croatian>Pretplatite se i gledajte na tisuće novih, starih i klasičnih TV emisija i filmova na dohvat ruke.</Croatian>
+			<Czech>Přihlaste se a na dosah ruky budete mít sledování tisíců nových, starých i klasických televizních show a filmů.</Czech>
+			<Danish>Registrer dig for at se tusinder af nye, gamle og klassiske tv-shows og film, lige når du har lyst.</Danish>
+			<Dutch>Neem een abonnement en bekijk duizenden nieuwe, oude en klassieke TV-shows en films wanneer u maar wilt.</Dutch>
+			<Estonian>Registreeru tuhandete uute, vanade ja klassikaks saanud telesaadete ning filmide vaatamiseks.</Estonian>
+			<Finnish>Tilaa katseluoikeus tuhansiin uusiin, vanhoihin ja perinteisiin TV-ohjelmiin ja elokuviin, jotka ovat käden ulottuvilla.</Finnish>
+			<French>Netflix a une énorme gamme de contenu populaire couvrant tous les goûts. Vous pouvez regarder des émissions de télévision recommandées, des séries originales primées de Netflix, les derniers films et des documentaires.</French>
+			<German>Abonnieren Sie Tausende neuer, alter und klassischer Fernsehsendungen und Filme mit den Fingerspitzen.</German>
+			<Greek>Εγγραφείτε για να παρακολουθείτε εύκολα και γρήγορα χιλιάδες καινούργιες, παλιές και κλασικές τηλεοπτικές εκπομπές και ταινίες.</Greek>
+			<Hungarian>Előfizetve több ezer új, régi és klasszikus, Önnek csak karnyújtásnyira lévő TV-műsort és filmet tekinthet meg.</Hungarian>
+			<Hebrew>לנטפליקס יש מגוון עצום של תוכן פופולארי שמתאים לכולם. באפשרותך לצפות בתוכניות טלוויזיה מומלצות, בסדרות מקוריות עטורות פרסים מבית נטפליקס, בסרטים חדשים ובסרטים תיעודיים.</Hebrew>
+			<Indonesian>Netflix punya segudang konten populer untuk setiap orang. Anda dapat menyaksikan acara TV yang direkomendasikan, serial orisinil Netflix pemenang berbagai penghargaan, film terbaru, serta dokumenter.</Indonesian>
+			<Italian>Iscriviti per avere sempre a portata di mano migliaia di film e programmi TV nuovi, vecchi e i classici.</Italian>
+			<Latvian>Abonējiet un skatieties tūkstošiem jaunu, vecu un klasisku TV šovu un filmu, kas pieejami nekavējoties.</Latvian>
+			<Lithuanian>Užsiprenumeruokite ir žiūrėkite tūkstančius naujų, senų ir klasikinių TV laidų ir filmų – tai ranka pasiekiama.</Lithuanian>
+			<Mongolian>Netflix нь бүх хүнд зориулсан маш өргөн хүрээтэй, алдартай контентууд агуулдаг.  Та тэдний санал болгосон ТВ шоу, Netflix-ийн шагналт оригинал цуврал, хамгийн сүүлийн үеийн кино, баримтат киноноос үзэх боломжтой.</Mongolian>
+			<Norwegian>Abonner for å se tusenvis av nye, gamle og klassiske TV-show og filmer der du er.</Norwegian>
+			<Persian>Netflix برنامه بسیاری متنوعی برای همگان دارد. می توانید سریال های تلویزیونی پیشنهادی، سریال های تقدیر شده تولید Netflix، جدیدترین فیلم ها و مستندها را تماشا کنید.</Persian>
+			<Polish>Zasubskrybuj, aby uzyskać dostęp do tysięcy nowych, starych i klasycznych seriali i filmów.</Polish>
+			<Portuguese>A Netflix tem uma vasta gama de populares conteúdos para todos. Pode ver programas de TV recomendados e as galardoadas séries originais da Netflix, os filmes mais recentes e documentários.</Portuguese>
+			<Portuguese_LA>A Netflix tem uma grande variedade de conteúdo popular para todas as pessoas. Você pode assistir a programas de TV recomendados, premiadas séries originais da Netflix, aos filmes mais atuais e documentários.</Portuguese_LA>
+			<Romanian>Abonaţi-vă şi urmăriţi mii de seriale şi filme TV vechi şi clasice, toate la îndemâna dvs.</Romanian>
+			<Russian>Netflix имеет огромный выбор популярных программ для каждого пользователя. Вы можете смотреть телепередачи, рекомендуемые специально для вас, включая превосходные сериалы Netflix, а также последние художественные и документальные фильмы.</Russian>
+			<Serbian>Prijavite se i moći ćete da gledate hiljade novih, starih i klasičnih TV emisija, serija i filmova – sve će vam biti nadohvat ruke.</Serbian>
+			<Slovak>Odoberanie tisícok nových, starých a klasických TV relácií a filmov na dosah rúk.</Slovak>
+			<Slovenian>Prijavite se za gledanje novih, starih in klasičnih TV oddaj in filmov, ki so vam na dosegu roke.</Slovenian>
+			<Spanish>Netflix ofrece una amplia variedad de contenido popular para todos. Puede ver programas de televisión recomendados, series originales y premiadas de Netflix, películas de estreno y documentales.</Spanish>
+			<Spanish_LA>Netflix ofrece una amplia variedad de contenido popular para todos. Puede ver programas de televisión recomendados, series originales y premiadas de Netflix, películas de estreno y documentales.</Spanish_LA>
+			<Spanish_NA>Netflix ofrece una amplia variedad de contenido popular para todos. Puede ver programas de televisión recomendados, series originales y premiadas de Netflix, películas de estreno y documentales.</Spanish_NA>
+			<Spanish_CA>Netflix ofrece una amplia variedad de contenido popular para todos. Puede ver programas de televisión recomendados, series originales y premiadas de Netflix, películas de estreno y documentales.</Spanish_CA>
+			<Swedish>Prenumerera för att visa tusentals nya, gamla och klassiska TV-program och filmer genom bara en fingertoppstryckning.</Swedish>
+			<Turkish>İyi bildiğiniz binlerce yeni, eski ve klasik TV gösterilerini ve filmlerini izlemek için abone olun.</Turkish>
+			<Thai>Netflix มีเนื้อหายอดนิยมที่หลากหลายสำหรับทุกคน คุณสามารถรับชมรายการ TV, ซีรี่ส์ต้นฉบับของ Netflix ที่ได้รับรางวัล, ภาพยนตร์ล่าสุด และ สารคดีที่เราแนะนำ</Thai>
+			<Ukrainian>Здійсніть передплату для простого перегляду тисяч нових, старих та класичних телешоу і кінофільмів.</Ukrainian>
+			<Uzbek>Netflix har bir kishi uchun juda katta hajmdagi ommabop kontentlarga ega. Siz tavsiya qilingan TV shoular, sovrinlar bilan taqdirlangan asl Netflix seriallari, yangi kinofimlar va hujjatli filmlarni ko‘rishingiz mumkin.</Uzbek>
+			<Vietnamese>Netflix có nhiều nội dung phong phú đáp ứng mọi lưới tuổi. Bạn có thể xem các chương trình TV được đề xuất, những loạt chương trình nguyên gốc từng giành giải thưởng của Netflix và phim truyện và phim tài liệu mới nhất.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "YouTube">
+		<img_L>../images/esticker/Esticker_Youtube_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Youtube_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_youtube.png</img_S>
+		<title>
+			<Arabic>YouTube</Arabic>
+			<ArabicEgypt>يوتيوب</ArabicEgypt>
+			<English>YouTube</English>
+			<English_LA>YouTube</English_LA>
+			<English_NA>YouTube</English_NA>
+			<English_CA>YouTube</English_CA>
+			<Chinese>YouTube</Chinese>
+			<ChineseTraditional>YouTube</ChineseTraditional>
+			<Bulgarian>YouTube</Bulgarian>
+			<Croatian>YouTube</Croatian>
+			<Czech>YouTube</Czech>
+			<Danish>YouTube</Danish>
+			<Dutch>YouTube</Dutch>
+			<Estonian>YouTube</Estonian>
+			<Finnish>YouTube</Finnish>
+			<French>YouTube</French>
+			<German>YouTube</German>
+			<Greek>YouTube</Greek>
+			<Hungarian>YouTube</Hungarian>
+			<Hebrew>YouTube</Hebrew>
+			<Indonesian>YouTube</Indonesian>
+			<Italian>YouTube</Italian>
+			<Latvian>YouTube</Latvian>
+			<Lithuanian>YouTube</Lithuanian>
+			<Mongolian>YouTube</Mongolian>
+			<Norwegian>YouTube</Norwegian>
+			<Persian>YouTube</Persian>
+			<Polish>YouTube</Polish>
+			<Portuguese>YouTube</Portuguese>
+			<Portuguese_LA>YouTube</Portuguese_LA>
+			<Romanian>YouTube</Romanian>
+			<Russian>YouTube</Russian>
+			<Serbian>YouTube</Serbian>
+			<Slovak>YouTube</Slovak>
+			<Slovenian>YouTube</Slovenian>
+			<Spanish>YouTube</Spanish>
+			<Spanish_LA>YouTube</Spanish_LA>
+			<Spanish_NA>YouTube</Spanish_NA>
+			<Spanish_CA>YouTube</Spanish_CA>
+			<Swedish>YouTube</Swedish>
+			<Turkish>YouTube</Turkish>
+			<Ukrainian>YouTube</Ukrainian>
+			<Thai>YouTube</Thai>
+			<Uzbek>YouTube</Uzbek>
+			<Vietnamese>YouTube</Vietnamese>
+		</title>
+		<description>
+			<Arabic>مع يوتيوب (YouTube) يمكنك مشاهدة ما يشاهده العالم - من مقاطع الفيديو الموسيقية الأكثر إثارة إلى الألعاب الأكثر جذبًا والتسلية والأحبار وغير ذلك الكثير.</Arabic>
+			<ArabicEgypt>باستخدام YouTube، يمكنك التعرف على ما يشاهده العالم - بدءًا من أحدث مقاطع فيديو الموسيقى وصولاً إلى ما الجديد في الألعاب والترفيه والأخبار والمزيد.</ArabicEgypt>
+			<English>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more.</English>
+			<English_LA>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more.</English_LA>
+			<English_NA>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more.</English_NA>
+			<English_CA>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more.</English_CA>
+			<Chinese>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Chinese>
+			<ChineseTraditional>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</ChineseTraditional>
+			<Bulgarian>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Bulgarian>
+			<Croatian>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Croatian>
+			<Czech>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Czech>
+			<Danish>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Danish>
+			<Dutch>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Dutch>
+			<Estonian>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Estonian>
+			<Finnish>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</Finnish>
+			<French>Avec YouTube, vous pouvez voir ce que le monde regarde – des vidéos de musique les plus branchées à ce qui fait la une en jeux, divertissement, nouvelles, et plus.</French>
+			<German>With YouTube, you can see what the world is watching – from the hottest music videos to what's trending in gaming, entertainment, news and more. Subscribe to channels you love, share with friends, and view on any device.</German>
+			<Greek>Παρακολουθήστε δημοφιλή δωρεάν τηλεοπτικά κανάλια από ολόκληρο τον κόσμο με σύντομους χρόνους προσωρινής αποθήκευσης και ενημερώσεις πραγματικού χρόνου.</Greek>
+			<Hungarian>Népszerű szabadon fogható (Free-to-Air) csatornákat nézhet a világ minden részéről, rövid pufferelési idők és valós idejű frissítések mellett.</Hungarian>
+			<Hebrew>עם יוטיוב, תוכלו לצפות במה שהעולם צופה, כגון קליפי המוסיקה האחרונים ובמילה האחרונה בתחומי הגיימינג, הבידור, החדשות ועוד.</Hebrew>
+			<Indonesian>Lewat YouTube, Anda dapat melihat apa yang dunia tonton - dari video musik populer terbaru hingga tren terbaru dalam dunia permainan, hiburan, berita, dan lain sebagainya.</Indonesian>
+			<Italian>Guarda i famosi canali TV Free to Air in tutto il mondo, con brevissimi tempi di attesa e aggiornamenti in tempo reale.</Italian>
+			<Latvian>Skatieties populārus brīvi uztveramus TV kanālus no visas pasaules ar īsiem buferizācijas laikiem un reāllaika atjauninājumiem.</Latvian>
+			<Lithuanian>Žiūrėkite populiarius nemokamai transliuojamus TV kanalus iš viso pasaulio – trumpas buferizacijos laikas ir tikralaikiai naujiniai.</Lithuanian>
+			<Mongolian>YouTube-ээр та дэлхийн хүмүүсийн үзэж буй зүйлсийг үзэх боломжтой - алдартай дууны клипнүүдээс эхлээд тоглоом, зугаа цэнгэл, мэдээ зэрэг тренд болж буй бусад олон зүйлс</Mongolian>
+			<Norwegian>Se populære gratis TV-kanaler fra hele verden med korte buffertider og oppdateringer i sanntid.</Norwegian>
+			<Persian>با YouTube می توانید تمام آنچه را به جهان به نظاره آن نشسته است تماشا کنید - از جدیدترین موزیک ویدیوها گرفته تا آخرین موضوعات داغ در جهان بازی های ویدیویی، تفریحات، اخبار و غیره.</Persian>
+			<Polish>Oglądaj popularne kanały telewizyjne FTA z całego świata z krótkim czasem buforowania i aktualizacjami w czasie rzeczywistym.</Polish>
+			<Portuguese>Com o YouTube, veja o que se passa no mundo – dos vídeos de música do momento às últimas tendências nos jogos, entretenimento, notícias e muito mais.</Portuguese>
+			<Portuguese_LA>Com o YouTube, você pode ver o que o mundo todo está assistindo: dos vídeos de músicas mais atuais até o que está acontecendo em jogos, entretenimento, notícias e muito mais.</Portuguese_LA>
+			<Romanian>Urmăriţi canale TV cu acces liber din toată lumea, cu timpi de buffering reduşi şi actualizări în timp real.</Romanian>
+			<Russian>С YouTube вы можете увидеть все, что смотрит весь мир, в том числе самые горячие музыкальные клипы, новинки в мире игр и развлечений, новостные программы и многое другое.</Russian>
+			<Serbian>Gledajte popularne otključane TV kanale iz svih krajeva sveta, koji se kratko baferuju i ažuriraju u realnom vremenu.</Serbian>
+			<Slovak>Sledujte populárne TV kanály Free to Air z celého sveta s krátkymi dobami ukladania do medzipamäte a aktualizáciami v reálnom čase.</Slovak>
+			<Slovenian>Predvajajte popularne brezplačne TV kanale iz celega sveta s kratkim časom nalaganja in posodobitvami v realnem času.</Slovenian>
+			<Spanish>Con YouTube, puedes ver lo que el mundo ve: desde los videos musicales más exitosos hasta las últimas tendencias en videojuegos, entretenimiento, noticias y más.</Spanish>
+			<Spanish_LA>Con YouTube, puedes ver lo que el mundo ve: desde los videos musicales más exitosos hasta las últimas tendencias en videojuegos, entretenimiento, noticias y más.</Spanish_LA>
+			<Spanish_NA>Con YouTube, puedes ver lo que el mundo ve: desde los videos musicales más exitosos hasta las últimas tendencias en videojuegos, entretenimiento, noticias y más.</Spanish_NA>
+			<Spanish_CA>Con YouTube, puedes ver lo que el mundo ve: desde los videos musicales más exitosos hasta las últimas tendencias en videojuegos, entretenimiento, noticias y más.</Spanish_CA>
+			<Swedish>Se populära, gratis TV-kanaler från hela världen med korta bufferttider och realtidsuppdateringar.</Swedish>
+			<Turkish>Dünyanın her yerinden popüler Ücretsiz Yayın Yapan TV kanallarını, kısa ara belleğe alma süreleri ve gerçek zamanlı güncellemeler ile izleyin.</Turkish>
+			<Thai>เมื่อใช้ YouTube คุณสามารถดูได้ว่าคนทั้งโลกดูอะไรกัน – นับจากมิวสิควิดีโอยอดฮิตจนถึงแนวโน้มการเล่นเกม บันเทิง ข่าว และอื่น ๆ</Thai>
+			<Ukrainian>Переглядайте популярні телеканали Free-to-Air з усього світу з коротким часом буферизації та оновленнями в реальному часі.</Ukrainian>
+			<Uzbek>YouTube bilan siz butun dunyo ko‘rayotgan narsalarni – eng qaynoq musiqali videolardan tortib eng so‘nggi o‘yinlar, ko‘ngilochar dasturlar, yangiliklar kabilarni ko‘rishingiz mumkin.</Uzbek>
+			<Vietnamese>Với YouTube, bạn có thể xem các nội dung hiện hành trên thế giới – từ các video âm nhạc nóng nhất cho tới xu hướng trong trò chơi, giải trí, tin tức và nhiều hơn thế.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "App Store">
+		<img_L>../images/esticker/Esticker_App store_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_App store_B_r.png</img_R>
+		<img_S>../images/esticker/Esticker_App-store_H.png</img_S>
+		<title>
+			<Arabic>متجر التطبيقات</Arabic>
+			<ArabicEgypt>متجر التطبيقات</ArabicEgypt>
+			<English>App Store</English>
+			<English_LA>App Store</English_LA>
+			<English_NA>App Store</English_NA>
+			<English_CA>App Store</English_CA>
+			<Chinese>App Store</Chinese>
+			<ChineseTraditional>App Store</ChineseTraditional>
+			<Bulgarian>Подобрява изживяването при гледане на спортни състезания</Bulgarian>
+			<Croatian>Unaprijedite sportski doživljaj gledanja</Croatian>
+			<Czech>Lepší zážitek ze sledování sportu</Czech>
+			<Danish>Forbedret visning af sportsprogrammer</Danish>
+			<Dutch>Verbeterde ervaring tijdens het kijken van sport</Dutch>
+			<Estonian>Parem spordisaadete vaatamine</Estonian>
+			<Finnish>Parantaa urheiluohjelmien katsomista</Finnish>
+			<French>App Store</French>
+			<German>Verbesserte Unterhaltung bei Sportsendungen</German>
+			<Greek>Βελτιωμένη εμπειρία θέασης αθλημάτων</Greek>
+			<Hungarian>Élménydúsabb sportközvetítés</Hungarian>
+			<Hebrew>חנות אפליקציות</Hebrew>
+			<Indonesian>Toko apl</Indonesian>
+			<Italian>Miglioramento dell'esperienza visiva dei programmi sportivi</Italian>
+			<Latvian>Uzlabojiet sporta skatīšanās pieredzi</Latvian>
+			<Lithuanian>Pagerinta sporto žiūrėjimo patirtis</Lithuanian>
+			<Mongolian>App Store</Mongolian>
+			<Norwegian>Forbedret opplevelse for sportsinnhold</Norwegian>
+			<Persian>فروشگاه نرم افزار</Persian>
+			<Polish>Lepsze oglądanie sportu</Polish>
+			<Portuguese>Loja de Apps</Portuguese>
+			<Portuguese_LA>Loja de Apps</Portuguese_LA>
+			<Romanian>Special pentru fanii sporturilor...</Romanian>
+			<Russian>App Store</Russian>
+			<Serbian>Bolji doživljaj gledanja sporskih sadržaja</Serbian>
+			<Slovak>Vylepšenie zážitku zo sledovania športu</Slovak>
+			<Slovenian>Izboljšajte izkušnjo spremljanja športa</Slovenian>
+			<Spanish>App Store</Spanish>
+			<Spanish_LA>App Store</Spanish_LA>
+			<Spanish_NA>App Store</Spanish_NA>
+			<Spanish_CA>App Store</Spanish_CA>
+			<Swedish>Bättre sportvisningsupplevelse</Swedish>
+			<Turkish>Spor izleme deneyiminizi geliştirin</Turkish>
+			<Ukrainian>Покращений перегляд спортивних передач</Ukrainian>
+			<Thai>App Store</Thai>
+			<Uzbek>Ilovalar do‘koni</Uzbek>
+			<Vietnamese>App Store</Vietnamese>
+		</title>
+		<description>
+			<Arabic>يقدم متجر التطبيقات أكثر من 300 تطبيقًا تبدأ من فيديو حسب الطلب و التطبيقات الاجتماعية والألعاب والموسيقى ومشاركة الصور التي تمكّن التفاعل بين أجهزة المحمول والتليفزيون.</Arabic>
+			<ArabicEgypt>يوفر لك متجر التطبيقات أكثر من 300+ تطبيق وتتراوح التطبيقات بين تطبيقات الفيديو، والتطبيقات الاجتماعية، والألعاب، والموسيقى، وتطبيقات مشاركة الصور التي تمكنك أيضًا من إحداث تفاعل بين التلفاز وأجهزة المحمول.</ArabicEgypt>
+			<English>App Store provides you over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing which also enables to interact between TV and mobile devices.</English>
+			<English_LA>App Store provides you over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing which also enables to interact between TV and mobile devices.</English_LA>
+			<English_NA>App Store provides you over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing which also enables to interact between TV and mobile devices.</English_NA>
+			<English_CA>App Store provides you over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing which also enables to interact between TV and mobile devices.</English_CA>
+			<Chinese>Latest version App Store provides you a comprehensive range of applications, over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing that enables interaction between TV and mobile sets.</Chinese>
+			<ChineseTraditional>Latest version App Store provides you a comprehensive range of applications, over 300+ applications ranging from video-on-demand, social, gaming, music, and photo sharing that enables interaction between TV and mobile sets.</ChineseTraditional>
+			<Bulgarian>Изпълнени с живот зелени поля, оптимизирани, отчетливи цветове на стадиони и мощен звуков съраунд ефект</Bulgarian>
+			<Croatian>Živahno zeleno polje, boja terena za sport optimizirana oštrinom i snažan efekt surround zvuka </Croatian>
+			<Czech>Svěže zelené hřiště, optimalizovaná ostrost barvy stadionu a výkonný prostorový zvukový efekt</Czech>
+			<Danish>Levende, skarpe og optimerede stadiumfarver og kraftig surround-lydeffekt</Danish>
+			<Dutch>Heldere groengevulde, voor scherpte geoptimaliseerde stadiumkleur en krachtig surround geluidseffect</Dutch>
+			<Estonian>Erkroheline väljak, teravus, optimaalsetes värvides staadion ja võimas surround heli </Estonian>
+			<Finnish>Vivahteikkaat vihreät kentät, optimoidut stadionien värit ja tehokkaat Surround-äänitehosteet</Finnish>
+			<French>App Store vous fournit plus de 300 applications pour la vidéo à la demande, le social, les jeux, la musique et le partage de photos, et celles-ci permettent l'interaction entre la télévision et les appareils mobiles.</French>
+			<German>Lebendiges grünes Spielfeld, optimierte scharfe Stadionfarben und leistungsstarker Surround Sound</German>
+			<Greek>Ζωντανό πράσινο στο γρασίδι, βελτιωμένη χρώματα γηπέδου και πανίσχυρα εφέ ήχου surround</Greek>
+			<Hungarian>Élénkzöld pálya, a stadion színeihez igazított élesség és erőteljes surround hanghatás</Hungarian>
+			<Hebrew>האפ-סטור מציעה לך למעלה מ-300 יישומונים החל מוידיאו בהזמנה, מדיה חברתית, גיימינג ושיתוף מוסיקה ותמונות שגם מאפשרים תקשורת בין מכשירי טלוויזיה למכשירים ניידים.</Hebrew>
+			<Indonesian>App Store menawarkan kepada Anda lebih dari 300 pilihan aplikasi, dari video atas permintaan, sosial, permainan, musik, dan berbagi foto yang memungkinkan interaksi antara TV dan perangkat bergerak</Indonesian>
+			<Italian>Campi di un verde vivido, colori dello stadio ottimizzati per una nitidezza insuperabile e incredibili effetti del suono surround </Italian>
+			<Latvian>Spilgts zaļais laukums, optimizēts asums, stadiona krāsa un spēcīgs aptverošās skaņas efekts</Latvian>
+			<Lithuanian>Ryškiai žalia optimizuoto kontrasto stadiono spalva ir galingas erdvinio garso efektas. </Lithuanian>
+			<Mongolian>App Store танд хамгийн эрэлттэй бичлэг, нийгмийн сүлжээ, тоглоом, хөгжим, телевиз, зөөврийн төхөөрөмж хооронд холбож ашиглах боломжтой зураг хуваалцах зэрэг 300+ гаруй аппликейшн санал болгодог.</Mongolian>
+			<Norwegian>Levende grønnfarger, optimaliserte fargestadier og skarphet og kraftig surroundlyd-effekt </Norwegian>
+			<Persian>فروشگاه نرم افزار بیش از 300 نرم افزار در زمینه هائی چون ویدیوهای اختصاصی، رسانه های اجتماعی، بازی، موسیقی و اشتراک گذاری عکس را در اختیار شما می گذارد که امکان تعامل میان تلویزیون و دستگاه های موبایل با فراهم می آورد.</Persian>
+			<Polish>Wyrazista zieleń boiska, zoptymalizowana ostrość kolorów stadionu oraz potężny dźwięk surround </Polish>
+			<Portuguese>A loja de aplicações disponibiliza mais de 300 aplicações de vídeos a pedido, redes sociais, jogos, música e de partilha de fotos que permitem igualmente fazer a interação entre a TV e os dispositivos móveis.</Portuguese>
+			<Portuguese_LA>A Loja de Apps oferece a você mais de 300 aplicativos, como apps de vídeo sob demanda, sociais, de jogos, música e de compartilhamento de fotos, que também permitem a interação entre a TV e dispositivos móveis.</Portuguese_LA>
+			<Romanian>Câmpuri de un verde viu, culoare şi claritate a stadionului optimizate şi efect surround redutabil</Romanian>
+			<Russian>App Store предлагает вам более 300 приложений, включая видео-по-запросу, социальные, игровые и музыкальные программы, а также приложения для обмена фотографиями, которые также обеспечивают интерактивную связь между телевизором и мобильными устройствами.</Russian>
+			<Serbian>Živopisni zeleni tereni, boje sa stadiona optimizovane u pogledu oštrine i snažni efekti okružujućeg zvuka</Serbian>
+			<Slovak>Živé ihrisko, ostrosť optimalizovaná pre farby štadiónov a silný efekt priestorového zvuku</Slovak>
+			<Slovenian>Živo zeleno igrišče, optimizirana ostrina barve stadiona in zmogljiv prostorski zvočni učinek</Slovenian>
+			<Spanish>App Store le ofrece más de 300 aplicaciones que van desde videos a la carta, sociales, juegos, música e intercambio de fotografías. También permite la interacción entre la televisión y los dispositivos móviles.</Spanish>
+			<Spanish_LA>App Store le ofrece más de 300 aplicaciones que van desde videos a la carta, sociales, juegos, música e intercambio de fotografías. También permite la interacción entre la televisión y los dispositivos móviles.</Spanish_LA>
+			<Spanish_NA>App Store le ofrece más de 300 aplicaciones que van desde videos a la carta, sociales, juegos, música e intercambio de fotografías. También permite la interacción entre la televisión y los dispositivos móviles.</Spanish_NA>
+			<Spanish_CA>App Store le ofrece más de 300 aplicaciones que van desde videos a la carta, sociales, juegos, música e intercambio de fotografías. También permite la interacción entre la televisión y los dispositivos móviles.</Spanish_CA>
+			<Swedish>Levande grön, arktiverad, optimerad stadium med skäpa och kraftfullt surroundljud</Swedish>
+			<Turkish>Canlı yeşil saha, keskinliği optimize edilmiş stadyum rengi ve güçlü çevresel ses efekti</Turkish>
+			<Thai>App Store ช่วยให้คุณเข้าถึงแอพพลิเคชั่นกว่า 300 รายการนับจากวิดีโอตามต้องการ สื่อสังคม เกม ดนตรี และแชร์รูปภาพ ซึ่งช่วยให้คุณโต้ตอบระหว่างทีวีกับอุปกรณ์มือถือ</Thai>
+			<Ukrainian>Яскраве зелене поле, колір стадіону з оптимізованою різкістю та потужний ефект об’ємного звуку</Ukrainian>
+			<Uzbek>App Store sizga talabga-ko‘ra-video, ijtimoiy tarmoqlar, o‘yinlar, musiqa va fotosuratlarni baham ko‘rish kabi 300 dan ortiq ilovalarni taqdim etadi, ular TV hamda mobil qurilmalar bilan o‘zaro aloqa qilishga ham imkon beradi.</Uzbek>
+			<Vietnamese>App Store mang đến hơn 300 ứng dụng từ ứng dụng xem video theo yêu cầu, mạng xã hội, trò chơi, âm nhạc và chia sẻ ảnh cho phép tương tác giữa TV và thiết bị di động.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Micro Dimming">
+		<img_L>../images/esticker/Esticker_Micro Dimming_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Micro Dimming_B_r.png</img_R>
+		<img_S>../images/esticker/Esticker_MICRO DIMMING_H.png</img_S>
+		<title>
+			<Arabic>تعتيم ميكرو</Arabic>
+			<ArabicEgypt>تعتيم مصغر</ArabicEgypt>
+			<English>Micro Dimming</English>
+			<English_LA>Micro Dimming</English_LA>
+			<English_NA>Micro Dimming</English_NA>
+			<English_CA>Micro Dimming</English_CA>
+			<Chinese>Micro Dimming</Chinese>
+			<ChineseTraditional>Micro Dimming</ChineseTraditional>
+			<Bulgarian>Звук от киноексперти</Bulgarian>
+			<Croatian>Zvuk poput onog u kinu</Croatian>
+			<Czech>Zvuk jako v kině</Czech>
+			<Danish>Toplydkvalitet som i biografen</Danish>
+			<Dutch>Expert bioscoopgeluid</Dutch>
+			<Estonian>Heli nagu päris kinos</Estonian>
+			<Finnish>Elokuvateattereiden ääni</Finnish>
+			<French>Gradation micro</French>
+			<German>Professioneller Kino-Sound</German>
+			<Greek>Κινηματογραφικός ήχος</Greek>
+			<Hungarian>Professzionális moziélmény</Hungarian>
+			<Hebrew>עמעום מיקרו</Hebrew>
+			<Indonesian>Peredup mikro</Indonesian>
+			<Italian>Sonorità per gli esperti del cinema</Italian>
+			<Latvian>Lieliska kino skaņa</Latvian>
+			<Lithuanian>Garsas kino ekspertams</Lithuanian>
+			<Mongolian>Микро Бүдгэрүүлэлт</Mongolian>
+			<Norwegian>Lyd i kinokvalitet</Norwegian>
+			<Persian>فناوری تنظیم نقطه‌ای نور</Persian>
+			<Polish>Dźwięk od ekspertów kina</Polish>
+			<Portuguese>Micro Dimming</Portuguese>
+			<Portuguese_LA>Micro Dimming</Portuguese_LA>
+			<Romanian>Dar şi pentru cinefili</Romanian>
+			<Russian>Микродимминг</Russian>
+			<Serbian>Zvuk po tehnologiji stručnjaka za bioskopski zvuk</Serbian>
+			<Slovak>Zvuk ako v kine</Slovak>
+			<Slovenian>Zvok kot v kinu</Slovenian>
+			<Spanish>Micro oscurecimiento</Spanish>
+			<Spanish_LA>Micro oscurecimiento</Spanish_LA>
+			<Spanish_NA>Micro oscurecimiento</Spanish_NA>
+			<Spanish_CA>Micro oscurecimiento</Spanish_CA>
+			<Swedish>Bioexpertljud</Swedish>
+			<Turkish>Sinema tadında ses</Turkish>
+			<Ukrainian>Звук професійного кінотеатру</Ukrainian>
+			<Thai>หรี่เสียงแบบไมโคร</Thai>
+			<Uzbek>Mikro qoraytirish</Uzbek>
+			<Vietnamese>Micro Dimming</Vietnamese>
+		</title>
+		<description>
+			<Arabic>تقوم تقنية تعتيم ميكرو بضبط السطوع والتعتيم عبر التحكم في مناطق منفصلة. ستحصل على تجربة مشاهدة رائعة مع التباين الكبير وجودة الصورة الحية.</Arabic>
+			<ArabicEgypt>تضبط تكنولوجيا التعتيم المصغر السطوع والتعتيم من خلال التحكم في مناطق منفصلة. ستتمتع بتجربة مشاهدة رائعة من خلال التباين الكبير وجودة الصورة المفعمة بالحياة.</ArabicEgypt>
+			<English>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</English>
+			<English_LA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</English_LA>
+			<English_NA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</English_NA>
+			<English_CA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</English_CA>
+			<Chinese>Micro Dimming analyses the video content in hundreds of separate zones  which adjusts the brightness and darkness separately. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</Chinese>
+			<ChineseTraditional>Micro Dimming analyses the video content in hundreds of separate zones  which adjusts the brightness and darkness separately. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.</ChineseTraditional>
+			<Bulgarian>Наслаждавайте се на Dolby звук с ясни диалози, настройки за адаптиране на звука към съдържанието и Dolby Atmos.</Bulgarian>
+			<Croatian>Uživajte u Dolby Audio zvuku s čistim dijalozima i postavkama zvuka prilagođenog sadržaju i budućem zvučnom sustavu Dolby Atmos. </Croatian>
+			<Czech>Vychutnejte si zvuk Dolby Audio se zřetelnými dialogy, zvukovým nastavením přizpůsobeným obsahu a nejdokonalejším zvukovým formátem Dolby Atmos.</Czech>
+			<Danish>Nyd Dolby Audio-lyd med tydelige dialoger og lydindstillinger, som løbende tilpasses indholdet, samt fremtidssikret Dolby Atmos.</Danish>
+			<Dutch>Geniet van Dolby Surround-geluid met duidelijke dialogen, op de inhoud aangepaste geluidsinstellingen en volgende generatie Dolby Atmos. </Dutch>
+			<Estonian>Nautige Dolby Audio heli selgelt arusaadavate dialoogide, sisu järgi kohandatud heliseadete ning Dolby Atmos süsteemiga.</Estonian>
+			<Finnish>Saat nauttia Dolby-äänestä, joka mahdollistaa selkeät vuoropuhelut, sisältöön mukautetut ääniasetukset ja tulevaisuuden Dolby Atmos -järjestelmään varautumisen.</Finnish>
+			<French>La technologie de gradation micro règle les zones claires et sombres séparément. Vous aurez une expérience visuelle fantastique grâce au contraste optimal et à la netteté de l’image.</French>
+			<German>Dolby Audio Sound mit klaren Dialogen, inhaltlich angepassten Soundeinstellungen und zukunftssicherem Dolby Atoms.</German>
+			<Greek>Απολαύστε ήχο Dolby με καθαρούς διαλόγους και ρυθμίσεις ήχου που προσαρμόζονται στο περιεχόμενο, με πρόβλεψη για την επερχόμενη τεχνολογία Dolby Atmos.</Greek>
+			<Hungarian>Élvezze a Dolby hanghatást jól érthető párbeszédekkel és a tartalomhoz igazított hangbeállításokkal és a jövőálló Dolby Atmos technológiával.</Hungarian>
+			<Hebrew>טכנולוגיית מיקרו עמעום (Micro Dimming) מתאימה את הבהירות ואת הכהות על ידי בקרה לפי אזורים נפרדים. תזכו לחוויית צפייה מרהיבה עם ניגודיות נהדרת ואיכות תמונה כמו מהחיים.</Hebrew>
+			<Indonesian>Teknologi Peredupan Mikro menyesuaikan cerah dan gelap lewat kontrol zona terpisah. Kontras yang tajam dan kualitas gambar yang begitu hidup akan memberi Anda pengalaman menonton yang luar biasa.</Indonesian>
+			<Italian>VedereSuono Dolby Audio con dialoghi chiari, impostazioni Adapt Sound per sonorità personalizzate in base ai contenuti e Dolby Atmos a prova di compatibilità futura.</Italian>
+			<Latvian>Izbaudiet Dolby Audio skaņu ar skaidriem dialogiem, saturam pielāgotiem skaņas iestatījumiem un inovatīvo Dolby Atmos.</Latvian>
+			<Lithuanian>Mėgaukitės „Dolby Audio“ garsu, aiškiais dialogais, prie turinio pritaikytais garso nustatymais ir ateities technologijoms pritaikyta „Dolby Atmos“.</Lithuanian>
+			<Mongolian>Micro Dimming технологи нь дэлгэцний тодрол ба сүүдрийг салангид бүсийн удирдлагаар тохируулдаг. Өнгө дүрсний дээд зэргийн ялгарал болон зургийн өндөр чанартайгаар үзэх гайхамшигт боломж.</Mongolian>
+			<Norwegian>Nyt Dolby Audio-lyden med krystallklare dialoger, innholdstilpassede lydinnstillinger og fremtidssikre Dolby Atmos.</Norwegian>
+			<Persian>فن آوری کم نور سازی با کنترل های منطقه ای جداگانه روشنائی و تاریکی را تنظیم می کند. با کنتراست عالی و کیفیت فوق العاده واضح تصویر می توانید از یک تجربه عالی تماشا لذت ببرید.</Persian>
+			<Polish>Ciesz się dźwiękiem Dolby Audio, klarownymi dialogami i ustawieniami dźwięku dostosowanym do treści, a także przyszłościową technologią Dolby Atmos.</Polish>
+			<Portuguese>A tecnologia Micro Dimming ajusta o brilho e os tons de preto através do controlo de diferentes áreas. Desfrutará, assim, de uma fantástica experiência de visualização, com o melhor contraste e uma qualidade de imagem vibrante.</Portuguese>
+			<Portuguese_LA>A tecnologia Micro Dimming ajusta a claridade e o escurecimento pelo controle de zonas separadas. Você terá uma fantástica experiência de visualização com o excelente contraste e a brilhante qualidade de imagem.</Portuguese_LA>
+			<Romanian>Sunet Dolby Audio cu dialoguri clare, setări audio adaptate la conţinut şi Dolby Atmos compatibil cu dezvoltări ulterioare.</Romanian>
+			<Russian>Функция «Микродимминг» обеспечивает регулировку яркости на отдельных участках экрана. Вы получите незабываемые впечатления от просмотра яркого живого изображения с потрясающей контрастностью.</Russian>
+			<Serbian>Uživajte u zvuku sa tehnologijom Dolby Audio, jasnim dijalozima, zvuku prilagođenom tipu sadržaja i tehnologijom budućnosti Dolby Atmos.</Serbian>
+			<Slovak>Vychutnajte si zvuk Dolby so zreteľnými dialógmi, nastavenia zvuku prispôsobené obsahu a vylepšenie z budúcnosti Dolby Atmos.</Slovak>
+			<Slovenian>OUživajte v Dolby Audio zvoku z jasnimi dialogi, zvočne nastavitve prilagojene vsebini in Dolby Atmos prilagojen prihodnosti.</Slovenian>
+			<Spanish>La tecnología Micro Dimming ajusta el brillo y la oscuridad mediante el control de zonas por separado. Disfrute de una experiencia visual fantástica con el gran contraste y la calidad de imagen vívida.</Spanish>
+			<Spanish_LA>La tecnología Micro Dimming ajusta el brillo y la oscuridad mediante el control de zonas por separado. Disfrute de una experiencia visual fantástica con el gran contraste y la calidad de imagen vívida.</Spanish_LA>
+			<Spanish_NA>La tecnología Micro Dimming ajusta el brillo y la oscuridad mediante el control de zonas por separado. Disfrute de una experiencia visual fantástica con el gran contraste y la calidad de imagen vívida.</Spanish_NA>
+			<Spanish_CA>La tecnología Micro Dimming ajusta el brillo y la oscuridad mediante el control de zonas por separado. Disfrute de una experiencia visual fantástica con el gran contraste y la calidad de imagen vívida.</Spanish_CA>
+			<Swedish>Lyssna på Dolby Audio-ljud med tydliga dialoger och framtida Dolby Atmos.</Swedish>
+			<Turkish>Net konuşmalara , içerik uyumlu ses ayarlarına ve gelecekteki değişikliklerden etkilenmeyen Dolby Atmos özelliğine sahip Dolby Audio ses.</Turkish>
+			<Thai>เทคโนโลยีการหรี่แสงแบบไมโครช่วยปรับความสว่างและความมืดโดยแยกการควบคุมโซน คุณจะได้รับประสบการณ์รับชมที่น่าตื่นตาตื่นใจด้วยภาพที่มีคุณภาพสดใสและชัดเจน</Thai>
+			<Ukrainian>Насолоджуйтесь звуком Dolby Audio з чіткими діалогами та налаштуваннями, адаптованими до вмісту, а також звуком Dolby Atmos.</Ukrainian>
+			<Uzbek>Mikro qoraytirish texnologiyasi boshqarish zonalarini ajratish orqali yorqinlik va qoramtirlikni sozlaydi. Siz ajoyib kontrast va yorqin tasvir sifati bilan fantastik ko‘rish tajribasiga ega bo‘lasiz.</Uzbek>
+			<Vietnamese>Công nghệ Micro Dimming điều chỉnh độ sáng và tối nhờ kiểm soát các vùng riêng biệt. Bạn sẽ có một trải nghiệm xem tuyệt vời với độ tương phản tuyệt vời và chất lượng hình ảnh sống động.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Sports Mode">
+		<img_L>../images/esticker/Esticker_Sports Mode_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Sports Mode_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_sportsmode.png</img_S>
+		<title>
+			<Arabic>وضع الرياضة</Arabic>
+			<ArabicEgypt>وضع الرياضة</ArabicEgypt>
+			<English>Sports Mode</English>
+			<English_LA>Sports Mode</English_LA>
+			<English_NA>Sports Mode</English_NA>
+			<English_CA>Sports Mode</English_CA>
+			<Chinese>Sports Mode</Chinese>
+			<ChineseTraditional>Sports Mode</ChineseTraditional>
+			<Bulgarian>Sports Mode</Bulgarian>
+			<Croatian>Sports Mode</Croatian>
+			<Czech>Sports Mode</Czech>
+			<Danish>Sports Mode</Danish>
+			<Dutch>Sports Mode</Dutch>
+			<Estonian>Sports Mode</Estonian>
+			<Finnish>Sports Mode</Finnish>
+			<French>Mode Sports</French>
+			<German>Sports Mode</German>
+			<Greek>Sports Mode</Greek>
+			<Hungarian>Sports Mode</Hungarian>
+			<Hebrew>מצב ספורט</Hebrew>
+			<Indonesian>Mode olahraga</Indonesian>
+			<Italian>Sports Mode</Italian>
+			<Latvian>Sports Mode</Latvian>
+			<Lithuanian>Sports Mode</Lithuanian>
+			<Mongolian>Спортын Горим</Mongolian>
+			<Norwegian>Sports Mode</Norwegian>
+			<Persian>حالت ورزشی</Persian>
+			<Polish>Sports Mode</Polish>
+			<Portuguese>Modo de esporte</Portuguese>
+			<Portuguese_LA>Modo de esporte</Portuguese_LA>
+			<Romanian>Sports Mode</Romanian>
+			<Russian>Режим «Спорт»</Russian>
+			<Serbian>Sports Mode</Serbian>
+			<Slovak>Sports Mode</Slovak>
+			<Slovenian>Sports Mode</Slovenian>
+			<Spanish>Modo Deportes</Spanish>
+			<Spanish_LA>Modo Deportes</Spanish_LA>
+			<Spanish_NA>Modo Deportes</Spanish_NA>
+			<Spanish_CA>Modo Deportes</Spanish_CA>
+			<Swedish>Sports Mode</Swedish>
+			<Turkish>Sports Mode</Turkish>
+			<Ukrainian>Sports Mode</Ukrainian>
+			<Thai>โหมดกีฬา</Thai>
+			<Uzbek>Sport rejimi</Uzbek>
+			<Vietnamese>Chế độ thể thao</Vietnamese>
+		</title>
+		<description>
+			<Arabic>يتيح تحسين الصوت والصورة للجمهور الاستمتاع بالشعور الغامر للأحداث الرياضية المباشرة. </Arabic>
+			<ArabicEgypt>تمكن خاصية تحسين الصور والصوت الجمهور من الاستمتاع بشعور الانغماس في الأحداث الرياضية المثيرة.</ArabicEgypt>
+			<English>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</English>
+			<English_LA>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</English_LA>
+			<English_NA>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</English_NA>
+			<English_CA>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</English_CA>
+			<Chinese>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</Chinese>
+			<ChineseTraditional>The optimization of images and sound allows audiences to enjoy the immersive feeling of live-action sports events.</ChineseTraditional>
+			<Bulgarian>FreeviewPlus осигурява безпроблемен достъп до всички налични Catch Up TV програми от мрежите с безплатно излъчване.</Bulgarian>
+			<Croatian>FreeviewPlus omogućuje bešavni pristup svim dostupnim Catch Up TV kanalima u nekodiranim mrežama.</Croatian>
+			<Czech>FreeviewPlus poskytuje bezproblémový přístup ke všem dostupným Catch Up TV ze sítí pro bezplatné vysílání.</Czech>
+			<Danish>FreeviewPlus giver sømløs adgang til alle tilgængelige Catch-Up TV-udsendelser fra free-to-air-netværkene.</Danish>
+			<Dutch>FreeviewPlus biedt naadloze toegang tot alle beschikbare Catch Up TV van de vrij te ontvangen netwerken. </Dutch>
+			<Estonian>FreeviewPlus pakub sujuvat ligipääsu kogu saadavale Catch Up TV-le vabalevi võrkudest.</Estonian>
+			<Finnish>FreeviewPlus tarjoaa saumattoman pääsyn kaikkiin käytettävissä oleviin Internet-TV-kanaviin ilmaisissa verkoissa.</Finnish>
+			<French>L’optimalisation d’images et de sons permet aux audiences d’apprécier le sentiment immersif des événements sportifs en direct.</French>
+			<German>FreeviewPlus bietet von allen kostenlosten Netzwerken reibungslosen Zugriff auf alle verfügbaren Catch Up Fernsehsendungen.</German>
+			<Greek>Το FreeviewPlus παρέχει άμεση πρόσβαση σε όλα τα διαθέσιμα τηλεοπτικά κανάλια ελεύθερης λήψης.</Greek>
+			<Hungarian>A FreeviewPlus szolgáltatással zökkenőmentesen elérhető az ingyenesen nézhető hálózatok minden Catc Up TV csatornája.</Hungarian>
+			<Hebrew>אופטימיזציה של התמונות והצלילים מאפשרת לקהלים ליהנות מתחושת המצאת באירוע ספורט חי. </Hebrew>
+			<Indonesian>Dengan optimisasi gambar dan suara, penonton seolah terlibat langsung dalam acara olahraga penuh aksi.</Indonesian>
+			<Italian>FreeviewPlus consente l’accesso immediato a tutti i canali Catch Up TV disponibili delle reti in chiaro.</Italian>
+			<Latvian>FreeviewPlus nodrošina vienotu piekļuvi visām pieejamajām Catch Up TV programmām no bezmaksas (free-to-air) tīkliem.</Latvian>
+			<Lithuanian>FreeviewPlus“ suteikia tiesioginę prieigą prie  visos prieinamos po premjeros rodomos TV iš nemokamų tinklų. </Lithuanian>
+			<Mongolian>Спортын тоглолтуудыг амьдаар-үзэж буй мэт бодит мэдрэмжийг үзэгчдэд мэдрүүлэх дээд зэргийн зураг дүрс болон дууны тохируулга.</Mongolian>
+			<Norwegian>FreeviewPlus gir sømløs tilgang til Catch Up TV som er tilgjengelig fra kringkastingsberettigede nettverk.</Norwegian>
+			<Persian>بهینه سازی تصاویر و صداها به مخاطبان اجازه می دهد تا از حس فراگیر رویدادهای ورزشی زنده لذت ببرند.</Persian>
+			<Polish>FreeviewPlus zapewnia ciągły dostęp do wszystkich dostępnych programów Catch Up TV z ogólnodostępnych sieci.</Polish>
+			<Portuguese>A otimização de imagens e som permite que as pessoas sintam a sensação de envolvimento em eventos esportivos ao vivo.</Portuguese>
+			<Portuguese_LA>A otimização de imagens e som permite que as pessoas sintam a sensação de envolvimento em eventos esportivos ao vivo.</Portuguese_LA>
+			<Romanian>FreeviewPlus oferă acces direct la toate emisiunile TV la cerere ale posturilor cu difuzare gratuită. </Romanian>
+			<Russian>Оптимизация изображения и звука позволяет зрителям по-настоящему погрузиться в динамичную атмосферу спортивных событий. </Russian>
+			<Serbian>FreeviewPlus nudi nesmetan pristup svim dostupnim Catch Up TV iz slobodnih mreža.</Serbian>
+			<Slovak>FreeViewPlus poskytuje bezproblémový prístup ku všetkým Catch Up TV z bezplatných sietí.</Slovak>
+			<Slovenian>FreeviewPlus vam nudi neomejen dostop do vseh Catch up TV programov, ki so na voljo preko nekodiranih omrežij.</Slovenian>
+			<Spanish>La optimización de imágenes y sonido les permite a las audiencias disfrutar de la sensación estar en los eventos deportivos en vivo.</Spanish>
+			<Spanish_LA>La optimización de imágenes y sonido les permite a las audiencias disfrutar de la sensación estar en los eventos deportivos en vivo.</Spanish_LA>
+			<Spanish_NA>La optimización de imágenes y sonido les permite a las audiencias disfrutar de la sensación estar en los eventos deportivos en vivo.</Spanish_NA>
+			<Spanish_CA>La optimización de imágenes y sonido les permite a las audiencias disfrutar de la sensación estar en los eventos deportivos en vivo.</Spanish_CA>
+			<Swedish>FreeviewPlus erbjuder sömlös åtkomst till alla tillgängliga Catch Up TV från gratis nätverk.</Swedish>
+			<Turkish>FreeviewPlus ücretsiz yayın ağlarından gelen tüm mevcut Catch Up TV hizmetlerine sorunsuz erişim sunar.</Turkish>
+			<Thai>การปรับภาพและเสียงให้เหมาะที่สุดช่วยให้ผู้ชมเพลิดเพลินและดื่มด่ำไปกับรายการกีฬาที่ให้ภาพสมจริง</Thai>
+			<Ukrainian>FreeviewPlus надає безперешкодний доступ до всіх каналів з вільно трансльованих мереж, доступних у форматі «слідом за ефіром».</Ukrainian>
+			<Uzbek>Tasvirlar va tovushni optimallashtirish tomoshabinlarni jonli sport o‘yinlarining qamrab oluvchi hissiyotlaridan rohatlanishlariga imkon beradi. </Uzbek>
+			<Vietnamese>Tính năng tối ưu hóa hình ảnh và âm thanh cho phép người xem đắm chìm vào cảm giác trung thực của các sự kiện thể thao trực tiếp.</Vietnamese>
+		</description>
+	</icon>
+	<icon id = "La Nacion">
+		<img_L>../images/esticker/Esticker_La Nacion_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_La Nacion_B_r.png</img_R>
+		<img_S>../images/esticker/Esticker_La Nacion_H.png</img_S>
+		<title>
+			<English_LA>La Nacion</English_LA>
+			<Portuguese_LA>La Nacion</Portuguese_LA>
+			<Spanish_LA>La Nacion</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>Get instant access to the latest national and international news. Browse through the different sections and enjoy exclusive interviews, videos and much more.</English_LA>
+			<Portuguese_LA>Acesse as últimas notícias nacionais e internacionais na hora. Navegue pelas diferentes seções e aproveite as entrevistas exclusivas, vídeos e muito mais.</Portuguese_LA>
+			<Spanish_LA>Accedé a las últimas noticias nacionales e internacionales al instante. Navegá por las diferentes secciones y disfrutá de entrevistas exclusivas, videos y mucho más.</Spanish_LA>
+		</description>
+	</icon>
+</root>

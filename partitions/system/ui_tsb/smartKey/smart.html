@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="smart.css"/>
+    <script type="text/javascript" src="smart.js"></script>
+    <script type="text/javascript" src="../event.js"></script>
+    <style>
+        body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            display: none;
+        }
+    </style>
+</head>
+
+<body onload="init()" onunload="uninit()" onfocus="onSmartBodyFocus()">
+<!--SmartKey主体部分-->
+<div id="smartBody" style=" left:0px;width:1920px;height: 1080px; display: none">
+    <img style="z-index:1;position: absolute;top:867px;left:0px;">
+    <div id="smartOption">
+
+    </div>
+</div>
+
+<!--单独听弹出菜单-->
+<div id="onlyListenRemind"
+     style="position:absolute;width:1920px;height:549px;left:0px;top:434px;display: none">
+    <img  style="top:0px;position: absolute;">
+    <img id="timerCircle"  style="position:absolute;top:70px;left:795px;">
+    <img style="position:absolute;top:86px;left:811px;">
+    <span id="onlyListenTime" style="position:absolute;top:145px;left:889px;">5</span>
+    <span id="onlyListenUnit" style="position:absolute;top:230px;left:997px;">s</span>
+    <span id="onlyListenRemindSpan1" style="position:absolute;top:424px;width: 1920px;float: left">Enter Audio Only Mode</span>
+    <span id="onlyListenRemindSpan2" style="position:absolute;top:472px;width: 1920px;float: left">Press any key except volume key to exit!</span>
+</div>
+
+
+<!--SleepTime弹出菜单-->
+<div id="sleepMenu" style="position: absolute; left:0px;top:763px;width: 1920px;height: 123px; visibility: hidden">
+    <span id="remindTime"></span>
+    <img>
+    <div class="sleep_elem" id="sleep_01" style="left:274px;"
+         data-focus_id="sleep_01_focus" data-left="sleep_09" data-right="sleep_02" onclick="showSmartFocusArrow(this);setSleeptime(0)">
+        <span>Off</span>
+        <img id="sleep_01_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_02" style="left:425px;"
+         data-focus_id="sleep_02_focus" data-left="sleep_01" data-right="sleep_03" onclick="showSmartFocusArrow(this);setSleeptime(1)">
+        <span>10 min</span>
+        <img id="sleep_02_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_03" style="left:576px;"
+         data-focus_id="sleep_03_focus" data-left="sleep_02" data-right="sleep_04" onclick="showSmartFocusArrow(this);setSleeptime(2)">
+        <span>20 min</span>
+        <img id="sleep_03_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_04" style="left:727px;"
+         data-focus_id="sleep_04_focus" data-left="sleep_03" data-right="sleep_05" onclick="showSmartFocusArrow(this);setSleeptime(3)">
+        <span>30 min</span>
+        <img id="sleep_04_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_05" style="left:878px;"
+         data-focus_id="sleep_05_focus" data-left="sleep_04" data-right="sleep_06" onclick="showSmartFocusArrow(this);setSleeptime(4)">
+        <span>40 min</span>
+        <img id="sleep_05_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_06" style="left:1029px;"
+         data-focus_id="sleep_06_focus" data-left="sleep_05" data-right="sleep_07" onclick="showSmartFocusArrow(this);setSleeptime(5)">
+        <span>50 min</span>
+        <img id="sleep_06_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_07" style="left:1180px;"
+         data-focus_id="sleep_07_focus" data-left="sleep_06" data-right="sleep_08" onclick="showSmartFocusArrow(this);setSleeptime(6)">
+        <span>60 min</span>
+        <img id="sleep_07_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_08" style="left:1331px;"
+         data-focus_id="sleep_08_focus" data-left="sleep_07" data-right="sleep_09" onclick="showSmartFocusArrow(this);setSleeptime(7)">
+        <span>90 min</span>
+        <img id="sleep_08_focus" style="visibility: hidden">
+    </div>
+    <div class="sleep_elem" id="sleep_09" style="left:1482px;"
+         data-focus_id="sleep_09_focus" data-left="sleep_08" data-right="sleep_01" onclick="showSmartFocusArrow(this);setSleeptime(8)">
+        <span>120 min</span>
+        <img id="sleep_09_focus" style="visibility: hidden">
+    </div>
+</div>
+<div id="popGuideMenu" style="display:none;">
+    <img  src="images/regza_link.png" height="700px" width="340px"/>
+</div>
+</body>
+</html>

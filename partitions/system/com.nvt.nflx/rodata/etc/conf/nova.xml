@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <screen_render_display_list>true</screen_render_display_list>
+    <debug_flags>testScreenFullRender=0</debug_flags>
+  </config_data>
+</config_root>

@@ -1,0 +1,2 @@
+Appmgr version:v1.3.69.1 [20171108]
+LibNAM version:v1.2.04 [20171102]

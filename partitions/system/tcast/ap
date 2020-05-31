@@ -1,0 +1,50 @@
+[{
+	"name": "YouTube",
+	"icon": "http://s3.tcllauncher.com/html5/images/YouTube.png",
+	"issysapp": "1"
+},
+{
+	"name": "Yupp TV",
+	"icon": "http://s3.tcllauncher.com/html5/images/YUPP_TV.png",
+	"issysapp": "1"
+},
+{
+	"name": "Viewster",
+	"icon": "http://s3.tcllauncher.com/html5/images/viewster.png",
+	"issysapp": "1"
+},
+{
+	"name": "SoundCloud",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_soundcloud.png",
+	"issysapp": "1"
+},
+{
+	"name": "T-Browser",
+	"icon": "http://s3.tcllauncher.com/html5/images/T-Browser.png",
+	"issysapp": "1"
+},
+{
+	"name": "Filmbox Live",
+	"icon": "http://s3.tcllauncher.com/html5/images/FilmboxLive.png",
+	"issysapp": "1"
+},
+{
+	"name": "Toon Goggles",
+	"icon": "http://s3.tcllauncher.com/html5/images/ToonGogglesH5.png",
+	"issysapp": "1"
+},
+{
+	"name": "T-Cast",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_tcast.png",
+	"issysapp": "1"
+},
+{
+	"name": "Baeble Music",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_baeblemusic.png",
+	"issysapp": "1"
+},
+{
+	"name": "Radioline",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_radioline.png",
+	"issysapp": "1"
+}]

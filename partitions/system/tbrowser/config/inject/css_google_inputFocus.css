@@ -1,0 +1,17 @@
+
+
+
+.lsb {
+	background: url(/images/nav_logo229.png) 0 -261px repeat-x;
+	border: none;
+	color: #000;
+	cursor: pointer;
+	height: 30px;
+	margin: 0;
+	font: 15px arial,sans-serif;
+	vertical-align: top
+}
+
+.lsb:focus {
+	border: 1px solid #FF8D1A;
+}

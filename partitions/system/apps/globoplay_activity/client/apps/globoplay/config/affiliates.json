@@ -1,0 +1,123 @@
+{
+  "14": [
+    {
+      "serviceId": 6400
+    },
+    {
+      "serviceId": 49280
+    }
+  ],
+  "15": [
+    {
+      "serviceId": 30980
+    },
+    {
+      "virtualNumber": 15,
+      "networkId": 15
+    }
+  ],
+  "17": [
+    {
+      "serviceId": 51200
+    }
+  ],
+  "18": [
+    {
+      "serviceId": 59200
+    }
+  ],
+  "19": [
+    {
+      "serviceId": 40640
+    }
+  ],
+  "21": [
+    {
+      "serviceId": 28786
+    },
+    {
+      "serviceId": 16256
+    },
+    {
+      "serviceId": 39104
+    }
+  ],
+  "22": [
+    {
+      "serviceId": 16960
+    }
+  ],
+  "23": [
+    {
+      "serviceId": 18624
+    }
+  ],
+  "26": [
+    {
+      "serviceId": 13600
+    },
+    {
+      "serviceId": 43200
+    }
+  ],
+  "28": [
+    {
+      "serviceId": 9120
+    },
+    {
+      "virtualNumber": 28,
+      "networkId": 28
+    }
+  ],
+  "29": [
+    {
+      "serviceId": 9536
+    },
+    {
+      "serviceId": 20992
+    },
+    {
+      "serviceId": 48352
+    }
+  ],
+  "30": [
+    {
+      "serviceId": 30144
+    }
+  ],
+  "33": [
+    {
+      "serviceId": 23104
+    },
+    {
+      "serviceId": 56416
+    },
+    {
+      "serviceId": 58560
+    }
+  ],
+  "34": [
+    {
+      "serviceId": 18272
+    },
+    {
+      "serviceId": 49984
+    },
+    {
+      "serviceId": 51648
+    }
+  ],
+  "36": [
+    {
+      "serviceId": 30112
+    },
+    {
+      "serviceId": 41664
+    }
+  ],
+  "41": [
+    {
+      "serviceId": 44512
+    }
+  ]
+}

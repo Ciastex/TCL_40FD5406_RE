@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" id="theme" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+<script type="text/javascript">
+
+function setFocusId(id)
+{
+	parent.FocusId(id)
+}
+
+document.onmousemove = function()
+{
+	parent.focus();
+}
+document.onclick = function()
+{
+	if(top.$("otherPage").src.indexOf("connectNetworkRemind.html")==-1)
+	{
+		parent.focus();
+	}
+}
+
+</script>
+</head>
+<body class="body_comm">
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+        <div id="appsPage" name="subwindow" class="window" style="display: block; left: 0px; top: 160px;">
+            <div class="appicon" id="apps_01" name="focusBlock" data-up="0" data-down="0" data-left="-1" data-right="apps_02" data-leftPage="tv_03" data-rightPage="tv_12" data-focus_id="border_apps_01" style="top: 63px; left: 95px; height: 572px; width: 572px;" onclick="jumpToApp('zeasn');setFocusId('apps_01');actionFive_Click('5','0_au_apps01_0','App Store','')">
+                <img src="images/APP_store.png?md5=fdabd820f19a486bc1024f9df9819803" class='app_background'/> 
+                <span class="elem_block_title" style="width: 572px;"></span>
+            </div>
+            <div class="elem_border border" id="border_apps_01" style="top: 38px; left: 70px; visibility: hidden; height: 559px; width: 559px;" onclick="jumpToApp('zeasn')"></div>
+            <div class="appicon" id="apps_02" name="apps_02" data-up="0" data-down="apps_03" data-left="apps_01" data-right="apps_04" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_02" style="top: 63px; left: 677px;" onclick="jumpToApp('youtube');setFocusId('apps_02');actionFive_Click('5','0_au_apps02_0','YouTube','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/YouTube.png?md5=2a7e0eaef1ff9696edf867091333bed4" class='app_foreground'/>
+                <span class="elem_block_title">YouTube</span>
+            </div>
+            <div class="elem_border border" id="border_apps_02" style="top:38px; left: 652px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('youtube')"></div>
+            <div class="appicon" id="apps_03" name="apps_03" data-up="apps_02" data-down="0" data-left="apps_01" data-right="apps_05" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_03" style="top: 353px; left: 677px;" onclick="jumpToApp('yupptv');setFocusId('apps_03');actionFive_Click('5','0_au_apps03_0','Yupp TV','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/YUPP_TV.png?md5=bbf86a9129f0048529a30d270dff36a5" class='app_foreground'/>
+                <span class="elem_block_title">Yupp TV</span>
+            </div>
+            <div class="elem_border border" id="border_apps_03" style="top: 328px; left: 652px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('yupptv')"></div>
+            <div class="appicon" id="apps_04" name="apps_04" data-up="0" data-down="apps_05" data-left="apps_02" data-right="apps_06" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_04" style="top:63px; left:968px;" onclick="jumpToApp('happykids');setFocusId('apps_04');actionFive_Click('5','0_au_apps04_0','Happy Kids','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/icon_happykids_maxi.png?md5=3859f8ea3f872712d681cdb7890df8b6" class='app_foreground'/>
+                <span class="elem_block_title" >Happy Kids</span>
+            </div>
+            <div class="elem_border border" id="border_apps_04" style="top: 38px; left: 943px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('happykids')"></div>
+            <div class="appicon" id="apps_05" name="apps_05" data-up="apps_04" data-right="apps_07" data-down="0" data-left="apps_03" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_05" style="top: 353px; left: 968px;" onclick="jumpToApp('ifood-tv');setFocusId('apps_05');actionFive_Click('5','0_eu_apps05_0','iFood.tv','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/icon_ifoodtv_maxi.png?md5=6a62c715a09f052d0d8de6b03a2bb0d0" class='app_foreground'/>
+                <span class="elem_block_title" >iFood.tv</span>
+            </div>
+            <div class="elem_border border" id="border_apps_05" style="top: 328px; left: 943px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('ifood-tv')"></div>
+            <div class="appicon" id="apps_06" name="apps_06" data-up="0" data-right="apps_08" data-down="apps_07" data-left="apps_04" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_06" style="top: 63px; left: 1259px;" onclick="jumpToApp('browser');setFocusId('apps_06');actionFive_Click('5','0_eu_apps06_0','T-Browser','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/T-Browser.png?md5=fd7689a5495edf48a9e448b7990133a2" class='app_foreground'/>
+                <span class="elem_block_title">T-Browser</span>
+            </div>
+            <div class="elem_border border" id="border_apps_06" style="top: 38px; left: 1234px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('browser')"></div>
+            <div class="appicon" id="apps_07" name="apps_07" data-up="apps_06" data-right="apps_09" data-down="0" data-left="apps_05" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_07" style="top: 353px; left: 1259px;" onclick="jumpToApp('filmboxlive');setFocusId('apps_07');actionFive_Click('5','0_eu_apps07_0','Filmbox Live','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/FilmboxLive.png?md5=15f6a2a8661359bbfb130adea9a33788" class='app_foreground'/>
+                <span class="elem_block_title">Filmbox Live</span>
+            </div>
+            <div class="elem_border border" id="border_apps_07" style="top: 328px; left: 1234px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('filmboxlive')"></div>
+            <div class="appicon" id="apps_08" name="apps_08" data-up="0" data-right="apps_100" data-down="apps_09" data-left="apps_06" data-leftPage="apps_03" data-rightPage="home_01" data-focus_id="border_apps_08" style="top:63px; left:1550px;" onclick="jumpToApp('toongoggles-h5');setFocusId('apps_08');actionFive_Click('5','0_eu_apps08_0','Toon Goggles','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/ToonGogglesH5.png?md5=c3c5cc323bc83b978b807e5a916dd548" class='app_foreground'/> 
+                <span class="elem_block_title">Toon Goggles</span>
+            </div>
+            <div class="elem_border border" id="border_apps_08" style="top: 38px; left: 1525px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('toongoggles-h5')"></div>
+            <div class="appicon" id="apps_09" name="apps_09" data-up="apps_08" data-right="apps_101" data-down="0" data-left="apps_07" data-leftPage="apps_03" data-rightPage="home_02" data-focus_id="border_apps_09" style="top: 353px; left: 1550px;" onclick="jumpLocalApps('tcast');setFocusId('apps_09');actionFive_Click('5','0_eu_apps09_0','T-Cast','')">	
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/icon_tcast.png?md5=50ad899db04f853ea6a29f170f4339e0" class='app_foreground'/> 
+                <span class="elem_block_title">T-Cast</span>
+            </div>
+            <div class="elem_border border" id="border_apps_09" style="top: 328px; left: 1525px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpLocalApps('tcast')"></div>
+            <div class="appicon" id="apps_100" name="apps_100" data-up="0" data-right="-1" data-down="apps_101" data-left="apps_08" data-leftPage="apps_03" data-rightPage="tv_00" data-focus_id="border_apps_100" style="top:63px; left:1841px;" onclick="jumpToApp('baeblemusic');setFocusId('apps_10');actionFive_Click('5','0_eu_apps10_0','Baeble Music','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/icon_baeblemusic.png?md5=e1af61f48a63bdcca7eb58fab95e40c9" class='app_foreground'/> 
+                <span class="elem_block_title">Baeble Music</span>
+            </div>
+            <div class="elem_border border" id="border_apps_100" style="top: 38px; left: 1816px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('baeblemusic')"></div>
+            <div class="appicon" id="apps_101" name="apps_101" data-up="apps_100" data-right="-1" data-down="0" data-left="apps_09" data-leftPage="apps_03" data-rightPage="tv_00" data-focus_id="border_apps_101" style="top: 353px; left: 1841px;" onclick="jumpToApp('radioline');setFocusId('apps_11');actionFive_Click('5','0_eu_apps11_0','Radioline','')">	
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/icon_radioline.png?md5=2d2885feeefa2f7122ab1bd4f7481dee" class='app_foreground'/> 
+                <span class="elem_block_title">Radioline</span>
+            </div>
+            <div class="elem_border border" id="border_apps_101" style="top: 328px; left: 1816px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('radioline')"></div>
+        </div>
+    </div>
+</body>
+<script>
+updateZeasn();
+</script>
+<!-- other -->
+</html>
+

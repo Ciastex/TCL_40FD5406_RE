@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="GloboPlay" xmlns:tvos="tvos" >
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <set-env>
+        <env tvos:name="PATH" tvos:mode="front">/system/apps/globoplay_activity/client/apps/globoplay:/system/apps/globoplay_activity/engine</env>
+        <env tvos:name="DFBHOME" tvos:mode="replace">/system/etc/mp</env>
+        <env tvos:name="DFBLIBS" tvos:mode="replace">/system/lib/dfb/directfb-1.7-1</env>
+        <env tvos:name="LD_LIBRARY_PATH" tvos:mode="front">/tvos/libGlibc:/system/lib/dfb:/system/lib/gstreamer:/system/lib/gstreamer/gstreamer-1.0:/system/lib:/system/com.nvt.nflx/lib:/system/lib/libs:/system/apps/globoplay_activity/engine</env>
+        <env tvos:name="NODE_PATH" tvos:mode="front">/system/apps/globoplay_activity/engine</env>
+        <env tvos:name="UV_THREADPOOL_SIZE" tvos:mode="replace">12</env>
+        <env tvos:name="BCP47HOME" tvos:mode="replace">/data/bcp47.txt</env>
+        <env tvos:name="FDYNAMEHOME" tvos:mode="replace">/persist/devicename.txt</env>
+        <env tvos:name="LD_PRELOAD" tvos:mode="replace">"/system/lib/libNDAL.so /system/lib/libNDAL_EX.so /system/lib/libs/libz.so.1 /system/lib/libs/libjpeg.so.9 /system/lib/libs/libpng16.so.16 /system/lib/nlib/libnpc.so /system/lib/libdrm.so.2 /system/lib/libv4l2.so.0 /system/lib/libs/libasound.so /system/lib/libs/libtinycompress.so /system/lib/libnteec.so"</env>
+        <env tvos:name="RESOULITON_ENV" tvos:mode="replace">1080P</env>
+        <env tvos:name="HOME" tvos:mode="replace">/system/etc/mp</env>
+        <env tvos:name="GST_PLUGIN_PATH_1_0" tvos:mode="replace">/system/lib/gstreamer/gstreamer-1.0</env>
+        <env tvos:name="GST_REGISTRY_1_0" tvos:mode="replace">/tmp/gst-registry.bin</env>
+        <env tvos:name="GST_REGISTRY_FORK" tvos:mode="replace">no</env>
+        <env tvos:name="GST_OMX_CONFIG_DIR" tvos:mode="replace">/system</env>
+        <env tvos:name="PATH" tvos:mode="front">/system/lib/gstreamer/bin</env>
+        <env tvos:name="ALSA_CONFIG_PATH" tvos:mode="replace">/system/etc/alsa.conf</env>
+        <env tvos:name="GST_MEDIA_CODEC_PATH" tvos:mode="replace">/system/media_codecs.xml</env>
+        <env tvos:name="GIO_MODULE_DIR" tvos:mode="replace">"/system/lib/gstreamer/gio/modules"</env>
+        <env tvos:name="G_SLICE" tvos:mode="replace">always-malloc</env>
+        <env tvos:name="GIO_EXTRA_MODULES" tvos:mode="replace">/system/lib/gstreamer/gio/modules</env>
+        <env tvos:name="GST_PR_LICENSE_PATH" tvos:mode="replace">/data/novatek_tk/mspr.hds</env>              
+        <env tvos:name="OPERA_PR_KEYFILE_PATH" tvos:mode="replace">/data/novatek_tk/keyfile.dat</env>
+        <env tvos:name="GP_LOADED_ON_BOOT" tvos:mode="replace">1</env>
+    </set-env>
+    <application tvos:persistet="true">
+        <activity tvos:name="GloboPlayActivity" >
+            <intent-filter>
+                <action tvos:name="tvos.globoplay.activity" />
+            </intent-filter>
+            <intent-filter>
+                <action tvos:name="tvos.intent.action.MAIN" />
+                <category tvos:name="tvos.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service tvos:name="GloboPlayService" >
+            <intent-filter>
+                <action tvos:name="tvos.globoplay.service" />
+            </intent-filter>
+        </service>
+        <broadcast tvos:name="GloboPlayStandby" >
+            <intent-filter>
+                <action tvos:name="tvos.system.broadcast.standby" />
+            </intent-filter>
+        </broadcast>
+
+        <broadcast tvos:name="GloboPlayWakeup" >
+            <intent-filter>
+                <action tvos:name="tvos.system.broadcast.wakeup" />
+            </intent-filter>
+        </broadcast>
+    </application>
+</manifest>
+
+
+

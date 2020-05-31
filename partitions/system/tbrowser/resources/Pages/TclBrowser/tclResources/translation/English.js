@@ -1,0 +1,9 @@
+var g_favorite = "Favorite";
+var g_history = "History";
+var g_Edit_Lineup = ["Edit", "Line up"];
+var g_Zoom = "Zoom";
+var g_Settings = "Settings";
+var g_About = "About";
+var g_Exit = "Exit";
+var g_Pointer = "Pointer";
+var g_Highlight = "Highlight";

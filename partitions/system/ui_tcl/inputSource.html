@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="inputSource.js"></script>
+<style>
+#inputSourceBgBar
+{
+	position:absolute;
+	height:1080px;
+	width:420px;
+	left:0px;
+	color:white;
+	font-size:30px;
+	overflow:hidden;
+}
+.inputSourceBarOther
+{
+	background:#000;
+	border:4px solid #1b1b1b;
+	opacity:0.92;
+}
+.inputSourceBarNewsan
+{
+	background-image: url("images/background_newsan.png");
+	background-repeat: no-repeat;
+}
+#inputSourceFocus
+{
+	position:absolute;
+	height:140px;
+	width:340px;
+	z-index:100;
+	top:1px;
+	left:41px;
+	display:block;
+	 pointer-events:none;
+}
+.inputSourceBox
+{
+	position:relative;
+	height:120px;
+	width:320px;
+	margin:10px 50px;
+	z-index:50;
+}
+.inputSourceBox ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.inputSouceName
+{
+	position:absolute;
+	top:80px;
+	width:320px;
+	height:40px;
+	text-align:center;
+	color:white;
+	font-size:26px;
+	opacity:0.5;
+	white-space:nowrap;
+}
+#Title
+{
+	position:absolute;
+	top:55px;
+	left:50px;
+    right:50px;
+	font-size:40px;
+	color:#b0b0b0;
+}
+</style>
+</head>
+
+<body onload="init()" onunload="uninit()">
+    <div id="inputSourceBgBar">
+		<img id="inputSourceBg" src="">
+    	<span id="Title"> </span>
+        <div style="position:absolute; top:125px;" id="inputsourcelist">
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+         <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <div class="inputSourceBox">
+            <span class="inputSouceName"></span>	
+        </div>
+        <img id="inputSourceFocus" src="images/Icon-Sourse_Focus.png" />
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<root>
+<path id = "firstImg">
+	<image>config/SCBC_image/transparent.png</image>
+</path>
+<path id = "secondImg">
+	<image>config/SCBC_image/transparent.png</image>
+</path>
+<static_icon id = "TCL">
+	<img>config/SCBC_image/SmartTV.png</img>
+</static_icon>
+<static_icon id = "UHD">
+	<img>config/SCBC_image/SmartTV.png</img>
+</static_icon>
+<static_icon id = "TCL_right">
+	<img>config/SCBC_image/scbc_default.png</img>
+</static_icon>
+
+<icon id = "netflix">
+	<!--<img_L>config/SCBC_image/Netflix_S.png</img_L>-->
+	<img_S>config/SCBC_image/Netflix_S.png</img_S>
+	<title>
+		<English>NETFLIX</English>
+		<Portuguese>NETFLIX</Portuguese>
+		<Spanish>NETFLIX</Spanish>
+		<French>NETFLIX</French>
+	</title>
+	<description>
+		<English>Netflix is the world’s leading internet television network. Members can watch thousands of TV shows and movies at your fingertips.</English>
+		<Portuguese>Netflix é a principal rede de televisão de Internet do mundo.Os membros podem assistir a milhares de programas de TV e filmes ao seu alcance.</Portuguese>
+		<Spanish>Netflix es líder mundial de la red de televisión en Internet.Los miembros pueden ver miles de programas de televisión y películas al alcance de la mano.</Spanish>
+		<French>Netflix est le premier réseau mondial de télévision sur Internet. Les membres peuvent regarder des milliers d'émissions de télévision et de films à portée de main.</French>
+	</description>
+</icon>
+
+<icon id = "YouTube ">
+	<!--<img_L>config/SCBC_image/Youtube_S.png</img_L>-->
+	<img_S>config/SCBC_image/Youtube_S.png</img_S>
+	<title>
+		<English>YouTube</English>
+		<Portuguese>YouTube</Portuguese>
+		<Spanish>YouTube</Spanish>
+		<French>YouTube</French>
+	</title>
+	<description>
+		<English>YouTube hosts user–generated videos. This app provides endless hours of fun to keep you entertained. </English>
+		<Portuguese>YouTube hosts User-vídeos gerados.Este aplicativo oferece infinitas horas de diversão para mantê-lo entretido.</Portuguese>
+		<Spanish>YouTube hospeda videos generados por usuarios.Esta APP ofrece interminables horas de diversión para mantenerte entretenido.</Spanish>
+		<French>Youtube accueille des vidéos générées par les utilisateurs.Cette application offre des heures de plaisir sans fin pour vous divertir.</French>
+	</description>
+</icon>
+
+	<icon id = "APP Store">
+		<!--<img_L>config/SCBC_image/AppStore.png</img_L>-->
+		<img_S>config/SCBC_image/AppStore.png</img_S>
+		<title>
+			<English>APP Store</English>
+			<Portuguese>APP Store</Portuguese>
+			<Spanish>APP Store</Spanish>
+			<French>APP Store</French>
+		</title>
+		<description>
+			<English>Provide thousands of APPs and Channels.</English>
+			<Portuguese>Forneça milhares de apps e de canaletas.</Portuguese>
+			<Spanish>Proporciona miles de APPs y Canales.</Spanish>
+			<French>Provide thousands of APPS and Channels.</French>
+		</description>
+	</icon>
+
+<icon id = "Instant power on">
+	<!--<img_L>config/SCBC_image/Str_S.png</img_L>-->
+	<img_S>config/SCBC_image/Str_S.png</img_S>
+	<title>
+		<English>Instant power on</English>
+		<Portuguese>Ativação instantânea</Portuguese>
+		<Spanish>Arranque instantáneo</Spanish>
+		<French>Instant power on</French>
+	</title>
+	<description>
+		<English>Turns on 4 times faster to let you watch TV.</English>
+		<Portuguese>Liga 4 vezes mais rápido para te deixar ver TV.</Portuguese>
+		<Spanish>Se enciende 4 veces más rápido para dejarte ver la televisión.</Spanish>
+		<French>S'allume 4 fois plus vite pour vous laisser regarder la télévision.</French>
+	</description>
+</icon>
+
+<icon id = "Sports mode">
+	<!--<img_L>config/SCBC_image/SportsMode_S.png</img_L>-->
+	<img_S>config/SCBC_image/SportsMode_S.png</img_S>
+	<title>
+		<English>Enhance Sports Viewing Experience.</English>
+		<Portuguese>Enhance Sports Viewing Experience.</Portuguese>
+		<Spanish>Enhance Sports Viewing Experience.</Spanish>
+		<French>Enhance Sports Viewing Experience.</French>
+	</title>
+	<description>
+		<English>Sharpness optimized stadium color and powerful surround sound effect</English>
+		<Portuguese>Melhore a experiência de visualização esportiva.Nitidez otimizado estádio cor e poderoso efeito de som surround</Portuguese>
+		<Spanish>Mejora la experiencia de ver deportes.Nitidez optimizada para el color del estadio y poderoso efecto de sonido envolvente.</Spanish>
+		<French>Améliorer l'expérience de visionnement sportif.Une netteté optimisée de la coloration du stade et un puissant effet de son surround</French>
+	</description>
+</icon>
+
+<icon id = "dolby">
+	<!--<img_L>config/SCBC_image/DolbyAudio_S.png</img_L>-->
+	<img_S>config/SCBC_image/DolbyAudio_S.png</img_S>
+	<title>
+		<English>Cinema experts sound</English>
+		<Portuguese>Som para os amantes do cinema</Portuguese>
+		<Spanish>Sonido para cinéfilos</Spanish>
+		<French>Cinema experts sound</French>
+	</title>
+	<description>
+		<English>Enjoy Dolby Audio sound with multi-type effect</English>
+		<Portuguese>Especialistas em cinema soam.Aprecie o som audio de Dolby com efeito do multi-tipo.</Portuguese>
+		<Spanish>Sonido de los Expertos del Cine.Disfrute del sonido Dolby Audio con todo tipo de efectos.</Spanish>
+		<French>Son du cinéma spécialisé.Profitez du son Dolby Audio avec effet multi-type.</French>
+	</description>
+</icon>
+
+<icon id = "Premium Color">
+	<!--<img_L>config/SCBC_image/PremiumColor_S.png</img_L>-->
+	<img_S>config/SCBC_image/PremiumColor_S.png</img_S>
+	<title>
+		<English>Premium Color</English>
+		<Portuguese>Premium Color</Portuguese>
+		<Spanish>Premium Color</Spanish>
+		<French>Premium Color</French>
+	</title>
+	<description>
+		<English>The Special image engine produce truly vivid expression with brilliant contrast.</English>
+		<Portuguese>O motor de imagem especial produzir expressão verdadeiramente vívida com um contraste brilhante.</Portuguese>
+		<Spanish>El motor gráfico especial produce una expresión verdaderamente viva con un contraste brillante.</Spanish>
+		<French>Le moteur d'image spécial produit une expression vraiment vive avec un contraste brillant.</French>
+	</description>
+</icon>
+</root>

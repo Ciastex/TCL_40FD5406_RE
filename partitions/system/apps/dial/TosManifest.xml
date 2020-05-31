@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="DIAL" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <application tvos:persistet="true">
+       <service tvos:name="DialService" >
+            <intent-filter>
+                <action tvos:name="tvos.dial.service" />
+            </intent-filter>
+        </service>
+		
+		<broadcast
+            tvos:name="DialBroadcast" >
+            <intent-filter>
+                <action tvos:name="tvos.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </broadcast>
+    </application>
+
+</manifest>

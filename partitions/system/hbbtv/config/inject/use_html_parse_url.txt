@@ -1,0 +1,11 @@
+http://www.rtve.es/xl/hbbtv
+http://tvnzhbbtv.fvpnz.co.nz/main.html?freeview-url=dvb://current.ait/250.5000
+http://mwhbbtv.fvpnz.co.nz/main.html?freeview-url=dvb://current.ait/250.5000
+http://tvnzhbbtv.fvpnz.co.nz/main.html
+http://mwhbbtv.fvpnz.co.nz/main.html
+http://images.tvnz.co.nz/hbbtv/latest-prod/main.html
+http://static.tvnz.co.nz
+https://hbbtv.9now.com.au/main.html
+https://stag.hbbtv.9now.com.au/main.html
+https://uat.hbbtv.9now.com.au/main.html
+http://hbbtv.9now.com.au

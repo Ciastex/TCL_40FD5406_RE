@@ -1,0 +1,3242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" href="init.css" rel="stylesheet" />
+<style>
+#container
+{
+    position:absolute;
+    top:250px;
+    left:100px;
+    right: -500px;
+}
+.initSelects li > span/*单选列表框的每一行中提示文字样式*/
+ {
+    position:absolute;
+    left:70px;
+    right: 260px;
+    height:70px;
+    width:600px;
+    line-height:70px;
+    font-size:28px;
+    color:#b0b0b0;
+ }
+.initSelects li > img/*单选列表框的每一行中标记图片样式*/
+{
+    position:absolute;
+    margin:20px 0px 20px 0px;
+    left:20px;
+    right: 210px;
+    width:30px;
+    height:30px;
+}
+.initSlectsFocus2/*单选列表框的焦点样式中原点样式*/
+{
+    position:absolute;
+    margin:20px 0px 20px 0px;
+    left:20px;
+    right: -390px;
+    width:30px;
+    height:30px;
+}
+#passwordContainer
+{
+	display:none;
+}
+.initInputs
+{
+	position:absolute;
+	top:280px;
+	width:1060px;
+	left:150px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;
+}
+.initInputs li
+{
+	position:relative;
+	width:100%;
+	height:80px;
+}
+.dialogInput/*对话框中输入框容器*/
+{
+	position:absolute;
+	width:1060px;
+	height:80px;
+	line-height:80px;
+}
+.dialogInputName/*对话框中输入框输入选项名称提示*/
+{
+	position:absolute;
+	left:5px;
+	font-size:32px;
+	font-weight:bold;
+	color:#fff;
+}
+.dialogValueContent/*对话框中输入框和选项框样式*/
+{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:524px;
+	text-align:center;
+	color:#FFF;
+	font-size:32px;
+	font-weight:bold;
+	overflow:hidden;
+	z-index:10;
+}
+.dialogOptionContentImg
+{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:524px;
+	height:80px;
+	z-index:5;
+}
+#locationTips
+{
+	position:absolute;
+	left:264px;
+	top:134px;
+	width:830px;
+	height:410px;
+	background-image:url(../images/Bg-Pop_up_box-03.png);
+	background-size:100% 100%;
+	display:none;
+}
+#tipsTitle
+{
+	position:absolute;
+	left:60px;
+	top:30px;
+	font-size:32px;
+	color:#fff;
+    right:60px;
+}
+#tipsContent
+{
+	position:absolute;
+	left:60px;
+	top:126px;
+	width:710px;
+	font-size:28px;
+	color:#bbb;
+}
+.tipsButton
+{
+	position:absolute;
+	top:328px;
+	background:url(../images/Focus-02-no.png) no-repeat; 
+	width:204px; 
+	height:64px; 
+	line-height:64px; 
+	text-align:center; 
+	color:#FFF; 
+	font-size:28px; 
+	font-weight:bold;
+    overflow: auto;
+}
+#tipsButtonFocus
+{
+	position:absolute;
+	top:328px;
+}
+
+#disclaimerContainer
+{
+    display:none;
+}
+#disclaimerText
+{
+    position: absolute;
+    background: url("../images/Title_bloc-Bg.png");
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 1120px;
+    height: 450px;
+    top: 250px;
+    left: 100px;
+    font-size: 28px;
+    color: #ffffff;
+    overflow: auto;
+}
+#disclaimerTitleName
+{
+    position: absolute;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight:bold;
+    top: 160px;
+    left: 60px;
+    right:100px;
+}
+#disclaimerSecTitle
+{
+    position: absolute;
+    color: #ffffff;
+    font-size: 28px;
+    top: 210px;
+    left: 60px;
+    right:100px;
+}
+#okButton
+{
+    position:absolute;
+    left:560px;
+    top:742px;
+    background:url(../images/Focus-02-no.png);
+    width:204px;
+    height:64px;
+    line-height:64px;
+    text-align:center;
+    color:#FFFFFF;
+    font-size:24px;
+    font-weight:bold;
+}
+#disclaimerButtonFocus
+{
+    position: absolute;
+    top:742px;
+    left: 560px;
+    pointer-events:none;
+}
+#policyTextContainer
+{
+    display: none;
+}
+#policyTextTable
+{
+    position: absolute;
+    top: 220px;
+    left: 700px;
+    width:600px;
+}
+#policyTextTable span
+{
+    font-size: 23px;
+    color: #ffffff;
+    overflow: auto;
+}
+#policyTextTable li
+{
+    list-style-type:none;
+}
+
+#privacyNoticeContainer
+{
+	display: none;
+}
+#containerRight
+{
+	position: absolute;
+    #background: url("../images/Title_bloc-Bg.png");
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 700px;
+    height: 450px;
+    top: 250px;
+    left: 50px;
+    font-size: 21px;
+    color: #ffffff;
+    overflow: auto;
+}
+#containerLeft
+{
+	position: absolute;
+    #background: url("../images/Title_bloc-Bg.png");
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 450px;
+    height: 450px;
+    top: 250px;
+    left: 800px;
+    font-size: 21px;
+    color: #ffffff;
+    overflow: auto;
+}
+#tickallButton
+{
+    position:absolute;
+    left:765px;
+    top:755px;
+    font-size: 23px;
+    color: #ffffff;
+    overflow: auto;
+    display: none;
+}
+</style>
+<script type="text/javascript">
+/*************** created by chenhua ***************************/
+var FirstTitle;
+var subTitle;
+var remindWords;
+var hotkeyWords;
+var langWords				= top.sysMenuLang;
+//这部分变量是为初始化变量countrys做准备，用到全局多语言词句top.all_country
+var country_localCountry_index	=[117,1,118,2,126,3,4,127,5,6,28,7,8,9,
+									10,11,119,33,12,128,30,120,13,129,130,90,131,14,15,16,
+									17,18,19,20,31,21,22,23,24,32,
+									59,25];				//其中>=58的是国家枚举中没有的东西 ,58为Lithuanian
+var STTLEnableCtryPstionInCtryIndex=[11/*Finland*/,28/*Norway*/,9/*Denmark*/,37/*Sweden*/,13/*Germany*/];//STTL enable的国家在country_localCountry_index数组中的位置。
+var countrySum				= country_localCountry_index.length;
+var countrys				= new Array(countrySum);
+var password_items_words;
+var changePassRemindWords;
+var locationSelectWords;
+var tipsT;
+var tips;
+var auTips = 0;
+var yesNoWords;
+
+var setting = top.g_setting;
+var channel = top.g_channel;
+var factory = top.g_factory;
+document.onkeydown = keyproc;
+document.onsystemevent = notifyProcess;
+
+
+var list_position_h 		= 0;			//当前语言在显示中的焦点的位置
+var offset 					= 0;			//offset = position_on_languageList - list_position_h
+var SELECT_STEP				= 70;			//单选列表框相邻两个选项之间的距离
+var line_count				= 0;			//使用滚动条的内容最大行数
+var focusOn					= "language";	//language/country/password/location/locationTips
+//language 下使用
+var position_on_languageList= 0;			//当前语言在语言列表中的绝对位置
+var language 				= 0;
+var languageSum 			= top.mlmLangIndex.length;
+var language_language_index = top.mlmLangIndex;
+var language_country_index 	= top.mlmCountryIndex;//其中>=58的是国家枚举中没有的东西,在页面上添加的枚举
+//country下使用
+var country_localLanguage_index = [63,5,18,9,107,24,10,8,0,2,36,22,9,5,
+									8,13,6,6,12,63,33,279,5,287,6,19,21,14,15,16,
+									17,19,18,21,25,20,7,23,5,35,
+									468,6];		//同语言对应
+var position_on_localCountryList = 0;
+//password 下使用
+var passNumCount 			= 0;
+var password 				= "";
+var rePassword 				= "";
+var SCAN_FOCUS_START		= 0;			//搜台框输入框焦点起始位置
+var SCAN_FORM_AND_FOCUS_STEP=80;			//当搜台框中每增加一个参数控制项需要增加的高度
+//locationTips下使用
+var form_position_h			= 0;			//locationTips时使用
+
+//滚动条使用
+var SCROLL_START_TOP		= 250;			//滚动条起始的top位置
+var SCROLL_MAX_HEIGHT		= 400;			//滚动条可以滚动范围长度
+var DISPLAY_COUNT			= 5;			//每一次最多可以显示的行数
+var E_LOCATION_HOME         = 0;
+var checkPicture            = ["../images/option/check_2.png","../images/option/check_3.png"];//复选框图片
+var isCheckBox              = 0;
+var privacy_li_list;
+var privacy_img_list;
+var checkindex              = 0;
+var privacyNoticespans;
+
+//从配置文件中获取要显示的国家(ini文件)
+function getShowCountryFromProfiles()
+{
+	var num = 0;//要显示的国家的个数
+	for(var i=0;i<top.all_country_ini_name.length;i++)
+	{
+		//console.log("YM" + top.all_country_ini_name[i] + ":" + setting.getProperty("ro.sita.model.ShowCountry." + top.all_country_ini_name[i],"0"))
+		if(setting.getProperty("ro.sita.model.ShowCountry." + top.all_country_ini_name[i],"0") == "1")
+		{
+			country_localCountry_index[num] = i;
+			countrys[num] = top.all_country[i];
+		}
+	}
+}
+
+function refreshMultiLanguage()
+{
+	FirstTitle 				= top.initialTitle[1];
+	subTitle				= top.initialOptions[0];
+	remindWords				= [top.initialPrompt[1],top.initialPrompt[2],top.initialPrompt[25],top.initialPrompt[3],top.initialPrompt[31],top.initialPrompt[32],top.initialPrompt[33],top.initialPrompt[34]];
+	hotkeyWords				= top.initialHotkeys;
+	
+	for(var i = 0;i < countrySum; i++)
+	{
+		countrys[i] = top.all_country[country_localCountry_index[i]];
+	}
+	line_count 				= countrySum;
+	password_items_words 	= [top.changePass[1],top.changePass[2]];
+	changePassRemindWords	= top.changePassDes;
+	locationSelectWords		= top.initLocations;
+	tipsT					= top.others[28];
+	tips					= top.eRPRemind;
+	auTips					= top.mEPSRemind;
+	yesNoWords				= top.yesNo;
+}
+
+
+function notifyProcess(evt)
+{
+    var msg = evt.which;
+    //全局消息
+    switch(msg)
+    {
+	    case top.E_READY_TO_CHANGE_SCART://ready to cart
+	        top.isChangeToScartAfterInit = 1;
+	    	break;
+		case top.E_NETWORK_CONNECT_TEST_SUCCESS:
+		case top.E_NETWORK_CONNECT_TEST_FAIL:
+		case top.E_DATABASE_FILE_DAMAGE:
+		case top.E_STR_SCREEN_OFF:
+		{
+			top.systemEventProc(evt);
+		}
+		break;
+	    case top.E_MUTE_OFF:
+	    	top.showMute(0);
+	       break;
+        case top.E_HP_PLUGIN:
+        case top.E_HP_PLUGOUT:
+        {
+            top.systemEventProc(evt);
+            break;
+        }
+	    default:
+	        break;
+    }
+}
+
+function keyproc(e)
+{
+	var ret = true;
+	var keycode = e.which;
+	
+	//快捷键处理
+	switch (keycode)
+	{
+		case top.VK_POWER://power
+			top.keyDownProcess(e);
+			break;
+		case top.VK_UP:
+			toUp();
+			ret = false;
+			break;
+		case top.VK_DOWN:
+			toDown();
+			ret = false;
+			break;
+		case top.VK_LEFT:
+			toLeft();
+			ret = false;
+			break;
+		case top.VK_RIGHT:
+			toRight();
+			ret = false;
+			break;
+		case top.VK_ENTER:
+			doEnter();
+			ret = false;
+			break;
+		case top.VK_RED:
+			top.changeSource();
+			top.jumpPage();
+			break;
+		case top.VK_0:
+		case top.VK_1:
+		case top.VK_2:
+		case top.VK_3:
+		case top.VK_4:
+		case top.VK_5:
+		case top.VK_6:
+		case top.VK_7:
+		case top.VK_8:
+		case top.VK_9:
+			if(focusOn == "password")
+			{
+				doCheck(e.which - 48);
+			}
+			else
+			{
+				top.keyDownProcess(e);
+			}
+			break;
+		case top.VK_HOME:
+			//check pwd for changing Prject Id
+			//if(top.changeProjIdPwd == "062598")
+			//	top.enterProjIdPwd(keycode);
+			break;	
+		default:
+			ret = true;
+			break;
+	}
+	return ret;
+
+}
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+function toLeft()
+{
+
+    //改变焦点框长度（适应德语长度）
+    if(focusOn=="locationTips"){
+        setFocusWith();
+    }
+    else{
+        $('focusImgID').style.width="";
+    }
+
+
+
+
+    if(focusOn == "country")
+	{
+		initLanguageSet();
+	}
+    else if(focusOn == "privacy")
+    {
+        /*if (isCheckBox == 3)
+        {
+            return;
+        }
+        isCheckBox = 0;
+        privacy_li_list[checkindex].style.background = "";*/
+        if (checkindex == 0)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            $("disclaimerButtonFocus").src = "../images/Focus-02.png";
+            checkindex = -1;
+        }
+        else if (checkindex == 3)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 1;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+    }
+	else if(focusOn == "password")
+	{
+		initCountrySet();
+	}
+	else if(focusOn == "location")
+	{
+		if((top.isNAFlag == 0 && top.isCBFlag==0) || top.isCAFlag == 1)
+			initCountrySet();
+		else
+			initLanguageSet();
+	}
+	else if(focusOn == "locationTips")
+	{
+		if(form_position_h == 0)
+		{
+			form_position_h = 1;
+			$("tipsButtonFocus").style.left = "476px";
+		}
+		else 
+		{
+			form_position_h = 0;
+			$("tipsButtonFocus").style.left = "150px";
+		}
+	}
+    else if(focusOn == "privacyTips")
+    {
+        if(form_position_h == 0)
+        {
+            form_position_h = 1;
+            $("tipsButtonFocus").style.left = "476px";
+        }
+        else
+        {
+            form_position_h = 0;
+            $("tipsButtonFocus").style.left = "150px";
+        }
+    }
+    else if(focusOn == "timezone")
+    {
+        initCountrySet();
+    }
+	else if(focusOn == "areazone")
+	{
+		initCountrySet();
+	}
+	else if(focusOn == "region")
+	{
+		initAreaZoneSet();
+	}
+	else if(focusOn == "city")
+	{
+		initRegionSet();
+	}
+}
+
+
+function toRight()
+{
+
+    //改变焦点框长度（适应德语长度）
+    if(focusOn=="locationTips"||focusOn=="location"||focusOn=="country"){
+
+        setFocusWith();
+    }
+    else{
+        $('focusImgID').style.width="";
+    }
+
+
+
+	if(focusOn == "language")
+	{
+		doEnter();
+	}
+    else if(focusOn == "privacy")
+    {
+        if (checkindex == -1)
+        {
+            $("disclaimerButtonFocus").src = "../images/Focus-02-no.png";
+            checkindex = 0;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+        else if (checkindex == 1 || checkindex == 2)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 3;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+    }
+	else if(focusOn == "country")
+	{
+		doEnter();
+	}
+    else if(focusOn == "timezone")
+    {
+        doEnter();
+    }
+	else if(focusOn == "location")
+	{
+		doEnter();
+	}
+	else if(focusOn == "locationTips")
+	{
+		if(form_position_h == 0)
+		{
+			form_position_h = 1;
+			$("tipsButtonFocus").style.left = "476px";
+		}
+		else 
+		{
+			form_position_h = 0;
+			$("tipsButtonFocus").style.left = "150px";
+		}
+	}
+	else if(focusOn == "privacyTips")
+    {
+        if(form_position_h == 0)
+        {
+            form_position_h = 1;
+            $("tipsButtonFocus").style.left = "476px";
+        }
+        else
+        {
+            form_position_h = 0;
+            $("tipsButtonFocus").style.left = "150px";
+        }
+    }
+	else if(focusOn == "areazone")
+	{
+		initRegionSet();
+	}
+	else if(focusOn == "region")
+	{
+		initCitySet();
+	}
+	else if(focusOn == "city")
+	{
+		//initLocationSet();
+        initDisclaimerSet();
+	}
+}
+
+function SetDefaultCountry()
+{
+    refreshMultiLanguage();
+    if(top.isCBFlag) 
+    {
+		position_on_localCountryList = 0;//gelunbiya
+		top.g_country = country_localCountry_index[position_on_localCountryList];
+		setting.firstAudioLanguage = 7;
+		setting.firstSubtitleLanguage = 7;
+		setting.teletextLanguage = 7;
+		setting.timeZone = 29; // 哥伦比亚 默认设置时区为 GMT -5:00
+    }
+    else 
+    {
+		position_on_localCountryList = 0;//墨西哥
+		top.g_country = country_localCountry_index[position_on_localCountryList];
+		setting.firstAudioLanguage = country_localLanguage_index[position_on_localCountryList];
+		setting.firstSubtitleLanguage = country_localLanguage_index[position_on_localCountryList];
+		setting.teletextLanguage = country_localLanguage_index[position_on_localCountryList];
+    }
+	channel.systemCountry = top.g_country;
+	var i = 0;
+	for(i = 0; i < STTLEnableCtryPstionInCtryIndex.length; i++)
+	{
+		if(position_on_localCountryList == STTLEnableCtryPstionInCtryIndex[i])
+		{
+			setting.enableSubtitle=1;
+			break;
+		}
+	}
+	if(i == STTLEnableCtryPstionInCtryIndex.length)
+	{
+		setting.enableSubtitle=0;
+		if(22 == top.g_country)/*spain*/
+		{
+			setting.hbbTVMode = 1;
+		}
+	}
+	
+	if(8 == top.g_country)//france
+	{
+		setting.parentalRating = 18;
+		initPasswordSet();
+	}
+	else if(12 == top.g_country)//意大利
+	{
+		initPasswordSet();
+	}
+	else
+	{
+		//initLocationSet();
+        initDisclaimerSet();
+	}
+}
+
+function doEnter()
+{
+
+    //改变焦点框长度（适应德语长度）
+    if(focusOn=="locationTips"||focusOn=="location"||focusOn=="disclaimer"||focusOn=="cookie"){
+
+        setFocusWith();
+    }
+    else{
+        $('focusImgID').style.width="";
+    }
+
+
+
+	if(focusOn == "language")
+	{
+	  if(languageSum <= DISPLAY_COUNT)
+        {
+	        position_on_languageList = list_position_h;
+		}
+	   else
+	    {
+	    	position_on_languageList = list_position_h + offset;
+		}
+		top.g_country = language_country_index[position_on_languageList];
+		top.g_language = language_language_index[position_on_languageList];
+		setting.menuLanguage = top.g_language;
+//		if(top.isGingaOn && top.GingaObj.isInit == top.GingaStates.True)//语言切换Ginga已移置中间件处理
+//		{
+//			top.gingaEvtProc(top.GingaStates.Events.GINGA_EVT_MENU_LANGUAGE_CHANGE);
+//		}
+		top.doChangeMultilanguage(top.g_language);
+        if("NZ" == top.g_setting.getProperty("ro.sita.model.MODEL_REGION_NAME_CFG.REGION_NAME", "EU")) //新西兰特殊要求
+        {
+            top.g_country = 26;
+        }
+        //initDisclaimerSet();
+        if((top.isNAFlag == 0 && top.isCBFlag==0) || top.isCAFlag == 1)
+        {
+            initCountrySet();
+        }
+        else
+        {
+            SetDefaultCountry();
+        }
+	}
+    else if(focusOn == "disclaimer")
+    {
+        if (top.isEUFlag == 1)
+        {
+            //initCookieSet();
+            initTermsAndConditionsSet();
+        }
+        else
+            initLocationSet();
+    }
+    else if (focusOn == "termsAndConditions")
+    {
+        initPrivacySet();
+    }
+    else if(focusOn == "cookie")
+    {
+        //initPrivacySet();
+        initLocationSet();
+    }
+    else if(focusOn == "privacy")//to ok
+    {
+        if (checkindex == -1)//next button
+        {
+            var smart_tv_service = setting.getProperty("app.ui.smart_tv_service","1");
+            var software_update = setting.getProperty("app.ui.software_update","0");
+            var personal_data = setting.getProperty("app.ui.personal_data","0");
+            if (smart_tv_service == 0 || software_update == 0 || personal_data == 0)
+            {
+                initPrivacyTips(0);
+                $("disclaimerButtonFocus").src = "../images/Focus-02-no.png";
+            }
+            else
+            {
+                //initLocationSet();
+                initCookieSet();
+            }
+            checkindex = 0;//restore default
+        }
+        else if (checkindex == 0)//tick all button
+        {
+            if (privacyNoticespans[checkindex].getElementsByTagName("img")[0].src.indexOf("check_3.png") != -1)
+            {
+                privacyNoticespans[checkindex].getElementsByTagName("img")[0].src = "../images/option/check_2.png";
+            }
+            else
+            {
+                $("disclaimerButtonFocus").src = "../images/Focus-02.png";
+                privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+                setting.setProperty("app.ui.smart_tv_service", "1");
+                setting.setProperty("app.ui.software_update", "1");
+                setting.setProperty("app.ui.personal_data", "1");
+                for (var i =0;i < privacyNoticespans.length;i++)
+                {
+                    privacyNoticespans[i].getElementsByTagName("img")[0].src = "../images/option/check_3.png";
+                }
+                checkindex = -1;
+            }
+        }
+        else//other check box
+        {
+            if (privacyNoticespans[checkindex].getElementsByTagName("img")[0].src.indexOf("check_3.png") != -1)
+            {
+                privacyNoticespans[checkindex].getElementsByTagName("img")[0].src = "../images/option/check_2.png";
+                if (privacyNoticespans[0].getElementsByTagName("img")[0].src.indexOf("check_3.png") != -1)
+                {
+                    privacyNoticespans[0].getElementsByTagName("img")[0].src = "../images/option/check_2.png";
+                }
+                switch (checkindex)
+                {
+                    case 1:
+                        setting.setProperty("app.ui.smart_tv_service", "0");
+                        break;
+                    case 2:
+                        setting.setProperty("app.ui.software_update", "0");
+                        break;
+                    case 3:
+                        setting.setProperty("app.ui.personal_data", "0");
+                        break;
+                }
+            }
+            else
+            {
+                privacyNoticespans[checkindex].getElementsByTagName("img")[0].src = "../images/option/check_3.png";
+                switch (checkindex)
+                {
+                    case 1:
+                        setting.setProperty("app.ui.smart_tv_service", "1");
+                        break;
+                    case 2:
+                        setting.setProperty("app.ui.software_update", "1");
+                        break;
+                    case 3:
+                        setting.setProperty("app.ui.personal_data", "1");
+                        break;
+                }
+            }
+        }
+    }
+	else if(focusOn == "country")
+	{
+        if(countrySum <= DISPLAY_COUNT)
+        {
+            position_on_localCountryList = list_position_h;
+        }
+        else
+        {
+            position_on_localCountryList = list_position_h + offset;
+        }
+		top.g_country = country_localCountry_index[position_on_localCountryList];
+		channel.systemCountry = top.g_country;
+		top.setHBBTVEnableForEU();//EU区域要求在英国和德国打开HBBTV的支持
+        top.getGDPRText(top.g_country);//EU区域根据国家获取对应的GDPR翻译
+		if(top.isGingaOn && top.GingaObj.isInit == top.GingaStates.True)
+		{
+            if(channel.systemCountry == country_localCountry_index[3]) //br
+            {
+                top.g_ginga.setCountry(0)//0:br 1:agr
+            }else if(channel.systemCountry == country_localCountry_index[0]) //arg
+            {
+                top.g_ginga.setCountry(1)
+            }else{
+                top.g_ginga.setCountry(0)//default:br
+            }
+			//top.gingaEvtProc(top.GingaStates.Events.GINGA_EVT_COUNTRY_CHANGE);
+		}
+		setting.firstAudioLanguage = country_localLanguage_index[position_on_localCountryList];
+		setting.firstSubtitleLanguage = country_localLanguage_index[position_on_localCountryList];
+		setting.teletextLanguage = country_localLanguage_index[position_on_localCountryList];
+		if(top.isCAFlag){
+			top.setTimeZoneForCA(top.g_country);
+		}
+		var i = 0;
+		for(i = 0; i < STTLEnableCtryPstionInCtryIndex.length; i++)
+		{
+			if(position_on_localCountryList == STTLEnableCtryPstionInCtryIndex[i])
+			{
+				setting.enableSubtitle=1;
+				break;
+			}
+		}
+		if(i == STTLEnableCtryPstionInCtryIndex.length)
+		{
+			setting.enableSubtitle=0;
+			if(22 == top.g_country)/*spain*/
+			{
+				setting.hbbTVMode = 1;
+			}
+		}
+
+//        if(26 == top.g_country)            //新西兰Freeview认证要求
+//        {
+//            setting.enableSubtitle=1;
+//        }
+		var url = setting.getProperty("ro.sita.model.Apps.launcher_branch", "null");
+		if ( url.indexOf("launcher_ui3") != -1 || channel.systemCountry == 52)
+		{
+			console.log("[ldc] Open GloboPlay service in next boot.");
+			setting.setAppPersistent("GloboPlay",1);
+		}
+		else
+		{
+			console.log("[ldc] Close GloboPlay service in next boot.");
+			setting.setAppPersistent("GloboPlay",0);
+		}		
+		if(8 == top.g_country)//france
+		{
+			setting.parentalRating = 18;
+			initPasswordSet();
+		}
+		else if(12 == top.g_country)//意大利
+		{
+			initPasswordSet();
+		}
+		else if(35 == top.g_country && top.isLAFlag)//菲律宾 EWBS
+		{
+			initAreaZoneSet();
+		}
+		else if (top.isCAFlag)
+        {
+            initTimeZoneSet();
+        }
+		else
+		{
+            if (top.isIRNFlag)//伊朗Flag
+            {
+                if (60 == top.g_country)
+                {
+                    setting.setProperty("app.persiandate.switch","1");//伊朗日历 国家为伊朗时为开
+                }
+                else
+                {
+                    setting.setProperty("app.persiandate.switch","0");//伊朗日历 国家非伊朗时关闭
+                }
+            }
+
+			if(98 == top.g_country)//加纳时区为0，需要设置偏移为0
+			{
+				setting.setClockOffset(0);
+			}
+			else if(134 == top.g_country)//马来西亚时区为GMT8
+			{
+				setting.timeZone = 14;
+				factory.otherBGM = 1;
+			}
+			else if(58 == top.g_country)//越南
+			{
+				setting.dvbNetworkUpdate = 0;//DVB network update 默认OFF
+			}
+			//initLocationSet();
+            initDisclaimerSet();
+		}
+	}
+    else if(focusOn == "timezone")
+    {
+        if(sumZone <= DISPLAY_COUNT)
+        {
+            position_on_TimeZoneList = list_position_h;
+        }
+        else
+        {
+            position_on_TimeZoneList = list_position_h + offset;
+        }
+        //把选择的值设置下去
+        var timezone = position_on_TimeZoneList + 1;
+        console.log("--hzm in doenter timezone = " + timezone);
+        setting.timeZone = timezone;
+        initDisclaimerSet();
+        //initLocationSet();
+    }
+	else if(focusOn == "location")
+	{
+		if(list_position_h == 0)
+		{
+			setting.location = list_position_h;
+            /****shopmode 2.3需求****/
+            console.log("--hzm in doenter autoStandby is " + setting.autoStandby);
+			if (setting.autoStandby == 0)
+            {
+                top.startrecord();
+            }
+            /****shopmode 2.3需求****/
+            /*
+            if (setting.getProperty("ui.eu.breathing", top.ledStatusDefault) == "on")
+            {
+                if (setting.location == E_LOCATION_HOME)
+                {
+                    setting.setProperty("sita.bootup.led.work", "off");
+                    setting.setProperty("sita.bootup.led.standby", "on");
+                }
+                else
+                {
+                    setting.setProperty("sita.bootup.led.work", "on");
+                    setting.setProperty("sita.bootup.led.standby", "breathing");
+                }
+            }
+            */
+            parent.updateInitProgress(1);
+			window.location.href = "initNetCondition.html";
+		}
+		else
+		{
+			initShopModeTips();
+		}
+	}
+	else if(focusOn == "locationTips")
+	{
+		if(form_position_h == 0)
+		{
+			setting.location = list_position_h;
+            /*
+            if (setting.getProperty("ui.eu.breathing", top.ledStatusDefault) == "on")
+            {
+                if (setting.location == E_LOCATION_HOME)
+                {
+                    setting.setProperty("sita.bootup.led.work", "off");
+                    setting.setProperty("sita.bootup.led.standby", "on");
+                }
+                else
+                {
+                    setting.setProperty("sita.bootup.led.work", "on");
+                    setting.setProperty("sita.bootup.led.standby", "breathing");
+                }
+            }
+            */
+            parent.updateInitProgress(1);
+			window.location.href = "initNetCondition.html";
+		}
+		else
+		{
+			$("locationTips").style.display = "none";
+			focusOn = "location";
+		}
+	}
+	else if (focusOn == "privacyTips")
+    {
+        if(form_position_h == 0)//yes
+        {
+            setting.setProperty("app.ui.smart_tv_service", "1");
+            setting.setProperty("app.ui.software_update", "1");
+            setting.setProperty("app.ui.personal_data", "1");
+        }
+        $("locationTips").style.display = "none";
+        //initLocationSet();
+        initCookieSet();
+    }
+	else if(focusOn == "areazone")
+	{
+		if(areaZoneSum <= DISPLAY_COUNT)
+        {
+	        position_on_AreaZoneList = list_position_h;
+		}
+		else
+	    {
+	    	position_on_AreaZoneList = list_position_h + offset;
+		}
+		initRegionSet();
+	}
+	else if(focusOn == "region")
+	{
+		if(regionSum <= DISPLAY_COUNT)
+        {
+	        position_on_RegionList = list_position_h;
+		}
+		else
+	    {
+	    	position_on_RegionList = list_position_h + offset;
+		}
+		initCitySet();
+	}
+	else if(focusOn == "city")
+	{
+		if(citySum <= DISPLAY_COUNT)
+        {
+	        position_on_CityList = list_position_h;
+		}
+		else
+	    {
+	    	position_on_CityList = list_position_h + offset;
+		}
+		//把选择的值设置下去
+		areaCode = ((position_on_AreaZoneList+2)<<9)|((position_on_RegionList+1)<<5)|(position_on_CityList+1);
+		channel.systemAreacode = areaCode;
+		console.log("position_on_AreaZoneList "+position_on_AreaZoneList+" position_on_RegionList "+ position_on_RegionList +" position_on_CityList "+position_on_CityList+" areaCode is "+areaCode);
+		//initLocationSet();
+        initDisclaimerSet();
+	}
+}
+
+function toUp()
+{
+
+    //改变焦点框长度（适应德语长度）
+    if(focusOn=="locationTips"||focusOn=="location"){
+        setFocusWith();
+    }
+    else{
+        $('focusImgID').style.width="";
+    }
+
+	if(focusOn == "language")
+	{
+      if(languageSum <= DISPLAY_COUNT)
+       {
+		 list_position_h = list_position_h == 0 ? langWords.length - 1 : list_position_h - 1;
+		 changeShow();
+		 $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+       }
+      else
+       {
+		if(list_position_h <= 0) 
+		{
+			if(offset > 0)
+			{
+				offset--;
+				for(var i = 0; i < 5; i++)
+				{
+					selectSpanList[i].innerHTML = langWords[offset + i];
+				}
+			}
+			else
+			{
+				list_position_h = 4;
+				offset = languageSum - 5;
+				for(var i = 0; i < 5; i++)
+				{
+					selectSpanList[i].innerHTML = langWords[offset + i];
+				}
+			}
+			$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+		}
+		else
+		{
+			list_position_h--;
+		}	
+		changeShow();
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(languageSum,offset);
+	  }
+	}
+    else if(focusOn == "disclaimer" || focusOn == "termsAndConditions" || focusOn == "cookie")
+    {
+        $("disclaimerText").scrollTop = $("disclaimerText").scrollTop - 40;
+        var vDiv =  $("disclaimerText");
+        $("ScrollBar").style.top =  Math.round(vDiv.clientHeight * vDiv.scrollTop / vDiv.scrollHeight + 250) + "px";
+    }
+    else if(focusOn == "privacy")//to up
+    {
+        if (checkindex == -1)
+        {
+            $("disclaimerButtonFocus").src = "../images/Focus-02-no.png";
+            checkindex = 2;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+        else if (checkindex == 0)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 2;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+        else if (checkindex == 2)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 1;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+    }
+	else if(focusOn == "country")
+	{
+        if(countrySum <= DISPLAY_COUNT)
+        {
+            list_position_h = list_position_h == 0 ? country_localCountry_index.length - 1 : list_position_h - 1;
+            $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        }
+        else
+        {
+            if(list_position_h <= 0)
+            {
+                if(offset > 0)
+                {
+                    offset--;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = countrys[offset + i];
+                    }
+                }
+                else
+                {
+                    list_position_h = 4;
+                    offset = countrySum - 5;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = countrys[offset + i];
+                    }
+                }
+                $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+            }
+            else
+            {
+                list_position_h--;
+            }
+            $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+            showUpDownFlagImg(countrySum,offset);
+        }
+	}
+	else if(focusOn == "location")
+	{
+		if(list_position_h <= 0) 
+		{
+            if((top.isAUFlag && 26 == channel.systemCountry) ||
+                ("IFFALCON" == top.g_setting.getProperty("ro.sita.model.MODEL_MANUFACTURER_NAME_CFG.MANUFACTURER_NAME", "TCL") && 58 == channel.systemCountry)) //AU选到新西兰国家后隐藏shop with demo,越南雷鸟也隐藏
+                list_position_h = 1;
+            else
+                list_position_h = 2;
+		}
+		else
+		{
+			list_position_h--;
+		}	
+		$('initListFormFocus').style.top = list_position_h*SELECT_STEP + "px";
+	}
+    else if(focusOn == "timezone")
+    {
+        if(sumZone <= DISPLAY_COUNT)
+        {
+            list_position_h = list_position_h == 0 ? sumZone - 1 : list_position_h - 1;
+        }
+        else
+        {
+            if(list_position_h <= 0)
+            {
+                if(offset > 0)
+                {
+                    offset--;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+                    }
+                }
+                else
+                {
+                    list_position_h = 4;
+                    offset = sumZone - 5;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+                    }
+                }
+                $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/sumZone,10) + "px";
+            }
+            else
+            {
+                list_position_h--;
+            }
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        showUpDownFlagImg(sumZone,offset);
+    }
+	else if(focusOn == "areazone")
+	{
+		if(areaZoneSum <= DISPLAY_COUNT)
+		{
+			list_position_h = list_position_h == 0 ? areaZoneSum - 1 : list_position_h - 1;
+		}
+		else
+		{
+			if(list_position_h <= 0) 
+			{
+				if(offset > 0)
+				{
+					offset--;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+					}
+				}
+				else
+				{
+					list_position_h = 4;
+					offset = areaZoneSum - 5;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/areaZoneSum,10) + "px";
+			}
+			else
+			{
+				list_position_h--;
+			}	
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(areaZoneSum,offset);
+	}
+	else if(focusOn == "region")
+	{
+		if(regionSum <= DISPLAY_COUNT)
+		{
+			list_position_h = list_position_h == 0 ? regionSum - 1 : list_position_h - 1;
+		}
+		else
+		{
+			if(list_position_h <= 0) 
+			{
+				if(offset > 0)
+				{
+					offset--;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = regionWord[offset + i];
+					}
+				}
+				else
+				{
+					list_position_h = 4;
+					offset = regionSum - 5;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = regionWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/regionSum,10) + "px";
+			}
+			else
+			{
+				list_position_h--;
+			}	
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(regionSum,offset);
+	}
+	else if(focusOn == "city")
+	{
+		console.log(" toUP list_position_h "+list_position_h+" offset "+offset);
+		if(citySum <= DISPLAY_COUNT)
+		{
+			list_position_h = list_position_h == 0 ? citySum - 1 : list_position_h - 1;
+		}
+		else
+		{
+			if(list_position_h <= 0) 
+			{
+				if(offset > 0)
+				{
+					offset--;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = cityWord[offset + i];
+					}
+				}
+				else
+				{
+					list_position_h = 4;
+					offset = citySum - 5;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = cityWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/citySum,10) + "px";
+			}
+			else
+			{
+				list_position_h--;
+			}
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(citySum,offset);
+	}
+}
+function toDown()
+{
+
+    //改变焦点框长度（适应德语长度）
+    if(focusOn=="locationTips"||focusOn=="location"){
+
+        setFocusWith()
+    }
+    else{
+        $('focusImgID').style.width="";
+    }
+
+
+    if(focusOn == "language")
+	{
+      if(languageSum <= DISPLAY_COUNT)
+	    {
+	   	  list_position_h = list_position_h == (langWords.length - 1)? 0 : list_position_h + 1;	
+		  changeShow();
+		  $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+	    }
+	  else
+	   {
+		if(list_position_h >= 4) 
+		{
+			if((offset + list_position_h) >= (languageSum - 1))
+			{
+				offset = 0;
+				list_position_h =0;
+				for(var i = 0; i < 5; i++)
+				{
+					selectSpanList[i].innerHTML = langWords[offset + i];
+				}
+			}
+			else
+			{
+				offset++;
+				for(var i = 0; i < 5; i++)
+				{
+					selectSpanList[i].innerHTML = langWords[offset + i];
+				}
+			}
+			$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+		}
+		else
+		{
+			list_position_h++;
+		}	
+		changeShow();
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(languageSum,offset);
+	   }	
+	}
+    else if(focusOn == "disclaimer" || focusOn == "termsAndConditions" || focusOn == "cookie")
+    {
+        $("disclaimerText").scrollTop = $("disclaimerText").scrollTop + 40;
+        var vDiv =  $("disclaimerText");
+        $("ScrollBar").style.top =  Math.round(vDiv.clientHeight * vDiv.scrollTop / vDiv.scrollHeight + 250) + "px";
+    }
+    else if(focusOn == "privacy")//to down
+    {
+        if (checkindex == 2 || checkindex == 3)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 0;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+        else if (checkindex == 1)
+        {
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = "";
+            checkindex = 2;
+            privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        }
+    }
+	else if(focusOn == "country")
+	{
+        if(countrySum <= DISPLAY_COUNT)
+        {
+            list_position_h = list_position_h == (country_localCountry_index.length - 1)? 0 : list_position_h + 1;
+            $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        }
+        else
+        {
+            if(list_position_h >= 4)
+            {
+                if((offset + list_position_h) >= (countrySum - 1))
+                {
+                    offset = 0;
+                    list_position_h =0;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = countrys[offset + i];
+                    }
+                }
+                else
+                {
+                    offset++;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = countrys[offset + i];
+                    }
+                }
+                $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+            }
+            else
+            {
+                list_position_h++;
+            }
+            $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+            showUpDownFlagImg(countrySum,offset);
+        }
+	}
+	else if(focusOn == "location")
+	{
+        if((top.isAUFlag && 26 == channel.systemCountry) ||
+            ("IFFALCON" == top.g_setting.getProperty("ro.sita.model.MODEL_MANUFACTURER_NAME_CFG.MANUFACTURER_NAME", "TCL") && 58 == channel.systemCountry)) //AU选到新西兰国家后隐藏shop with demo,越南雷鸟也隐藏
+            var position = 1;
+        else
+            var position = 2;
+
+		if(list_position_h >= position)
+		{
+			list_position_h=0;
+			
+		}
+		else
+		{
+			list_position_h++;
+		}	
+		$('initListFormFocus').style.top = list_position_h*SELECT_STEP + "px";
+	}
+    else if(focusOn == "timezone")
+    {
+        if(sumZone <= DISPLAY_COUNT)
+        {
+            list_position_h = list_position_h == (sumZone - 1)? 0 : list_position_h + 1;
+        }
+        else
+        {
+            if(list_position_h >= 4)
+            {
+                if((offset + list_position_h) >= (sumZone - 1))
+                {
+                    offset = 0;
+                    list_position_h =0;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+                    }
+                }
+                else
+                {
+                    offset++;
+                    for(var i = 0; i < 5; i++)
+                    {
+                        selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+                    }
+                }
+                $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/sumZone,10) + "px";
+            }
+            else
+            {
+                list_position_h++;
+            }
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        showUpDownFlagImg(sumZone,offset);
+    }
+	else if(focusOn == "areazone")
+	{
+		if(areaZoneSum <= DISPLAY_COUNT)
+	    {
+	   	  list_position_h = list_position_h == (areaZoneSum - 1)? 0 : list_position_h + 1;	
+	    }
+		else
+		{
+			if(list_position_h >= 4) 
+			{
+				if((offset + list_position_h) >= (areaZoneSum - 1))
+				{
+					offset = 0;
+					list_position_h =0;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+					}
+				}
+				else
+				{
+					offset++;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/areaZoneSum,10) + "px";
+			}
+			else
+			{
+				list_position_h++;
+			}
+		}	
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(areaZoneSum,offset);
+	}
+	else if(focusOn == "city")
+	{
+		if(citySum <= DISPLAY_COUNT)
+	    {
+	   	  list_position_h = list_position_h == (citySum - 1)? 0 : list_position_h + 1;	
+	    }
+		else
+		{
+			console.log(" offset "+offset+" list_position_h "+list_position_h+" citySum "+citySum);
+			if(list_position_h >= 4) 
+			{
+				if((offset + list_position_h) >= (citySum - 1))
+				{
+					offset = 0;
+					list_position_h =0;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = cityWord[offset + i];
+					}
+				}
+				else
+				{
+					offset++;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = cityWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/citySum,10) + "px";
+			}
+			else
+			{
+				list_position_h++;
+			}	
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(citySum,offset);
+	}
+	else if(focusOn == "region")
+	{
+		if(regionSum <= DISPLAY_COUNT)
+	    {
+	   	  list_position_h = list_position_h == (regionSum - 1)? 0 : list_position_h + 1;	
+	    }
+		else
+		{
+			if(list_position_h >= 4) 
+			{
+				if((offset + list_position_h) >= (regionSum - 1))
+				{
+					offset = 0;
+					list_position_h =0;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = regionWord[offset + i];
+					}
+				}
+				else
+				{
+					offset++;
+					for(var i = 0; i < 5; i++)
+					{
+						selectSpanList[i].innerHTML = regionWord[offset + i];
+					}
+				}
+				$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/regionSum,10) + "px";
+			}
+			else
+			{
+				list_position_h++;
+			}	
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(regionSum,offset);
+	}
+}
+
+function showUpDownFlagImg(optionSum,positionOffset)
+{
+	//第一阶段不做鼠标，所以隐藏。
+	$("initListUpImg").style.opacity = 0;
+	$("initListDownImg").style.opacity = 0;
+	return;
+	//第一阶段不做鼠标，所以隐藏。
+	
+
+	if(optionSum <= 5)
+	{
+		$("initListUpImg").style.opacity = 0;
+		$("initListDownImg").style.opacity = 0;
+		return;
+	}
+	
+	if(positionOffset > 0)
+	{
+		$("initListUpImg").style.opacity = 1;
+	}
+	else
+	{
+		$("initListUpImg").style.opacity = 0;
+	}
+	
+	if((positionOffset + 4) >= (optionSum - 1))
+	{
+		$("initListDownImg").style.opacity = 0;
+	}
+	else
+	{
+		$("initListDownImg").style.opacity = 1;
+	}
+}
+
+function initLocationSet()
+{
+	$('selectTitleTag').innerHTML = remindWords[3];
+	list_position_h = 0;
+	selectSpanList[0].innerHTML = locationSelectWords[0];
+	selectSpanList[1].innerHTML = locationSelectWords[1];
+	selectSpanList[2].innerHTML = locationSelectWords[2];
+	containerLiList[0].style.display = "block";
+	containerLiList[1].style.display = "block";
+    if((top.isAUFlag && 26 == channel.systemCountry) ||
+        ("IFFALCON" == top.g_setting.getProperty("ro.sita.model.MODEL_MANUFACTURER_NAME_CFG.MANUFACTURER_NAME", "TCL") && 58 == channel.systemCountry)) //AU选到新西兰国家后隐藏shop with demo,越南雷鸟也隐藏
+	    containerLiList[2].style.display = "none";
+    else
+	    containerLiList[2].style.display = "block";
+	containerLiList[3].style.display = "none";
+	containerLiList[4].style.display = "none";
+	showUpDownFlagImg(3,0);
+	
+	stepImgList[0].style.width = "1200px";
+	stepImgList[1].style.width = "0px";
+	$("back").style.display = "block";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "location";
+	$('initListFormFocus').style.top = list_position_h*SELECT_STEP + "px";
+	
+	$("ScrollBar").style.display = "none";
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+
+    //console.log("--hzm initCountrySet textDiv.scrollTop = " + $("disclaimerText").scrollTop);
+    //$("ScrollBar").style.left = 1250 + "px";
+    //$("disclaimerText").scrollTop = "0px"
+    $("selectTitleTag").style.display = "block";
+    $("disclaimerContainer").style.display = "none";
+    $("policyTextContainer").style.display = "none";
+    $("privacyNoticeContainer").style.display = "none";
+}
+function initShopModeTips()
+{
+	form_position_h = 0;
+	$("tipsTitle").innerHTML = tipsT;
+	var buttons = $("locationTips").getElementsByTagName("div");
+	focusOn = "locationTips";
+	if(top.isAUFlag)
+	{//澳洲平台 重新初始化变量
+		$("tipsContent").innerHTML = auTips;
+	}
+	else
+	{
+		$("tipsContent").innerHTML = tips;
+	}
+	buttons[0].innerHTML = yesNoWords[0];
+	buttons[1].innerHTML = yesNoWords[1];
+	$("tipsButtonFocus").style.left = "150px";
+	$("locationTips").style.display = "block";
+}
+
+function initPrivacyTips(checkindex)
+{
+    form_position_h = 0;
+    $("tipsTitle").innerHTML = top.smartTVOptions[8];
+    var buttons = $("locationTips").getElementsByTagName("div");
+    focusOn = "privacyTips";
+    switch (checkindex)
+    {
+        case 0:
+            $("tipsContent").innerHTML = top.tickremindWords;//"Please tick the check boxes, or you cannot enjoy Smart TV Service.";//top.privacyPolicyTips[0];
+            break;
+        case 1:
+            $("tipsContent").innerHTML = top.privacyPolicyTips[1];
+            break;
+        case 2:
+            $("tipsContent").innerHTML = top.privacyPolicyTips[2];
+            break;
+        case 3:
+            $("tipsContent").innerHTML = top.privacyPolicyTips[3];
+            break;
+        case 4:
+            $("tipsContent").innerHTML = top.privacyPolicyTips[4];
+            break;
+        case 5:
+            $("tipsContent").innerHTML = top.privacyPolicyTips[5];
+            break;
+    }
+    buttons[0].innerHTML = top.tickall;//"Tick all";
+    buttons[1].innerHTML = hotkeyWords[2];
+    $("tipsButtonFocus").style.left = "150px";
+    $("locationTips").style.display = "block";
+}
+
+
+function initPasswordSet()
+{
+	$("selectTitleTag").innerText = remindWords[2];
+	list_position_h = 0;
+	password = "";
+    rePassword = "";
+	passNumCount = 0;
+	
+	var containerLableList = $("passwordContainer").getElementsByTagName("label");
+	containerLableList[0].innerText=password_items_words[0];
+	containerLableList[1].innerText=password_items_words[1];
+	
+	$("pass").innerText = "_";
+	$("rePass").innerText = "";
+	$("passError").innerText = "";
+	$("scanInputFocus").style.top = SCAN_FOCUS_START + list_position_h*SCAN_FORM_AND_FOCUS_STEP + "px";
+	$("back").style.display = "block";
+	$("select").style.display = "none";
+	$("next").style.display = "none";
+	focusOn = "password";
+	
+	$("ScrollBar").style.display = "none";
+	$("initBigSelectForm").style.display = "none";
+	$("passwordContainer").style.display = "block";
+}
+function doCheck(which)
+{
+	//需要说明的是String.fromCharCode(which)的值总是大写的，因为onkeyup和onkeydown事件不能主动判断键盘的大小写，onkeypress可以判断大小写。其中只有onkeyup事件能获取键盘按下去后的结果值，因为此处需用到要清除键盘按下去后的值，所以只能用onkeyup事件，考虑到遥控器只有数字键，没有大小写之分，所以够用了
+	
+	if(list_position_h == 0)
+	{
+		password = password + which;
+		$("pass").innerText = $("pass").innerText.substring(0,passNumCount)+"*"+"_";
+		passNumCount++;
+		var length = password.length;
+		if(length == 4)
+		{
+			list_position_h = 1;
+			$("scanInputFocus").style.top = SCAN_FOCUS_START + list_position_h*SCAN_FORM_AND_FOCUS_STEP + "px";
+			$("pass").innerText = $("pass").innerText.substring(0,passNumCount);
+			$("rePass").innerText = "_";
+			passNumCount = 0;
+		}
+	}
+	else
+	{
+		rePassword = rePassword + which;
+		$("rePass").innerText = $("rePass").innerText.substring(0,passNumCount)+"*"+"_";
+		passNumCount++;
+		var length = rePassword.length;
+		if(length == 4)
+		{
+			if(rePassword == password)
+			{
+				if(password == "0000")
+				{
+					$("passError").innerText=changePassRemindWords[3];
+					password = "";
+					rePassword = "";
+					passNumCount = 0;
+					$("pass").innerText = "_";
+					$("rePass").innerText = "";
+					list_position_h = 0;
+					$("scanInputFocus").style.top = SCAN_FOCUS_START + list_position_h*SCAN_FORM_AND_FOCUS_STEP + "px";
+				}
+				else
+				{
+					setting.password = password;
+					//initLocationSet();
+                    initDisclaimerSet();
+				}
+			}
+			else
+			{
+				$("passError").innerText=changePassRemindWords[1];
+				password = "";
+				rePassword = "";
+				passNumCount = 0;
+				$("pass").innerText = "_";
+				$("rePass").innerText = "";
+				list_position_h = 0;
+				$("scanInputFocus").style.top = SCAN_FOCUS_START + list_position_h*SCAN_FORM_AND_FOCUS_STEP + "px";
+			}
+		}
+	}
+}
+
+
+function initCountrySet()
+{
+	refreshMultiLanguage();
+	$("selectTitleTag").innerHTML = remindWords[1];
+	offset = 0;
+	list_position_h = 0;
+    line_count = countrySum;
+	fixCountryFocus();
+    for(var i = 0; i < containerLiList.length; i++)
+    {
+        containerLiList[i].style.display = i >= line_count ? 'none' : 'block';
+    }
+	
+	stepImgList[0].style.width = "800px";
+	stepImgList[1].style.width = "400px";
+	$("back").style.display = "block";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "country";
+    if(countrySum <= DISPLAY_COUNT)
+    {
+        $("ScrollBar").style.display = "none";
+    }
+    else
+    {
+        $("ScrollBar").style.display = "block";
+    }
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+}
+function fixCountryFocus()
+{
+	var index = top.g_country;
+	var len = country_localCountry_index.length;
+	for(var i=0; i < len;i++)
+	{
+		if(country_localCountry_index[i]==index)
+		{
+			position_on_localCountryList = i;
+			break;
+		}
+	}
+
+    if(countrySum <= DISPLAY_COUNT)
+    {
+        list_position_h = position_on_localCountryList;
+        for(var i = 0; i < country_localCountry_index.length; i++)
+        {
+            selectSpanList[i].innerHTML = countrys[i];
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        showUpDownFlagImg(countrySum,0);
+        $("ScrollBar").style.display = 'none';
+    }
+    else
+    {
+        if(position_on_localCountryList >= (countrySum - 5))//当前语言位置排在尾端
+        {
+            offset = countrySum - 5;
+            list_position_h = position_on_localCountryList - offset;
+            for(var i = 0; i < 5; i++)
+            {
+                selectSpanList[i].innerHTML = countrys[offset + i];
+            }
+        }
+        else
+        {
+            list_position_h = 0;
+            offset = position_on_localCountryList;
+            for(var i = 0; i < 5; i++)
+            {
+                selectSpanList[i].innerHTML = countrys[offset + i];
+            }
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+        $("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/line_count,10) + "px";
+        showUpDownFlagImg(countrySum,offset)
+    }
+}
+
+
+function initLanguageSet()
+{
+	$("selectTitleTag").innerHTML = remindWords[0];
+	language = top.g_language;
+	offset = 0;
+	list_position_h = 0;
+	line_count = languageSum;
+	for(var i = 0; i < containerLiList.length; i++)
+	{
+		containerLiList[i].style.display = i >= line_count ? 'none' : 'block';
+	}
+	fixLanguageFocus();
+	
+	stepImgList[0].style.width = "400px";
+	stepImgList[1].style.width = "800px";
+	$("back").style.display = "none";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "language";
+	if(languageSum <= DISPLAY_COUNT)
+     {
+	   $("ScrollBar").style.display = "none";
+	 }
+	else
+    {
+      $("ScrollBar").style.display = "block";
+	}
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+}
+
+function initDisclaimerSet()
+{
+    var textDiv = $("disclaimerText");
+    var titleDiv = $("disclaimerTitleName");
+    var scrollDiv =  $("ScrollBar");
+    $("okButton").innerHTML = hotkeyWords[3];
+    if (top.isEUFlag == 1)
+    {
+        titleDiv.innerHTML = top.termsFirTitle[0];
+        //top.getGDPRText(top.g_country);//根据国家获取对应的GDPR翻译
+        setTimeout(function () {
+            //加个timeout来获取termsAndConditionsText，否则获取的为空
+            //将字符串里的“\n”替换成“<br>”标签用于换行，将“\”替换成“”
+            textDiv.innerHTML = top.termsAndConditionsText.replace(/\\n/g,"<br/>&nbsp;&nbsp;&nbsp;").replace(/\\/g,"");
+        },10);
+        $("disclaimerSecTitle").style.display = "block";
+        $("disclaimerSecTitle").innerHTML = top.termsSecTitle[0];
+    }
+    else
+    {
+        titleDiv.innerHTML = top.termsTitle;
+        textDiv.innerHTML = getDisclaimerText(top.termsConditions);
+        $("disclaimerSecTitle").style.display = "none";
+    }
+    focusOn = "disclaimer";
+
+    //Delay 10ms get the scrollHeight and clientHeight or you will get 0
+    setTimeout(function () {
+        console.log("--hzm initDisclaimerSet textDiv.scrollHeight = " + textDiv.scrollHeight);
+        console.log("--hzm initDisclaimerSet textDiv.clientHeight = " + textDiv.clientHeight);
+        if(textDiv.scrollHeight == textDiv.clientHeight)
+        {
+            scrollDiv.style.display = "none";
+        }
+        else
+        {
+            scrollDiv.style.display = "block";
+            textDiv.scrollTop = "0px";
+            scrollDiv.style.top = 250 + "px";
+            scrollDiv.style.height = Math.round(textDiv.clientHeight * textDiv.clientHeight / (textDiv.clientHeight + textDiv.scrollHeight)) + "px";
+        }
+    },10);
+
+    $("selectTitleTag").style.display = "none";
+    $("back").style.display = "none";
+    $("select").style.display = "none";
+    $("next").style.display = "none";
+    $("initBigSelectForm").style.display = "none";
+    $("policyTextContainer").style.display = "none";
+    $("disclaimerContainer").style.display = "block";
+    $("disclaimerText").style.display = "block";
+    $("tickallButton").style.display = "none";
+    $("passwordContainer").style.display = "none";
+}
+
+function initTermsAndConditionsSet()
+{
+    var textDiv = $("disclaimerText");
+    var titleDiv = $("disclaimerTitleName");
+    $("disclaimerSecTitle").innerHTML = top.termsSecTitle[1];
+    var scrollDiv =  $("ScrollBar");
+    $("okButton").innerHTML = hotkeyWords[3];
+    titleDiv.innerHTML = top.termsFirTitle[1];
+    textDiv.innerHTML = top.privacyNoticeText.replace(/\\n/g,"<br/>&nbsp;&nbsp;&nbsp;").replace(/\\/g,"");
+    focusOn = "termsAndConditions";
+
+    //Delay 10ms get the scrollHeight and clientHeight or you will get 0
+    setTimeout(function () {
+        console.log("--hzm initTermsAndConditionsSet textDiv.scrollHeight = " + textDiv.scrollHeight);
+        console.log("--hzm initTermsAndConditionsSet textDiv.clientHeight = " + textDiv.clientHeight);
+        if(textDiv.scrollHeight == textDiv.clientHeight)
+        {
+            scrollDiv.style.display = "none";
+        }
+        else
+        {
+            scrollDiv.style.display = "block";
+            textDiv.scrollTop = "0px";
+            scrollDiv.style.top = 250 + "px";
+            scrollDiv.style.height = Math.round(textDiv.clientHeight * textDiv.clientHeight / (textDiv.clientHeight + textDiv.scrollHeight)) + "px";
+        }
+    },10);
+
+    $("selectTitleTag").style.display = "none";
+    $("back").style.display = "none";
+    $("select").style.display = "none";
+    $("next").style.display = "none";
+    $("initBigSelectForm").style.display = "none";
+    $("policyTextContainer").style.display = "none";
+    $("disclaimerContainer").style.display = "block";
+    $("disclaimerText").style.display = "block";
+    $("tickallButton").style.display = "none";
+    $("passwordContainer").style.display = "none";
+}
+
+function initCookieSet()
+{
+    var textDiv = $("disclaimerText");
+    var titleDiv = $("disclaimerTitleName");
+    $("disclaimerSecTitle").innerHTML = top.termsSecTitle[2];
+    var scrollDiv =  $("ScrollBar");
+    $("okButton").innerHTML = hotkeyWords[3];
+    titleDiv.innerHTML = top.termsFirTitle[2];
+    textDiv.innerHTML = top.cookieNoticeText.replace(/\\n/g,"<br/>&nbsp;&nbsp;&nbsp;").replace(/\\/g,"");
+    focusOn = "cookie";
+
+    //Delay 10ms get the scrollHeight and clientHeight or you will get 0
+    setTimeout(function () {
+        console.log("--hzm initCookieSet textDiv.scrollHeight = " + textDiv.scrollHeight);
+        console.log("--hzm initCookieSet textDiv.clientHeight = " + textDiv.clientHeight);
+        if(textDiv.scrollHeight == textDiv.clientHeight)
+        {
+            scrollDiv.style.display = "none";
+        }
+        else
+        {
+            scrollDiv.style.display = "block";
+            textDiv.scrollTop = "0px";
+            scrollDiv.style.top = 250 + "px";
+            scrollDiv.style.height = Math.round(textDiv.clientHeight * textDiv.clientHeight / (textDiv.clientHeight + textDiv.scrollHeight)) + "px";
+        }
+    },10);
+
+    $("selectTitleTag").style.display = "none";
+    $("back").style.display = "none";
+    $("select").style.display = "none";
+    $("next").style.display = "none";
+    $("initBigSelectForm").style.display = "none";
+    $("policyTextContainer").style.display = "none";
+    $("disclaimerContainer").style.display = "block";
+    $("disclaimerText").style.display = "block";
+    $("tickallButton").style.display = "none";
+    $("privacyNoticeContainer").style.display = "none";
+    $("disclaimerButtonFocus").src = "../images/Focus-02.png";
+}
+
+function initPrivacySet()
+{
+    //initPolicyValue();
+    var textDiv = $("disclaimerText");
+    var titleDiv = $("disclaimerTitleName");
+    titleDiv.innerHTML = top.termsFirTitle[1];
+    $("disclaimerSecTitle").innerHTML = top.termsSecTitle[1];
+    $("okButton").innerHTML = hotkeyWords[2];
+    $("tickallText").innerHTML = top.tickall;//"Tick all";
+    $("containerRightText1").innerHTML = top.privacyPolicy[0];
+    $("containerRightText2").innerHTML = top.privacyPolicy[3];
+    $("checkboxRightText1").innerHTML = top.privacyPolicy[1];
+    $("checkboxRightText2").innerHTML = top.privacyPolicy[2];
+    $("containerLeftText").innerHTML = top.privacyPolicy[4];
+    $("checkboxLeftText").innerHTML = top.privacyPolicy[5];
+    focusOn = "privacy";
+    var smart_tv_service = setting.getProperty("app.ui.smart_tv_service","1");
+    var software_update = setting.getProperty("app.ui.software_update","0");
+    var personal_data = setting.getProperty("app.ui.personal_data","0");
+    if (smart_tv_service == 0 || software_update == 0 || personal_data == 0)
+    {
+        privacyNoticespans[checkindex].getElementsByTagName("span")[0].style.color = top.uiColourStyle;
+        $("disclaimerButtonFocus").src = "../images/Focus-02-no.png";
+    }
+    else
+    {
+        $("disclaimerButtonFocus").src = "../images/Focus-02.png";
+        for (var i =0;i < privacyNoticespans.length;i++)
+        {
+            privacyNoticespans[i].getElementsByTagName("img")[0].src = "../images/option/check_3.png";
+        }
+        checkindex = -1;
+    }
+    textDiv.scrollTop = "0px";
+    $("selectTitleTag").style.display = "none";
+    $("ScrollBar").style.display = "none";
+    $("back").style.display = "none";
+    $("select").style.display = "none";
+    $("next").style.display = "none";
+    $("initBigSelectForm").style.display = "none";
+    $("disclaimerContainer").style.display = "block";
+    $("disclaimerText").style.display = "none";
+    $("policyTextContainer").style.display = "none";
+    $("disclaimerTitleName").style.display = "block";
+    $("privacyNoticeContainer").style.display = "block";
+    $("tickallButton").style.display = "block";
+}
+
+function getDisclaimerText(text)
+{
+    var tempText = new Array();
+    var disclaimerText = "";
+
+    console.log("--hzm getDisclaimerText text.length = " + text.length);
+    if(text.length > 1)
+    {
+        tempText  =  text[1].split("\n");
+    }
+    else
+    {
+        tempText  =  text[0].split("\n");
+    }
+
+    if (text.length > 1) {
+        disclaimerText = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+text[0]+tempText[0]
+            +"<br>&nbsp;&nbsp;&nbsp;"+tempText[1]
+            +"<br>&nbsp;&nbsp;&nbsp;"+tempText[2]
+            +"<br>&nbsp;&nbsp;&nbsp;"+tempText[3];
+    }
+    else
+    {
+        disclaimerText = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+tempText[0];
+        for (var i = 1; i < tempText.length; i++) {
+                disclaimerText = disclaimerText+"<br>&nbsp;&nbsp;&nbsp;"+tempText[i];
+        }
+    }
+    return disclaimerText;
+}
+
+var timeZoneWords = [top.sysTimeZone[1], top.sysTimeZone[2], top.sysTimeZone[3], top.sysTimeZone[4], top.sysTimeZone[5],
+    top.sysTimeZone[6], top.sysTimeZone[7], top.sysTimeZone[8], top.sysTimeZone[9], top.sysTimeZone[10],
+    top.sysTimeZone[11], top.sysTimeZone[12], top.sysTimeZone[13], top.sysTimeZone[14], top.sysTimeZone[15],
+    top.sysTimeZone[16], top.sysTimeZone[17], top.sysTimeZone[18], top.sysTimeZone[19], top.sysTimeZone[20],
+    top.sysTimeZone[21], top.sysTimeZone[22], top.sysTimeZone[23], top.sysTimeZone[24], top.sysTimeZone[25],
+    top.sysTimeZone[26], top.sysTimeZone[27], top.sysTimeZone[28], top.sysTimeZone[29], top.sysTimeZone[30],
+    top.sysTimeZone[31], top.sysTimeZone[32], top.sysTimeZone[33], top.sysTimeZone[34]];
+var sumZone = timeZoneWords.length;
+var position_on_TimeZoneList = 0;
+function initTimeZoneSet()
+{
+    $("selectTitleTag").innerHTML = remindWords[7];
+    offset = 0;
+    list_position_h = 0;
+    line_count = sumZone;
+    fixTimeZoneFocus();
+    for(var i = 0; i < containerLiList.length; i++)
+    {
+        containerLiList[i].style.display = i >= line_count ? 'none' : 'block';
+    }
+
+    stepImgList[0].style.width = "1000px";
+    stepImgList[1].style.width = "200px";
+    $("back").style.display = "block";
+    $("select").style.display = "block";
+    $("next").style.display = "block";
+    focusOn = "timezone";
+    if(line_count <= DISPLAY_COUNT)
+    {
+        $("ScrollBar").style.display = "none";
+    }
+    else
+    {
+        $("ScrollBar").style.display = "block";
+    }
+    $("initBigSelectForm").style.display = "block";
+    $("passwordContainer").style.display = "none";
+}
+function fixTimeZoneFocus()
+{
+    var index = setting.timeZone - 1;
+    console.log("--hzm in fixTimeZoneFocus index = " + index);
+    var len = sumZone;
+    for(var i=0; i < len;i++)
+    {
+        if(i==index)
+        {
+            position_on_TimeZoneList = i;
+            break;
+        }
+    }
+    if(sumZone <= DISPLAY_COUNT)
+    {
+        list_position_h = position_on_TimeZoneList;
+        for(var i = 0; i < sumZone; i++)
+        {
+            selectSpanList[i].innerHTML = timeZoneWords[i];
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        showUpDownFlagImg(sumZone,0);
+        $("ScrollBar").style.display = 'none';
+    }
+    else
+    {
+        if(position_on_TimeZoneList >= (sumZone - 5))//当前语言位置排在尾端
+        {
+            offset = sumZone - 5;
+            list_position_h = position_on_TimeZoneList - offset;
+            for(var i = 0; i < 5; i++)
+            {
+                selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+            }
+        }
+        else
+        {
+            list_position_h = 0;
+            offset = position_on_TimeZoneList;
+            for(var i = 0; i < 5; i++)
+            {
+                selectSpanList[i].innerHTML = timeZoneWords[offset + i];
+            }
+        }
+        $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+        $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+        $("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/line_count,10) + "px";
+        showUpDownFlagImg(sumZone,offset)
+    }
+}
+
+
+var showLength = 2;
+var areaZoneSum = 0;
+var regionSum = 0;
+var citySum = 0;
+var position_on_AreaZoneList = 0;//9~11 bit位 (areaCode>>9)&0x7
+var position_on_RegionList = 0;// 5~8 bit位 (areaCode>>5)&0xf
+var position_on_CityList = 0;// 0~4 bit位  areaCode&0x1F
+var areaCode = 0;
+var allArea = ["LUZON","VISAYAS","MINDANAO"]
+
+var allRegion = [
+			["NCR","CAR","REGION 1","REGION 2","REGION 3","REGION 4-A","REGION 4-B","REGION 5"],
+			["REGION 6","REGION 7","REGION 8"],
+			["REGION 9","REGION 10","REGION 11","REGION 12","REGION 13","ARMM",]
+		   ];
+		   
+var allCity = [
+			["Caloocan","Las Pinas","Makati","Malabon","Mandaluyong","Manila","Marikina","Muntinlupa","Navotas","Paranaque","Pasay","Pasig","Pateros","Quezon City","San Juan","Taguig","Valenzuela"],
+			["Abra","Apayao","Baguio","Benguet","lfugao","Kalinga","Mt. Province"],
+			["llocos Norte","llocos Sur","La Union","Pangasinan"],
+			["Batanes","Cagayan","lsabela","Nueva Vizcaya","Quirino","Santiago"],
+			["Angeles","Aurora","Bataan","Bulacan","Nueva Ecija","Olongapo","Pampanga","Tralac","Zambales"],
+			["Batangas","Cavite","Laguna","Lucena","Quezon","Rizal"],
+			["Marinduque","Occidental Mindoro","Oriental Mindoro","Palawan","Puerto Princesa","Romblon"],
+			["Albay","Camarines Sur","Camarines Norte","Catanduanes","Masbata","Naga","Sorsogon"],
+			["Aklan","Antique","Bacolod","Capiz","Guimaras","lloilo","lloilo City","Negros Occidental"],
+			["Bohol","Cebu","Cebu City","Lapu Lapu","Negros Oriental","Siquijor"],
+			["Biliran","Eastern Samar","Leyte","Northem Samar","Oromc","Samar","Southern Leyte","Tacloban"],
+			["lsabela City","Zamboanga City","Zamboanga del Norte","Zamboanga del Sur","Zamboanga Sibuga"],
+			["Bukidnon","Cagayan de Oro","Camiguin","lligan","Lanao del Norte","Misamis Occidental","Misamis Oriental"],
+			["Compostela Valley","Davao City","Davao del Norte","Davao del Sur","Davao Oriental"],
+			["Cotabato","Cotabato City","General Santos","Saranggani","South Cotabato","Sultan Kudarat"],
+			["Agusan del Norte","Agusan del Sur	","Butuan","Dinagat lslands","Surigao del Norte","Surigao del Sur"],
+			["Basilan","Lanao del Sur","Maguindanao","Sulu","Tawi-Tawi"]
+		   ];
+var areaZoneWord = ["LUZON","VISAYAS","MINDANAO"];
+var regionWord = ["NCR","CAR","REGION 1","REGION 2","REGION 3","REGION 4-A","REGION 4-B","REGION 5"];
+var cityWord = ["Caloocan","Las Pinas","Makati","Malabon","Mandaluyong","Manila","Marikina","Muntinlupa","Navotas","Paranaque","Pasay","Pasig","Pateros","Quezon City","San Juan","Taguig","Valenzuela"];
+
+
+//var region = [["NCR","CAR","REGION 1(llocos Region)","REGION 2(Cagayan Velley)","REGION 3(Central Luzon)","REGION 4-A(CALABAZON)","REGION 4-B(MIMAROPA)","REGION 5(Bicol Region)"],["REGION 6(Western Visayas)","REGION 7(Central Visayas)","REGION 8(Eastern Visayas)"],["REGION 9(Zamboanga Peninsula)","REGION 10(Northem Mindanao)","REGION 11(Davao Region)","REGION 12(SOCCSKSARGEN)","REGION 13(CARAGA)","ARMM(Autonomous Region in Muslim)"]];
+//var City = [["Caloocan","Las Pinas","Makati","Malabon","Mandaluyong","Manila"],["Abra","Apayao","Baguio","Benguet","lfugao","Kalinga"],["llocos Norte","llocos Norte","llocos Norte","llocos Norte"]]
+/*
+ * 计算数组的相对偏移
+*/
+function cacularLength(obj,offset)
+{
+	var length = 0;
+	for(var i = 0;i < offset;i++)
+	{
+		length += obj[i].length;
+		console.log(" length "+length);
+	}
+	return length;
+}
+function initAreaZoneSet()
+{
+	$("selectTitleTag").innerHTML = remindWords[4];//Area zone
+
+	offset = 0;
+	list_position_h = 0;
+	areaZoneWord = allArea;
+	areaZoneSum = areaZoneWord.length;
+	areaCode = channel.systemAreacode;
+	console.log(" areaCode is "+areaCode);
+	position_on_AreaZoneList = 0;//不保存上次记录，默认为0
+	/*
+	if(position_on_AreaZoneList == 0 && areaCode > 0)
+	{
+		position_on_AreaZoneList = (areaCode>>9)&0x7 - 2; 
+	}
+	if (position_on_AreaZoneList > areaZoneSum)
+	{
+		position_on_AreaZoneList = 0;
+	}
+	*/
+	console.log("areaZoneWord"+areaZoneWord+" areaZoneSum "+areaZoneSum);
+	for(var i = 0; i < containerLiList.length; i++)
+	{
+		containerLiList[i].style.display = i >= areaZoneSum ? 'none' : 'block';
+	}
+	fixAreaZoneFocus();
+	
+	stepImgList[0].style.width = "900px";
+	stepImgList[1].style.width = "300px";
+	$("back").style.display = "block";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "areazone";
+	if(areaZoneSum <= DISPLAY_COUNT)
+     {
+	   $("ScrollBar").style.display = "none";
+	 }
+	else
+    {
+      $("ScrollBar").style.display = "block";
+	}
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+}
+
+function fixAreaZoneFocus()
+{
+	if(areaZoneSum <= DISPLAY_COUNT)
+	{
+		list_position_h = position_on_AreaZoneList;
+		for(var i = 0; i < areaZoneWord.length; i++)
+		{
+			selectSpanList[i].innerHTML = areaZoneWord[i];
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(areaZoneSum,0);
+		$("ScrollBar").style.display = 'none';
+	}
+   else
+    {
+		if(position_on_AreaZoneList >= (areaZoneSum - 5))//当前语言位置排在尾端
+		{
+			offset = areaZoneSum - 5;
+			list_position_h = position_on_AreaZoneList - offset;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+			}
+		}
+		else
+		{
+			list_position_h = 0;
+			offset = position_on_AreaZoneList;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = areaZoneWord[offset + i];
+			}
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(areaZoneSum,offset);
+		$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/areaZoneSum,10) + "px";
+		$("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/areaZoneSum,10) + "px";
+   }  
+}
+
+function initRegionSet()
+{
+	$("selectTitleTag").innerHTML = remindWords[5];//Language region
+
+	offset = 0;
+	list_position_h = 0;
+	regionWord = allRegion[position_on_AreaZoneList];
+	regionSum = regionWord.length;
+	position_on_RegionList = 0;//不保存上次记录，默认为0
+	/*
+	if(position_on_RegionList == 0 && areaCode > 0)
+	{
+		position_on_RegionList = (areaCode>>5)&0xf - 1; 
+	}
+	if (position_on_RegionList > regionSum)
+	{
+		position_on_RegionList = 0;
+	}
+	*/
+	console.log(" regionWord "+regionWord+" regionSum "+regionSum);
+	for(var i = 0; i < containerLiList.length; i++)
+	{
+		containerLiList[i].style.display = i >= regionSum ? 'none' : 'block';
+	}
+	fixRegionFocus();
+	
+	stepImgList[0].style.width = "1000px";
+	stepImgList[1].style.width = "200px";
+	$("back").style.display = "block";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "region";
+	if(regionSum <= DISPLAY_COUNT)
+     {
+	   $("ScrollBar").style.display = "none";
+	 }
+	else
+    {
+      $("ScrollBar").style.display = "block";
+	}
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+}
+
+function fixRegionFocus()
+{
+	if(regionSum <= DISPLAY_COUNT)
+	{
+		list_position_h = position_on_RegionList;
+		for(var i = 0; i < regionWord.length; i++)
+		{
+			selectSpanList[i].innerHTML = regionWord[i];
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(regionSum,0);
+		$("ScrollBar").style.display = 'none';
+	}
+   else
+    {
+		if(position_on_RegionList >= (regionSum - 5))//当前语言位置排在尾端
+		{
+			offset = regionSum - 5;
+			list_position_h = position_on_RegionList - offset;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = regionWord[offset + i];
+			}
+		}
+		else
+		{
+			list_position_h = 0;
+			offset = position_on_RegionList;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = regionWord[offset + i];
+			}
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(regionSum,offset);
+		$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/regionSum,10) + "px";
+		$("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/regionSum,10) + "px";
+   }  
+}
+
+function initCitySet()
+{
+	$("selectTitleTag").innerHTML = remindWords[6];//Location  City
+
+	offset = 0;
+	list_position_h = 0;
+	var length = cacularLength(allRegion,position_on_AreaZoneList);
+	cityWord = allCity[length+position_on_RegionList];
+	citySum = cityWord.length;
+	position_on_CityList = 0;//不保存上次记录，默认为0
+	/*
+	if(position_on_CityList == 0 && areaCode > 0)
+	{
+		position_on_CityList = (areaCode&0x1F) - 1; 
+	}
+	if(position_on_CityList > citySum)
+	{
+		position_on_CityList = 0;
+	}
+	*/
+	console.log("length "+length+" cityWord "+cityWord+" citySum "+citySum);
+	for(var i = 0; i < containerLiList.length; i++)
+	{
+		containerLiList[i].style.display = i >= citySum ? 'none' : 'block';
+	}
+	fixCityFocus();
+	
+	stepImgList[0].style.width = "1100px";
+	stepImgList[1].style.width = "100px";
+	$("back").style.display = "block";
+	$("select").style.display = "block";
+	$("next").style.display = "block";
+	focusOn = "city";
+	if(citySum <= DISPLAY_COUNT)
+     {
+	   $("ScrollBar").style.display = "none";
+	 }
+	else
+    {
+      $("ScrollBar").style.display = "block";
+	}
+	$("initBigSelectForm").style.display = "block";
+	$("passwordContainer").style.display = "none";
+}
+
+function fixCityFocus()
+{
+	if(citySum <= DISPLAY_COUNT)
+	{
+		list_position_h = position_on_CityList;
+		for(var i = 0; i < cityWord.length; i++)
+		{
+			selectSpanList[i].innerHTML = cityWord[i];
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(citySum,0);
+		$("ScrollBar").style.display = 'none';
+	}
+   else
+    {
+		if(position_on_CityList >= (citySum - 5))//当前语言位置排在尾端
+		{
+			offset = citySum - 5;
+			list_position_h = position_on_CityList - offset;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = cityWord[offset + i];
+			}
+		}
+		else
+		{
+			list_position_h = 0;
+			offset = position_on_CityList;
+			for(var i = 0; i < 5; i++)
+			{
+				selectSpanList[i].innerHTML = cityWord[offset + i];
+			}
+		}
+		$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+		showUpDownFlagImg(citySum,offset);
+		$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/citySum,10) + "px";
+		$("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/citySum,10) + "px";
+   }  
+}
+
+//多语言变换
+var timer = 0;
+function changeShow()
+{
+	if(languageSum <= DISPLAY_COUNT)
+	 {
+	 	position_on_languageList = list_position_h;
+	 }
+	else
+	 {
+        position_on_languageList = list_position_h + offset;
+	 }
+	top.g_language = language_language_index[position_on_languageList];
+	if(timer)
+	{
+		clearTimeout(timer);
+	}
+	timer = setTimeout(function(){
+	    var pretextDirection = top.textDirection;//记录前一个语言的文字方向
+		top.doChangeMultilanguage(top.g_language);
+		setTimeout(function(){
+			FirstTitle 				= top.initialTitle[1];
+			subTitle				= top.initialOptions[0];
+			remindWords				= [top.initialPrompt[1],top.initialPrompt[2],top.initialPrompt[25],top.initialPrompt[3],top.initialPrompt[31],top.initialPrompt[32],top.initialPrompt[33],top.initialPrompt[34]];
+			hotkeyWords				= top.initialHotkeys;
+			parent.updateInitTitle(FirstTitle);
+			$("subTitleTag").innerHTML = subTitle;
+			$("selectTitleTag").innerHTML = remindWords[0];
+			
+			$("back").getElementsByTagName("span")[0].innerHTML = hotkeyWords[0];
+			$("select").getElementsByTagName("span")[0].innerHTML = hotkeyWords[1];
+			$("next").getElementsByTagName("span")[0].innerHTML = hotkeyWords[2];
+			if (pretextDirection != top.textDirection)//切换文字方向时需要刷新页面
+            {
+                window.location.href = "initEnvironmentSet.html";
+            }
+		},100);
+	},200);
+}
+function fixLanguageFocus()
+{
+    var index = language;
+	var len = language_language_index.length;
+    for (var i=0; i < len; i++)
+    {
+        if (language_language_index[i] == index)
+        {
+            position_on_languageList = i;
+            break;
+        }
+    }
+   if(languageSum <= DISPLAY_COUNT)
+     {
+       list_position_h = position_on_languageList;
+	   for(var i = 0; i < langWords.length; i++)
+     	{
+		   selectSpanList[i].innerHTML = langWords[i];
+		}
+	   $("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+       showUpDownFlagImg(languageSum,0);
+	   $("ScrollBar").style.display = 'none';
+     }
+   else
+     {
+	if(position_on_languageList >= (languageSum - 5))//当前语言位置排在尾端
+	{
+		offset = languageSum - 5;
+		list_position_h = position_on_languageList - offset;
+		for(var i = 0; i < 5; i++)
+		{
+			selectSpanList[i].innerHTML = langWords[offset + i];
+		}
+	}
+	else
+	{
+		list_position_h = 0;
+		offset = position_on_languageList;
+		for(var i = 0; i < 5; i++)
+		{
+			selectSpanList[i].innerHTML = langWords[offset + i];
+		}
+	}
+	$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+	showUpDownFlagImg(languageSum,offset);
+		
+	
+	$("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/line_count,10) + "px";
+	$("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/line_count,10) + "px";
+   }
+   
+}
+var selectSpanList;
+var containerLiList;
+var stepImgList;
+var urlAttribute;
+var tipsButtonClassList;
+
+
+var notEmptyCountryIndexArray = new Array(country_localCountry_index.length);
+var isHasEmp = false;
+/**
+ * 检查country_localCountry_index中是否有为空的county index
+ * 如果有，则删除为空的index，重置country_localCountry_index
+ */
+function checkCountryIsEmpty()
+{
+    var index = 0;
+    for(var i = 0;i < country_localCountry_index.length ; i++)
+    {
+        if(top.all_country[country_localCountry_index[i]] != null && top.all_country[country_localCountry_index[i]] != " " &&
+                top.all_country[country_localCountry_index[i]] != "" && top.all_country[country_localCountry_index[i]] != "*")
+        {
+            notEmptyCountryIndexArray[index] = country_localCountry_index[i];
+            index++;
+        }
+        else    //当前索引指向的country为" "
+        {
+            isHasEmp = true;
+        }
+    }
+    if(isHasEmp)    //如果有为空的索引，去掉该索引，并且重置country_localCountry_index
+    {
+        countrySum = index;
+        country_localCountry_index = new Array(countrySum);
+        for(var i=0;i < countrySum;i++)
+        {
+            country_localCountry_index[i] = notEmptyCountryIndexArray[i];
+        }
+    }
+}
+//初始化AU配置，主要是语言和国家
+function initAuData()
+{
+	country_localCountry_index	=[0,26];				//要显示的国家在国家数组中对应的位置，例如UK 对应的是25
+	country_localLanguage_index =[6,5,9,24,10,0,2,36,22,9,5,
+								8,13,6,12,33,279,5,14,6,15,16,
+								17,19,18,21,25,20,7,23,5,35,
+								468,6];		//同语言对应(选择国家后audiolang，Subtitle，teletext对应的语言在语言数组中的位置);选择澳大利亚和新西兰跟UK情况一样
+	//languageSum = 30;
+    languageSum = langWords.length;
+	countrySum	= country_localCountry_index.length;
+    checkCountryIsEmpty();
+	countrys	= new Array(countrySum);
+	
+}
+function initAfData()
+{
+	country_localCountry_index	=[67,125,122,68,82,
+						60,61,77,96,71,
+						66,109,75,88,124,
+						70,35,123,64,112];	
+	country_localLanguage_index =[6,6,6,6,6,
+						6,6,6,6,6,
+						6,6,6,6,6,
+						6,6,6,6,6,];	
+	languageSum = langWords.length;
+	countrySum	= country_localCountry_index.length;
+	checkCountryIsEmpty();
+	countrys	= new Array(countrySum);
+	
+}
+
+function initLAData()
+{
+    langWords				   = top.sysMenuLangLA;
+    country_localCountry_index = top.mlmCountryIndexLA;
+    countrySum				   = top.mlmCountryIndexLA.length;
+    languageSum 			   = 3;//LA: English/Portugues/Espanol	
+    language_language_index    = top.mlmLangIndexLA;	
+}
+
+function initNAData()
+{
+	country_localCountry_index	=[54];
+	country_localLanguage_index =[7];
+	langWords				   = top.sysMenuLangNA;
+	countrySum				   = 1;
+	languageSum 			   = 2;//NA: English/Espanol/France
+	language_language_index    = top.mlmLangIndexNA;
+}
+
+function initCAData()
+{
+	country_localCountry_index	= top.mlmCountryIndexCA;
+	country_localLanguage_index = top.mlmLangIndexCA;
+	langWords				   	= top.sysMenuLangNA;//沿用NA的语言
+	countrySum				  	= top.mlmCountryIndexCA.length;
+	languageSum 			  	= top.sysMenuLangNA.length;//NA: English/Espanol/France
+	language_language_index    	= top.mlmLangIndexNA;//沿用NA的语言
+}
+
+function initCOData()
+{
+	langWords				   = top.sysMenuLangCO;
+	country_localCountry_index = top.mlmCountryIndexCO;
+	countrySum				   = 1;
+	languageSum 			   = top.mlmLangIndexCO.length;//CO: English/Espanol/France
+	language_language_index    = top.mlmLangIndexCO;
+}
+function initAPData()
+{
+    if (top.isIRNFlag)
+    {
+        country_localCountry_index = top.mlmCountryIndexIRN;
+        country_localLanguage_index = top.mlmLangIndexIRN;
+        languageSum = top.mlmLangIndex.length;
+        countrySum	= country_localCountry_index.length;
+        //checkCountryIsEmpty();
+        countrys	= new Array(countrySum);
+    }
+    else
+    {
+        country_localCountry_index = top.mlmCountryIndexAP;
+        country_localLanguage_index = top.mlmLangIndexAP;
+        languageSum = top.mlmLangIndex.length;
+        countrySum	= country_localCountry_index.length;
+        //checkCountryIsEmpty();
+        countrys	= new Array(countrySum);
+    }
+}
+
+function init()
+{
+    if (top.isSambaFlag == "true" && top.g_setting.getProperty("app.ui.sambaTV","1") == "1")
+    {
+        setting.setProperty("resetShopFlag", "1");
+        setting.setProperty("isInitEnvironmentSeting", "1");
+    }
+    top.initTextDirection(window);
+	if(top.isAUFlag)//澳洲平台 重新初始化变量
+	{
+		initAuData();
+	}
+	else if(top.isAFFlag)
+	{
+		initAfData();
+	}	
+    if(top.isLAFlag) //拉美平台 重新初始化变量
+    {
+        initLAData();
+    }
+	if(top.isNAFlag) //北美平台 重新初始化变量
+	{
+		initNAData();
+	}
+	
+	if(top.isCBFlag) //北美平台 重新初始化变量
+	{
+		initCOData();
+	}
+	if(top.isAPFlag || top.isIRNFlag)
+	{
+		initAPData();
+	}
+	if(top.isCAFlag)
+	{
+		initCAData();
+	}
+
+	refreshMultiLanguage();
+	top.stopTimeout();
+	setting.sendMsgToDBC(1);
+	urlAttribute = window.location.search.substring(1);//除去？
+	stepImgList = $("subTitleForm").getElementsByTagName("img");
+	containerLiList = $("container").getElementsByTagName("li");
+	selectSpanList = $("container").getElementsByTagName("span");
+    privacy_li_list = $("policyTextContainer").getElementsByTagName("li");
+    privacy_img_list = $("policyTextContainer").getElementsByTagName("img");
+    privacyNoticespans = document.getElementsByClassName("privacyNoticeCheckbox");
+	tipsButtonClassList = $("locationTips").getElementsByClassName("tipsButton");
+	//面板按键处理场景设置
+	setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	//开机设置LED初始状态为normal，由三个状态组合而成
+	setting.setProperty("sita.bootup.led.work", "off");
+	setting.setProperty("sita.bootup.led.standby", "on");
+	setting.setProperty("sita.bootup.led.standbying", "on");
+	//top.g_channel.testLog("setting.tvRunningMode =" + top.g_setting.tvRunningMode);
+    /****shopmode 2.3需求******/
+    if (top.isEUFlag == 1)
+    {
+        setting.setProperty("app.ui.autoshopmode.switch","1");//仅EU区 auto shopmode 默认设为开
+    }
+    else
+    {
+        setting.setProperty("app.ui.autoshopmode.switch","0");//其它区域 auto shopmode 默认设为关
+    }
+    /****shopmode 2.3需求******/
+	//parent.updateInitTitle(FirstTitle);
+	$("subTitleTag").innerHTML = subTitle;
+	
+	$("back").getElementsByTagName("span")[0].innerHTML = hotkeyWords[0];
+	$("select").getElementsByTagName("span")[0].innerHTML = hotkeyWords[1];
+	$("next").getElementsByTagName("span")[0].innerHTML = hotkeyWords[2];
+	$("initListFormFocus").style.display = "block";
+	
+    if (typeof(middleware) != "undefined")
+    {
+        middleware.setUIContext(1);
+    }
+	
+	if(top.isFirstInitNotifyThread)//初始化消息接收线程
+	{
+		setting.createNotifyThread();
+		setting.browserIsStart();
+		top.isFirstInitNotifyThread = 0;
+	}
+	
+	if(urlAttribute == "network")
+	{
+        setFocusWith();
+		initLocationSet();
+	}
+	else
+	{
+		initLanguageSet();
+	}
+	addMouseListener();
+	initDefaultValue();//重置恢复出厂后需要UI设置的值
+}
+
+function initDefaultValue()
+{
+	if("true" == top.isSCBCFlag)
+	{
+		//SCBC客户要求autoStandby默认off
+		var countryForUI = top.g_setting.getProperty("ro.sita.cfg.app.countryForUI","NULL");
+		if("US" == countryForUI)
+		{
+			//SCBC美国客户默认关闭DLNA
+			setting.dlnaEnable = 0;
+		}
+	}
+	else if (top.isLAFlag || top.isNAFlag)
+    {
+        setting.autoStandby = 0;//拉美和中美区要求autoStandby默认off
+    }
+	else
+	{
+		setting.autoStandby = 1;
+	}
+}
+
+function initPolicyValue()
+{
+    setting.setProperty("app.ui.quickKey","1");
+    setting.setProperty("app.ui.hbbtv","1");
+    setting.setProperty("app.ui.update","1");
+    setting.dlnaEnable = 1;
+    setting.setProperty("app.ui.software","1");
+    if (channel.systemCountry == 25)//uk
+        setting.hbbTVMdsState = 1;
+}
+
+function addMouseListener()
+{
+	document.body.onmousedown = function(evt){evt.preventDefault();
+		if(evt.button == 2 && focusOn != "locationTips") toLeft();//right key
+	}
+	
+	for(var i = 0; i < 5; i++)
+	{
+		containerLiList[i].setAttribute("newAttr",i);
+		containerLiList[i].onmousedown = function(evt){
+			if(evt.button == 0){//left key
+				if(focusOn == "language")
+				{
+					list_position_h = parseInt(this.getAttribute("newAttr"));
+					changeShow();
+					$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+					doEnter();
+				}
+				else if(focusOn == "country")
+				{
+					list_position_h = parseInt(this.getAttribute("newAttr"));
+					$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+					doEnter();
+				}
+				else if(focusOn == "location")
+				{
+					if(parseInt(this.getAttribute("newAttr")) < 3)
+					{
+						list_position_h = parseInt(this.getAttribute("newAttr"));
+						$('initListFormFocus').style.top = list_position_h*SELECT_STEP + "px";
+						doEnter();
+					}
+				}
+			}
+		}
+	}
+	$("initListUpImg").onmousedown = function(evt){
+		if(evt.button == 0){//left key
+			if(focusOn == "language")
+			{
+				if($("initListUpImg").style.opacity == 1)
+				{
+					list_position_h = 0;
+					changeShow();
+					$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+					toUp();
+				}
+			}
+			else if(focusOn == "country")
+			{
+					if($("initListUpImg").style.opacity == 1)
+					{
+						list_position_h = 0;
+						$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+						toUp();
+					}
+			}
+		}
+	}
+	$("initListDownImg").onmousedown = function(evt){
+		if(evt.button == 0){//left key
+			if(focusOn == "language")
+			{
+				if($("initListDownImg").style.opacity == 1)
+				{
+					list_position_h = 4;
+					changeShow();
+					$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+					toDown();
+				}
+			}
+			else if(focusOn == "country")
+			{
+				if($("initListDownImg").style.opacity == 1)
+				{
+					list_position_h = 4;
+					$("initListFormFocus").style.top = list_position_h*SELECT_STEP + "px";
+					toDown();
+				}
+			}
+		}
+	}
+	
+	for(var i = 0; i < 2; i++)
+	{
+		tipsButtonClassList[i].setAttribute("newAttr",i);
+		tipsButtonClassList[i].onmousedown = function(evt){
+			if(evt.button == 0){//left key
+				if(focusOn == "locationTips")
+				{
+					form_position_h = parseInt(this.getAttribute("newAttr"));
+					if(form_position_h == 1)
+					{
+						$("tipsButtonFocus").style.left = "476px";
+					}
+					else 
+					{
+						$("tipsButtonFocus").style.left = "150px";
+					}
+					doEnter();
+				}
+			}
+		}
+	}
+
+}
+
+
+//设置焦点背景宽度（左：变长；右：不变）
+function setFocusWith() {
+    if (top.g_language == 31 || top.g_language == 34 || top.g_language == 160 || top.g_language == 362 || top.g_language == 503)//右对齐视图，HEB,PER,ARA,ARE
+    {
+        $('focusImgID').style.width = "";
+    }
+    else {
+
+        $('focusImgID').style.width = "600px";
+    }
+}
+</script>
+</head>
+
+<body onload="init()">
+    <div id="initDialog">
+    	<div id="subTitleForm">
+        	<img  src="../images/Title_bloc-Progress.png" style="width:400px;" /><img src="../images/Title_bloc-Bg.png" style="width:800px;" />
+            <span id="subTitleTag"  style="left:10px;"></span>
+        </div>
+
+        <span id="selectTitleTag" class="leftRemind" style="top:200px;"></span>
+
+        <img id="ScrollBar" src="../images/Scroll_bar-Vertical.png" style="	position:absolute;width:10px;left:1250px;top:250px;"/>
+        
+        <div id="initBigSelectForm">
+        	<img id="initListUpImg" src="../images/arrow/U-Focus.png"/>
+            <ul id="container" class="initSelects">
+              <div id="initListFormFocus" style="display:none">
+                <img class="initSlectsFocus2" src="../images/option/Radio_3.PNG"/>
+                <img id="focusImgID"  class="initSlectsFocus" src="../images/Focus_Frame/Focus.png">
+              </div>
+              <li style="display:none">
+                <img src="../images/option/Radio_2.PNG" />
+                <span></span>
+              </li>
+              <li style="display:none">
+                <img src="../images/option/Radio_2.PNG" />
+                <span ></span>
+              </li>
+              <li style="display:none">
+                <img src="../images/option/Radio_2.PNG"/>
+                <span></span>
+              </li>
+              <li style="display:none">
+                <img src="../images/option/Radio_2.PNG"/>
+                <span></span>
+              </li>
+              <li style="display:none">
+                <img src="../images/option/Radio_2.PNG"/>
+                <span></span>
+              </li>
+            </ul>
+            <img id="initListDownImg" src="../images/arrow/D-Focus.png"/>
+        </div>
+        
+        <div id="passwordContainer">
+            <ul class="initInputs">
+                <img id="scanInputFocus" class="dialogOptionContentImg" src="../images/Input_box-3-Focus.png"  />
+                <li>
+                    <div class="dialogInput">
+                        <img class="dialogOptionContentImg" src="../images/Input_box-3-Bg.png" />
+                        <label class="dialogInputName"></label>
+                        <span id="pass" class="dialogValueContent" ></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="dialogInput">
+                        <img class="dialogOptionContentImg" src="../images/Input_box-3-Bg.png" />
+                        <label class="dialogInputName"></label>
+                        <span id="rePass" class="dialogValueContent" ></span>
+                    </div>
+                </li>
+             </ul>
+             
+            <span id="passError" class="midRemind" style="top:470px;color:#f00;"></span>
+        </div>
+        <!-----------------------免责声明主页面内容---------------------------------->
+        <div id="disclaimerContainer">
+            <div id="disclaimerTitleName"></div>
+            <div id="disclaimerSecTitle"></div>
+            <div id="disclaimerText" ></div>
+            <div id="okButton"></div>
+            <div class="privacyNoticeCheckbox" id="tickallButton">
+                <img class="checkImg" src="../images/option/check_2.png"/>
+                <span id="tickallText"></span>
+            </div>
+            <img id="disclaimerButtonFocus" src="../images/Focus-02.png" />
+        </div>
+
+        <div id="privacyNoticeContainer">
+            <div id="containerRight">
+                <div id="containerRightText1"></div>
+                <div class="privacyNoticeCheckbox" style="margin-top: 10px">
+                    <img class="checkImg" src="../images/option/check_3.png"/>
+                    <span id="checkboxRightText1"></span>
+                </div>
+                <div class="privacyNoticeCheckbox" style="margin-top: 10px">
+                    <img class="checkImg" src="../images/option/check_2.png"/>
+                    <span id="checkboxRightText2"></span>
+                </div>
+                <div id="containerRightText2" style="margin-top: 10px"></div>
+            </div>
+            <div id="containerLeft">
+                <div id="containerLeftText"></div>
+                <div class="privacyNoticeCheckbox" style="margin-top: 10px">
+                    <img class="checkImg" src="../images/option/check_2.png"/>
+                    <span id="checkboxLeftText"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="policyTextContainer">
+            <ul id="policyTextTable">
+                <li>
+                    <img class="checkImg" id="checkList1" src="../images/option/check_3.png"/>
+                    <span id="PolicyText1"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList2" src="../images/option/check_3.png"/>
+                    <span id="PolicyText2"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList3" src="../images/option/check_3.png"/>
+                    <span id="PolicyText3"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList4" src="../images/option/check_3.png"/>
+                    <span id="PolicyText4"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList5" src="../images/option/check_3.png"/>
+                    <span id="PolicyText5"></span>
+                </li>
+                <li>
+                    <img class="checkImg" id="checkList6" src="../images/option/check_3.png"/>
+                    <span id="PolicyText6"></span>
+                </li>
+            </ul>
+        </div>
+        <!-----------------------免责声明主页面内容---------------------------------->
+        <div id="back" class="hotkey" style="left:100px;" >
+          	<img src="../images/icon-Back.png"/>
+            <span></span>
+        </div>
+        <div id="select" class="hotkey" style="left:592px;" >
+          	<img src="../images/icon-Select_1.png"/>
+            <span></span>
+        </div>
+        <div id="next" class="hotkey" style="right:100px;" >
+          	<img src="../images/icon-Next.png"/>
+            <span></span>
+        </div>
+    </div>
+    
+    <div id="locationTips">
+        <img id="tipsButtonFocus" src="../images/Focus-02.png"/>
+    	<span id="tipsTitle"></span>
+        <span id="tipsContent"></span>
+        <div class="tipsButton" style="left:150px;"></div>
+        <div class="tipsButton" style="left:476px;"></div>
+    </div>
+</body>
+</html>

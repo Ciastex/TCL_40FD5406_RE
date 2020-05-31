@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="hbbtvPairWSServer" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <application tvos:persistet="true">
+       <service tvos:name="hbbtvPairWSServer" >
+            <intent-filter>
+                <action tvos:name="tvos.hbbtv.pair.server.Service" />
+            </intent-filter>
+        </service>
+		
+		<broadcast
+            tvos:name="HbbtvPairBroadcast" >
+            <intent-filter>
+                <action tvos:name="tvos.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </broadcast>
+    </application>
+
+</manifest>

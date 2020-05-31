@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fixer>
+    <element>
+		<notation>解决9频道播放视频后返回页面无焦点的问题</notation>
+		<targetFile>hbbtv.9now.com.au/js/app.js</targetFile>
+		<node>
+			<org_code>this._playerObject.stop(),</org_code>
+			<replace_code>if(this._playerObject.stop)this._playerObject.stop();</replace_code>
+		</node>
+    </element>
+    <element>
+		<notation>解决[UKTV]播放视频时，进度条上的time会跳着显示</notation>
+		<targetFile>tvapp.uktv.co.uk/static/script/appui/components/videocomponent.js</targetFile>
+		<node>
+			<org_code>this.onTimeUpdateThrottled()</org_code>
+			<replace_code>this.onTimeUpdate()</replace_code>
+		</node>
+    </element>
+</fixer>

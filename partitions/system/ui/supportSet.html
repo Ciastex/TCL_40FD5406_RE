@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="all.css"/>
+    <style>
+        .listSecondProperty {
+            text-align: right;
+        }
+
+        .showMenu
+        {
+            position:absolute;
+            overflow:hidden;
+            top:80px;
+            height:840px;
+            width:800px;
+        }
+        #contactDiv {
+            position: absolute;
+            top: 135px;
+            left: 420px;
+            width: 1080px;
+            height: 810px;
+            padding: 0px; /*必须有，因为ul默认的padding是40px*/
+            opacity: 0.92;
+            background: url(./images/Bg-Contact_us.png);
+        }
+        #titleName {
+            position: absolute;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight:bold;
+            top: 30px;
+            left: 60px;
+            right:60px;
+
+            overflow:hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        #contactDiv ul/* 设置三级菜单右半部分 的UL属性*/
+        {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .popList/* 设置 关于列表每项的属性*/
+        {
+            position: relative;
+            top:112px;
+            left: 90px;
+            right: 90px;
+            height: 48px;
+            width: 900px;
+            font-size: 28px;
+            color: #ffffff;
+
+            line-height:48px;
+            overflow:hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+    </style>
+    <script type="text/javascript" src="supportSet.js"></script>
+</head>
+
+<body onload="init()" onunload="uninit()">
+
+<div id="sndMenuLeft"></div>
+
+<div id="sndMenuRight">
+
+    <div id="listUpRemind" style="display:none;">
+        <img src="images/arrow/U-Focus.png"/>
+    </div>
+    <div class="showMenu">
+        <ul id="menuUl" style=" position:absolute">
+            <!-- E-manual -->
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" style="display: none"/>
+            </li>
+
+            <!-- Software update -->
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/icon_Submenu_focus.png" />
+            </li>
+
+            <!-- Remote diagnosis -->
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/icon_Submenu_focus.png" />
+            </li>
+
+            <!-- Contact us -->
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/icon_Submenu_focus.png" />
+            </li>
+
+        </ul>
+    </div>
+    <div id="listDownRemind" style="top:1010px">
+        <img src="images/arrow/D-Focus.png"/>
+    </div>
+    <img id="listFocus" src="images/Focus_Frame/Focus-1.png"/>
+</div>
+
+<!----------------------弹出列表框使用---------------------->
+<div id="listForm" class="fourthPopUpBox">
+    <img id="listUpImg" src="images/arrow/U-Focus.png"/>
+    <ul id="listBox">
+        <img id="listFormFocus" class="formFocus" src="images/Focus_Frame/Focus2.png"/>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <img id="listDownImg" src="images/arrow/D-Focus.png"/>
+</div>
+
+<!----------------------图像重置对话框--------------------------->
+<div id="reset" class="dialogForm" style="height:300px;top:390px; left:560px; display:none;">
+    <span class="dialogTitle"></span>
+    <span class="dialogContent" style="top:100px;"></span>
+    <div class="dialogButton" style="left:200px;"></div>
+    <div class="dialogButton" style="left:430px;"></div>
+    <img id="resetFocus" style=" position:absolute ;left:420px; bottom:20px; height:60px; width:170px; pointer-events:none;" src="images/Focus_Frame/Focus2.png">
+</div>
+<!------------------------说明提示框---------------------------------------->
+<div id="promptWin" style="display: none;">
+    <img class="promptWinLeft"/>
+
+    <div class="promptWinRight">
+        	<span id="promptContent">
+            </span>
+    </div>
+</div>
+
+
+<!----------------------进度条调整项--------------------------->
+<div id="adjustProgressBox">
+
+    <div id="adjustProgMinorUp">
+        <span class="adjustProgSpan"></span>
+    </div>
+
+    <div id="adjustProgMain">
+
+        <img src="images/SS_1_02_3_Activation.png" style="position:absolute;left:10px;"/>
+
+        <div class="adjustName" style="width:240px;">
+            <span class="adjustProgSpan" style="width:240px;"></span>
+        </div>
+
+        <div id="adjustProgBar">
+            <div class="progressBarLeft" style="width:250px;background:#f00;"></div>
+            <div class="progressBarCenter"></div>
+            <div class="progressBarRight" style="width:250px;"></div>
+        </div>
+
+        <div id="adjustProgValue">100</div>
+    </div>
+
+
+    <div id="adjustProgMinorDown">
+        <span class="adjustProgSpan"></span>
+    </div>
+
+</div>
+
+<!----------------------password弹出框使用---------------------->
+<div id="passForm" class="dialogForm" style=" height:300px;top:300px; display:none;">
+    <span class="dialogTitle"></span>
+
+    <div class="dialogInput" style="top:120px;">
+        <span class="dialogInputName"></span>
+
+        <div id="passContent" class="dialogInputContent" style="background:#333;"></div>
+    </div>
+    <div class="dialogInputFocus" style="top:120px;"></div>
+    <span id="passRemind" class="dialogRemind" style="top:190px;"></span>
+</div>
+<!----------------------Contact us 弹出框--------------------------->
+<div id="contactDiv" style="display: none;">
+    <ul>
+        <li id="titleName"><span ></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span ></span></li> <!-- 空一行 -->
+        <li class="popList"><span style="font-size: 32px;font-weight: bold"></span></li>
+        <li class="popList"><span ></span><span style="font-size: 40px"></span><span></span></li>
+        <li class="popList"><span id="callCenter"></span></li>
+        <li class="popList"><span style="font-size: 32px;font-weight: bold"></span></li>
+        <li class="popList"><span id="Model"></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span ></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span></span></li>
+        <li class="popList"><span></span></li>
+    </ul>
+</div>
+</body>
+</html>

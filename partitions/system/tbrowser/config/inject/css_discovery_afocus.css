@@ -1,0 +1,5 @@
+a:focus {
+    display: block;
+    float: inherit;
+    border: #EE7600 solid 1px;
+}

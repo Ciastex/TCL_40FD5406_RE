@@ -1,0 +1,18 @@
+CACHE MANIFEST 
+
+#version 5.28
+
+CACHE:
+http://s3.tcllauncher.com/html5/history/history.css
+http://s3.tcllauncher.com/html5/history/history.js
+
+
+http://s3.tcllauncher.com/html5/images/BottomSlider.png
+http://s3.tcllauncher.com/html5/images/slider.png
+http://s3.tcllauncher.com/html5/images/whiteline.png
+http://s3.tcllauncher.com/html5/images/TimeAxis.png
+http://s3.tcllauncher.com/html5/images/deleteBG.png
+http://s3.tcllauncher.com/html5/images/noticeBG.png
+
+NETWORK:
+*

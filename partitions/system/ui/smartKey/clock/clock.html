@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clock</title>
+    <link rel="stylesheet" type="text/css" href="clock.css"/>
+    <script type="text/javascript" src="../../event.js"></script>
+    <script type="text/javascript" src="clock.js"></script>
+</head>
+
+<body onload="init()" onunload="uninit()">
+    <!-- 1表盘 -->
+    <div class="background">
+
+        <!-- big -->
+        <div id="big_clock" class="display_none">
+            <div id="chassis">
+                <img id="chassis_img">
+            </div>
+            <div id="time">
+                <span id="time_span"></span>
+            </div>
+            <div id="location">
+                <span id="location_span"></span>
+            </div>
+
+            <div style="position: absolute;z-index: 8;">
+                <img id="heart_big" src="clock_images/big_night_heart.png" style="position: absolute;z-index: 1;top:515px;left:934px;">
+                <canvas id="canvas_big" width="1920" height="1080" style="position: absolute;z-index: 0;"></canvas>
+            </div>
+        </div>
+
+        <!-- little 1 -->
+        <div id="little_clock" class="display_none">
+            <div id="little_clock_1" class="display_none little_clock">
+                <div style="position: absolute;top:170px; z-index: 0;">
+                    <img src="clock_images/LittleClockProjection.png">
+                </div>
+                <div style="position: absolute;z-index: 1;">
+                    <img id="chassis_little1_img">
+                </div>
+                <div style="position:absolute;;z-index: 8;">
+                    <img id="heart_little_1" src="clock_images/little_night_heart.png"
+                         style="position: absolute;z-index: 1;top:165px;left:165px;">
+                    <canvas id="canvas_little_1" width="1920" height="1080"
+                            style="position: absolute;z-index: 0;"></canvas>
+                </div>
+                <div class="location_span">
+                    <span id="location_little1_span"></span>
+                </div>
+                <div class="time_span">
+                    <span id="time_little1_span"></span>
+                </div>
+            </div>
+
+            <!-- little 2 -->
+            <div id="little_clock_2" class="display_none little_clock">
+                <div style="position: absolute;top:170px; z-index: 0;">
+                    <img src="clock_images/LittleClockProjection.png">
+                </div>
+                <div style="position: absolute;z-index: 1;">
+                    <img id="chassis_little2_img">
+                </div>
+                <div style="position:absolute;;z-index: 8;">
+                    <img id="heart_little_2" src="clock_images/little_night_heart.png"
+                         style="position: absolute;z-index: 1;top:165px;left:165px;">
+                    <canvas id="canvas_little_2" width="1920" height="1080"
+                            style="position: absolute;z-index: 0;"></canvas>
+                </div>
+                <div class="location_span">
+                    <span id="location_little2_span"></span>
+                </div>
+                <div class="time_span">
+                    <span id="time_little2_span"></span>
+                </div>
+            </div>
+
+            <!-- little 3 -->
+            <div id="little_clock_3" class="display_none little_clock">
+                <div style="position: absolute;top:170px; z-index: 0;">
+                    <img src="clock_images/LittleClockProjection.png">
+                </div>
+                <div style="position: absolute;z-index: 1;">
+                    <img id="chassis_little3_img">
+                </div>
+                <div style="position:absolute;;z-index: 8;">
+                    <img id="heart_little_3" src="clock_images/little_night_heart.png"
+                         style="position: absolute;z-index: 1;top:165px;left:165px;">
+                    <canvas id="canvas_little_3" width="1920" height="1080"
+                            style="position: absolute;z-index: 0;"></canvas>
+                </div>
+                <div class="location_span">
+                    <span id="location_little3_span"></span>
+                </div>
+                <div class="time_span">
+                    <span id="time_little3_span"></span>
+                </div>
+            </div>
+
+            <!-- little 4 -->
+            <div id="little_clock_4" class="display_none little_clock">
+                <div style="position: absolute;top:170px; z-index: 0;">
+                    <img src="clock_images/LittleClockProjection.png">
+                </div>
+                <div style="position: absolute;z-index: 1;">
+                    <img id="chassis_little4_img">
+                </div>
+                <div style="position:absolute;;z-index: 8;">
+                    <img id="heart_little_4" src="clock_images/little_night_heart.png"
+                         style="position: absolute;z-index: 1;top:165px;left:165px;">
+                    <canvas id="canvas_little_4" width="1920" height="1080"
+                            style="position: absolute;z-index: 0;"></canvas>
+                </div>
+                <div class="location_span">
+                    <span id="location_little4_span"></span>
+                </div>
+                <div class="time_span">
+                    <span id="time_little4_span"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- edit -->
+        <div id="edit" onclick="jumpToAddButtom()">
+            <img  src="clock_images/AddButtonClickEffect.png" >
+       </div>
+        <div id="tips">
+            <span id="tips_span"></span>
+        </div>
+    </div>
+
+    <!-- 2底框 -->
+    <div id="add_bottom" class="background display_none">
+        <div id="bottom_box">
+            <img  src="clock_images/Addbottombox.png" >
+        </div>
+        <img id="right_arrow" src="clock_images/arrow_right.png" style="position: absolute;left: 1832px;top: 855px;z-index: 5;" >
+        <img id="left_arrow" src="clock_images/arrow_left.png" style="position: absolute;left: 47px;top: 855px;z-index: 5;display: none;" >
+        <div id="select_box" style="position: absolute;top:720px;z-index: 4;">
+            <div class="select_div" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+            <div class="select_div" style="left:261px;" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+            <div class="select_div" style="left:522px;" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+            <div class="select_div" style="left:783px;" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+            <div class="select_div" style="left:1044px;" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+            <div class="select_div" style="left:1305px;" onclick="">
+                <img src="clock_images/UnselectedIcon.png" class="select_button">
+                <img src="clock_images/AddDayClockIcon.png" class="select_clockIcon">
+                <img src="clock_images/focus.png" class="select_focus" >
+                <span></span>
+            </div>
+
+
+        </div>
+
+    </div>
+	
+    <div id="remind">
+		<span id="remind_span"></span>
+	</div>
+</body>
+</html>

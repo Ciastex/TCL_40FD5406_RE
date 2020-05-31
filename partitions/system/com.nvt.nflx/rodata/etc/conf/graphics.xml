@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <alpha_format>BGRA32_PM</alpha_format>
+    <opaque_format>BGRA32_PM</opaque_format>
+    <text_format>A8</text_format>
+    <capabilities>
+      <gibbon>
+        <transform>true</transform>
+        <effects>
+          <blur>
+            <accelerated>true</accelerated>
+          </blur>
+          <desaturate>
+            <accelerated>true</accelerated>
+          </desaturate>
+          <tint>
+            <accelerated>true</accelerated>
+          </tint>
+          <!-- <chromakey> -->
+          <!--   <accelerated>true</accelerated> -->
+          <!-- </chromakey> -->
+        </effects>
+      </gibbon>
+    </capabilities>
+  </config_data>
+</config_root>

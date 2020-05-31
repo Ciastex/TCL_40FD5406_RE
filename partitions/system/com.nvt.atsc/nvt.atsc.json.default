@@ -1,0 +1,6 @@
+{
+    "block_play_after_scan":true,
+    "tuner_lock_wait_in_ms": 10,
+    "tuner_cable_vsb_wait_in_ms": 1000,
+    "DBB_wait_time_in_ms": 15000
+}

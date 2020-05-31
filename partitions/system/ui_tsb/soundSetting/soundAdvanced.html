@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../all.css">
+<script type="text/javascript" src="soundAdvanced.js"></script>
+<style>
+#soundBalanceLeft
+{
+	background:#383838;
+}
+
+#promptWin
+{
+    position:absolute;
+    left:986px;
+    top:110px;
+    height:110px;
+    width:420px;
+    display:none;
+}
+</style>
+</head>
+
+<body onload="init()" onunload="uninit()" onfocus="updateData()">
+	<div id="thdMenuLeft"></div>
+	<div id="thdMenuRight" >
+        <div class="titleName">
+            <span style="top:60px; position:absolute">Advanced Settings</span>
+        </div>
+        <div id="listUpRemind" style="display:none; top:120px;">
+            <img src="../images/arrow/U-Focus.png"/>
+        </div>
+        <div class="showMenu">
+            <ul style="position:absolute" id="menuUl">
+                <li>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="soundBalanceContainer" class="listSecondProgress">
+                        <div id="soundBalanceLeft" class="progressBarLeft"></div>
+                        <div class="progressBarCenter"></div>
+                        <div id="soundBalanceRight" class="progressBarRight"></div>
+                    </div>
+                    <lable id="soundBalanceValue" class="listThirdProperty"></lable>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="audioLanguage" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="soundTypeStatus" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+                    <img class="listThirdPropertyImg" src="../images/arrow/icon_Submenu_focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="speakerStatus" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="speakerVolumeContainer" class="listSecondProgress">
+                        <div id="speakerVolumeLeft" class="progressBarLeft" style="width:150px;"></div>
+                        <div class="progressBarCenter"></div>
+                        <div id="speakerVolumeRight" class="progressBarRight" style="width:0px;"></div>
+                    </div>
+                    <div id="speakerVolumeValue" class="listThirdProperty"></div>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="headphoneStatus" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="headphoneVolumeContainer" class="listSecondProgress">
+                        <div id="headphoneVolumeLeft" class="progressBarLeft" style="width:250px;"></div>
+                        <div class="progressBarCenter"></div>
+                        <div id="headphoneVolumeRight" class="progressBarRight" style="width:0px;"></div>
+                    </div>
+                    <div id="headphoneVolumeValue" class="listThirdProperty"></div>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="btDeviceStatus" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png"/>
+                </li>
+                <li class="list">
+                    <span class="listFirstProperty"></span>
+
+                    <div id="btDeviceVolumeContainer" class="listSecondProgress">
+                        <div id="btDeviceVolumeLeft" class="progressBarLeft" style="width:250px;"></div>
+                        <div class="progressBarCenter"></div>
+                        <div id="btDeviceVolumeRight" class="progressBarRight" style="width:0px;"></div>
+                    </div>
+                    <div id="btDeviceVolumeValue" class="listThirdProperty"></div>
+                </li>
+            </ul>
+        </div>
+        <div id="listDownRemind" style="top:1010px;display:none;">
+            <img src="../images/arrow/D-Focus.png"/>
+        </div>
+        <div id="thdListFocus"></div>
+   </div>
+   
+    <!----------------------弹出列表框使用---------------------->
+    <div id="listForm" class="fourthPopUpBox">
+        <img id="listUpImg" src="../images/arrow/U-Focus.png"/>
+        <ul id="listBox">
+          <img id="listFormFocus" class="formFocus" src="../images/Focus_Frame/Focus2.png">
+          <li ></li>
+          <li ></li>
+          <li ></li>
+          <li ></li>
+          <li ></li>
+        </ul>
+        <img id="listDownImg" src="../images/arrow/D-Focus.png" />
+    </div>
+    <!------------------------说明提示框---------------------------------------->
+    <div id="promptWin" style="display: none;">
+        <img class="promptWinLeft"/>
+
+        <div class="promptWinRight">
+        	<span id="promptContent">
+            </span>
+        </div>
+    </div>
+    <!----------------------进度条调整项--------------------------->
+  <div id="adjustProgressBox">
+       <div id="adjustProgMinorUp">
+        	<span class="adjustProgSpan"></span>
+        </div>
+        <div id="adjustProgMain">
+        	 <img src="../images/SS_1_02_3_Activation.png" style="position:absolute;left:10px;">
+        	 <div class="adjustName" style="width:240px;">
+        	 	<span class="adjustProgSpan" style="width:240px;"></span>
+             </div>
+             <div id="adjustProgBar" >
+                	<div id = "progressBarLeftDiv" class="progressBarLeft" style="width:250px;background:#f00"></div>
+                    <div class="progressBarCenter"></div>
+                    <div class="progressBarRight" style="width:250px;"></div>
+             </div>
+             <div id="adjustProgValue">100</div>
+        </div>
+        <div id="adjustProgMinorDown">
+        	<span class="adjustProgSpan"></span>
+        </div>
+   </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+
+/* -------------------------------------------------------------------  */
+
+.virtualremotediv
+{
+	position: absolute;
+
+	left: 1430px;
+	top: 900px;
+	width: 440px;
+	height: 130px;
+	background-image:url("../img/Vkey_bg_5.png");
+	display: inline-table;
+}
+
+
+
+
+/* ----------------------------------------- 11、快捷键：r、g、y、b 				不显示 -----------table显示与否设置-------------------*/
+
+.t11_short
+{
+	width:440px;
+	height:90px;
+	margin-top: 20px;
+	padding-top:0px;
+
+	border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+	border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+	display: inline-table;
+
+}
+
+.t11_short td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 110px;
+	height: 90px;
+}
+
+
+

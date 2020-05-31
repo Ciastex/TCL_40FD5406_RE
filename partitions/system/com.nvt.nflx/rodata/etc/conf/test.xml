@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <ui_url>http://lgux-pnavarro3.corp.netflix.com:8080/master/nrdptest/functional/gibbon/gibbonTest.js</ui_url>
+    <allow_insecure_requests/>
+  </config_data>
+</config_root>

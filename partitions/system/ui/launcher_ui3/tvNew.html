@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="tvNew.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+<script type="text/javascript">
+function setFocusId(id)
+{
+	parent.FocusId( id , "tv");
+}
+
+document.onclick = function()
+{
+	parent.focus();
+}
+
+</script>
+</head>
+
+<body onload="init()" class="body_tv" oncontextmenu='return false' ondragstart='return false' onselectstart='return false' onbeforecopy='return false'>
+
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+	<!-- ---------------------------------------------------------------------- tv ------------------------------------------------------------------------- -->
+
+	<div id="tvPage" name="subwindow" class="window"
+		style="display: block; left: 0px; top: 160px;">
+
+		<div class="elem" id="tv_00" onclick="jumpToChannelPlay();setFocusId('tv_00')"
+			name="focusBlock" data-up="0" data-right="tv_01" data-down="0"
+			data-left="-1" data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_00"
+			style="top: 63px; left: 95px; height: 573px; width: 1016px;">
+        <div id="currentProgramRemind" style="position:absolute;left:0px;top:260px;width:100%;font-size:30px;text-align:center;display:none;color:#fff"></div>    
+        </div>
+
+		<div class="elem_border themeImg_1066x621" id="border_tv_00"  onclick="jumpToChannelPlay()"
+			style="top: 38px; left: 71px; visibility: hidden; height: 621px; width: 1066px;">
+		</div>
+
+
+		<!-- 1 -->
+		<div class="elem" id="tv_01" onclick="" name="tv_01" onclick="setFocusId('tv_01')"
+			data-up="0" data-right="tv_02" data-down="tv_04" data-left="tv_00"
+			data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_01"
+			style="top: 63px; left: 1125px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_01"
+			style="top: 39px; left: 1101px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+
+		<!-- 2 -->
+		<div class="elem" id="tv_02" onclick="setFocusId('tv_02')" name="tv_02"
+			data-up="0" data-right="tv_03" data-down="tv_05" data-left="tv_01"
+			data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_02"
+			style="top: 63px; left: 1320px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_02"
+			style="top: 39px; left: 1296px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+		
+		<!-- 3 -->
+		<div class="elem" id="tv_03" onclick="setFocusId('tv_03')" name="tv_03"
+			data-up="0" data-right="-1" data-down="tv_06" data-left="tv_02"
+			data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_03"
+			style="top: 63px; left: 1515px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_03"
+			style="top: 39px; left: 1491px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+		
+		
+		
+		<!-- 4 -->
+		<div class="elem" id="tv_04" onclick="setFocusId('tv_04')" name="tv_04"
+			data-up="tv_01" data-right="tv_05" data-down="tv_07"
+			data-left="tv_00" data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_04"
+			style="top: 256px; left: 1125px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_04"
+			style="top: 234px; left: 1101px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+		<!-- 5 -->
+		<div class="elem" id="tv_05" onclick="setFocusId('tv_05')" name="tv_05"
+			data-up="tv_02" data-right="tv_06" data-down="tv_07"
+			data-left="tv_04" data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_05"
+			style="top: 256px; left: 1320px; height: 184px; width: 185px;">
+			
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_05"
+			style="top: 234px; left: 1296px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+		<!-- 6 -->
+		<div class="elem" id="tv_06" onclick="setFocusId('tv_06')" name="tv_06"
+			data-up="tv_03" data-right="-1" data-down="tv_07" data-left="tv_05"
+			data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_06"
+			style="top: 256px; left: 1515px; height: 184px; width: 185px;">
+			
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_06"
+			style="top: 234px; left: 1491px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+		
+
+		<!-- 7 -->
+		<div class="elem" id="tv_07" onclick="setFocusId('tv_07')" name="tv_07"
+			data-up="tv_04" data-right="tv_08" data-down="0" data-left="tv_00"
+			data-leftPage="videos_07" data-rightPage="apps_01" data-focus_id="border_tv_07"
+			style="top: 450px; left: 1125px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=20284d2ddce8b0308f316a78cb782d6a" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_07"
+			style="top: 427px; left: 1101px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+
+
+		<!-- 8 -->
+		<div class="elem" id="tv_08" name="tv_08" onclick="setFocusId('tv_08')" data-up="tv_05"
+			data-right="tv_09" data-down="0" data-left="tv_07"
+			data-leftPage="videos_07" data-rightPage="apps_01"
+			data-focus_id="border_tv_08"
+			style="top: 450px; left: 1320px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=82ad12e7c8933b1606b088ae6d4c867c" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_08"
+			style="top: 428px; left: 1296px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+
+
+		<!-- 9 -->
+		<div class="elem" id="tv_09" name="tv_09" onclick="setFocusId('tv_09')" data-up="tv_06"
+			data-right="-1" data-down="0" data-left="tv_08" data-leftPage="tv_03"
+			data-rightPage="apps_01" data-focus_id="border_tv_09"
+			style="top: 450px; left: 1515px; height: 184px; width: 185px;">
+			<img src="images/ditu.png?md5=82ad12e7c8933b1606b088ae6d4c867c" />
+            <span class="elem_block_title" style="width: 155px; bottom: 10px; font-size: 30px"></span>
+		</div>
+
+		<div class="elem_border themeImg_234x233" id="border_tv_09"
+			style="top: 427px; left: 1491px; visibility: hidden; height: 233px; width: 234px;">
+		</div>
+
+	</div>
+    </div>
+
+</body>
+
+
+
+</html>

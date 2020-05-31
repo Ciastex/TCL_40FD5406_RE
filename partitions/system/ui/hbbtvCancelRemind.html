@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#hbbtvCancelTips
+{
+	position:absolute;
+	height:410px;
+	width:830px;
+	top:334px; 
+	left:544px; 
+	background:url(images/Bg-Pop_up_box-04.png);
+	display:block;
+	z-index:200;
+}
+
+#dialogContent
+{
+	position:absolute;
+	width:710px;
+	top:125px;
+	color:#b0b0b0; 
+	font-size:28px;
+	left:60px; 
+	text-align:left;
+	line-height:48px;
+}
+#dialogName
+{
+	position:absolute;
+	width:710px;
+	top:30px;
+	color:#b0b0b0; 
+	font-size:32px;
+	left:60px; 
+	text-align:left;
+}
+.dialogButton/*对话框中的按钮样式*/
+{
+	position:absolute;
+	width:150px;
+	height:35px;
+	bottom:30px;
+	padding-top:7px;
+	font-size:25px;
+	font-weight:bold;
+	color:#fff;
+	text-align:center;
+	background:#333;
+	border-radius:10px;
+}
+
+</style>
+<body onload="init()">
+
+<div id="hbbtvCancelTips">
+   		<span id="dialogName"></span>
+        <span id="dialogContent" style=""></span>
+        <div class="dialogButton" style="left:200px; font-size:20px;"></div>
+        <div class="dialogButton" style="left:500px; font-size:20px;"></div>
+        <img id="cancelRemindFocus" style=" position:absolute ;left:490px; bottom:20px; height:60px; width:170px;" src="images/Focus_Frame/Focus2.png">
+</div>
+<script>
+document.onsystemevent = top.systemEventProc;
+document.onkeydown = keyproc;
+document.onkeyup = keyupproc;
+var remindButton              = [top.chOptions[0],top.okCancel[0],top.okCancel[1]];
+var positionV                 = 0;
+var keyValue                  = 0xffff;
+function $(id)
+{
+    return document.getElementById(id);
+}
+function init()
+{
+    top.initTextDirection(window);
+	top.g_setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	top.keySetForUI(1);
+	 keyValue = window.location.search;
+	keyValue = keyValue.substring(keyValue.indexOf("?")+1);
+	$("dialogName").innerHTML=top.others[28];
+	$("dialogContent").innerHTML=top.hbbtvStopRemind[0];
+	var divs=$("hbbtvCancelTips").getElementsByTagName("div");
+	divs[0].innerHTML=remindButton[1];
+	divs[1].innerHTML=remindButton[2];
+	positionV=1;
+	$("cancelRemindFocus").style.left="490px";
+}
+function keyproc(evt)
+{
+	var ret = true;
+	var keycode = evt.which;
+	switch(keycode)
+	{
+		case top.VK_ENTER:
+			toOK();
+			break ;
+		case top.VK_LEFT:
+		case top.VK_RIGHT:
+			changeFocus();
+			break;
+		case top.VK_POWER://power
+			top.keyDownProcess(evt);
+		 break ;
+	}
+}
+function changeFocus()
+{
+	if(positionV==1)
+	{
+		positionV = 0;
+		$("cancelRemindFocus").style.left="190px";
+	}
+	else
+	{
+		positionV = 1;
+		$("cancelRemindFocus").style.left="490px";
+	}
+}
+function keyupproc(evt)
+{
+	var ret = true;
+	var keycode = evt.which;
+	top.g_channel.testLog("zenglm kecodeup is"+keycode);
+	switch(keycode)
+	{
+		case top.VK_ENTER:
+			toUpOK();
+			break ;
+		default:
+			break;
+	}
+}
+function toUpOK()
+{
+	if(positionV)
+	{
+		top.g_channel.testLog("zenglm jumppage 145");
+		top.jumpPage();					 
+	}
+}
+function toOK()
+{
+	if(positionV)
+	{
+		//top.jumpPage();					 
+	}
+	else
+	{
+		$("hbbtvCancelTips").style.display = "none";
+		setTimeout(
+		function(){
+		top.globleHBBTVClose();
+		switch(parseInt(keyValue,10))
+		{
+			case top.VK_MENU:
+			{
+				top.g_previousHtmlPage = "channelPlay.html";
+				top.jumpToOperatePage("index.html");
+			}
+			break;
+			case top.VK_OPTION:
+			{
+				top.g_previousHtmlPage = "channelPlay.html";
+				//$('otherPage').src = "option.html";
+				top.$('main').src = "option.html";
+				//$('main').src = "initSetup/initEnvironmentSet.html";
+				//$("main").src = "";
+				//top.otherPage.focus();
+				top.requestFocus(top.main, 1);
+				top.setFrameFocusPage("main");
+				top.$("operatePage").src = "";
+			}
+			break;
+			case top.VK_TV:
+			{
+				if(top.g_channel.inputSource > 1)
+				 {
+					top.g_previousHtmlPage = "channelPlay.html";
+					top.g_remindWord = "TvHotKey";
+					top.$("main").src = "intermediate.html";
+					top.requestFocus(top.main, 1);
+					top.$("operatePage").src = "";
+				 }
+				 else
+				 {
+					 top.jumpPage();
+				 }
+			}
+			break;
+			case top.VK_SOURCE:
+			{
+				top.g_isUsedHotKeyToIntoPage = 1;
+				top.g_previousHtmlPage = "channelPlay.html";
+				if((top.g_factory.sourceLock)&&(top.g_factory.hotelEnable))
+				{
+					top.$('main').src = "password.html?sourceLock";
+					top.requestFocus(top.main, 1);
+					top.setFrameFocusPage("main");
+				}
+				else
+				{
+					top.$("main").src = "channelPlay.html";
+					top.$('operatePage').src = "inputSource.html";
+					top.requestFocus(top.operatePage, 0);
+					top.setFrameFocusPage("operatePage");
+				}
+			}
+			break;
+			case top.VK_HOME:
+			{
+				if(top.recordStatusFlag == 1)
+				{
+					top.$("globleShow").contentWindow.hiddenRecord();
+					top.clearMyTimeout();
+					top.$('main').src = "pvr/Pvr.html?homePage&tv";
+					top.$("main").style.display = "block";
+					top.$("operatePage").src = "";
+					top.requestFocus(top.main, 1);
+					top.setFrameFocusPage("main");
+					return;
+				}
+				else if(top.timeShiftStatusFlag == 1)
+				{
+					top.$("globleShow").contentWindow.hiddenTimeShift();
+					top.$('main').src = "pvr/timeshift.html?homePage&tv";
+					top.$("main").style.display = "block";
+					top.$("operatePage").src = "";
+					top.requestFocus(top.main, 1);
+					top.setFrameFocusPage("main");
+					return;
+				}
+				if(top.g_isDownloading == 1){
+					top.g_isDownloading = 0;
+					if(!top.g_isForceUpgrade){
+						top.hideDownloadRing();
+					}
+					top.g_setting.pauseDownloadUpdateFile();
+				}
+				top.g_previousHtmlPage = "channelPlay.html";
+				if(top.currentPanel==1)
+				{
+					if(top.g_setting.pic3DMode!=0)
+					{
+						top.g_setting.pic3DMode=0;
+						top.$("globleShow").contentWindow.hiddenGlassRemind();					
+					}
+				}
+				else if(top.currentPanel==2)
+				{
+					if(top.g_setting.pic3DMode!=0)
+					{
+						top.g_setting.pic3DMode=0;
+					}
+				}
+				top.$("main").src = top.getHomepage("?tv&title");
+				top.requestFocus(top.main, 1);
+				top.setFrameFocusPage("main");
+				top.$("operatePage").src = "";
+			}
+			break;
+			case top.VK_GUIDE:
+			{
+				top.g_previousHtmlPage = "channelPlay.html";
+				if(top.g_channel.inputSource == 1 && top.inputLock != 1)
+				{
+					 if(top.currentPanel==1)
+					 {
+						if(top.g_setting.pic3DMode!=0)
+						{
+							top.g_setting.pic3DMode=0;
+							top.$("globleShow").contentWindow.hiddenGlassRemind();
+						}
+					}
+					else if(top.currentPanel==2)
+					{
+						if(top.g_setting.pic3DMode!=0)
+						{
+							top.g_setting.pic3DMode=0;
+						}
+					}
+					top.g_isUsedHotKeyToIntoPage = 1;
+					if(top.recordStatusFlag == 1)
+					{
+						top.$("globleShow").contentWindow.hiddenRecord();
+						top.clearMyTimeout();
+						top.$('main').src = "pvr/Pvr.html?guide";
+						return;
+					}
+					else if(top.timeShiftStatusFlag == 1)
+					{
+						top.$("globleShow").contentWindow.hiddenTimeShift();
+						top.$('main').src = "pvr/timeshift.html?guide";
+						return;
+					}
+				}
+				top.openEPG();
+				top.requestFocus(top.main, 1);
+				top.$("operatePage").src = "";
+			}
+			break;
+			case top.VK_RECORD:
+			{
+				if(top.g_channel.inputSource == 1)
+				{
+					top.g_channel.testLog("g_factory.pvrOpenStatus="+top.g_factory.pvrOpenStatus);
+					if(top.g_factory.pvrOpenStatus == 1 && top.g_setting.getProperty("ro.sita.model.LiveTV.PVR","FALSE") == "TRUE")
+					{
+						if(top.recordStatusFlag==1)
+						{
+							top.$("globleShow").contentWindow.hiddenRecord();
+						}
+						top.$("operatePage").src = "";
+						top.$('main').src = "pvr/Pvr.html?menu";
+						top.$("main").style.display = "block";
+						
+					}
+					else
+					{
+							top.$("operatePage").src = "";
+						top.g_remindWord = "notAvailable";
+						top.$("main").src = "intermediate.html";
+						top.$("main").style.display = "block";
+					
+					}
+				}
+				else
+				{
+					top.$("operatePage").src = "";
+					top.g_remindWord = "notAvailable";
+					top.$("main").src = "intermediate.html";
+					top.$("main").style.display = "block";
+					
+				}
+				top.requestFocus(top.main, 1);
+				top.setFrameFocusPage("main");
+			}
+			break;
+			case top.VK_TELETEXT:
+			{
+				if(top.g_setting.openttx())
+				{
+					top.$("operatePage").src = "";
+					top.$("main").src = "TeletextMenu.html";
+					top.$("main").style.display = "block";
+					
+				}
+				else
+				{
+					var Mheg5Status=top.g_channel.getMheg5Status();
+					if(Mheg5Status==1)
+					{
+						top.g_openMheg5State=1;
+						top.g_channel.transportKeyToMheg5(keycode);
+					}
+					else
+					{
+						top.$("operatePage").src = "";
+						top.g_remindWord = "noTeletext";
+					   top.$("main").src = "intermediate.html";
+					   top.$("main").style.display = "block";
+						
+					}
+				}
+			}
+			break;
+			case top.VK_CHANNEL_UP:
+			{
+				top.toChannelUp();
+			}
+			break;
+			case top.VK_CHANNEL_DOWN:
+			{
+				top.toChannelDown();
+			}
+			break;
+			case top.VK_PRE_CH:
+			{
+				top.toPreKey();
+			}
+			break;
+			case top.VK_LIST:
+			{
+				top.toChannelList();
+			}
+			break;
+			case top.VK_FAV:
+			{
+				top.toFavList();
+			}
+			break;
+			default:
+			break;
+		}
+		},1);
+	}
+}
+</script>
+</body>
+</html>

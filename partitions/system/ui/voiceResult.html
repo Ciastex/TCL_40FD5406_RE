@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>no title document</title>
+</head>
+<style>
+#resultPic
+{
+	position:absolute;
+	height:250px;
+	width:1500px;
+	top:534px; 
+	left:700px; 
+    repeat:no-repeat;
+	display:block;
+	z-index:200;
+    background:url(images/voiceUI/bg.png);
+}
+
+</style>
+<body onload="init()">
+
+<div id="resultPic">
+<div style="text-align:center;position:absolute;top:-10px">please, try again</div>
+<img id="picture" style="text-align:center;position:absolute"></img>
+</div>
+<script>
+
+var loadingTimer = -1;
+function init()
+{
+    loading( 0 );
+}
+function loading( loadingCount ) 
+{
+	var loadingImgs		= ["images/voiceUI/red.png",
+						   "images/voiceUI/red.png"];
+	document.getElementById("picture").src = loadingImgs[loadingCount%2];
+	loadingCount++;
+	loadingTimer=setTimeout("loading(" + loadingCount + ")",300);
+    console.log(loadingCount);
+}
+</script>
+</body>
+</html>

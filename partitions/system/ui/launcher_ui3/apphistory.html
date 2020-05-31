@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="apphistory.css" />
+    <script type="text/javascript" src="apphistory.js"></script>
+    <script type="text/javascript" src="event.js"></script>
+    <script type="text/javascript" src="generalFun.js"></script>
+</head>
+<body class="appHistory body_comm">
+    <div>
+        <header class="PageHeader clearfix">
+            <div class="pageTitle">
+                <span class="needTranslate_apphistory">Recent App</span>
+            </div>
+
+            <div class="countTip">
+                <span class="needTranslate" data-translate="recentVideoNum-1"></span>
+                <span class="number" id="number"></span>&nbsp;<span class="needTranslate_apphistory">apps</span>
+            </div>
+
+            <div class="tools">
+                <img src="images/redLine.png" alt="">
+                <span class="needTranslate_apphistory">To delete</span>
+            </div>
+
+        </header>
+
+        <main class="pageMain clearfix" data-role="root">
+            <div class="items clearfix" id="items_1" style="margin-top: 0px">
+                <div class="items_title">
+                    <span class="needTranslate_apphistory" style="margin-right:25px">today</span>
+                    <span class="needTranslate" data-translate="recentVideoNum-1"></span>
+                    <span id="items_1_count">5</span>&nbsp;
+                    <span class="needTranslate_apphistory">apps</span>
+                </div>
+
+                <img class="pageMain_line" src="images/line.png" alt="">
+                <div class="items_wrap clearfix">
+                    <div class="items_content clearfix" id="items_content_1" data-role="block" style="margin-top: 0px">
+                        <ul class="clearfix" id="item_ul_1">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="items clearfix" id="items_2">
+                <div class="items_title">
+                    <span class="needTranslate_apphistory" style="margin-right:25px;">earlier</span>
+                    <span class="needTranslate" data-translate="recentVideoNum-1"></span>
+                    <span id="items_2_count">5</span>&nbsp;
+                    <span class="needTranslate_apphistory">apps</span>
+                </div>
+
+                <img class="pageMain_line" src="images/line.png" alt="">
+
+                <div class="items_wrap clearfix">
+                    <div class="items_content clearfix" id="items_content_2" data-role="block" style="margin-top: 0px">
+                        <ul class="clearfix" id="item_ul_2">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="animationBorder" id="animationBorder" style="left: 164px">
+            <img class="border_img" src="images/appBorder.png" alt="">
+            <div id="deleteDiv" class="deleteDiv">
+                <img class="delete_img" id="delete_img" src="images/deleteHistory.png" alt="">
+                <div class="delete_tip">
+                    <span class="needTranslate_apphistory">delete one</span>
+                    <span class="needTranslate_apphistory">delete all</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="shade" id="shade" >
+            <img class="shade_img" src="images/shade.png" alt="">
+        </div>
+    </div>
+
+
+    <div class="templateDiv" id="templateDiv" style="display: none">
+        <li class="templateLi">
+            <div class="itemDiv" data-role="node">
+                <div class="itemBackPic">
+                    <img class="itemBackPic_img" src="images/appBG.png" alt="">
+                    <img class="itemPic_img" src="images/appBG.png" alt="">
+                    <img class="borderItem_img" src="images/appBorder.png" alt="">
+                </div>
+                <div class="itemName">
+                    <span class="itemName_span">QQ</span>
+                </div>
+            </div>
+        </li>
+    </div>
+    <!--<div id="deleteTips">
+        <span id="deleteContent" class="needTranslate" data-translate="deleteHistoryNote">Do you want to delete all records?</span>
+        <div class="dialogButton needTranslate" style="left: 0px; background: rgb(225, 31, 31);" data-translate="done">Done</div>
+        <div class="dialogButton needTranslate" style="right: 0px; background: rgb(33, 32, 37);" data-translate="cancel">Cancel</div>
+    </div>-->
+    <div id="deleteTips">
+        <span id="dialogName">Tips</span>
+        <span id="deleteContent" class='needTranslate_recent_dailog' style="">Do you want to delete all records?</span>
+        <img id="dialogFocus" style=" position:absolute ;left:140px; bottom:39px; height:64px; width:204px;" src="images/Focus_Pop_up_box.png">
+        <div class="dialogButton needTranslate_recent_dailog" style="left:140px; font-size:20px;">Done</div>
+        <div class="dialogButton needTranslate_recent_dailog" style="left:480px; font-size:20px;">Cancel</div>
+    </div>
+</body>
+</html>

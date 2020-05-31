@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="all.css"/>
+    <style>
+        .listSecondProperty {
+            text-align: right;
+        }
+
+        .showMenu
+        {
+            position:absolute;
+            overflow:hidden;
+            top:80px;
+            height:840px;
+            width:978px;
+        }
+		#listFocus/*设置二级菜单中焦点属性*/
+{
+	position:absolute;
+	width:972px;
+	height:98px;
+	top:75px;
+	left:3px;
+	display:none;
+	z-index:100;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-direction: alternate;
+	background:url(images/breathe/MENU_ITEM_FOCUS6.png) no-repeat 0 0;
+    -webkit-animation:num_ani 2700ms steps(1) infinite;
+	pointer-events:none;
+}
+@-webkit-keyframes num_ani{
+    0% {
+        background:url(images/breathe/MENU_ITEM_FOCUS5.png);
+    }
+    9% {
+       background:url(images/breathe/MENU_ITEM_FOCUS4.png);
+    }
+    18% {
+       background:url(images/breathe/MENU_ITEM_FOCUS3.png);
+    }
+    27% {
+       background:url(images/breathe/MENU_ITEM_FOCUS2.png);
+    }
+    36% {
+       background:url(images/breathe/MENU_ITEM_FOCUS1.png);
+    }
+    45%{
+       background:url(images/breathe/MENU_ITEM_FOCUS0.png);
+    }
+	54% {
+       background:url(images/breathe/MENU_ITEM_FOCUS1.png);
+    }
+	63% {
+       background:url(images/breathe/MENU_ITEM_FOCUS2.png);
+    }
+	72% {
+       background:url(images/breathe/MENU_ITEM_FOCUS3.png);
+    }
+	81% {
+       background:url(images/breathe/MENU_ITEM_FOCUS4.png);
+    }
+	90% {
+       background:url(images/breathe/MENU_ITEM_FOCUS5.png);
+    }
+	100% {
+       background:url(images/breathe/MENU_ITEM_FOCUS6.png);
+    }
+	}
+
+    </style>
+    <script type="text/javascript" src="soundSet.js"></script>
+</head>
+
+<body onload="init()" onunload="uninit()">
+
+<div id="sndMenuLeft"></div>
+
+<div id="sndMenuRight">
+
+    <div id="listUpRemind" style="display:none;">
+        <img src="images/arrow/U-Focus.png"/>
+    </div>
+    <div class="showMenu">
+        <ul id="menuUl" style=" position:absolute">
+            <!-- Sound preset -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+                <div id="soundPresetStatus" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+            <!-- 100Hz -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="100HZPgreContainer" class="listSecondProgress">
+                    <div id="100HZPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="100HZPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="100HZValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- 300Hz -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="300HZPgreContainer" class="listSecondProgress">
+                    <div id="300HZPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="300HZPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="300HZValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- 1KHz -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="1KHZPgreContainer" class="listSecondProgress">
+                    <div id="1KHZPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="1KHZPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="1KHZValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- 3KHz -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="3KHZPgreContainer" class="listSecondProgress">
+                    <div id="3KHZPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="3KHZPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="3KHZValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- 10KHz -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="10KHZPgreContainer" class="listSecondProgress">
+                    <div id="10KHZPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="10KHZPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="10KHZValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- Balance -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="balancePgreContainer" class="listSecondProgress">
+                    <div id="balancePgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="balancePgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="balanceValue" class="listThirdProperty"></lable>
+            </li>
+            <!-- Auto volume control -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="autoVolumeCtrlStatus" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+
+            <!-- SPDIF type -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="sPDIFTypeStatus" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+
+            <!-- SPDIF delay -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="sPDIFDelayPgreContainer" class="listSecondProgress">
+                    <div id="sPDIFDelayPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="sPDIFDelayPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="sPDIFDelayValue" class="listThirdProperty"></lable>
+            </li>
+
+            <!-- Audio delay -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="audioDelayPgreContainer" class="listSecondProgress">
+                    <div id="audioDelayPgreLeft" class="progressBarLeft"></div>
+                    <div class="progressBarCenter"></div>
+                    <div id="audioDelayPgreRight" class="progressBarRight"></div>
+                </div>
+                <lable id="audioDelayValue" class="listThirdProperty"></lable>
+            </li>
+
+            <!-- Spdif DDP -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="SpdifDDPCtrlStatus" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+
+            <!-- TV placement -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="audioScene" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+
+            <!-- Bass boost -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+
+                <div id="bassBoostModeStatus" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png"/>
+            </li>
+
+            <!-- Advanced settings -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+                <img class="listThirdPropertyImg" src="images/arrow/icon_Submenu_focus.png"/>
+            </li>
+
+			<!-- TTS settings -->
+            <li class="list">
+                <span class="listFirstProperty"></span>
+                <img class="listThirdPropertyImg" src="images/arrow/icon_Submenu_focus.png"/>
+            </li>
+
+            <!--&lt;!&ndash; TTS Switch  &ndash;&gt;-->
+            <!--<li class="list" >-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="Switch" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />&lt;!&ndash; 图片为：右箭头 &ndash;&gt;-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSLanguage  &ndash;&gt;-->
+            <!--<li class="list">-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="TTSLanguage" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSVoice &ndash;&gt;-->
+            <!--<li class="list">-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="TTSVoice" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSvolume &ndash;&gt;-->
+            <!--<li class="list" >-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="volumePgreContainer" class="listSecondProgress">-->
+                    <!--<div id="volumePgreLeft" class="progressBarLeft"></div>-->
+                    <!--<div class="progressBarCenter"></div>-->
+                    <!--<div id="volumePgreRight" class="progressBarRight"></div>-->
+                <!--</div>-->
+                <!--<lable id="volumeValue" class="listThirdProperty"></lable>-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSspeed &ndash;&gt;-->
+            <!--<li class="list" >-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="speed" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; focusSpeechAudioCtrl &ndash;&gt;-->
+            <!--<li class="list" >-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="focusSpeechAudioCtrlStatus" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSpitch &ndash;&gt;-->
+            <!--<li class="list" >-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="pitchPgreContainer" class="listSecondProgress">-->
+                    <!--<div id="pitchPgreLeft" class="progressBarLeft"></div>-->
+                    <!--<div class="progressBarCenter"></div>-->
+                    <!--<div id="pitchPgreRight" class="progressBarRight"></div>-->
+                <!--</div>-->
+                <!--<lable id="pitchValue" class="listThirdProperty"></lable>-->
+            <!--</li>-->
+
+            <!--&lt;!&ndash; TTSverbosity &ndash;&gt;-->
+            <!--<li class="list">-->
+                <!--<span class="listFirstProperty"></span>-->
+                <!--<div id="verbosity" class="listSecondProperty"></div>-->
+                <!--<img class="listThirdPropertyImg" src="images/arrow/focus_R-Focus.png" />-->
+            <!--</li>-->
+
+        </ul>
+    </div>
+    <div id="listDownRemind" style="top:1010px">
+        <img src="images/arrow/D-Focus.png"/>
+    </div>
+	 <div id="listFocus"></div>
+    <!--<img id="listFocus" src="images/Focus_Frame/Focus-1.png"/>-->
+</div>
+
+<!----------------------弹出列表框使用---------------------->
+<div id="listForm" class="fourthPopUpBox" style="left:986px;">
+    <img id="listUpImg" src="images/arrow/U-Focus.png"/>
+    <ul id="listBox">
+        <img id="listFormFocus" class="formFocus" src="images/Focus_Frame/Focus2.png"/>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <img id="listDownImg" src="images/arrow/D-Focus.png"/>
+</div>
+
+
+<!------------------------说明提示框---------------------------------------->
+<div id="promptWin">
+    <img class="promptWinLeft"/>
+
+    <div class="promptWinRight">
+        	<span id="promptContent">
+            </span>
+    </div>
+</div>
+
+
+<!----------------------进度条调整项--------------------------->
+<div id="adjustProgressBox">
+
+    <div id="adjustProgMinorUp">
+        <span class="adjustProgSpan"></span>
+    </div>
+
+    <div id="adjustProgMain">
+
+        <img src="images/SS_1_02_3_Activation.png" style="position:absolute;left:10px;"/>
+
+        <div class="adjustName">
+            <span class="adjustProgSpan" style="width:240px;"></span>
+        </div>
+
+        <div id="adjustProgBar">
+            <div class="progressBarLeft" style="width:250px;background:#f00;"></div>
+            <div class="progressBarCenter"></div>
+            <div class="progressBarRight" style="width:250px;"></div>
+        </div>
+
+        <div id="adjustProgValue">100</div>
+    </div>
+
+
+    <div id="adjustProgMinorDown">
+        <span class="adjustProgSpan"></span>
+    </div>
+
+</div>
+
+<!----------------------password弹出框使用---------------------->
+<div id="passForm" class="dialogForm" style=" height:300px;top:300px; display:none;">
+    <span class="dialogTitle"></span>
+
+    <div class="dialogInput" style="top:120px;">
+        <span class="dialogInputName"></span>
+
+        <div id="passContent" class="dialogInputContent" style="background:#333;"></div>
+    </div>
+    <div class="dialogInputFocus" style="top:120px;"></div>
+    <span id="passRemind" class="dialogRemind" style="top:190px;"></span>
+</div>
+</body>
+</html>

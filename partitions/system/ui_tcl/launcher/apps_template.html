@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" id="theme" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+<script type="text/javascript">
+
+function setFocusId(id)
+{
+	parent.FocusId(id)
+}
+
+document.onmousemove = function()
+{
+	parent.focus();
+}
+document.onclick = function()
+{
+	if(top.$("otherPage").src.indexOf("connectNetworkRemind.html")==-1)
+	{
+		parent.focus();
+	}
+}
+
+</script>
+</head>
+<body class="body_comm">
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+        <div id="appsPage" name="subwindow" class="window" style="display: block; left: 0px; top: 160px;">
+            <div class="appicon" id="apps_02" name="apps_02" data-up="0" data-down="apps_03" data-left="apps_01" data-right="apps_04" data-leftPage="apps_03" data-rightPage="apps_03" data-position="" data-focus_id="border_apps_02" style="top: 63px; left: 677px;" onclick="jumpToApp('youtube');setFocusId('apps_02');actionFive_Click('5','0_au_apps02_0','YouTube','')">
+                <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5" class='app_background'/>
+                <img src="images/YouTube.png?md5=2a7e0eaef1ff9696edf867091333bed4" class='app_foreground'/>
+                <img src="images/zhezhao.png" class="app_zhezhao">
+                <span class="elem_block_title">YouTube</span>
+            </div>
+            <div class="elem_border border" id="border_apps_02" style="top:38px; left: 652px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('youtube')"></div>
+        </div>
+    </div>
+</body>
+<script>
+updateZeasn();
+</script>
+<!-- other -->
+</html>
+

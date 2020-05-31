@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <title>tclBrowser</title> 
+  <!--tcl_toolbar start 1 -----------------> 
+  <link rel="stylesheet" type="text/css" href="./tclResources/tclBrowser.css" /> 
+  <script src="./tclResources/tclBrowser.js"></script> 
+  <script src="./tclResources/controlFocusMove.js"></script> 
+  <script src="./tclResources/dataAccess.js"></script> 
+  <!--tcl_toolbar end  1-----------------> 
+ </head> 
+ <body onload="Init()"> 
+  <!--tcl_toolbar start 2 -----------------------------------------------------> 
+  <div id="translation"> 
+   <script type="text/javascript" src="./tclResources/translation/English.js"></script> 
+  </div> 
+  <div id="toolbar" style="visibility: hidden"> 
+   <ul> 
+    <li class="toolbar_href"> <a id="a_Back" href="javascript:void(0);" class="not_move_up_left" style="padding:14px"><img id="img_back" src="./tclResources/img_1280/cannotBack.png" /></a></li> 
+    <li class="toolbar_href"> <a id="a_Forward" href="javascript:void(0);" class="not_move_up" style="padding:14px"><img id="img_next" src="./tclResources/img_1280/cannotNext.png" /></a></li> 
+    <li class="toolbar_href"> <a id="a_Reload" href="javascript:void(0);" class="not_move_up" style="padding:14px"><img id="img_refresh" src="./tclResources/img_1280/refresh.png" /></a></li> 
+    <li id="inputLi"><input type="text" id="toolbar_input" onfocus="showInputFocus()" onblur="unShowInputFocus()" value="Search or input website"/></li> 
+    <li id="toolbar_btn"> <a id="a_Go" href="javascript:void(0);" class="not_move_up"></a></li> 
+    <li class="toolbar_href"> <a id="a_Star" href="javascript:void(0);" class="not_move_up" style="padding:14px 13px"><img id="img_collect" src="./tclResources/img_1280/collect.png" width="34px" height="32px" /></a></li> 
+    <li class="toolbar_href"> <a id="a_Home" href="javascript:void(0);" class="not_move_up" style="padding:14px 17px"><img id="home" src="./tclResources/img_1280/bookmark.png" /></a></li> 
+    <li class="toolbar_href"> <a id="a_Menu" href="javascript:void(0);" class="not_move_up_right" style="padding:17px 14px"><img id="more" src="./tclResources/img_1280/more.png" /></a></li> 
+   </ul> 
+  </div> 
+  <!--inputPopupBox----start-->
+  <div id="inputPopupBox" style="visibility: hidden">
+  <ul id="inputPopupBox_ul">
+  	   <li><a href="javascript:void(0);" class="not_move_right_left" onClick="OpenUrl('www.baidu.com')"><span>www.baidu.com</span> - 百度一下，你就知道</a></li>
+  </ul>
+  </div>
+  <!--inputPopupBox----end-->
+   
+  <!--homePopupBox--start--> 
+  <div id="homePopupBox" style="visibility: hidden"> 
+   <div id="homePopupBox_top"> 
+    <ul> 
+     <li><a id="a_Favorite" class="not_move_left" href="javascript:void(0);">Favorite</a></li> 
+     <li style="margin-left:2px;"><a id="a_History" class="not_move_right" href="javascript:void(0);">History</a></li> 
+    </ul> 
+   </div> 
+   <div id="homePopupBox_edit" style="display:none;"> 
+    <ul> 
+     <li><a id="a_Edit_Lineup" class="not_move_right_left" href="javascript:void(0);"></a></li> 
+    </ul> 
+   </div> 
+   <div id="homePopupBox_no_available" style="display:none;"> 
+    <ul> 
+     <li>No available <span id="history_favorite">favorite</span> line-up, view a</li> 
+     <li>website and press <span style="vertical-align:sub;"><img src="tclResources/img_1280/collect1.png" /></span> to save.</li> 
+    </ul> 
+   </div> 
+   <ul id="homePopupBox_ul" style="overflow-y:auto;max-height:471px;" class="ellipsis"> 
+   </ul> 
+   <div id="homePopupBox_bottom"></div> 
+  </div> 
+  <!--homePopupBox--end--> 
+  <!--morePopupBox--> 
+  <div id="morePopupBox" style="visibility: hidden"> 
+   <ul> 
+    <li><a class="not_move_right_left" id="a_About" href="javascript:void(0);"></a></li> 
+    <li><a class="not_move_right_left" id="a_Pointer" href="javascript:void(0);"></a></li> 
+    <li><a class="not_move_right_down_left" id="a_Exit" href="javascript:void(0);"></a></li> 
+   </ul> 
+  </div> 
+  <!-- About popupBox start --> 
+  <div id="aboutPopupBox" style="visibility: hidden"> 
+   <div> 
+    <img src="./tclResources/img_1280/12.png" /> 
+    <span>T Browser</span> 
+    <ul> 
+     <li>A html5 browser based on webkit</li> 
+     <li>Version 1.0.0</li> 
+    </ul> 
+   </div> 
+  </div> 
+  <!--About popupBox end --> 
+  <!--tcl_toolbar end 2 ----------------------------------------------------->  
+  <img src="./tclResources/img_1280/loading.png" id="loading" style="visibility: hidden"/>
+ </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link type="text/css" href="init.css" rel="stylesheet" />
+<style type="text/css">
+#container
+{
+	top:250px;
+	left:100px;
+    right: 100px;
+}
+.initSelects li > span/*单选列表框的每一行中提示文字样式*/
+{
+    position:absolute;
+    left:70px;
+    right: 70px;
+    height:70px;
+    line-height:70px;
+    font-size:28px;
+    color:#b0b0b0;
+}
+.initSelects li > img/*单选列表框的每一行中标记图片样式*/
+{
+    position:absolute;
+    margin:20px 0px 20px 0px;
+    left:20px;
+    right: 20px;
+    width:30px;
+    height:30px;
+}
+.initSlectsFocus2/*单选列表框的焦点样式中原点样式*/
+{
+    position:absolute;
+    margin:20px 0px 20px 0px;
+    left:20px;
+    right: -580px;
+    width:30px;
+    height:30px;
+}
+.initSlectsFocus
+{
+	width:600px;
+}
+</style>
+</head>
+
+<body onload="init()"> 
+    <!--------------初始化主体部分------------------->
+    <div id="initDialog">
+    	<div id="subTitleForm">
+        	<img  src="../images/Title_bloc-Progress.png" style="width:300px;" /><img src="../images/Title_bloc-Bg.png" style="width:900px;" />
+            <span id="subTitleTag"  style="left:10px;"></span>
+        </div>
+        
+        
+        <span id="remind" class="leftRemind" style="top:200px;"></span>
+        <ul id="container" class="initSelects">
+          <div id="initListFormFocus">
+          	<img class="initSlectsFocus2" src="../images/option/Radio_3.PNG"/>
+          	<img class="initSlectsFocus" src="../images/Focus_Frame/Focus.png">
+          </div>
+          <li >
+          	<img src="../images/option/Radio_2.PNG" />
+            <span></span>
+          </li>
+          <li >
+          	<img src="../images/option/Radio_2.PNG" />
+            <span ></span>
+          </li>
+          <li >
+          	<img src="../images/option/Radio_2.PNG" />
+            <span ></span>
+          </li>
+        </ul>
+        
+        
+       <div id="back" class="hotkey" style="left:100px;" >
+          	<img src="../images/icon-Back.png"/>
+            <span></span>
+        </div>
+        <div id="select" class="hotkey" style="left:592px;" >
+          	<img src="../images/icon-Select_1.png"/>
+            <span></span>
+        </div>
+        <div id="next" class="hotkey" style="right:100px;" >
+          	<img src="../images/icon-Next.png"/>
+            <span></span>
+        </div>
+    </div>
+<script type="text/javascript" src="initWirelessType.js"></script>    
+</body>
+</html>

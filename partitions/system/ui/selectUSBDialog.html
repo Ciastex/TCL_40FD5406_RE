@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#regionTips
+{
+	position:absolute;
+	height:410px;
+	width:830px;
+	top:334px; 
+	left:544px; 
+	background:url(images/Bg-Pop_up_box-04.png);
+	display:block;
+	z-index:200;
+}
+#dialogName
+{
+	position:absolute;
+	width:710px;
+	top:30px;
+	color:#b0b0b0; 
+	font-size:32px;
+	left:70px;
+	/*text-align:left;*/
+}
+.showlist
+{
+    position:relative;
+    width:830px;
+    height:254px;
+    top:80px;
+}
+.popList
+{
+    position:relative;
+    width:830px;
+    height:84px;
+    top:12px;
+    list-style-type:none;/*列表去掉前面的点*/
+}
+.popListFirPro
+{
+    position:absolute;
+    left:40px;
+    right: 80px;
+    top:14px;
+    height:40px;
+    line-height:20px;
+    width:830px;
+    font-size:30px;
+    padding-top:10px;
+    /*text-align:left;*/
+    color:#fff;
+    overflow:hidden;white-space: nowrap;text-overflow: ellipsis;
+
+    white-space: nowrap;
+    /*overflow: hidden;*/
+
+    /* Safari and Chrome
+    overflow-x:-webkit-marquee;*/
+    -webkit-marquee-direction: backwards;
+    -webkit-marquee-style: scroll;
+    -webkit-marquee-speed: fast;
+    -webkit-marquee-increment: small;
+    -webkit-marquee-repetition: infinite;
+
+    /* W3C
+    overflow-x: marquee-line;*/
+    marquee-direction: forward;
+    marquee-style: scroll;
+    marquee-speed: fast;
+    marquee-play-count: infinite;
+}
+</style>
+<body onload="init()">
+
+<div id="regionTips">
+   		<span id="dialogName"></span>
+       <img id="ScrollBar" src="images/Scroll_bar-Vertical.png" style="position:absolute;width:10px;left:790px;top:115px;"/>
+        <div class="showlist">
+            <ul id="menuUl">
+                <li class="popList" >
+                    <span class="popListFirPro"></span>
+                </li>
+                <li class="popList" >
+                    <span class="popListFirPro"></span>
+                </li>
+                <li class="popList" >
+                    <span class="popListFirPro"></span>
+                </li><!--
+                <li class="popList" >
+                    <span class="popListFirPro"></span>
+                </li>-->
+            </ul>
+            <img id="cancelRemindFocus" style=" position:absolute ;left:40px; right:40px; top:0px; height:100px; width:400px;" src="images/OP-01-1_Focus.png">
+        </div>
+</div>
+<script>
+document.onsystemevent = notifyProcess;//top.systemEventProc;
+document.onkeydown = keyproc;
+var multimedia              = top.g_media;
+var pvr                     = top.g_pvr;
+var usbList                 = "";
+var spans                   = "";
+var usbListLength           = 0;
+var SUB_MENU_START          = 80;
+var SUB_MENU_STEP           = 84;
+var positionV               = 0;
+var position_on_UsbList     = 0;
+var offset                  = 0;
+//滚动条使用
+var SCROLL_START_TOP		= 115;			//滚动条起始的top位置
+var SCROLL_MAX_HEIGHT		= 280;			//滚动条可以滚动范围长度
+var DISPLAY_COUNT			= 3;			//每一次最多可以显示的行数
+function $(id)
+{
+    return document.getElementById(id);
+}
+function init()
+{
+    top.initTextDirection(window);
+	top.g_setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	$("dialogName").innerHTML="Please select one USB drive:";
+    spans = $("menuUl").getElementsByTagName("span");
+    initValue();
+	$("cancelRemindFocus").style.left="40px";
+}
+function notifyProcess(e)
+{
+    var msg = e.which;
+    var value = e.modifiers;//消息携带的参数
+    switch(msg)
+    {
+        case top.E_PVR_DISK_UNPLUG:
+        case top.E_MEDIA_USB_REMOVE_OTHER:
+            top.jumpPage();
+            break;
+        default:
+            top.systemEventProc(e);
+            break;
+    }
+}
+var event = new Object();
+function keyproc(evt)
+{
+	var ret = true;
+	var keycode = evt.which;
+	switch(keycode)
+	{
+		case top.VK_ENTER:
+			toOK();
+			break ;
+		case top.VK_UP:
+            toUp();
+            break;
+		case top.VK_DOWN:
+            toDown();
+			break;
+        case top.VK_BACK:
+        case top.VK_EXIT:
+            top.jumpPage();
+            break;
+		case top.VK_POWER://power
+			top.keyDownProcess(evt);
+		 break ;
+	}
+}
+function toUp()
+{
+    if (usbListLength <= DISPLAY_COUNT)
+    {
+        positionV = positionV == 0 ? usbListLength - 1 : positionV - 1;
+    }
+    else
+    {
+        if(positionV <= 0)
+        {
+            if(offset > 0)
+            {
+                offset--;
+                for(var i = 0; i < 3; i++)
+                {
+                    spans[i].innerHTML = usbList[offset + i].name;
+                }
+            }
+            else
+            {
+                positionV = 2;
+                offset = usbListLength - 3;
+                for(var i = 0; i < 3; i++)
+                {
+                    spans[i].innerHTML = usbList[offset + i].name;
+                }
+            }
+            $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/usbListLength,10) + "px";
+        }
+        else
+        {
+            positionV = positionV - 1;
+        }
+    }
+    $("cancelRemindFocus").style.top=positionV*SUB_MENU_STEP+"px";
+}
+function toDown()
+{
+    if (usbListLength <= DISPLAY_COUNT)
+    {
+        positionV = positionV == (usbListLength - 1)? 0 : positionV + 1;
+    }
+    else
+    {
+        if(positionV >= 2)
+        {
+            if((offset + positionV) >= (usbListLength - 1))
+            {
+                offset = 0;
+                positionV =0;
+                for(var i = 0; i < 3; i++)
+                {
+                    spans[i].innerHTML = usbList[offset + i].name;
+                }
+            }
+            else
+            {
+                offset++;
+                for(var i = 0; i < 3; i++)
+                {
+                    spans[i].innerHTML = usbList[offset + i].name;
+                }
+            }
+            $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/usbListLength,10) + "px";
+        }
+        else
+        {
+            positionV = positionV + 1;
+        }
+    }
+    $("cancelRemindFocus").style.top=positionV*SUB_MENU_STEP+"px";
+}
+function initValue()
+{
+    usbList = multimedia.getDiskListInfo();
+    usbListLength = usbList.length;
+    console.log("huangzhming test initValue usbListLength = " + usbListLength);
+    fixFocus();
+    for (var i = 0;i < usbListLength;i++)
+    {
+        console.log("huangzhming test initValue usbList["+i+"].name = " + usbList[i].name);
+        console.log("huangzhming test initValue usbList["+i+"].path = " + usbList[i].path);
+    }
+}
+
+function toOK()
+{
+    if (usbListLength <= 3)
+    {
+        position_on_UsbList = positionV;
+    }
+    else
+    {
+        position_on_UsbList = positionV + offset;
+    }
+    console.log("huangzhming test toOK() position_on_UsbList =  " + position_on_UsbList);
+    pvr.setDisk(usbList[position_on_UsbList].name,usbList[position_on_UsbList].path);
+    top.$('main').src = "pvr/Pvr.html?menu";
+    top.$("main").style.display = "block";
+    top.requestFocus(top.main, 1);
+    top.setFrameFocusPage("main");
+    var str = pvr.getDiskInfo();
+    console.log("huangzhming test toOK() name =  " + str.split(",")[0]);
+    console.log("huangzhming test toOK() path =  " + str.split(",")[1]);
+}
+
+
+function fixFocus()
+{
+    if(usbListLength <= 3)
+    {
+        positionV = position_on_UsbList;
+        for(var i = 0; i < usbListLength; i++)
+        {
+            spans[i].innerHTML=usbList[i].name;
+        }
+        $("cancelRemindFocus").style.top = positionV*SUB_MENU_STEP + "px";
+        $("ScrollBar").style.display = 'none';
+    }
+    else
+    {
+        if(position_on_UsbList >= (usbListLength - 3))//当前语言位置排在尾端
+        {
+            offset = usbListLength - 3;
+            positionV = position_on_UsbList - offset;
+            for(var i = 0; i < 3; i++)
+            {
+                spans[i].innerHTML=usbList[offset + i].name;
+            }
+        }
+        else
+        {
+            positionV = 0;
+            offset = position_on_UsbList;
+            for(var i = 0; i < 3; i++)
+            {
+                spans[i].innerHTML=usbList[offset + i].name;
+            }
+        }
+        $("cancelRemindFocus").style.top = positionV*SUB_MENU_STEP + "px";
+        $("ScrollBar").style.top = SCROLL_START_TOP + parseInt(SCROLL_MAX_HEIGHT*offset/usbListLength,10) + "px";
+        $("ScrollBar").style.height = parseInt(SCROLL_MAX_HEIGHT*DISPLAY_COUNT/usbListLength,10) + "px";
+    }
+}
+</script>
+</body>
+</html>

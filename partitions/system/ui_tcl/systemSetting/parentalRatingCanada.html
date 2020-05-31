@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../all.css">
+    <script type="text/javascript" src="parentalRatingCanada.js"></script>
+    <style type="text/css">
+        .listSecondProperty
+        {
+            left:306px;
+            text-align:right;
+        }
+        .liListName
+        {
+            position:absolute;
+            left:0px;
+            top:0px;
+            height:54px;
+            width:100px;
+            text-align:left
+        }
+        .liListSubName
+        {
+            position:absolute;
+            left:100px;
+            top:0px;
+            height:54px;
+            width:100px;
+            text-align:center
+        }
+        .fourthPopUpBox/*设置菜单弹出框边框样式*/
+        {
+            position: absolute;
+            background: #000;
+            width: 250px;
+            /*height: 1072px;*/
+            border-bottom:4px solid #1b1b1b;
+            border-top:4px solid #1b1b1b;
+            border-right:4px solid #1b1b1b;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding: 0px;
+            list-style-type: none;
+            opacity: 0.92;
+            overflow: hidden;
+            display:none;
+        }
+
+        #listBox/*设置菜单弹出框内容列表容器样式*/
+        {
+            position:relative;
+            width:250px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #listBox li/*设置菜单弹出框内容列表每一个元素样式*/
+        {
+            position:relative;
+            height:70px;
+            width:200px;
+            left:25px;
+            line-height:70px;
+            margin:10px 0px 10px 0px;
+            color:white;
+            text-align:left;
+            /*overflow:hidden;*/
+            white-space:nowrap;
+        }
+        .formFocus/*下拉选项弹出框的焦点样式*/
+        {
+            position: absolute;
+            width:108px;
+            pointer-events:none;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+<div id="fifthMenuLeft"></div>
+<div id="fifthMenuRight" >
+    <img id="fifthListFocus" src="../images/Focus_Frame/Focus-1.png">s
+    <div class="titleName">
+        <span id="titleNameSpan" style="top:60px; position:absolute"></span>
+    </div>
+    <div id="listUpRemind" style="display:none; top:120px;">
+        <img src="../images/arrow/U-Focus.png"/>
+    </div>
+    <div class="showMenu">
+        <ul style="position:absolute" id="menuUl">
+            <li>
+            </li>
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div id="ageRating" class="listSecondProperty"></div>
+                <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+            </li>
+            <li class="list" >
+                <span class="listFirstProperty"></span>
+                <div id="contentRating" class="listSecondProperty"></div>
+                <lable class="listThirdPropertyImg"><img src="../images/arrow/focus_R-Focus.png" /></lable>
+            </li>
+        </ul>
+    </div>
+    <div id="listDownRemind" style="top:1010px;display:none;">
+        <img src="../images/arrow/D-Focus.png"/>
+    </div>
+</div>
+
+<!----------------------弹出列表框使用---------------------->
+<div id="listForm" class="fourthPopUpBox">
+
+    <ul id="listBox">
+        <img id="listFormFocus" class="formFocus" src="../images/1.png">
+        <li >
+            <div>
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+        <li >
+            <div >
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+        <li >
+            <div >
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+        <li >
+            <div >
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+        <li >
+            <div >
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+        <li >
+            <div >
+                <span class="liListName">ALL</span>
+                <img  style = "position:absolute;left:110px;top:25px;"src="../images/2.png"/>
+                <span class="liListSubName">ALL</span>
+            </div>
+        </li>
+
+    </ul>
+</div>
+</body>
+</html>

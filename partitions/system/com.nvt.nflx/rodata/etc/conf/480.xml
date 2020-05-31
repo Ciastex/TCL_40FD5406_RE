@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <screen_width>853</screen_width>
+    <screen_height>480</screen_height>
+    <debug_flags>testScreenCoordinateScale</debug_flags>
+    <!-- <inject_js>http://localcontrol.netflix.com/js/inject/1080_boxshots.js</inject_js> -->
+  </config_data>
+</config_root>

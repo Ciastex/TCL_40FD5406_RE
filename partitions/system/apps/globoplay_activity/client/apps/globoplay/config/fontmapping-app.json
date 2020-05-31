@@ -1,0 +1,30 @@
+{  
+    "faces":[
+        {  
+            "family":"open-sans",
+            "src":"resource/font/OpenSans-Regular.ttf"
+        },
+        {  
+            "family":"open-sans",
+            "src":"resource/font/OpenSans-Bold.ttf",
+            "weight":"bold"
+        },
+        {  
+            "family":"open-sans-semibold",
+            "src":"resource/font/OpenSans-Semibold.ttf"
+        },
+        {  
+            "family":"GloboPlay",
+            "src":"resource/font/globoplay-tfsgka.ttf"
+        },
+        {  
+            "family":"Globo",
+            "src": "resource/font/URWGeometric-Regular.ttf"            
+        },
+        {  
+            "family":"Globo",
+            "src":"resource/font/URWGeometric-Bold.ttf",
+            "weight":"bold"
+        }
+    ]
+}

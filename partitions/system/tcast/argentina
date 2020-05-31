@@ -1,0 +1,41 @@
+[{
+	"name": "YouTube",
+	"icon": "http://s3.tcllauncher.com/html5/images/YouTube.png",
+	"issysapp": "1"
+},
+{
+	"name": "Qubit TV",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_qubit.png",
+	"issysapp": "1"
+},
+{
+	"name": "Telediario",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_telediario.png",
+	"issysapp": "1"
+},
+{
+	"name": "Crackle",
+	"icon": "http://s3.tcllauncher.com/html5/images/Crackle.png",
+	"issysapp": "1"
+},
+{
+	"name": "Baeble Music",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_baeblemusic.png",
+	"issysapp": "1"
+},
+{
+	"name": "Lanacion",
+	"icon": "http://s3.tcllauncher.com/html5/images/LaNacion.png",
+	"issysapp": "1"
+},
+{
+	"name": "Deezer",
+	"icon": "http://s3.tcllauncher.com/html5/images/DEEZER.png",
+			 http://s3.tcllauncher.com/html5/DEEZER.png
+	"issysapp": "1"
+},
+{
+	"name": "T-Browser",
+	"icon": "http://s3.tcllauncher.com/html5/images/T-Browser.png",
+	"issysapp": "1"
+}]

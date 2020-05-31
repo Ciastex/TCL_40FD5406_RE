@@ -1,0 +1,356 @@
+body{
+    height: 1080px;
+    width: 1920px;
+    overflow: hidden;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.body_comm
+{
+    margin:0px;
+    background:url(images/theme/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c) no-repeat;
+}
+.items_wrap{
+    margin-top: 44px;
+    overflow: hidden;
+}
+.items_content li{
+    list-style: none;
+    float: left;
+    margin-right: 23px;
+    margin-bottom: 80px;
+}
+
+
+.clearfix:after{
+    content: '';
+    display:block;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+
+
+
+
+.PageHeader{
+    padding-left: 60px;
+    padding-top: 73px;
+    height:214px;
+    box-sizing: border-box;
+
+}
+
+.PageHeader>div{
+    display: inline-block;
+}
+
+/*标题：最近应用*/
+.pageTitle{
+    vertical-align: text-top;
+    float: left;
+}
+.pageTitle>span{
+    font-size: 68px;
+    color: #fff;
+}
+
+
+/*数量：共20个应用*/
+.countTip{
+    font-size: 28px;
+    color: #fff;
+    vertical-align: text-top;
+    margin-top: 54px;
+    margin-left: 70px;
+    font-weight: lighter;
+    float: left;
+}
+.countTip .number{
+    font-size: 25px;
+    font-weight: normal;
+}
+
+
+.tools{
+    float: right;
+    font-size: 25px;
+    color: #fff;
+    margin-right: 80px;
+    margin-top: 14px;
+    font-weight: lighter;
+}
+.tools .tools_name{
+    color: red;
+    margin-right: 22px;
+}
+
+
+/*内容区域*/
+.pageMain{
+    height: 866px;
+    padding-left: 77px;
+    overflow: hidden;
+}
+.pageMain .pageMain_line{
+    height: 90%;
+    margin-left: 40px;
+    position: absolute;
+    width: 2px;
+}
+
+
+.items{
+    position: relative;
+    margin-bottom: 22px;
+    transition: all 0.3s;
+}
+
+.items .items_title{
+    color: #fff;
+    height: 56px;
+}
+.items .items_title span:first-child{
+    font-size: 40px;
+    font-weight: normal;
+}
+.items .items_title span{
+    font-size: 28px;
+    font-weight: lighter;
+}
+
+
+/*内容*/
+.items_content{
+    width: 1746px;
+    float: right;
+    height: auto;
+    min-height: 310px;
+    margin-top: 0px;
+    transition: all 0.3s;
+}
+
+.itemDiv{
+    position: relative;
+    width: 230px;
+    height: 230px;
+}
+
+.itemBackPic{
+    position: absolute;
+    top:0px;
+    width: 228px;
+    height: 228px;
+    transition: all 0.3s;
+}
+
+/*   灰色背景  */
+.itemBackPic_img{
+    width: 228px;
+    height: 228px;
+}
+
+
+/*   应用图标  */
+.itemPic_img{
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left: -51px;
+    margin-top: -51px;
+    width: 102px;
+    height: 102px;
+}
+
+.borderItem_img{
+    position: absolute;
+    top: 0px;
+    width: 244px;
+    height: 248px;
+    margin-left: -9px;
+    margin-top: -9px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.itemActive .borderItem_img{
+    visibility: visible;
+    opacity: 1;
+}
+
+/*  应用名  */
+.itemName{
+    position: absolute;
+    top:246px;
+}
+
+.itemName_span{
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+}
+
+
+/*焦点 254*/
+.animationBorder{
+    position: absolute;
+    top: 305px;
+    left: 164px;
+    width: 248px;
+    height: 248px;
+    transition: all 0.3s;
+
+}
+.border_img{
+    width: 248px;
+    height: 248px;
+}
+
+
+
+/*焦点里面的删除 焦点红色*/
+.delete_img{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width: 222px;
+    height:56px;
+
+    margin-left: -111px;
+    margin-top: -51px;
+}
+.deleteDiv{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 248px;
+    height: 248px;
+    background: rgba(0, 0, 0, 0.7);
+}
+/*删除提示*/
+.delete_tip{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width: 222px;
+    height:112px;
+
+    margin-left: -111px;
+    margin-top: -56px;
+}
+.delete_tip span{
+    display: block;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+    margin-top: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*最下方的遮罩*/
+.shade{
+    position: absolute;
+    top:952px;
+    width: 1920px;
+}
+.shade_img{
+    width: 100%;
+}
+/*
+#deleteTips
+{
+  position:absolute;
+  height:410px;
+  width:781px;
+  top:334px; 
+  left:544px; 
+  background:#393a3d;
+  display:none;
+  z-index:2000;
+}
+
+#deleteContent
+{
+  position:absolute;
+  width:689px;
+  top:125px;
+  color:#c5c7d0; 
+  font-size:32px;
+  left:46px; 
+  text-align:left;
+  line-height:48px;
+}
+
+#deleteTips .dialogButton
+{
+    position:absolute;
+    width:390px;
+    height:65px;
+    bottom:0px;
+    padding-top:30px;
+    font-size:34px;
+    color:#FFFFFF;
+    text-align:center;
+    background:#212025;
+}*/
+
+#deleteTips
+{
+    position:absolute;
+    height:410px;
+    width:830px;
+    top:334px;
+    left:544px;
+    background:url(../images/Bg-Pop_up_box-04.png);
+    display:none;
+    z-index:2000;
+}
+
+#deleteContent
+{
+    position:absolute;
+    width:710px;
+    top:125px;
+    color:#b0b0b0;
+    font-size:28px;
+    left:60px;
+    text-align:left;
+    line-height:48px;
+}
+#dialogName
+{
+    position:absolute;
+    width:710px;
+    top:30px;
+    color:#b0b0b0;
+    font-size:32px;
+    left:60px;
+    text-align:left;
+}
+.dialogButton/*对话框中的按钮样式*/
+{
+    position:absolute;
+    width:204px;
+    height:44px;
+    bottom:40px;
+    padding-top:20px;
+    font-size:25px;
+    font-weight:bold;
+    color:#fff;
+    text-align:center;
+    background:url(../images/Focus_Pop_up_box_no.png);
+}
+
+
+
+

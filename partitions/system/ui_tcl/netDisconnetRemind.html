@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title> Net Disconnect Remind </title>
+<style>
+    body
+    {
+        background: transparent;
+    }
+    #remind
+    {
+        position: absolute;
+        left: 710px;
+        top: 440px;
+        width: 500px;
+        height: 200px;
+        line-height:200px;
+        background: rgba(0,0,0,0.8);
+        border:solid 4px #1b1b1b;
+        color:#fff;
+        font-size:28px;
+        font-weight:bold;
+        text-align: center;
+        display: block;
+    }
+</style>
+
+<script>
+    var remindShowTimer = 0;
+    function init()
+    {
+        top.initTextDirection(window);
+        top.isShowOnce = 1;
+        if(remindShowTimer!=0)
+        {
+            clearTimeout(remindShowTimer);
+            remindShowTimer=0;
+        }
+        remindShowTimer = setTimeout("uninit()",10*1000);
+    }
+    function uninit()
+    {
+        top.$("otherPage").style.display = "none";
+        top.$("otherPage").src = "";
+        top.requestFocus(top.main, 1);
+        top.setFrameFocusPage("main");
+    }
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+</script>
+</head>
+
+<body onload="init()" >
+<div id="remind">Network Disconnet!!</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.watch-title:focus{
+  outline:auto 0px #FF8D1A;   
+}
+.watch-title:focus .watch-icon,.watch-title:focus .watch-page-link {
+    display: block;
+}

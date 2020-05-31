@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+  <config_data>
+    <dump>false</dump>
+    <loglevel>error</loglevel>
+    <!-- <write_data_path>$HOME/.netflix/ttml/</write_data_path> -->
+    <error_path>/js/ttml/ttml.js</error_path>
+    <boot_url>http://localcontrol.netflix.com/js/ttml/ttml.js</boot_url>
+    <splash_screen>false</splash_screen>
+  </config_data>
+</config_root>

@@ -1,0 +1,1041 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<fixer>
+	<element>
+		<notation>解决NetRange首页上半部分有白色边框的问题</notation>
+		<name>fix portal white blank</name>
+		<whiteUrl>
+			<url>portal.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_fix_portal_blank.js</file>
+	</element>
+	<element>
+		<notation>解决NetRange的all app页面中在最右端按右键无法切换页的问题</notation>
+		<name>inject right key code</name>
+		<whiteUrl>
+		</whiteUrl>
+		<blackUrl>
+            		<url>youtube.com</url>
+            		<url>appspot.com</url>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_netrange_keycode.js</file>
+	</element>
+	<element>
+		<notation>解决应用facebook在帮助中心里不显示选择框的问题</notation>
+		<name>inject remove tabIndex</name>
+		<whiteUrl>
+			<url>https://m.facebook.com/help/?refid=8</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_remove_tabIndex.js</file>
+	</element>
+    <element>
+		<notation> noble kids 不响应遥控器</notation>
+		<name>noble kids bug for keys</name>
+		<whiteUrl>
+			<url>www.tvapp.com.ar/kids/index.html</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_noblexkids.js</file>
+	</element>
+	<element>
+		<notation> grtv bug</notation>
+		<name>grtv bug for yellow keys</name>
+		<whiteUrl>
+			<url>http://www.gamereactor.eu/smarttvapps/sony</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_grtv.js</file>
+	</element>
+	<element>
+		<notation> back bug</notation>
+		<name>bug for bac keys</name>
+		<whiteUrl>
+			<url>pk096-bayerntm.tvbuddy.com/sta</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_changeback.js</file>
+	</element>
+	<element>
+		<notation> eltrecetv bug</notation>
+		<name>eltrecetv bug for ok keys</name>
+		<whiteUrl>
+			<url>http://www.eltrecetv.com.ar/tv/noblex/eltrecetv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_eltrecetv.js</file>
+	</element>
+	<element>
+		<notation>解决Netrange焦点移出国家选项列表的问题</notation>
+		<name>inject country focus move</name>
+		<whiteUrl>
+			<url>http://a8ba7ed41c9e355780639f3ff05c2724.002d734450b3be6f5d0cb4939aa0a4bc.com/portal.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_cntry_focus_move.js</file>
+	</element>
+	<element>
+		<notation>解决应用hitMusicOnly无法退出</notation>
+		<name>inject remove tabIndex</name>
+		<whiteUrl>
+			<url>http://www.nrjnet.de/tv/netrange/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_hitMusicOnly.js</file>
+	</element>
+	<element>
+		<notation>解决页面未设置body的margin属性导致出现白边框</notation>
+		<name>inject margin</name>
+		<whiteUrl>
+			<url>http://alms.app.nrmmh.tv/live/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_alms.js</file>
+	</element>
+	<element>
+		<notation>解决netrange search的输入框光标问题</notation>
+		<name>inject netrange search</name>
+		<whiteUrl>
+			<url>http://search2a3s1d3.temp.nrmmh.tv/sharp/www/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_netrange_search.js</file>
+	</element>
+	<element>
+		<notation>解决yahoo打开死机问题</notation>
+		<name>inject margin</name>
+		<whiteUrl>
+			<url>yahoo.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_yahoo.js</file>
+	</element>
+	<element>
+		<notation>解决terra打开死机问题</notation>
+		<name>inject margin</name>
+		<whiteUrl>
+			<url>terra.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_terra.js</file>
+	</element>
+	<element>
+		<notation>解决Search、Service输入框未阴影突出的问题</notation>
+		<name>inject input button backgroud color</name>
+		<whiteUrl>
+			<url>http://a8ba7ed41c9e355780639f3ff05c2724.002d734450b3be6f5d0cb4939aa0a4bc.com/portal.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_inputbtn_backgroudcolor.css</file>
+	</element>
+	<element>
+		<notation>解决app freshnews 焦点框过大的问题</notation>
+		<name>inject netrange remove_focus_box</name>
+		<whiteUrl>
+			<url>http://netrange_app.nrmmh.tv/</url>
+		    <url>nettv.cinetrailer.tv/</url>
+		    <url>www.euronews.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_remove_focus_border.css</file>
+	</element>
+		<element>
+		<notation>shurufa chenhui</notation>
+		<name>inject file</name>
+		<whiteUrl>
+			<url>http://apps.tvstore.opera.com/video_application</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_changestyle.js</file>
+	</element>
+   	<element>
+	        <notation>增加js小键盘功能</notation>
+	        <name>inject js input method</name>
+	        <whiteUrl>
+	        </whiteUrl>
+	        <blackUrl>
+			<url>http://picasa.app.nrmmh.tv</url>
+			<url>www.dailymotion.com</url>
+			<url>http://tv.deezer.com/smarttv/oaquaexeex4fu2waereeseicheiGhopa9wei6aes/netrange</url>
+			<url>http://apps.fractalmedia.es/netrange/berni</url>			
+			<url>http://www.viewster.tv/Viewster_v5/index.html</url>	
+			<url>http://aircast.app.nrmmh.tv/</url>
+			<url>/taxonomy/term/284</url>
+			<url>foxxum.com</url>
+			<url>toongoggles.com</url>
+			<url>http://www.redkaraoke.com/tv</url>
+			<url>tclime=disabled</url>
+			<url>http://brasil.fxmconnect.com/babidiboo/app/</url>
+			<url>http://1067564395.a.fxmconnect.com/?app=babi</url>
+			<url>6263467844-5495564812.am-live.fxmconnect.com</url>
+			<url>http://vizio.tvapps.hungama.com/</url>
+			<url>http://pk123-ran.tvbuddy.com/STA_V11/index.NetTV.html</url>
+			<url>http://tv2sony.clarovideo.net</url>
+			<url>http://www.gamereactor.eu/smarttvapps/sony</url>	
+			<url>http://tv2hisense.clarovideo.net/381V2/FRONTEND/</url>	
+			<url>http://smartp.qubit.tv/</url>			
+			<url>http://bigstarlatino.com</url>				
+			<url>http://tcllooke.ottvs.com.br</url>
+			<url>http://egmont.minbio.final.24imedia.tv/</url>
+			<url>http://nettv.joomeo.com</url>
+	        </blackUrl>
+	        <position>bottom</position>
+	        <type>js</type>
+	        <file>js_tclime_keyboard_720.js</file>
+    	</element>
+	<element>
+		<notation>解决browsn app 输入框字符无法移动的问题</notation>
+		<name>inject netrange for browsn app</name>
+		<whiteUrl>
+			<url>http://browsn.app.nrmmh.tv/live/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_inject_browsn_app.js</file>
+	</element>
+	<element>
+		<notation>nmh Twitter应用浏览器不处理返回键</notation>
+		<name>no do VK_BACK</name>
+		<whiteUrl>
+			<url>http://sharp.tw.nrmmh.tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_nodoback.js</file>
+	</element>
+	<element>
+		<notation>nmh主页浏览器处理返回键</notation>
+		<name>do VK_BACK</name>
+		<whiteUrl>
+			<url>5ee0c98f1dcfd0ea1049c70a166bb78b.002d734450b3be6f5d0cb4939aa0a4bc.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_doback.js</file>
+	</element>
+	<element>
+		<notation>mmh主页浏览不缓存js文件</notation>
+		<name>js close cache</name>
+		<whiteUrl>
+			<url>a8ba7ed41c9e355780639f3ff05c2724.002d734450b3be6f5d0cb4939aa0a4bc.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_close_cache_for_format.js</file>
+	</element>
+	<element>
+		<notation>dash_player页面不缓存mp4</notation>
+		<name>js close cache mp4</name>
+		<whiteUrl>
+			<url>dash-player.html</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_close_cache_for_format_mp4.js</file>
+	</element>
+	<element>
+		<notation>除mmh主页其他网页浏览时打开cache缓存</notation>
+		<name>js open cache</name>
+		<whiteUrl>
+		</whiteUrl>
+		<blackUrl>
+			<url>a8ba7ed41c9e355780639f3ff05c2724.002d734450b3be6f5d0cb4939aa0a4bc.com</url>
+			<url>dash-player.html</url>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_open_cache_for_format.js</file>
+	</element>
+	<element>
+		<notation>设置facebook视频播放全屏</notation>
+		<name>facebook full screen</name>
+		<whiteUrl>
+		    <url>m.facebook.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_facebook_setenv_1.js</file>
+	</element>
+	<element>
+		<notation>返回nmh主页和browser将facebook env设为0</notation>
+		<name>set facebook env 0</name>
+		<whiteUrl>
+			<url>5ee0c98f1dcfd0ea1049c70a166bb78b.002d734450b3be6f5d0cb4939aa0a4bc.com</url>
+			<url>http://browsn.app.nrmmh.tv</url>
+			<url>http://118.194.161.119:8080/huan123_tcl/skin/home2015List.action</url>
+			<url>http://103.235.237.119:8080/huan123_tcl/skin/home2015List.action</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_facebook_setenv_0.js</file>
+	</element>
+	<element>
+		<notation>实现opera对象，Golive主页退出使用</notation>
+		<name>js opera object</name>
+		<whiteUrl>
+			<url>http://tv.gole.tv/?clientType=THOM-EU-MT56-S2</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_opera_sendPlatformMessage.js</file>
+	</element>
+	<element>
+		<notation>防止获取图片信息出错，成功进入deezer页面</notation>
+		<name>js deezer</name>
+		<whiteUrl>
+			<url>tv.deezer.com/smarttv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_deezer.js</file>
+	</element>
+	<element>
+		<notation>mmh中jukeBo应用无法播放音乐问题</notation>
+		<name>jukeBo can't play music</name>
+		<whiteUrl>
+			<url>http://www.jukebox.fr/tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_mmh_jukebo.js</file>
+	</element>
+	<element>
+		<notation>mmh中jukeBo应用无法播放音乐问题</notation>
+		<name>jukeBo can't play music</name>
+		<whiteUrl>
+			<url>http://www.jukebox.fr/tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_mmh_jukebo_btm.js</file>
+	</element>	
+	<element>
+		<notation>radio line的字排版问题</notation>
+		<name>radio</name>
+		<whiteUrl>
+			<url>http://zeasn.radioline.co/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_set_div_width.js</file>
+	</element>	
+	<element>
+		<notation>某些页面下需要显示焦点框和响应焦点默认移动</notation>
+		<name>youtube inject</name>
+		<whiteUrl>
+			<url>dash-player.html</url>
+			<url>portal.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_add_focus_box.js</file>
+	</element>
+	<element>
+		<notation>某些页面下不显示焦点框和不响应焦点默认移动</notation>
+		<name>chili inject</name>
+		<whiteUrl>
+			<url>https://netrange.chili.tv/</url>
+			<url>https://www.youtube.com/tv</url>
+			<url>http://www.marketwall.com/</url>
+			<url>webaudio.html</url>
+			<url>http://tv.deezer.com/smarttv/</url>
+			<url>http://apps.fractalmedia.es/netrange/berni</url>
+			<url>https://premiumonline.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://play-be.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://www.infinitytv.it/tsplay/index.html</url>
+            <url>http://nettv.kinderkino.de/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_remove_focus_box.js</file>
+	</element>
+	<element>
+		<notation>mmh awale app 无法退出</notation>
+		<name>awale inject</name>
+		<whiteUrl>
+			<url>http://smartgames.tv/SG/SGO_Awale/index.html</url>
+			<url>http://smartgames.tv/game/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_awale.js</file>
+	</element>
+	<element>
+		<notation>对于除chili页面允许jquery设置不使用缓存</notation>
+		<name>chili inject</name>
+		<whiteUrl>			
+		</whiteUrl>
+		<blackUrl>
+			<url>https://netrange.chili.tv/</url>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_allow_jquery_set_cache_disable.js</file>
+	</element>
+	<element>
+		<notation>chili页面忽略jquery设置的不使用缓存设置</notation>
+		<name>chili inject</name>
+		<whiteUrl>
+			<url>https://netrange.chili.tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_ignore_jquery_set_cache_disable.js</file>
+	</element>
+	<element>
+		<notation>解决google首页搜索按钮焦点框不显示的问题</notation>
+		<name>google input</name>
+		<whiteUrl>
+			<url>www.google.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_google_inputFocus.css</file>
+	</element>
+	<element>
+		<notation>解决MMH中picasa应用不应该响应焦点问题</notation>
+		<name>set focus false</name>
+		<whiteUrl>
+			<url>http://picasa.app.nrmmh.tv</url>
+			<url>https://premiumonline.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://play-be.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://www.infinitytv.it/tsplay/index.html</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_set_focus_false.js</file>
+	</element>
+	<element>
+		<notation>解决【菲律宾】Turn in Radio 打开异常</notation>
+		<name>set use substr true</name>
+		<whiteUrl>
+			<url>http://tv.tunein.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_cookie_use_substr_true.js</file>
+	</element>
+	<element>
+	<notation>解决【菲律宾】Turn in Radio 打开异常</notation>
+		<name>set use substr false</name>
+		<whiteUrl>
+		</whiteUrl>
+		<blackUrl>
+			<url>http://tv.tunein.com/</url>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_cookie_use_substr_false.js</file>
+	</element>
+	<element>
+		<notation>解决退出MMH中picasa应用，其他应用不响应焦点问题</notation>
+		<name>set focus true</name>
+		<whiteUrl>
+		</whiteUrl>
+		<blackUrl>
+			<url>http://picasa.app.nrmmh.tv</url>
+			<url>https://premiumonline.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://play-be.mediasetpremium.it/tsplay/index.html</url>
+			<url>https://www.infinitytv.it/tsplay/index.html</url>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_set_focus_true.js</file>
+	</element>
+	<element>
+		<notation>解决ted.com广告视频不能选中的问题</notation>
+		<name>ted ad</name>
+		<whiteUrl>
+			<url>www.ted.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_ted_addEvents.js</file>
+	</element>
+	<element>
+		<notation>解决twitter焦点移动的问题</notation>
+		<name>twitter focus move</name>
+		<whiteUrl>
+		<url>https://mobile.twitter.com/</url>
+		<url>https://www.twitter.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_twitter.js</file>
+	</element>
+	<element>
+		<notation>解决mmh首页日期显示与时间同行的问题</notation>
+		<name>fix calendar breakline</name>
+		<whiteUrl>
+			<url>http://a8ba7ed41c9e355780639f3ff05c2724.002d734450b3be6f5d0cb4939aa0a4bc.com/portal.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_fix_calendar_breakline.js</file>
+	</element>
+	<element>
+		<notation>解决crash应用菜单第一次获取焦点会消失一下的问题</notation>
+		<name>crash menu</name>
+		<whiteUrl>
+			<url>http://crash.app.nrmmh.tv/live/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_crash_menu.js</file>
+	</element>
+	<element>
+		<notation>instagram上LogIn按钮焦点框不显示的问题</notation>
+		<name>instagram login</name>
+		<whiteUrl>
+			<url>https://www.instagram.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_instagram_loginFocus.css</file>
+	</element>
+	<element>
+		<notation>解决linked链接无法打开的问题</notation>
+		<name>linked</name>
+		<whiteUrl>
+			<url>https://www.linkedin.com/</url>
+			<url>www.aol.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_linkedin_a.js</file>
+	</element>
+        <element>
+		<notation>解决linkedin显示黑色的问题</notation>
+		<name>linkedin</name>
+		<whiteUrl>
+			<url>www.linkedin.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_linkedin_background.css</file>
+	</element>
+	<element>
+		<notation>解决discovery焦点框不显示的问题</notation>
+		<name>discovery focus</name>
+		<whiteUrl>
+			<url>www.discovery.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_discovery_afocus.css</file>
+	</element>
+    	<element>
+		<notation>解决discovery按钮点击不响应的问题</notation>
+		<name>discovery click</name>
+		<whiteUrl>
+			<url>www.discovery.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_discovery_divclick.js</file>
+	</element>
+	<element>
+		<notation>解决discovery蓝色原点不消失问题</notation>
+		<name>discovery focus</name>
+		<whiteUrl>
+			<url>www.discovery.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_discovery_load.css</file>
+	</element>
+	<element>
+		<notation>解决取消googleinput输入联想的问题</notation>
+		<name>google input</name>
+		<whiteUrl>
+			<url>www.google.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_setNoThink.js</file>
+	</element>
+	<element>
+		<notation>解决netflix焦点框显示有问题的问题</notation>
+		<name>netflix focus</name>
+		<whiteUrl>
+		<url>netflix.com</url>
+		<url>http://www.netflix.com/</url>		
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_netflix.css</file>
+	</element>
+	<element>
+		<notation>解决mmh coachclub ok按钮显示位置不对问题</notation>
+		<name>coachclub ok button issue</name>
+		<whiteUrl>
+		<url>http://coachclub.philips.iptv.hubee.tv</url>	
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_coachclub.css</file>
+	</element>
+	<element>
+		<notation>解决mmh blend 8 焦点移动错误的问题</notation>
+		<name>mmh blend 8 focus move error</name>
+		<whiteUrl>
+		<url>pid=157</url>
+		<url>pid=158</url>		
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_blend8_focus_handle.js</file>
+	</element>
+	<element>
+		<notation>解决mmh WebCamera.pl无法移动焦点的问题</notation>
+		<name>mmh WebCamera.pl focus move error</name>
+		<whiteUrl>
+		<url>http://nr.webcamera.pl/</url>	
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_linkTag_add_href.js</file>
+	</element>
+	<element>
+		<notation>解决mmh clipfish无法进入对应的app</notation>
+		<name>mmh</name>
+		<whiteUrl>
+		<url>http://hbbtv.clipfish.de/index.php?app=launcher</url>	
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_clipfish.js</file>
+	</element>
+	<element>
+		<notation>解决 kinderkino 焦点移动异常的问题</notation>
+		<name>kinderkino focus move</name>
+		<whiteUrl>
+            		<url>http://nettv.kinderkino.de/</url>		
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_kinderkino_element.js</file>
+	</element>
+	<element>
+		<notation>解决 kinderkino 焦点移动异常的问题</notation>
+		<name>kinderkino focus move</name>
+		<whiteUrl>
+            		<url>http://nettv.kinderkino.de/login.php</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_kinderkino_keydown.js</file>
+	</element>    
+    	<element>
+		<notation>屏蔽 YouTube MSE 的 webm 格式音视频</notation>
+		<name>YouTube MSE</name>
+		<whiteUrl>
+			<url>youtube.com</url>
+        		<url>appspot.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_youtube_mse.js</file>
+	</element>
+	<element>
+		<notation>设置arte焦点移动</notation>
+		<name>arte focusControl </name>
+		<whiteUrl>
+		    <url>http://arte.vo.llnwd.net/o21/liveweb/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_arte_setenv_1.js</file>
+	</element>
+	<element>
+		<notation>重新设置redkaraoke页面text-shadow属性</notation>
+		<name>redkaraoke text-shadow</name>
+		<whiteUrl>
+		    <url>http://www.redkaraoke.com/tv/netrange/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_redkaraoke.css</file>
+	</element>
+	<element>
+		<notation>voice control</notation>
+		<name>voice control</name>
+		<whiteUrl>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_voice_control.js</file>
+	</element>
+	<element>
+		<notation>nrmmh 预加载图片</notation>
+		<name>nrmmh preload image</name>
+		<whiteUrl>
+			<url>netrange_app.nrmmh.tv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_nrmmh_preload.js</file>
+	</element>
+	<element>
+		<notation>euronews 去除没有内容的a标签</notation>
+		<name>euronews remove label a without content</name>
+		<whiteUrl>
+			<url>www.euronews.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_euronews_displaynone.css</file>
+	</element>
+	
+	<element>
+		<notation>修改EPIC TV HeaderText 节目名显示不全</notation>
+		<name>fixed EPIC TV can't show the whole program name</name>
+		<whiteUrl>
+			<url>netrange_app.nrmmh.tv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_epic_tv_header_show.js</file>
+	</element>
+	
+	<element>
+		<notation>解决lanacion 应用不能退出的问题</notation>
+		<name>fixed lanacion app can't exit</name>
+		<whiteUrl>
+			<url>smart.lanacion.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_lanacion_exit.js</file>
+	</element>
+	
+	<element>
+		<notation>toongoggles 红键切换视频源没关闭加载条</notation>
+		<name>toongoggles close bufferBar</name>
+		<whiteUrl>
+			<url>html5.toongoggles.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_removeDarkOverlay.js</file>
+	</element>
+	
+	<element>
+		<notation> banaxi大屏,父母锁</notation>
+		<name>banaxi  fullscreen and parent lock bug</name>
+		<whiteUrl>
+			<url>.shyomi.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_progress_control.js</file>
+	</element>
+	
+	<element>
+		<notation>diepress ok键不响应</notation>
+		<name>js diepress</name>
+		<whiteUrl>
+			<url>diepresse.com/nettv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>top</position>
+		<type>js</type>
+		<file>js_diepress.js</file>
+	</element>
+	
+	<element>
+		<notation> joomeo 导航按键不响应</notation>
+		<name>joomeo key event </name>
+		<whiteUrl>
+			<url>mmh.joomeo.com/pt</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_joomeo_key_event.js</file>
+	</element>
+	
+	<element>
+		<notation> Surf El Amal 无法自动播放</notation>
+		<name>Surf El Amal </name>
+		<whiteUrl>
+			<url>surfelamal.app.nrmmh.tv</url>
+			<url>temptingfear.app.nrmmh.tv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_surfelamal.js</file>
+	</element>
+	<element>
+		<notation>euronews 焦点问题</notation>
+		<name>euronews focus debug</name>
+		<whiteUrl>
+			<url>www.euronews.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_euronews.js</file>
+        </element>
+	<element>
+		<notation>CHIlI应用账号输入栏字母宽窄不一</notation>
+		<name>CHILI login account show issue</name>
+		<whiteUrl>
+			<url>chili.tv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_chili_login_letters_show.css</file>
+	</element>
+	<element>
+		<notation>CHIlI pin code页面提示不正确</notation>
+		<name>CHILI The hint of pin code incorrect</name>
+		<whiteUrl>
+			<url>chili.tv</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_chili.js</file>
+	</element>
+	<element>
+		<notation>hellokids播放视频退出键失效</notation>
+		<name>rentun key is unabled when the video is playing in app hellokids </name>
+		<whiteUrl>
+			<url>standardappzwo.a.fxmconnect.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_returnKeyUnabledWhilePlaying_hellokids.js</file>
+	</element>
+	<element>
+		<notation>france24暂停，全屏窗口变小</notation>
+		<name>france24</name>
+		<whiteUrl>
+			<url>http://connected-tv.france24.com/foxxum.cehtml</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_france24.js</file>
+	</element>
+		<element>
+		<notation>smartbrowser输入框提示显示不美观</notation>
+		<name></name>
+		<whiteUrl>
+			<url>http://smartbrowser.am-live.fxmconnect.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_smartbrowser.css</file>
+	</element>
+	<element>
+		<notation>cineTrailer focus bug</notation>
+		<name>cineTrailer</name>
+		<whiteUrl>
+			<url>http://nettv.cinetrailer.tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_cineTrailer.js</file>
+	</element>
+	<element>
+		<notation>印度网站文字显示错误</notation>
+		<name></name>
+		<whiteUrl>
+			<url>http://beta1.esakal.com/</url>
+			<url>http://www.bhaskar.com/</url>
+			<url>http://www.jagran.com/</url>
+			<url>http://www.esakal.com/</url>
+			<url>http://divyamarathi.bhaskar.com/ </url>
+			<url>http://www.lokmat.com/</url>
+			<url>http://maharashtratimes.indiatimes.com/</url>
+			<url>http://www.loksatta.com/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>css</type>
+		<file>css_indian.css</file>
+	</element>
+	<element>
+		<notation> internet.tv bug</notation>
+		<name>internet.tv bug for keys</name>
+		<whiteUrl>
+			<url>http://nettv.1internet.tv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_internettv.js</file>
+	</element>
+	<element>
+		<notation> chip bug</notation>
+		<name>chip bug for keys</name>
+		<whiteUrl>
+			<url>http://www.chip.com.tr/appcontent/outapps/smarttv/nettv/</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_chip.js</file>
+	</element>
+</fixer>

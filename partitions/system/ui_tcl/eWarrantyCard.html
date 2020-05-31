@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="initSetup/md5.js"></script>
+<style>
+#eWarrantyCardDiv
+{
+    position: absolute;
+    top: 135px;
+    left: 420px;
+    width: 1080px;
+    height: 610px;
+    padding: 0px; /*必须有，因为ul默认的padding是40px*/
+    opacity: 0.92;
+    background:#181818;
+    border: 2px solid #1b1b1b;
+}
+#eWarrantyCardTitle {
+    position: absolute;
+    color: #ffffff;
+    font-size: 40px;
+    /*font-weight:bold;*/
+    top: 30px;
+    left: 60px;
+    right:60px;
+}
+#eWarrantyCardList
+{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    list-style-type:none;
+}
+#eWarrantyCardList li
+{
+    padding-top: 10px;
+}
+#eWarrantyCardList span
+{
+    color: #ffffff;
+    font-size: 30px;
+}
+#remind
+{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    padding: 10px;
+    font-size: 30px;
+    color: #ffffff;
+}
+#loading
+{
+    position: absolute;
+    top: 270px;
+    left: 480px;
+    display: none;
+}
+</style>
+</head>
+<body onload="init()">
+<!-----------------------主页面内容---------------------------------->
+    <div id="eWarrantyCardDiv">
+        <div id="eWarrantyCardTitle"></div>
+        <img id="loading"  src="images/Loading-01.png">
+        <ul id="eWarrantyCardList">
+            <li>
+                <span class="eWarrantyCardText"></span>
+                <span id="userName"></span>
+            </li>
+            <li>
+                <span class="eWarrantyCardText"></span>
+                <span id="email"></span>
+            </li>
+            <li>
+                <span class="eWarrantyCardText"></span>
+                <span id="phoneNum"></span>
+            </li>
+            <li style="padding-top: 50px">
+                <span class="eWarrantyCardText"></span>
+                <span id="sn"></span>
+            </li>
+            <li>
+                <span class="eWarrantyCardText"></span>
+                <span id="model"></span>
+            </li>
+            <li style="padding-top: 50px">
+                <span class="eWarrantyCardText"></span>
+            </li>
+            <li>
+                <span id="wholeTime" style="padding-left: 600px"></span>
+            </li>
+            <li style="display: none">
+                <span class="eWarrantyCardText"></span>
+            </li>
+            <li style="display: none">
+                <span id="mainTime" style="padding-left: 700px"></span>
+            </li>
+            <li style="padding-top: 50px;display: none">
+                <span class="eWarrantyCardText"></span>
+                <span></span>
+            </li>
+        </ul>
+        <div id="remind"></div>
+    </div>
+<script>
+    document.onsystemevent = top.systemEventProc;
+    document.onkeydown = keyproc;
+    var eWarrantyCardWords = [top.infoArray[0],top.emailWord,top.contentSpan1_7Array[3]+": ","NO.&nbsp;&nbsp;&nbsp;&nbsp;",top.contactUsOption[6]+"&nbsp;&nbsp;&nbsp;&nbsp;",top.eWarrantyCardWords[1],"Expiration date of main components warranty","Call center"];
+    var loadingImgs				= ["images/Loading-01.png",
+        "images/Loading-02.png",
+        "images/Loading-03.png",
+        "images/Loading-04.png",
+        "images/Loading-05.png",
+        "images/Loading-06.png",
+        "images/Loading-07.png",
+        "images/Loading-08.png"];
+    var loadingTimer = 0;
+    var loadingCount = 0;
+    var factory = top.g_factory;
+    var setting = top.g_setting;
+    var channel = top.g_channel;
+    var sn = 0;
+    var sign;
+    var model;
+    var infolist;
+    var country = 0;
+    function init()
+    {
+        top.initTextDirection(window);
+        top.g_setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+        country = channel.systemCountry;
+        $("eWarrantyCardTitle").innerHTML = top.eWarrantyCardWords[0];
+        infolist = $("eWarrantyCardList").getElementsByTagName("li");
+        var tableList = $("eWarrantyCardList").getElementsByClassName("eWarrantyCardText");
+        for (var i = 0; i < tableList.length;i++)
+        {
+            tableList[i].innerHTML = eWarrantyCardWords[i];
+        }
+        sn = factory.getProductInfo().sn;
+        model = factory.getProductInfo().projectName;
+        $("model").innerHTML = model;
+        $("sn").innerHTML = sn.replace(/(.{4})/g,' $1 ');
+        var eCard_ActTime = localStorage.getItem("eCard_ActTime");
+        var eCard_Name = localStorage.getItem("eCard_Name");
+        var eCard_Email = localStorage.getItem("eCard_Email");
+        var eCard_Phone = localStorage.getItem("eCard_Phone");
+        var netStatus = setting.networkStatus();
+
+        sign = hex_md5("secretsn"+sn+"secret").toUpperCase();
+        console.log("--eWarrantyCard init sn = " + sn + "  sign = " + sign);
+        console.log("--eWarrantyCard init country = " + country);
+        if (country == 58)//vie
+        {
+            //var url = "http://103.205.125.138:8080/api/warranty/getinformation?sn="+sn+"&sign="+sign;//test link
+            var url = "https://cseleint.tcl.com:8088/api/warranty/getinformation?sn="+sn+"&sign="+sign;//really link
+        }
+        else if (country == 82)//india        
+		{
+            //var url = "https://cseleuatin.tcl.com:8088/api/warranty/getinformation?sn="+sn+"&sign="+sign;//test link
+            var url = "https://cseleinind.tcl.com:8088/api/warranty/getinformation?sn="+sn+"&sign="+sign;//really link
+        }
+        console.log("--eWarrantyCard init link = " + url);
+        console.log("--eWarrantyCard init netStatus = " + netStatus + "  eCard_ActTime = " + eCard_ActTime);
+        console.log("--eWarrantyCard init eCard_Name = " + eCard_Name + "  eCard_Email = " + eCard_Email + "  eCard_Phone = " + eCard_Phone);
+
+        if (eCard_ActTime)//有数据
+        {
+            if (netStatus == 0)//无网络
+            {
+                if (eCard_Name  || eCard_Email  || eCard_Phone)
+                {
+                    $("userName").innerHTML = eCard_Name;
+                    $("email").innerHTML = eCard_Email;
+                    $("phoneNum").innerHTML = eCard_Phone;
+                    $("wholeTime").innerHTML = eCard_ActTime;
+                }
+                else
+                {
+                    infolist[0].style.display = "none";
+                    infolist[1].style.display = "none";
+                    infolist[2].style.display = "none";
+                    $("wholeTime").innerHTML = eCard_ActTime;
+                }
+            }
+            else //有网络
+            {
+                startloading();
+                $("eWarrantyCardList").style.display = "none";
+                ajaxGet(url);
+            }
+        }
+        else //无数据
+        {
+            if (netStatus == 0)//无网络
+            {
+                $("eWarrantyCardList").style.display = "none";
+                $("remind").innerHTML = "The current TV is not connected to the Internet and cannot obtain the activation information of the electronic warranty card. Please try again after networking!";
+            }
+            else
+            {
+                startloading();
+                $("eWarrantyCardList").style.display = "none";
+                ajaxGet(url);
+            }
+        }
+    }
+    function keyproc(evt)
+    {
+        var keycode = evt.which;
+        switch(keycode)
+        {
+            case top.VK_BACK:
+            case top.VK_EXIT:
+            case top.VK_LEFT:
+                parent.returnPopWindow(2);
+                break;
+        }
+    }
+
+    function ajaxObject() {
+        var xmlHttp;
+        try {
+            // Firefox, Opera 8.0+, Safari
+            xmlHttp = new XMLHttpRequest();
+        }
+        catch (e) {
+            // Internet Explorer
+            try {
+                xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    alert("您的浏览器不支持AJAX！");
+                    return false;
+                }
+            }
+        }
+        return xmlHttp;
+    }
+
+    // ajax get请求：
+    function ajaxGet (url) {
+        var ajax = ajaxObject();
+        ajax.open( "GET" , url , true );
+        //ajax.setRequestHeader( "Content-Type" , "application/x-www-form-urlencoded" );
+        ajax.onreadystatechange = function () {
+            if( ajax.readyState == 4 ) {
+                if( ajax.status == 200 ) {
+                    console.log("--eWarrantyCard test ajaxPost success ajax.responseText = " + ajax.responseText);
+                    var responseText = JSON.parse(ajax.responseText);
+                    console.log("--eWarrantyCard test get ErrorCode = " + responseText.ErrorCode);
+                    if(loadingTimer)
+                    {
+                        clearTimeout(loadingTimer);
+                    }
+                    $("loading").style.display = "none";
+                    $("eWarrantyCardList").style.display = "block";
+
+                    if (responseText.ErrorCode == 0)
+                    {
+                        var time = convertUTCTimeToLocalTime(responseText.Data.activationdate);
+                        console.log("--eWarrantyCard test get time = " + time);
+
+                        if (responseText.Data.username == "" && responseText.Data.email == "" && responseText.Data.phonenum == "")
+                        {
+                            console.log("--eWarrantyCard net get user info is empty !");
+                            infolist[0].style.display = "none";
+                            infolist[1].style.display = "none";
+                            infolist[2].style.display = "none";
+                        }
+
+                        localStorage.setItem("eCard_Name", responseText.Data.username);
+                        localStorage.setItem("eCard_Email", responseText.Data.email);
+                        localStorage.setItem("eCard_Phone", responseText.Data.phonenum);
+                        localStorage.setItem("eCard_ActTime", time);
+
+                        $("userName").innerHTML = responseText.Data.username;
+                        $("email").innerHTML = responseText.Data.email;
+                        $("phoneNum").innerHTML = responseText.Data.phonenum;
+                        $("wholeTime").innerHTML = time;//responseText.Data.activationdate;
+                        $("mainTime").innerHTML = responseText.Data.warrantyenddate;
+                    }
+                    else
+                    {
+                        $("userName").innerHTML = responseText.Message;
+                        $("email").innerHTML = responseText.Message;
+                        $("phoneNum").innerHTML = responseText.Message;
+                        $("wholeTime").innerHTML = responseText.Message;
+                        $("mainTime").innerHTML = responseText.Message;
+                    }
+                }
+                else {
+                    console.log("--eWarrantyCard test ajaxPost fail error code = " + ajax.status);
+                }
+            }
+            else {
+                console.log("--eWarrantyCard test ajaxPost loading ");
+            }
+        }
+        ajax.send();
+    }
+
+    function convertUTCTimeToLocalTime(UTCDateString) {
+        if(!UTCDateString){
+            return '-';
+        }
+        var date2 = new Date(UTCDateString);     //这步是关键
+        console.log("--convertUTCTimeToLocalTime date2 = " + date2);
+        //设置为越南东7区时区，切换国家后时区改变，再切换回来越南时时区不会变成东7区
+        if (country == 58)//vie
+        {
+            var time = date2.getTimezoneOffset()*60000 + date2.getTime()+ 3600000*7;//vie
+        }
+        else if (country == 82)//india
+        {
+            var time = date2.getTimezoneOffset()*60000 + date2.getTime()+ 3600000*5;//indian
+        }
+        date2.setTime(time);
+        var year = date2.getFullYear();
+        var mon = formatFunc(date2.getMonth() + 1);
+        var day = formatFunc(date2.getDate());
+        var hour = date2.getHours();
+        var noon = hour >= 12 ? 'PM' : 'AM';
+        hour = hour>=12?hour-12:hour;
+        hour = formatFunc(hour);
+        var min = formatFunc(date2.getMinutes());
+        var seconds = formatFunc(date2.getSeconds());
+        var dateStr = year+'-'+mon+'-'+day+' '+noon +' '+hour+':'+min+':'+seconds;
+        return dateStr;
+    }
+    function formatFunc(str) {    //格式化显示
+        return str > 9 ? str : '0' + str
+    }
+
+    function startloading()
+    {
+        $("loading").style.display = "block";
+        $("loading").src = loadingImgs[loadingCount%8];
+        loadingCount++;
+        loadingTimer=setTimeout("startloading()",300);
+    }
+
+
+    function $(id)
+    {
+        return document.getElementById(id);
+    }
+</script>
+</body>
+</html>

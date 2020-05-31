@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<MediaCodecs>
+    <Decoders>
+		<VIDEO>
+			<MediaCodec name="MPEG" type="0" id="0"/>
+			<MediaCodec name="H264" type="0" id="1"/>
+			<MediaCodec name="HEVC" type="0" id="2"/>		
+			<MediaCodec name="VC1" type="0" id="3"/>	
+			<MediaCodec name="MPEG4" type="0" id="4"/>	
+			<MediaCodec name="DIVX3" type="0" id="5"/>	
+			<MediaCodec name="RMVB" type="0" id="6"/>	
+			<MediaCodec name="AVS" type="0" id="7"/>	
+			<MediaCodec name="MJPEG" type="0" id="8"/>
+			<MediaCodec name="VP8" type="0" id="9"/>
+			<MediaCodec name="VP9" type="0" id="10"/>
+			<MediaCodec name="LOGO" type="0" id="11"/>
+			<MediaCodec name="LOGO_MPEG" type="0" id="12"/>
+			<MediaCodec name="STILL" type="0" id="13"/>		
+			<MediaCodec name="JPEG_HW" type="0" id="14"/>
+			<MediaCodec name="JPEG_SW" type="0" id="15"/>
+			<MediaCodec name="GIF" type="0" id="16"/>
+			<MediaCodec name="BMP" type="0" id="17"/>	
+			<MediaCodec name="PNG" type="0" id="18"/>
+			<MediaCodec name="TIFF" type="0" id="19"/>
+			<MediaCodec name="WEBP" type="0" id="20"/>
+			<MediaCodec name="STILL_DIRECT_DRAW" type="0" id="21"/>
+			<MediaCodec name="DIVX456" type="0" id="22"/>		
+			<MediaCodec name="MPEG1" type="0" id="23"/>
+			<MediaCodec name="MPEG2" type="0" id="24"/>
+		</VIDEO>	
+		<AUDIO>
+			<MediaCodec name="MPEG" type="1" id="0"/>
+			<MediaCodec name="MP3" type="1" id="1"/>		
+			<MediaCodec name="WMA" type="1" id="2"/>	
+			<MediaCodec name="MPEG_AAC" type="1" id="3"/>	
+			<MediaCodec name="HE_AAC" type="1" id="4"/>	
+			<MediaCodec name="AC3" type="1" id="5"/>	
+			<MediaCodec name="OGG" type="1" id="6"/>	
+			<MediaCodec name="BEEP_TONE" type="1" id="7"/>
+			<MediaCodec name="PCM" type="1" id="8"/>
+			<MediaCodec name="COOK" type="1" id="9"/>
+			<MediaCodec name="DTS" type="1" id="10"/>
+			<MediaCodec name="AMR_NB" type="1" id="11"/>		
+			<MediaCodec name="AMR_WB" type="1" id="12"/>
+			<MediaCodec name="DTSHD_LBR" type="1" id="13"/>
+			<MediaCodec name="FLAC" type="1" id="14"/>
+			<MediaCodec name="EAC3" type="1" id="15"/>
+			<MediaCodec name="ADPCM" type="1" id="16"/>
+			<MediaCodec name="LPCM" type="1" id="17"/>
+			<MediaCodec name="ULAW" type="1" id="18"/>
+			<MediaCodec name="ALAW" type="1" id="19"/>
+			<MediaCodec name="MPEG_1_LAYER_1" type="1" id="20"/>
+			<MediaCodec name="MPEG_1_LAYER_2" type="1" id="21"/>
+			<MediaCodec name="MPEG_1_LAYER_3" type="1" id="22"/>
+			<MediaCodec name="MPEG_2_LAYER_1" type="1" id="23"/>
+			<MediaCodec name="MPEG_2_LAYER_2" type="1" id="24"/>
+			<MediaCodec name="MPEG_2_LAYER_3" type="1" id="25"/>
+			<MediaCodec name="MPEG_2_5_LAYER_1" type="1" id="26"/>
+			<MediaCodec name="MPEG_2_5_LAYER_2" type="1" id="27"/>
+			<MediaCodec name="MPEG_2_5_LAYER_3" type="1" id="28"/> 
+			<MediaCodec name="DRA" type="1" id="29"/>
+			<MediaCodec name="ALAC" type="1" id="30"/>
+			<MediaCodec name="OPUS" type="1" id="31"/>
+			<MediaCodec name="DTSHD_LL" type="1" id="32"/>
+			<MediaCodec name="MPEGH" type="1" id="33"/>
+			<MediaCodec name="AC4" type="1" id="34"/>
+		</AUDIO>			
+		<SUBTITLE>
+			<MediaCodec name="DVD_SUBTITLE" type="3" id="0"/>		
+			<MediaCodec name="TEXT" type="3" id="1"/>	
+			<MediaCodec name="XSUP" type="3" id="2"/>	
+			<MediaCodec name="XSUP_PLUS" type="3" id="3"/>	
+			<MediaCodec name="SRT" type="3" id="4"/>	
+			<MediaCodec name="ASS" type="3" id="5"/>	
+			<MediaCodec name="SSA" type="3" id="6"/>
+			<MediaCodec name="SAMI" type="3" id="7"/>
+			<MediaCodec name="LRC" type="3" id="8"/>
+			<MediaCodec name="MICRODVD" type="3" id="9"/>
+			<MediaCodec name="PSB" type="3" id="10"/>		
+			<MediaCodec name="MOV_TEXT" type="3" id="11"/>
+			<MediaCodec name="IDX_VOBSUB" type="3" id="12"/>
+			<MediaCodec name="MPL2" type="3" id="13"/>
+			<MediaCodec name="SUBVIEWER" type="3" id="14"/>	
+			<MediaCodec name="JACOSUB" type="3" id="15"/>
+			<MediaCodec name="TMPLAYER" type="3" id="16"/>
+			<MediaCodec name="DVDSUBTITLE" type="3" id="17"/>
+			<MediaCodec name="TTML" type="3" id="18"/>
+			<MediaCodec name="DVBSUBTITLE" type="3" id="19"/>
+			<MediaCodec name="TTX" type="3" id="20"/>			
+		</SUBTITLE>
+		<ATTACHMENT>
+		<MediaCodec name="TTF" type="4" id="0"/>	
+		</ATTACHMENT>
+    </Decoders>
+</MediaCodecs>
+

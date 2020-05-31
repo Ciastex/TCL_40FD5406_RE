@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>no title document</title>
+</head>
+<style>
+#RecognizingPic
+{
+	position:absolute;
+	height:250px;
+	width:1500px;
+	top:734px; 
+	left:200px; 
+    repeat:no-repeat;
+	display:block;
+	z-index:200;
+    background:url(images/voiceUI/bg.png);
+}
+
+</style>
+<body onload="init()">
+
+<div id="RecognizingPic">
+<img id="picture"
+</div>
+<script>
+
+var loadingTimer = -1;
+function init()
+{
+    loading( 0 );
+}
+function loading( loadingCount ) 
+{
+	var loadingImgs		= ["images/voiceUI/loading_00000.png",
+						   "images/voiceUI/loading_00001.png",
+						   "images/voiceUI/loading_00002.png",
+						   "images/voiceUI/loading_00003.png",
+						   "images/voiceUI/loading_00004.png",
+						   "images/voiceUI/loading_00005.png",
+						   "images/voiceUI/loading_00006.png",
+						   "images/voiceUI/loading_00007.png",
+						   "images/voiceUI/loading_00008.png",
+						   "images/voiceUI/loading_00009.png",
+						   "images/voiceUI/loading_00010.png",
+						   "images/voiceUI/loading_00011.png",
+						   "images/voiceUI/loading_00012.png",
+						   "images/voiceUI/loading_00013.png",
+						   "images/voiceUI/loading_00014.png",
+						   "images/voiceUI/loading_00015.png",
+						   "images/voiceUI/loading_00016.png",
+						   "images/voiceUI/loading_00017.png",
+						   "images/voiceUI/loading_00018.png",
+						   "images/voiceUI/loading_00019.png",
+						   "images/voiceUI/loading_00020.png",
+						   "images/voiceUI/loading_00021.png",
+						   "images/voiceUI/loading_00022.png",
+						   "images/voiceUI/loading_00023.png",
+						   "images/voiceUI/loading_00024.png",
+						   "images/voiceUI/loading_00025.png",
+						   "images/voiceUI/loading_00026.png",
+						   "images/voiceUI/loading_00027.png",
+						   "images/voiceUI/loading_00028.png",
+						   "images/voiceUI/loading_00029.png",
+						   "images/voiceUI/loading_00030.png",
+						   "images/voiceUI/loading_00031.png",
+						   "images/voiceUI/loading_00032.png"];
+	document.getElementById("picture").src = loadingImgs[loadingCount%8];
+	loadingCount++;
+	loadingTimer=setTimeout("loading(" + loadingCount + ")",300);
+    console.log(loadingCount);
+}
+</script>
+</body>
+</html>

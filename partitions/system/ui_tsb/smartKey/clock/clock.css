@@ -1,0 +1,414 @@
+
+body {
+    position:absolute;
+    margin:0;
+    width:1920px;
+    height:1080px;
+    background:url(clock_images/Background.png) no-repeat;
+    z-index:0;
+}
+.background {
+    position:absolute;
+    margin:0;
+    width:1920px;
+    height:1080px;
+    z-index:0;
+}
+
+.display_none {
+    display: none;
+    /* display: inline; */
+}
+
+/*表盘*/
+#background {
+    position:absolute;
+    z-index:0;
+}
+#time {
+    position:absolute;
+    top:350px;
+    left:841px;
+    z-index:1;
+    text-align:center;
+}
+#time span {
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #dc2118;
+}
+#location {
+    position:absolute;
+    top:452px;
+    left:901px;
+    z-index:1;
+}
+#location span {
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 48px;
+    color: #828181;
+}
+#chassis {
+    position:absolute;
+    top:83px;
+    left:504px;
+    width:912px;
+    height:912px;
+    z-index:1;
+}
+
+#hour {
+    position:absolute;
+    top:83px;
+    left:904px;
+    width:912px;
+    height:912px;
+    z-index:2;
+    pointer-events:none;
+}
+#min {
+    position:absolute;
+    top:83px;
+    left:904px;
+    width:912px;
+    height:912px;
+    z-index:2;
+    pointer-events:none;
+}
+#second {
+    position:absolute;
+    top:83px;
+    left:904px;
+    width:912px;
+    height:912px;
+    z-index:2;
+}
+
+#edit {
+    position:absolute;
+    top:902px;
+    left:1604px;
+    width:83px;
+    height:83px;
+    z-index:1;
+}
+
+#tips {
+    position:absolute;
+    top:995px;
+    left:1495px;
+    width:300px;
+    height:35px;
+    z-index:1;
+    text-align:center;
+}
+#tips span {
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 25px;
+    color: #828181;
+}
+
+/* little */
+/* little 1 */
+.projection_little1 {
+    position:absolute;
+    top:390px;
+    left:122px;
+    z-index:1;
+}
+
+.little_clock {
+    position:absolute;
+    top:219px;
+    left:122px;
+    width:353px;
+    height:353px;
+}
+
+.location_little1 {
+    position:absolute;
+    text-align:center;
+    top:612px;
+    left:241px;
+    width:353px;
+    height:62px;
+    z-index:1;
+}
+.location_span {
+    position: absolute;
+    top:393px;
+    width: 353px;
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 48px;
+    color: #ffffff;
+}
+
+.time_little1 {
+    position:absolute;
+    top:466px;
+    width: 353px;
+    z-index:1;
+    text-align:center;
+}
+.time_little1 span {
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #d1d1d1;
+}
+
+.time_span{
+    position:absolute;
+    top:466px;
+    width: 353px;
+    z-index:1;
+    text-align:center;
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #d1d1d1;
+}
+
+/* little 2 */
+.del_btn_little2 {
+    position:absolute;
+    top:152px;
+    left:730px;
+    z-index:1;
+}
+
+.projection_little2 {
+    position:absolute;
+    top:390px;
+    left:576px;
+    z-index:1;
+}
+
+.chassis_little2 {
+    position:absolute;
+    top:219px;
+    left:576px;
+    width:353px;
+    height:353px;
+    z-index:1;
+}
+
+.location_little2 {
+    position:absolute;
+    top:612px;
+    left:696px;
+    text-align:center;
+    width:353px;
+    height:62px;
+    z-index:1;
+}
+.location_little2 span {
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 48px;
+    color: #ffffff;
+}
+
+.time_little2 {
+    position:absolute;
+    top:685px;
+    left:628px;
+    z-index:1;
+    text-align:center;
+}
+.time_little2 span {
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #d1d1d1;
+}
+
+/* little 3 */
+.del_btn_little3 {
+    position:absolute;
+    top:152px;
+    left:1175px;
+    z-index:1;
+}
+
+.projection_little3 {
+    position:absolute;
+    top:390px;
+    left:1030px; /* 间隔454px */
+    z-index:1;
+}
+
+.chassis_little3 {
+    position:absolute;
+    top:219px;
+    left:1030px;
+    width:353px;
+    height:353px;
+    z-index:1;
+}
+
+.location_little3 {
+    position:absolute;
+    top:612px;
+    left:1150px;
+    text-align:center;
+    width:353px;
+    height:62px;
+    z-index:1;
+}
+.location_little3 span {
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 48px;
+    color: #ffffff;
+}
+
+.time_little3 {
+    position:absolute;
+    top:685px;
+    left:1082px;
+    z-index:1;
+    text-align:center;
+}
+.time_little3 span {
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #d1d1d1;
+}
+
+/* little 4 */
+.del_btn_little4 {
+    position:absolute;
+    top:152px;
+    left:1629px;
+    z-index:1;
+}
+
+.projection_little4 {
+    position:absolute;
+    top:390px;
+    left:1484px; /* 间隔454px */
+    z-index:1;
+}
+
+.chassis_little4 {
+    position:absolute;
+    top:219px;
+    left:1484px;
+    width:353px;
+    height:353px;
+    z-index:1;
+}
+
+.location_little4 {
+    position:absolute;
+    top:612px;
+    left:1604px;
+    text-align:center;
+    width:353px;
+    height:62px;
+    z-index:1;
+}
+.location_little4 span {
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 48px;
+    color: #ffffff;
+}
+
+.time_little4 {
+    position:absolute;
+    top:685px;
+    left:1536px;
+    z-index:1;
+    text-align:center;
+}
+.time_little4 span {
+    font-family: Arial, serif;
+    font-size: 72px;
+    color: #d1d1d1;
+}
+
+/*添加底框*/
+#add_bottom {
+    z-index:3;
+    /* display: none; */
+    /* display: inline; */
+}
+
+
+#bottom_box {
+    position:absolute;
+    top:720px;
+    left:0px;
+    width: 1920px;
+    height: 374px;
+    z-index:3;
+}
+
+/* font */
+.bottom_span{
+    text-align:center;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 30px;
+    color: #b7b7b7;
+}
+
+#remind
+{
+    position: absolute;
+    left: 710px;
+    top: 440px;
+    width: 500px;
+    height: 200px;
+    line-height:200px;
+    background: rgba(0,0,0,0.8);
+    border:solid 4px #1b1b1b;
+    color:#fff;
+    font-family: 'Microsoft YaHei', serif;
+    font-size:28px;
+    font-weight:bold;
+    text-align: center;
+    display: none;
+    z-index: 100;
+}
+
+.select_div
+{
+    position: absolute;
+    width: 200px;
+    text-align: center;
+}
+
+.select_div span
+{
+    position: absolute;
+    top: 273px;
+    left:215px;
+    width: 200px;
+    font-family: 'Microsoft YaHei', serif;
+    font-size: 30px;
+    color: #b7b7b7;
+}
+
+.select_button
+{
+    position: absolute;
+    top:65px;
+    left:297px;
+}
+
+.select_clockIcon
+{
+    position: absolute;
+    top:117px;
+    left: 245px;
+}
+
+.select_focus
+{
+    position: absolute;
+    top: 258px;
+    left: 215px;
+    width: 200px;
+    display: none;
+}

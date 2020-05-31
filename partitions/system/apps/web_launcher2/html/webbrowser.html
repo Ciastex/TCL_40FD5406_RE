@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="./tclResources/tclBrowser.css" />
+</head>
+<body>
+<div id="toolbar"  class ="toolbar">
+	<a id="a_Back" href="javascript:void(0);"><img src="./tclResources/img_1280/cannotBack.png" /></a>
+	<a id="a_Forward" href="javascript:void(0);"><img src="./tclResources/img_1280/cannotNext.png" /></a>
+	<a id="a_Reload" href="javascript:void(0);"><img src="./tclResources/img_1280/refresh.png" /></a>
+	<div id="divinput">
+    	<i></i>
+        <input type="text" id="inputUrl" value="" placeholder="Search or input website" />
+    </div>
+    <a id="a_Go" href="javascript:void(0);" class="a_Go"></a>
+	<a id="a_Star" href="javascript:void(0);"><img src="./tclResources/img_1280/collect.png"/></a>
+	<a id="a_Home" href="javascript:void(0);"><img src="./tclResources/img_1280/bookmark.png" /></a>
+	<a id="a_Menu" href="javascript:void(0);"><img src="./tclResources/img_1280/more.png" /></a>
+</div>
+<div id="homePopupBox">
+    <ul id="homePopupBox_top"> 
+		<li class="active"><a href="javascript:void(0);" id="a_Favorite">Favorite</a></li> 
+		<li><a href="javascript:void(0);" id="a_History">History</a></li>
+    </ul> 
+   <div id="homePopupBox_no_available"> 
+    	<p>No available <span id="history_favorite">favorite</span> line-up, view a<br/>website and press <i></i> to save.</p>
+	</div>
+	<div class="historyTab" id="historyTab" > 
+        <button id="edit_H" class="edit">Edit</button>
+        <ul id="historyList" class="favorite_urlList"></ul>
+    </div>
+	<div class="favoriteTab" id="favoriteTab"> 
+        <button id="edit" class="edit">Edit</button> 
+        <ul id="favoriteList" class="favorite_urlList"></ul>
+    </div>
+</div>
+
+<!--inputPopupBox----start-->
+<div id="inputPopupBox">
+	<a href="https://www.baidu.com/"><span>www.google.com</span></a>
+</div>
+<!--inputPopupBox----end-->
+
+<div id="morePopupBox"> 
+	<ul> 
+	    <li><a href="javascript:void(0);" id="about">About</a ></li> 
+	    <li><a href="javascript:void(0);" id="privacy">Privacy</a ></li> 
+	    <li><a href="javascript:void(0);" id="mousemode">Mouse Mode</a ></li>
+		<li><a href="javascript:void(0);" id="changeua">PC UA</a ></li>
+	    <li><a href="javascript:void(0);" id="exit">Exit</a ></li> 
+   </ul> 
+</div>
+
+<!-- About popupBox start --> 
+<div id="aboutPopupBox"> 
+    <div> 
+	    <img src="./tclResources/img_1280/12.png" /> 
+	    <span>T Browser</span> 
+	    <p>A html5 browser based on blink<br/>Version M49</p>
+	    <p>Press INFO key to show navigation bar.<br/>
+			Press BACK key to hide navigation bar.
+	    </p>
+	</div> 
+</div> 
+<!--About popupBox end -->
+
+<!-- Privacy popupBox start --> 
+<div id="privacyPopupBox"> 
+	<div>Privacy</div>
+    <ul>
+    	<li>
+    		<a href="javascript:void(0);" id="clearCache">
+	    		<span>Clear cache</span>
+				<span>Clear locally cached content and databases</span>
+			</a>
+    	</li>
+    	<li>
+    		<a href="javascript:void(0);" id="acceptCookies">
+	    		<span>Accept cookies</span>
+				<span>Allow sites to save and read cookie data 
+					<!-- <i class="checkbox" id="defaultcheckbox"></i> -->
+					<!-- <button class="checkbox" id="acceptCacheBtn"></button> -->
+					<i id="acceptCookiesCheckbox"></i>
+				</span>
+			</a>
+    	</li>
+    	<li>
+    		<a href="javascript:void(0);" id="clearAllCookie">
+    			<span>Clear all cookie data</span>
+				<span>Clear all browser cookies</span>
+			</a>
+    	</li>
+    </ul>
+</div> 
+<!--Privacy popupBox end -->
+
+<!-- clear cache Box -->
+<div id="clearCacheBox" class="clearCacheBox"> 
+	<div class="clearMain">	
+		<span>Clear cache</span>
+		<span>Delete locally cached content and databases</span>
+	</div>
+	<div class="btn">
+		<button id="clearcacheCancel">Cancel</button>
+		<button id="clearcacheOK">OK</button>
+	</div>
+</div>
+<!--  clear cache errorBox -->
+
+<!-- clear all cache Box -->
+<div id="clearAllCookieBox" class="clearCacheBox"> 
+	<div class="clearMain">	
+		<span>Clear all cookie data</span>
+		<span>Delete all cookies</span>
+	</div>
+	<div class="btn">
+		<button id="clearAllCookieCancel">Cancel</button>
+		<button id="clearAllCookieOK">OK</button>
+	</div>
+</div>
+<!--  clear all cache errorBox -->
+
+<!-- urlTab start --> 
+<div id="tab" class="urlTab" style="visibility: hidden">
+    <ul id="tabList"></ul>
+    <button id="addTab" class="addTab"><img src="tclResources/img_1280/icon-add.png" alt="add"></button>
+</div>
+<!-- errorBox -->
+<div id="errorMessageBox" style="visibility: hidden"> 
+	<div class="errorWrap">
+	<img src="./tclResources/img_1280/tip_i.png" class="tip_i">
+	<div class="errorInfo"> 
+		<p id="errorCode"></p>
+		<div id="errorDescription"></div>
+		<div id="errorUrl"></div>
+	</div>
+	</div>
+	<button id="ok_button" class="errorBtnOk" onclick = "removeErrorBox();onClickExit();">OK</button>
+</div>
+<!-- end errorBox -->
+<!-- urlTab end --> 
+<img src="tclResources/img_1280/loading.png" id="loading" />
+<script src="tclResources/tclBrowser.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="recentContent.css" />
+    <script type="text/javascript" src="recentContent.js"></script>
+    <script type="text/javascript" src="event.js"></script>
+    <script type="text/javascript" src="generalFun.js"></script>
+</head>
+<body class="body_recent body_comm" >
+<div>
+    <div class="bodyWrap body_comm" id="recentPage" name="subwindow">
+        <div class="wrap" id="recentWrap">
+            <header>
+                <div class="tools">
+                    <img src="images/redLine.png" alt="">
+                    <span class="needTranslate_recent">To delete</span>
+                </div>
+            </header>
+            <div class="screenShots">
+            </div>
+            <div class="recentApp" id="recentApp">
+                <header class="appHeader">
+                    <span class="needTranslate_recent">Recent apps</span>
+                </header>
+
+                <div class="contentWrap">
+                    <div class="appBody" id="appBody">
+                        <ul id="appUl">
+
+
+                            <li id="moreAppTipLi">
+                                <div class="appDiv moreAppDiv">
+                                    <div id="moreAppTip" name="focusBlock">
+                                        <div class="moreAppBorder">
+                                        </div>
+                                        <div class="moreAppBackPic">
+                                            <img class="moreAppBackPic_img" src="images/moreAppBackground.png" alt="">
+                                        </div>
+                                        <div class="moreAppPic">
+                                            <img class="moreAppPic_img" src="images/dot.png" alt="">
+                                        </div>
+                                        <div class="moreAppName">
+                                            <span class="moreAppName_span needTranslate_recent">more</span>
+                                        </div>
+                                    </div>
+
+                                    <div id="noAppTip">
+                                        <div class="moreAppBorder">
+                                        </div>
+                                        <div class="moreAppBackPic">
+                                            <img class="moreAppBackPic_img" src="images/moreAppBackground.png" alt="">
+                                        </div>
+                                        <div class="noApp">
+                                            <span class="needTranslate_recent">no app</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!--<li>-->
+                            <!--<div class="appDiv">-->
+                            <!--<div class="appBorder">-->
+                            <!--<img class="appBorder_img" src="images/app_block_bg_focus_normal.png" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="appBackPic">-->
+                            <!--<img class="appBackPic_img" src="images/appBackground.png" alt="">-->
+                            <!--<img class="appPic_img" src="images/APP_store.png" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="appName">-->
+                            <!--<span class="appName_span">QQ</span>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</li>-->
+
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="recentWatch" id="recentWatch">
+                <div class="recentWatchContent" id="recentWatchContent">
+                    <header class="videoHeader">
+                        <span class="needTranslate_recent">Recent videos</span>
+                    </header>
+                    <div class="videoBody" id="videoBody">
+                        <ul id="videoUl">
+                            <li id="moreVideoTipLi">
+                                <div class="videoDiv moreVideoDiv">
+                                    <div id="moreVideoTip">
+                                        <div class="moreVideoPic">
+                                            <img class="moreVideoBackImg" src="images/moreBackground.png" alt="">
+                                            <img class="moreVideoImg" src="images/dot.png" alt="">
+                                            <img class="borderMoreVideo_img" src="images/videoBorder.png" alt="">
+                                        </div>
+                                        <footer class="moreVideoInfo">
+                                            <span class="moreVideoTitle needTranslate_recent">more</span>
+                                        </footer>
+                                    </div>
+
+
+                                    <div id="noVideoTip">
+                                        <div class="moreVideoPic">
+                                            <img class="moreVideoBackImg" src="images/moreBackground.png" alt="">
+                                            <img class="borderMoreVideo_img" src="images/videoBorder.png" alt="">
+                                        </div>
+                                        <footer class="noVideoInfo">
+                                            <span class="needTranslate_recent">no history</span>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <!--<li>-->
+                                <!--<div class="videoDiv">-->
+                                    <!--<div class="videoBorder">-->
+                                        <!--<img class="videoBorder_img" src="images/block_bg_focus_normal.png" alt="">-->
+                                    <!--</div>-->
+                                    <!--<div class="videoPic">-->
+                                        <!--<img class="videoImg" src="images/3.png" alt="">-->
+                                    <!--</div>-->
+                                    <!--<footer class="videoInfo">-->
+                                        <!--<img class="videoInfo_backPic" src="images/titleMask.png" alt="">-->
+                                        <!--<span class="videoTitle">捉妖记</span>-->
+                                        <!--<span class="videoTime">上次观看到00:24:21</span>-->
+                                    <!--</footer>-->
+                                <!--</div>-->
+                            <!--</li>-->
+
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="recentCollect">
+                <div class="recommend">
+                    <img src="images/arrow.png" alt="">
+                    <span class="needTranslate_recent">Home</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="display: none" class="videoTemplate" data-role="videoTemplate">
+            <li class="videoTemplateLi">
+                <div class="videoDiv">
+                    <div class="videoBorder">
+                        <img class="videoBorder_img" src="images/block_bg_focus_normal.png" alt="">
+                    </div>
+                    <div class="videoPic">
+                        <img class="videoImg" src="images/2.png" alt="">
+
+                        <div class="mask">
+                            <div class="deleteDiv">
+                                <img class="delete_img" src="images/deleteHistory.png" alt="">
+                                <div class="delete_tip">
+                                    <span class="needTranslate_recent">delete one</span>
+                                    <span class="needTranslate_recent">delete all</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <footer class="videoInfo">
+                        <img class="videoInfo_backPic" src="images/titleMask.png" alt="">
+                        <span class="videoTitle scrollSpan"></span>
+                        <span class="videoTime"></span>
+                    </footer>
+
+                </div>
+            </li>
+        </div>
+
+        <div style="display: none" class="appTemplate" data-role="appTemplate">
+            <li class="appTemplateLi">
+                <div class="appDiv">
+                    <div class="appBorder">
+                        <img class="appBorder_img" src="images/app_block_bg_focus_normal.png" alt="">
+                    </div>
+                    <div class="appBackPic">
+                        <img class="appBackPic_img" src="images/appBackground.png" alt="">
+                        <img class="appPic_img" src="images/cinetrailer.png" alt="">
+
+                        <div class="mask">
+                            <div class="deleteDiv">
+                                <img class="delete_img" src="images/deleteHistory.png" alt="">
+                                <div class="delete_tip">
+                                    <span class="needTranslate_recent">delete one</span>
+                                    <span class="needTranslate_recent">delete all</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appName">
+                        <span class="appName_span scrollSpan"></span>
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <!--<div id="deleteTips">
+            <span id="deleteContent" class='needTranslate_recent_dailog'>Do you want to delete all records?</span>
+            <div class="dialogButton needTranslate_recent_dailog" style="left: 0px; background: rgb(225, 31, 31);">Done</div>
+            <div class="dialogButton needTranslate_recent_dailog" style="right: 0px; background: rgb(33, 32, 37);">Cancel</div>
+        </div>-->
+        <div id="deleteTips">
+            <span id="dialogName">Tips</span>
+            <span id="deleteContent" class='needTranslate_recent_dailog' style="">Do you want to delete all records?</span>
+            <img id="dialogFocus" style=" position:absolute ;left:140px; bottom:39px; height:64px; width:204px;" src="images/Focus_Pop_up_box.png">
+            <div class="dialogButton needTranslate_recent_dailog" style="left:140px; font-size:20px;">Done</div>
+            <div class="dialogButton needTranslate_recent_dailog" style="left:480px; font-size:20px;">Cancel</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+CACHE MANIFEST 
+
+#version 5.28
+
+CACHE:
+http://s3.tcllauncher.com/html5/search/resultSearch.css
+http://s3.tcllauncher.com/html5/search/resultSearch.js
+
+http://s3.tcllauncher.com/html5/images/Loading-01.png
+
+NETWORK:
+*

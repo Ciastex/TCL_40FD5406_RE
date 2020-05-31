@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="CommonWebApp" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <set-env>
+        <env tvos:name="LD_LIBRARY_PATH" tvos:mode="front">/system/tbrowser2/lib</env>
+    </set-env>
+    <application tvos:persistet="true">
+        <activity tvos:name="CommonWebApp" >
+            <intent-filter>
+                <action tvos:name="tvos.CommonWebApp" />
+                <category tvos:name="tvos.intent.category.LAUNCHER" />
+            </intent-filter>
+			<intent-filter>
+                <action tvos:name="tvos.CommonWebApp.NoLoading" />
+            </intent-filter>
+            <intent-filter>
+                <action tvos:name="tvos.CommonWebApp.NoErrorPage" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

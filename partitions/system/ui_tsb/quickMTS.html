@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="all.css">
+    <script type="text/javascript" src="quickMTS.js"></script>
+    <style type="text/css">
+
+        #countDown {
+            position: absolute;
+            width: 295px;
+            height: 100px;
+            line-height: 100px;
+            background: #000;
+            /*bottom:100px;*/
+            top: 108px;
+            left: 308px;
+            overflow: hidden;
+            opacity: 0.92;
+            color: #FFFFFF;
+            font-size: 24px;
+            border-top: 4px solid #1b1b1b;
+            border-bottom: 4px solid #1b1b1b;
+            border-right: 4px solid #1b1b1b;
+            display: block;
+        }
+
+        #preSetBarSleep {
+            position: absolute;
+            background: #000;
+            /*bottom:100px;*/
+            overflow: hidden;
+            opacity: 0.92;
+            background: url(images/History_bg.png);
+            width: 360px;
+            height: 1080px;
+            left: 0px;
+            display: block;
+        }
+
+        #preSetOptionSleep {
+            position: absolute;
+            top: 55px;
+	     text-align: center;
+		font-size: 28px;
+            color: #b0b0b0;
+            width: 360px;
+            white-space: nowrap;
+        }
+
+        .marquee {
+            white-space: nowrap;
+            /*overflow: hidden;*/
+
+            /* Safari and Chrome  */
+            overflow-x: -webkit-marquee;
+            -webkit-marquee-direction: backwards;
+            -webkit-marquee-style: scroll;
+            -webkit-marquee-speed: fast;
+            -webkit-marquee-increment: small;
+            -webkit-marquee-repetition: infinite;
+
+            /* W3C  */
+            overflow-x: marquee-line;
+            marquee-direction: forward;
+            marquee-style: scroll;
+            marquee-speed: fast;
+            marquee-play-count: infinite;
+        }
+    </style>
+
+</head>
+
+<body onload="init()" onunload="uninit()">
+<!----------------------重置选择列表--------------------------->
+<div id="preSetBarSleep">
+    <span id="preSetOptionSleep"></span>
+    <span class="preSetValue" style="width:310px;left:25px; top:100px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:200px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:300px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:400px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:500px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:600px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:700px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:800px;"></span>
+    <span class="preSetValue" style="width:310px;left:25px;top:900px;"></span>
+    <img id="preSetSelectFocusSleep" src="images/focus-Tuner_mode.png"
+         style="position:absolute;display:block; top:120px; left:5px; pointer-events:none; width:350px; height:64px;"/>
+</div>
+</body>
+</html>

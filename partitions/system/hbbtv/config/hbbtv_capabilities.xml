@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<profilelist> 
+  <ui_profile name="OITF_HD_UIPROF+DVB_S+TRICK_MODE+DVB_T_FVC_P3"> 
+    <ext> 
+      <drm name="drm" DRMSystemID="urn:dvb:casystemid:19219">urn:dvb:casystemid:19188</drm>  
+      <parentalcontrol schemes="dvb-si">true</parentalcontrol> 
+    </ext> 
+  </ui_profile>  
+  <video_profile name="MP4_AVC_SD_25_HEAAC" type="video/mp4" transport="dash"/>  
+  <video_profile name="MP4_AVC_HD_25_HEAAC" type="video/mp4" transport="dash"/>  
+  <audio_profile name="MPGE1_L3" type="audio/mpeg"/>  
+  <audio_profile name="HEAAC" type="audio/mp4"/>  
+  <video_profile name="TS_AVC_SD_25_HEAAC" type="video/mpeg"/>  
+  <video_profile name="TS_AVC_HD_25_HEAAC" type="video/mpeg"/>  
+  <video_profile name="MP4_AVC_SD_25_HEAAC" type="video/mp4"/>  
+  <video_profile name="MP4_AVC_HD_25_HEAAC" type="video/mp4"/>  
+  <video_profile name="TS_AVC_SD_25_E-AC3" type="video/mpeg"/>  
+  <video_profile name="TS_AVC_HD_25_E-AC3" type="video/mpeg"/>  
+  <video_profile name="MP4_AVC_SD_25_E-AC3" type="video/mp4"/>  
+  <video_profile name="MP4_AVC_HD_25_E-AC3" type="video/mp4"/>  
+  <video_profile name="MP4_AVC_SD_25_E-AC3" type="video/mp4" transport="dash"/>  
+  <video_profile name="MP4_AVC_HD_25_E-AC3" type="video/mp4" transport="dash"/>  
+  <html5_media>true</html5_media>
+</profilelist>

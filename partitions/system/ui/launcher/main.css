@@ -1,0 +1,63 @@
+.app_background
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.app_foreground
+{
+    position: absolute;
+    left: 87px;
+    top: 60px;
+    width: 106px;
+    height: 106px;
+}
+
+.app_zhezhao
+{
+    bottom: 0px;
+    height: 60px;
+    width: 100%;
+}
+
+.appicon
+{
+    position:absolute;
+    height:281px;
+    width:281px;
+}
+
+.appicon img
+{
+    position: absolute;
+    
+}
+
+.iconimag
+{
+  left:87px;
+  top:60px;
+  width: 106px;
+  height: 106px;
+}
+
+.appicon span
+{
+    position: absolute;
+    bottom: 36px;
+    left: 0px;
+    width:281px;
+    overflow: hidden;
+    font-size: 36px;
+    font-family: 'Helvetica World';
+    color: #e0e0e0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.elem_block_title
+{
+    padding-top: 5px;
+}

@@ -1,0 +1,93 @@
+<html>
+<head>
+<script type="text/javascript" src="keyboard.js"></script>
+<script type="text/javascript" src="dummy.js"></script>
+<script>
+var password = "";
+var passwordTimeout;
+var repeatTimerIndex;
+function init()
+{
+    showKeyBoard();
+    mouseCallBack.funcOk=toOK;
+    mouseCallBack.funcMouseUp=repeatkeyupproc;
+}
+function toOK()
+{
+var key=top.toOkGetChar();
+if(key=="back")
+		{
+			if(passwordTimeout!=0)
+			{
+				clearTimeout(passwordTimeout);
+				passwordTimeout = 0;
+				showPassword('');//是否该变成*号再删除，还是直接删除?
+			}
+			if(password.length>0)
+			{
+
+				password = password.substr(0,password.length - 1);
+				showPassword('');
+			}
+
+            //NT563平台持续按输入法的回退按键会导致setInterval里的函数无限循环执行，从而导致输入法无法输入字符
+            if (repeatTimerIndex != 0)
+            {
+                clearInterval(repeatTimerIndex);
+                repeatTimerIndex = 0;
+            }
+
+			repeatTimerIndex = setInterval(function() {
+				if(password.length>0)
+				{
+					password = password.substr(0,password.length - 1);
+					showPassword('');
+				}
+				top.timeoutFuc.osdTimeoutEndFuc();
+				top.timeoutFuc.osdTimeoutStartFuc();
+			},300);
+		}
+		else if(key=="!one" || key =="shift" || key=="symPage1" || key=="symPage2" ||key=="changeChar" || key=="changeLang" || key=="setting")
+		{
+			return;
+		}
+		else
+		{
+			if(passwordTimeout!=0)
+			{
+				clearTimeout(passwordTimeout);
+				passwordTimeout = 0;
+				showPassword('');
+			}
+			showPassword(key);
+			password=password+key;
+			passwordTimeout = setTimeout("showPasswordByKeyboard()", 500);
+		}
+}
+
+function showPassword(key)
+{
+	$("input").innerHTML = password.replace(/[ \S]/g, "*") + key;
+	console.log("showPassword("+key+")--password="+password);
+}
+
+function showPasswordByKeyboard()
+{
+	passwordTimeout = 0;
+	showPassword('');
+}
+
+function repeatkeyupproc(evt)
+{
+	if (repeatTimerIndex != 0)
+	{
+		clearInterval(repeatTimerIndex);
+		repeatTimerIndex = 0;
+	}
+}
+</script>
+</head>
+<body onload="init()">
+<div id="input"></div>
+</body>
+</html>

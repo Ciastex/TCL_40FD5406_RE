@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fixer>
+	<element>
+		<notation>解决amazon应用js无法获取扩展方法</notation>
+		<name>fix amazon get jsext method</name>
+		<whiteUrl>
+			<url>https://atv-ext-eu.amazon.com</url>
+		</whiteUrl>
+		<blackUrl>
+		</blackUrl>
+		<position>bottom</position>
+		<type>js</type>
+		<file>js_amazon.js</file>
+	</element>
+</fixer>

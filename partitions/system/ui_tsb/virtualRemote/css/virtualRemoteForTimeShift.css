@@ -1,0 +1,288 @@
+﻿
+/* -------------------------------------------------------------------  */
+.virtualremotediv
+{
+	position: absolute;
+
+	left: 1430px;
+	top: 810px;
+	width: 440px;
+	height: 220px;
+	background-image:url("../img/Vkey_bg_4.png");
+	display: inline-table;
+}
+
+
+
+/* ----------------------------------------- 8、 播放键：play、stop、pause        不显示 -----------table显示与否设置-------------------*/
+
+.t08_play
+{
+	width:420px;
+    height:90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+
+    border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+    border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+    display: inline-table;
+}
+
+.t08_play td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 140px;
+	height: 90px;
+}
+
+/* ----------------------------------------- 9、 播放键：快退、  、快进             不显示 -----------table显示与否设置-------------------*/
+
+.t09_play
+{
+	width:420px;
+    height:90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0px;
+
+    border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+    border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+   display: inline-table;
+}
+
+.t09_play td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 140px;
+	height: 90px;
+}
+
+
+
+
+
+
+
+
+
+
+/*----------------------------table内部标签的样式定义:未选中、选中------------------------------*/
+
+
+
+
+/* ----------------------------------------- 1、1-9 的文字的样式 ：未选中、选中------------------------------*/
+
+.span_number
+{
+	font-size: 40px;
+	color: #aaaaaa;
+}
+
+.span_number_f
+{
+	font-size: 40px;
+	color: #ffffff;
+}
+
+/* ----------------------------------------- 2、非数字的文字的样式 ：未选中、选中------------------------------*/
+
+.span_text
+{
+	font-size: 36px;
+	color: #aaaaaa;
+}
+
+.span_text_f
+{
+	font-size: 36px;
+	color: #ffffff;
+}
+
+
+
+/* ----------------------------------------- 3、红色按键的样式 ：未选中、选中------------------------------*/
+
+.pic_r
+{
+	background-image:url("../img/Vkey_K_R.png");
+}
+
+.pic_r_f
+{
+	background-image:url("../img/Vkey_K_R_Hi.png");
+}
+
+
+/* ----------------------------------------- 4、绿色按键样式 ：未选中、选中------------------------------*/
+
+.pic_g
+{
+	background-image:url("../img/Vkey_K_G.png");
+}
+
+.pic_g_f
+{
+	background-image:url("../img/Vkey_K_G_Hi.png");
+}
+
+
+
+/* ----------------------------------------- 5、黄色按键的样式 ：未选中、选中------------------------------*/
+
+.pic_y
+{
+	background-image:url("../img/Vkey_K_Y.png");
+}
+
+.pic_y_f
+{
+	background-image:url("../img/Vkey_K_Y_Hi.png");
+}
+
+/* ----------------------------------------- 5、蓝色按键的样式 ：未选中、选中------------------------------*/
+
+.pic_b
+{
+	background-image:url("../img/Vkey_K_B.png");
+}
+
+.pic_b_f
+{
+	background-image:url("../img/Vkey_K_B_Hi.png");
+}
+
+
+/* ----------------------------------------- 6、PVR:红色录制点的样式 ：未选中、选中------------------------------*/
+
+/* PVR按键非选中时的样式 */
+.pic_reddot
+{
+	background-image:url("../img/Vkey_K_Pvr.png");
+}
+
+
+/* PVR按键选中时的样式 */
+.pic_reddot_f
+{
+	background-image:url("../img/Vkey_K_Pvr_Hi.png");
+}
+
+/* ----------------------------------------- 7、PVR:绿色按键的样式 ：未选中、选中------------------------------*/
+
+.pic_blue
+{
+	background-repeat:no-repeat;
+	background-image:url("../img/Vkey_K_B.png");
+}
+
+.pic_blue_f
+{
+	background-image:url("../img/Vkey_K_B_Hi.png");
+}
+
+
+/* ----------------------------------------- 8、play按键的样式 ：未选中、选中------------------------------*/
+
+.pic_play
+{
+	background-image:url("../img/Vkey_K_Play.png");
+}
+
+.pic_play_f
+{
+	background-image:url("../img/Vkey_K_Play_Hi.png");
+}
+
+
+
+/* ----------------------------------------- 9、stop按键的样式 ：未选中、选中------------------------------*/
+
+.pic_stop
+{
+	background-image:url("../img/Vkey_K_Stop.png");
+	visibility:visible;
+}
+
+.pic_stop_f
+{
+	background-image:url("../img/Vkey_K_Stop_Hi.png");
+}
+
+
+
+
+/* ----------------------------------------- 10、pause按键的样式 ：未选中、选中------------------------------*/
+
+.pic_pause
+{
+	background-image:url("../img/Vkey_K_Pause.png");
+}
+
+.pic_pause_f
+{
+	background-image:url("../img/Vkey_K_Pause_Hi.png");
+}
+
+
+
+/* ----------------------------------------- 11、FB按键的样式 ：未选中、选中------------------------------*/
+
+.pic_fb
+{
+	background-image:url("../img/Vkey_K_FB.png");
+}
+
+.pic_fb_f
+{
+	background-image:url("../img/Vkey_K_FB_Hi.png");
+}
+
+
+
+
+/* ----------------------------------------- 12、FF按键的样式 ：未选中、选中------------------------------*/
+
+.pic_ff
+{
+	background-image:url("../img/Vkey_K_FF.png");
+}
+
+
+.pic_ff_f
+{
+	background-image:url("../img/Vkey_K_FF_Hi.png");
+}
+
+
+
+
+
+/* ----------------------------------------- 13、大焦点的样式 、小焦点的样式-----------------------------------------*/
+
+.focus_b
+{
+	position:absolute;
+	top:560px;
+	left:1560px;
+	width: 180px;
+	height: 90px;
+	background-image: url("../img/Vkey_Focus_1.png");
+	display: inline-table;
+}
+
+.focus_s
+{
+	position:absolute;
+	top:560px;
+	left:1560px;
+	width: 130px;
+	height: 90px;
+	background-image: url("../img/Vkey_Focus_2.png");
+	display: inline-table;
+}

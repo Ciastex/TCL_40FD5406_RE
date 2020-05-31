@@ -1,0 +1,591 @@
+{
+  "width": 62,
+  "height": 62,
+  "prefetch": 300,
+  "events": [
+    {
+      "mode": "Source",
+      "fill": "#00000000",
+      "name": "clear"
+    },
+    {
+      "mode": "Source",
+      "name": "0_0",
+      "fill": "#E5091419",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 34,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 1102,
+        "y": 0,
+        "width": 34,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "1_0",
+      "fill": "#E5091412",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 1054,
+        "y": 0,
+        "width": 48,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "2_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 620,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "3_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 788,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "4_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 558,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "5_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 56
+      },
+      "duration": 30,
+      "source": {
+        "x": 186,
+        "y": 62,
+        "width": 62,
+        "height": 56
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "6_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 56
+      },
+      "duration": 30,
+      "source": {
+        "x": 124,
+        "y": 62,
+        "width": 62,
+        "height": 56
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "7_0",
+      "fill": "#E5091412",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 48
+      },
+      "duration": 30,
+      "source": {
+        "x": 558,
+        "y": 62,
+        "width": 62,
+        "height": 48
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "8_0",
+      "fill": "#E5091412",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 48
+      },
+      "duration": 30,
+      "source": {
+        "x": 496,
+        "y": 62,
+        "width": 62,
+        "height": 48
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "9_0",
+      "fill": "#E5091412",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 48
+      },
+      "duration": 30,
+      "source": {
+        "x": 434,
+        "y": 62,
+        "width": 62,
+        "height": 48
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "10_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 56
+      },
+      "duration": 30,
+      "source": {
+        "x": 62,
+        "y": 62,
+        "width": 62,
+        "height": 56
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "11_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 56
+      },
+      "duration": 30,
+      "source": {
+        "x": 0,
+        "y": 62,
+        "width": 62,
+        "height": 56
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "12_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 496,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "13_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 434,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "14_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 8,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 952,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "15_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 8,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 898,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "16_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 8,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 844,
+        "y": 0,
+        "width": 54,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "17_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 372,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "18_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 310,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "19_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 248,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "20_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 186,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "21_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 124,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "22_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 8,
+        "width": 62,
+        "height": 54
+      },
+      "duration": 30,
+      "source": {
+        "x": 372,
+        "y": 62,
+        "width": 62,
+        "height": 54
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "23_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 8,
+        "width": 62,
+        "height": 54
+      },
+      "duration": 30,
+      "source": {
+        "x": 310,
+        "y": 62,
+        "width": 62,
+        "height": 54
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "24_0",
+      "fill": "#E5091410",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 8,
+        "width": 62,
+        "height": 54
+      },
+      "duration": 30,
+      "source": {
+        "x": 248,
+        "y": 62,
+        "width": 62,
+        "height": 54
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "25_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 62,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "26_0",
+      "fill": "#E509140E",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 0,
+        "y": 0,
+        "width": 62,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "27_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 732,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "28_0",
+      "fill": "#E509140F",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 676,
+        "y": 0,
+        "width": 56,
+        "height": 62
+      }
+    },
+    {
+      "mode": "Source",
+      "name": "29_0",
+      "fill": "#E5091412",
+      "url": "Spinner_Splash.png",
+      "dest": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 62
+      },
+      "duration": 30,
+      "source": {
+        "x": 1006,
+        "y": 0,
+        "width": 48,
+        "height": 62
+      }
+    },
+    {
+      "name": "loop",
+      "send": true,
+      "count": null
+    },
+    {
+      "name": "done",
+      "send": true
+    }
+  ]
+}

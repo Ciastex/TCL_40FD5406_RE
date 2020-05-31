@@ -1,0 +1,982 @@
+/**
+ * Created by lqt on 2017/3/27.
+ */
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.bodyWrap{
+    width: 1920px;
+    height: 1080px;
+}
+.wrap{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+}
+/*头部删除提示*/
+.tools{
+    float: right;
+    color: #fff;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+.tools img{
+    vertical-align: middle;
+}
+.tools span{
+    vertical-align: middle;
+}
+
+/*1、视频截图*/
+.screenShots{
+    height: 378px;
+}
+
+/*------最左侧的more app------*/
+/*--------------*/
+/*左侧的more*/
+.moreAppsContent{
+    position: relative;
+    width: 284px !important;
+    float: left;
+    list-style: none;
+}
+.moreAppsContent:hover .border{
+    visibility: visible;
+}
+.moreAppsContent.active2 .border{
+    visibility: visible;
+}
+.moreAppsContent .backImg{
+    width: 284px !important;
+}
+.moreAppsContent .rectangle{
+    position: absolute;
+    top: 142px;
+    left: 112px;
+}
+.moreAppsContent .videoInfo{
+    background-image: none;
+    width: 284px !important;
+}
+.moreAppsContent .videoTip{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -26px;
+    margin-top: -6px;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+/*上一个和下一个的标题*/
+.title{
+    font-size: 40px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 76px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+
+}
+
+/*当前的标题*/
+.activeTitle{
+    font-size: 46px;
+    color: #fff;
+    line-height: 46px;
+    margin-left: 76px;
+    font-weight: normal;
+    margin-bottom: 128px;
+}
+
+.moreContent{
+
+}
+
+/*第三个，我的收藏*/
+.recentCollect .title{
+    position: absolute;
+    bottom: 10px;
+}
+
+.recentCollect .recommend{
+    position: absolute;
+    bottom: 68px;
+    right: 42px;
+}
+
+/*右下角的*/
+.recommend{
+
+}
+.recommend img{
+    display: block;
+}
+.recommend span{
+    font-size: 28px;
+    color: red;
+}
+
+.clearfix:after{
+    content: '';
+    display:block;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+
+/*焦点框*/
+.border{
+    top: -10px;
+    left: -2px;
+    visibility: hidden;
+    width: 271px;
+    height: 328px;
+    position: absolute;
+    z-index: 100;
+    transform: none;
+    border: 12px solid transparent;
+    border-image: url('images/history/focus.png') 12 12 stretch;
+}
+
+/*-----------------------最近应用-----------------------------*/
+.recentApp{
+    height: 532px;
+    width: 1920px;
+    position: absolute;
+    top:360px;
+    /*border: 1px solid red;*/
+    overflow: hidden;
+
+}
+/*标题：最近应用*/
+.appHeader span{
+    margin-top: 0px;
+    font-size: 40px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 76px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+    /*transition: all 0.3s;*/
+}
+
+.upShow .appHeader span{
+    margin-top: 18px;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.contentWrap{
+    position: absolute;
+    height: 532px;
+    width: 1920px;
+    overflow: hidden;
+}
+
+/*内容：6个应用*/
+.appBody{
+    position: absolute;
+    /*transition: all 0.3s;*/
+    top:-300px;
+    left:78px;
+}
+
+.upShow .appBody{
+    position: absolute;
+    top:140px;
+}
+
+.appBody li{
+    float: left;
+    list-style: none;
+    margin-right: 12px;
+}
+
+/*每个li里面的div*/
+.appDiv{
+    position: relative;
+    width: 228px;
+    height: 228px;
+}
+
+.appDiv.appActive{
+    z-index:10;
+}
+
+
+
+
+
+/*  正常 焦点边框  */
+.appBorder_img{
+    width: 294px;
+    margin-left: -33px;
+    margin-top: -31px;
+    height: 286px;
+    visibility: hidden;
+    opacity: 0;
+    /*transition: all 0.3s;*/
+}
+
+/*  获取焦点的  焦点边框*/
+
+.appActive .appBorder_img{
+    width: 315px;
+    height: 415px;
+    visibility: visible;
+    margin-left: -44px;
+    margin-top: -154px;
+    opacity: 1;
+}
+
+/*  正常的     灰色背景 和 图标  */
+.appBackPic{
+    position: absolute;
+    top:0px;
+    width: 228px;
+    height: 228px;
+    /*transition: all 0.3s;*/
+
+}
+
+/*  获取焦点的  灰色背景 和 图标*/
+.appActive .appBackPic{
+    top: -110px;
+    transform:scale(1.088);
+}
+
+/*   灰色背景  */
+.appBackPic_img{
+    width: 228px;
+    height: 228px;
+}
+
+
+
+/*----------删除--------------------*/
+.appBackPic .mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    top:0;
+
+    background-color: rgba(0,0,0,.7);
+
+    display: none;
+
+}
+
+.appActive .appBackPic .mask{
+    display: none;
+}
+
+
+
+.appBackPic .delete_img{
+    position: absolute;
+    top: 35%;
+    /*left: 50%;*/
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    margin-top: 2px;
+    display: none;
+}
+
+.appActive .appBackPic .delete_img{
+    display: block;
+}
+
+.appBackPic .delete_tip{
+    position: absolute;
+    top: 35%;
+    /*left: 50%;*/
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    display: none;
+}
+
+.appBackPic .delete_tip{
+    display: block;
+}
+
+.appActive .appBackPic .delete_tip{
+    display: block;
+}
+
+.appBackPic .delete_tip span{
+    display: none;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+    margin-top: 11px;
+}
+
+.appActive .appBackPic .delete_tip span{
+    display: block;
+}
+
+
+/*.appBackPic .delete_img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    display: none;
+}*/
+
+
+
+
+
+
+/*----------删除--------------------*/
+
+
+/*   应用图标  */
+.appPic_img{
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left: -51px;
+    margin-top: -51px;
+    width: 102px;
+    height: 102px;
+}
+
+.borderApp_img{
+    position: absolute;
+    top: 0px;
+    width: 244px;
+    height: 248px;
+    margin-left: -9px;
+    margin-top: -9px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.appActive .borderApp_img{
+    visibility: visible;
+    opacity: 1;
+}
+
+/*  应用名  */
+.appName{
+    position: absolute;
+    top:182px;
+    width: 228px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*transition: all 0.3s;*/
+}
+
+.appActive .appName{
+    top:168px;
+    left: -20px;
+}
+
+.appName_span{
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 20px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+    /*transition: all 0.3s;*/
+}
+
+.appActive .appName_span{
+    font-size: 30px;
+}
+
+.appDiv.active3 {
+    transform: scale(1.1);
+    margin-top: -60px;
+}
+
+.appDiv.active3 .appBorder {
+    visibility: visible;
+}
+
+.appDiv.active3 .appBorder_img{
+    width: 289px;
+    height: 379px;
+    margin-left: -30px;
+    margin-top: -55px;
+}
+
+/*app 的 moreApp*/
+.moreAppDiv{
+    position: relative;
+    width: 284px;
+    height: 228px;
+}
+.appActive .moreAppBorder{
+    visibility: visible;
+}
+
+/*灰色的背景 div*/
+.moreAppBackPic{
+    position: absolute;
+    top:0px;
+    width: 284px;
+    height: 228px;
+}
+/*灰色的背景 img*/
+.moreAppBackPic_img{
+    width: 284px;
+    height: 228px;
+}
+
+/*   应用图标  */
+.moreAppPic{
+    position: absolute;
+    top:32%;
+    left:50%;
+    margin-left: -30px;
+    margin-top: 0px;
+    width: 60px;
+    height: 11px;
+}
+
+.moreAppPic_img{
+    width: 60px;
+    height: 11px;
+}
+
+/*  应用名  */
+.moreAppName{
+    position: absolute;
+    top:182px;
+    left:34%;
+}
+
+.moreAppName_span{
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 20px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+}
+
+/*没有应用时的提示*/
+/*  应用名  */
+.noApp{
+    position: absolute;
+    left: 0;
+    top: 32%;
+    width: 100%;
+}
+.noApp span:nth-child(1){
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    font-weight: lighter;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.noApp span:nth-child(2){
+    font-size: 48px;
+    color: #fff;
+    line-height: 38px;
+    font-weight: lighter;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/*焦点框*/
+.moreAppBorder{
+    top: -10px;
+    left: -2px;
+    visibility: hidden;
+    width: 271px;
+    height: 225px;
+    position: absolute;
+    z-index: 100;
+    transform: none;
+    border: 12px solid transparent;
+    border-image: url('images/history/focus.png') 12 12 stretch;
+}
+
+/*-------------------------最近观看-------------------------------*/
+.recentWatch{
+    height: 532px;
+    width: 1920px;
+    /*border: 1px solid red;*/
+    position: absolute;
+    top:452px;
+    overflow: visible;
+}
+
+.recentWatchContent{
+    height: 532px;
+    width: 1920px;
+    /*border: 1px solid red;*/
+    position: absolute;
+    top:0px;
+    /*transition: all 0.3s;*/
+}
+.upHide .recentWatchContent{
+    height: 532px;
+    width: 1920px;
+    /*border: 1px solid red;*/
+    position: absolute;
+    top:460px;
+}
+
+/*标题：最近观看*/
+.videoHeader span{
+    font-size: 48px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 76px;
+    margin-bottom: 38px;
+    display: inline-block;
+    font-weight: normal;
+    /*transition: all 0.3s;*/
+}
+
+.upHide .videoHeader span{
+    font-weight: lighter;
+    font-size: 40px;
+}
+
+/*内容：6个视频*/
+.videoBody{
+    position: absolute;
+    top:178px;
+    left:94px;
+}
+.videoBody.upShow{
+}
+
+.videoBody li{
+    float: left;
+    list-style: none;
+    margin-right: 12px;
+}
+
+/*每个li里面的div*/
+.videoDiv{
+    position: relative;
+    width: 228px;
+    height: 252px;
+}
+
+.videoDiv.videoActive{
+    z-index:10;
+}
+
+
+
+/*!*  正常 焦点边框  *!*/
+.videoBorder_img{
+    margin-left: -30px;
+    width: 293px;
+    height: 380px;
+    margin-top: -26px;
+    opacity: 0;
+    visibility: hidden;
+    /*transition: all 0.3s;*/
+}
+
+/*  获取焦点的  焦点边框*/
+.videoActive .videoBorder_img{
+    opacity: 1;
+    visibility: visible;
+    width: 320px;
+    height: 426px;
+    margin-left: -44px;
+    margin-top: -126px;
+}
+
+/*  正常的  海报 + 纯边框 */
+.videoPic{
+    position: absolute;
+    top:0px;
+    width: 228px;
+    height: 264px;
+    /*transition: all 0.3s;*/
+}
+
+/*  正常的  海报   */
+.videoPic .videoImg{
+    width: 228px;
+    height: 263px;
+}
+
+/*  正常的  纯边框   */
+.borderVideo_img{
+    position: absolute;
+    top: 0px;
+    width: 245px;
+    height: 281px;
+    margin-left: -9px;
+    margin-top: -9px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/*  获取焦点的  海报 + 纯边框 */
+.videoActive .videoPic{
+    top: -88px;
+    transform: scale(1.088);
+}
+
+/*----------删除--------------------*/
+.videoPic .mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    top:0;
+
+    background-color: rgba(0,0,0,.7);
+
+    display: none;
+
+}
+
+.videoActive .videoPic .mask{
+    display: none;
+}
+
+
+
+.videoPic .delete_img{
+    position: absolute;
+    top: 35%;
+    /*left: 50%;*/
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    margin-top: 2px;
+    display: none;
+}
+
+.videoActive .videoPic .delete_img{
+    display: block;
+}
+
+.videoPic .delete_tip{
+    position: absolute;
+    top: 35%;
+    /*left: 50%;*/
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    display: none;
+}
+
+.videoPic .delete_tip{
+    display: block;
+}
+
+.videoActive .videoPic .delete_tip{
+    display: block;
+}
+
+.videoPic .delete_tip span{
+    display: none;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+    margin-top: 11px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.videoActive .videoPic .delete_tip span{
+    display: block;
+}
+
+
+/*.videoPic .delete_img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 222px;
+    height: 56px;
+    transform: translate(-50%, -50%);
+
+    display: none;
+}*/
+
+
+
+
+
+
+/*----------删除--------------------*/
+
+
+
+/*  获取焦点的  纯边框 */
+.videoActive .borderVideo_img{
+    visibility: visible;
+    opacity: 1;
+}
+
+.videoInfo{
+    position: absolute;
+    top: 194px;
+    /* height: 70px; */
+    overflow: hidden;
+}
+
+.videoInfo_backPic{
+    width: 228px;
+    height: 69px;
+    opacity: 1;
+    /*transition: all 0.8s 0.1s;*/
+}
+
+.videoActive .videoInfo_backPic{
+    opacity: 0;
+    /*transition: all 0.1s ;*/
+}
+
+.videoTitle{
+    position: absolute;
+    top:18px;
+    left: 18px ;
+    font-size: 25px;
+    color: #fff;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    white-space: nowrap;
+    /*max-width: 200px;*/
+    /*transition: all 0.3s;*/
+}
+.videoActive .videoTitle{
+    top: 23px;
+    left: 0px;
+    font-size: 30px;
+}
+
+.videoTime{
+    position: absolute;
+    top:60px;
+    left: 18px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.videoActive .videoTime{
+    top: 75px;
+    left: 0px;
+}
+
+/*-------------更多视频----------------*/
+/*moreVideo 的 moreVideo*/
+.moreVideoDiv{
+    position: relative;
+    width: 284px;
+    height: 263px;
+}
+
+
+/*灰色的背景 div*/
+.moreVideoPic{
+    position: absolute;
+    top:0px;
+    width: 284px;
+    height: 252px;
+}
+
+/*灰色的背景 img*/
+.moreVideoBackImg{
+    width: 284px;
+    height: 263px;
+}
+/* ...  */
+.moreVideoImg{
+    position: absolute;
+    top:32%;
+    left:50%;
+    margin-left: -30px;
+    margin-top: 0px;
+    width: 60px;
+    height: 11px;
+}
+/*   边框   */
+.borderMoreVideo_img{
+    top: -7px;
+    left: -11px;
+    visibility: hidden;
+    width: 304px;
+    height: 279px;
+    position: absolute;
+    z-index: 100;
+    transform: none;
+}
+.videoActive .borderMoreVideo_img{
+    visibility: visible;
+}
+
+/*  影片名  */
+.moreVideoInfo{
+    position: absolute;
+    top:182px;
+    left:34%;
+}
+
+.moreVideoTitle{
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    margin-left: 20px;
+    font-weight: lighter;
+    margin-bottom: 38px;
+    display: inline-block;
+}
+
+.noVideoInfo{
+    position: absolute;
+    left: 0;
+    top: 32%;
+    width: 100%;
+}
+
+.noVideoInfo span:nth-child(1){
+    font-size: 25px;
+    color: #fff;
+    line-height: 38px;
+    font-weight: lighter;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.noVideoInfo span:nth-child(2){
+    font-size: 48px;
+    color: #fff;
+    line-height: 38px;
+    font-weight: lighter;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/*焦点框*/
+.moreAppBorder{
+    top: -10px;
+    left: -2px;
+    visibility: hidden;
+    width: 271px;
+    height: 225px;
+    position: absolute;
+    z-index: 100;
+    transform: none;
+    border: 12px solid transparent;
+    border-image: url('images/history/focus.png') 12 12 stretch;
+}
+/*
+
+#deleteTips
+{
+  position:absolute;
+  height:410px;
+  width:781px;
+  top:334px; 
+  left:544px; 
+  background:#393a3d;
+  display:none;
+  z-index:2000;
+}
+
+#deleteContent
+{
+  position:absolute;
+  width:689px;
+  top:125px;
+  color:#c5c7d0; 
+  font-size:32px;
+  left:46px; 
+  text-align:left;
+  line-height:48px;
+}
+#deleteTips .dialogButton
+{
+    position:absolute;
+    width:390px;
+    height:65px;
+    bottom:0px;
+    padding-top:30px;
+    font-size:34px;
+    color:#FFFFFF;
+    text-align:center;
+    background:#212025;
+}*/
+#deleteTips
+{
+    position:absolute;
+    height:410px;
+    width:830px;
+    top:334px;
+    left:544px;
+    background:url(../images/Bg-Pop_up_box-04.png);
+    display:none;
+    z-index:2000;
+}
+
+#deleteContent
+{
+    position:absolute;
+    width:710px;
+    top:125px;
+    color:#b0b0b0;
+    font-size:28px;
+    left:60px;
+    text-align:left;
+    line-height:48px;
+}
+#dialogName
+{
+    position:absolute;
+    width:710px;
+    top:30px;
+    color:#b0b0b0;
+    font-size:32px;
+    left:60px;
+    text-align:left;
+}
+.dialogButton/*对话框中的按钮样式*/
+{
+    position:absolute;
+    width:204px;
+    height:44px;
+    bottom:40px;
+    padding-top:20px;
+    font-size:25px;
+    font-weight:bold;
+    color:#fff;
+    text-align:center;
+    background:url(../images/Focus_Pop_up_box_no.png);
+}

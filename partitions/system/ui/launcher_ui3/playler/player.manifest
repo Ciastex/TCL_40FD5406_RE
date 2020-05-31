@@ -1,0 +1,14 @@
+CACHE MANIFEST 
+
+#version 5.28
+
+CACHE:
+http://s3.tcllauncher.com/html5/playler/player.css
+
+http://s3.tcllauncher.com/html5/images/player/play_button2.png
+http://s3.tcllauncher.com/html5/images/player/before_button.png
+http://s3.tcllauncher.com/html5/images/player/pause_button.png
+http://s3.tcllauncher.com/html5/images/player/next_button.png
+
+NETWORK:
+*

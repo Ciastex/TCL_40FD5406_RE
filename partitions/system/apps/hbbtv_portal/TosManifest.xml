@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="HbbtvPortal" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <application tvos:persistet="true">
+        <activity tvos:name="HbbtvPortal" >
+            <intent-filter>
+                <action tvos:name="tvos.HbbtvPortal" />
+                <category tvos:name="tvos.intent.category.LAUNCHER" />
+            </intent-filter>
+			<intent-filter>
+                <action tvos:name="tvos.HbbtvPortal.mds" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

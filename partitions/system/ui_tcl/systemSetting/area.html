@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../all.css"/>
+    <script type="text/javascript" src="area.js"></script>
+</head>
+
+<body onload="init()">
+
+<div id="thdMenuLeft"></div>
+
+<div id="thdMenuRight">
+    <div id="thdHtml">
+        <img id="thdListFocus" src="../images/Focus_Frame/Focus-1.png"/>
+        <div class="titleName">
+            <span id="titleNameSpan" style="top:60px; position:absolute"></span>
+        </div>
+        <div id="listUpRemind" style="display:none; top:120px;">
+            <img src="../images/arrow/U-Focus.png"/>
+        </div>
+        <div id="listRightRemind" style="display:none; top:120px;">
+            <img src="../images/arrow/Icon-R.png"/>
+        </div>
+        <div class="showMenu">
+            <ul style="position:absolute" id="menuUl">
+                <li>
+                </li>
+                <!-- 2 -->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div id="LuzonRegion" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/icon_Submenu_focus.png" />
+                </li>
+
+                <!-- 3 -->
+                <li class="list">
+                    <span class="listFirstProperty" ></span>
+                    <div id="VisayasRegion" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/icon_Submenu_focus.png" />
+                </li>
+
+                <!-- 4 -->
+                <li class="list">
+                    <span class="listFirstProperty" ></span>
+                    <div id="MindannaoRegion" class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/icon_Submenu_focus.png" />
+                </li>
+            </ul>
+        </div>
+        <div id="listDownRemind" style="top:1010px;display:none;">
+            <img src="../images/arrow/D-Focus.png"/>
+        </div>
+    </div>
+
+    <!--页面不跳转，本页面内展示region、city-->
+    <div id="regionAndCity" style="display: none">
+        <!--<img id="thdListFocusF" src="../images/Focus_Frame/Focus-1.png"/>-->
+        <div id="listRightRemindF" style="display:none; position:absolute; top:70px; left:105px;">
+            <img src="../images/arrow/focus_R-Focus.png"/>
+        </div>
+        <div class="titleName">
+            <span id="titleNameSpanF_1" style="top:60px; position:absolute"></span>
+            <span id="titleNameSpanF_2" style="top:60px; position:absolute; left:120px;"></span>
+        </div>
+        <div id="listUpRemindF" style="display: none">
+            <img src="../images/arrow/U-Focus.png"/>
+        </div>
+        <div class="showMenu">
+            <ul id="menuUlF">
+                <!--1-->
+                <li>
+                </li>
+                <!--2-->
+                <li>
+                </li>
+                <!--3-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--3-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--4-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--5-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--6-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--7-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--8-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+                <!--9-->
+                <li class="list" >
+                    <span class="listFirstProperty"></span>
+                    <div class="listSecondProperty"></div>
+                    <img class="listThirdPropertyImg" src="../images/arrow/focus_R-Focus.png" />
+                </li>
+            </ul>
+        </div>
+        <div id="listDownRemindF" style="display: none">
+            <img src="../images/arrow/D-Focus.png"/>
+        </div>
+        <img id="fourthListFocus" src="../images/Focus_Frame/Focus-1.png">
+    </div>
+</div>
+
+<!----------------------弹出列表框使用---------------------->
+<div id="listForm" class="fourthPopUpBox">
+    <img id="listUpImg" src="../images/arrow/U-Focus.png"/>
+    <ul id="listBox">
+        <img id="listFormFocus" class="formFocus" src="../images/Focus_Frame/Focus2.png">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <img id="listDownImg" src="../images/arrow/D-Focus.png" />
+</div>
+</body>
+</html>

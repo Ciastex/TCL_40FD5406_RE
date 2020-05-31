@@ -1,0 +1,687 @@
+<root>
+	<static_icon id = "TCL">
+		<img>../images/esticker/TCL.png</img>
+	</static_icon>
+	<static_icon id = "TCL_right">
+		<img>../images/esticker/TCL_right.png</img>
+	</static_icon>
+
+	<icon id = "HD">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_HD.png</img_S>
+		<img_D>../images/esticker/esticker_eu_HD_TCL.png</img_D>
+		<title>
+			<Albanian>HD</Albanian>
+			<Arabic>HD</Arabic>
+			<ArabicEgypt>HD</ArabicEgypt>
+			<Bosnian>HD</Bosnian>
+			<Bulgarian>HD</Bulgarian>
+			<Chinese>HD</Chinese>
+			<ChineseTraditional>HD</ChineseTraditional>
+			<Croatian>HD</Croatian>
+			<Czech>HD</Czech>
+			<Danish>HD</Danish>
+			<Dutch>HD</Dutch>
+			<Egyptian>HD</Egyptian>
+			<English>HD</English>
+			<English_CA>HD</English_CA>
+			<English_LA>HD</English_LA>
+			<English_NA>HD</English_NA>
+			<Estonian>HD</Estonian>
+			<Finnish>HD</Finnish>
+			<French>HD</French>
+			<French_NA>HD</French_NA>
+			<German>HD</German>
+			<Greek>HD</Greek>
+			<Hebrew>HD</Hebrew>
+			<Hungarian>HD</Hungarian>
+			<Indonesian>HD</Indonesian>
+			<Italian>HD</Italian>
+			<Latvian>HD</Latvian>
+			<Lithuanian>HD</Lithuanian>
+			<Macedonian>HD</Macedonian>
+			<Malay>HD</Malay>
+			<Mongolian>HD</Mongolian>
+			<Norwegian>HD</Norwegian>
+			<Persian>HD</Persian>
+			<Polish>HD</Polish>
+			<Portuguese>HD</Portuguese>
+			<Portuguese_LA>HD</Portuguese_LA>
+			<Romanian>HD</Romanian>
+			<Russian>HD</Russian>
+			<Serbian>HD</Serbian>
+			<Slovak>HD</Slovak>
+			<Slovenian>HD</Slovenian>
+			<Spanish>HD</Spanish>
+			<Spanish_CA>HD</Spanish_CA>
+			<Spanish_LA>HD</Spanish_LA>
+			<Spanish_NA>HD</Spanish_NA>
+			<Swedish>HD</Swedish>
+			<Thai>HD</Thai>
+			<Turkish>HD</Turkish>
+			<Ukrainian>HD</Ukrainian>
+			<Uzbek>HD</Uzbek>
+			<Vietnamese>HD</Vietnamese>
+		</title>
+		<description>
+			<Albanian>Përjetim i mrekullueshëm shikimi falë rezolucionit HD të ekranit.  Uluni më afër dhe shihni më tepër detaje.</Albanian>
+			<Arabic>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Arabic>
+			<ArabicEgypt>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</ArabicEgypt>
+			<Bosnian>Zadivljujući doživljaj gledanja zahvaljujući HD rezoluciji ekrana.  Sjedite bliže i gledajte više detalja.</Bosnian>
+			<Bulgarian>Зашеметяващо зрително изживяване, благодарение на HD резолюция на екрана.  Вижте повече детайли от по-близо.</Bulgarian>
+			<Chinese>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Chinese>
+			<ChineseTraditional>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</ChineseTraditional>
+			<Croatian>Nevjerojatno iskustvo gledanja zahvaljujući HD razlučivosti zaslona.  Sjedite bliže i uočite više detalja.</Croatian>
+			<Czech>Ohromující zážitek ze sledování díky HD rozlišení obrazovky.  Posaďte se blíže a zhlédněte více detailů.</Czech>
+			<Danish>Enestående billedoplevelse takket være skærmens HD-opløsning.  Sid tættere på, og se flere detaljer.</Danish>
+			<Dutch>Fantastische kijkervaring dankzij HD-schermresolutie.  Zit dichterbij en zie meer details.</Dutch>
+			<Egyptian>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Egyptian>
+			<English>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</English>
+			<English_CA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</English_CA>
+			<English_LA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</English_LA>
+			<English_NA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</English_NA>
+			<Estonian>Äge vaatamiskogemus tänu HD-resolutsioonis ekraanile.  Istuge lähemale, et näha rohkem üksikasju.</Estonian>
+			<Finnish>Uskomaton katselukokemus HD-näyttöresoluution ansiosta.  Istumalla lähempänä näet enemmän yksityiskohtia.</Finnish>
+			<French>Incroyable expérience de visionnage grâce à la résolution d’écran HD.  Rapprochez-vous et découvrez plus de détails.</French>
+			<French_NA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</French_NA>
+			<German>Beeindruckendes Fernseherlebnis dank HD-Bildschirmauflösung.  Näher am Gerät sitzen und Details noch deutlicher sehen.</German>
+			<Greek>Εκπληκτική εμπειρία εικόνας χάρη στην ανάλυση οθόνης HD.  Καθίστε πιο κοντά και δείτε περισσότερες λεπτομέρειες.</Greek>
+			<Hebrew>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Hebrew>
+			<Hungarian>Lenyűgöző vizuális élmény a HD képernyőfelbontásnak köszönhetően.  Üljön közelebb, és lásson még több részletet.</Hungarian>
+			<Indonesian>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Indonesian>
+			<Italian>Straordinaria esperienza di visione grazie alla risoluzione dello schermo HD.  Avvicinati per vedere ancora più dettagli.</Italian>
+			<Latvian>Pārsteidzoša skatīšanās pieredze, pateicoties HD ekrāna izšķirtspējai.  Sēdiet tuvāk un redziet vairāk detaļu.</Latvian>
+			<Lithuanian>Nepakartojami žiūrėjimo įspūdžiai dėl HD ekrano skyros.  Atsisėskite arčiau, matysite daugiau detalių.</Lithuanian>
+			<Macedonian>Неверојатно искуство при гледањето благодарение на резолуцијата на HD-екранот.  Седете поблиску и видете повеќе детали.</Macedonian>
+			<Malay>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Malay>
+			<Mongolian>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Mongolian>
+			<Norwegian>En utrolig seeropplevelse takket være HD-skjermoppløsningen.  Sitt nærmere og se flere detaljer.</Norwegian>
+			<Persian>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Persian>
+			<Polish>Fantastyczne wrażenia dzięki rozdzielczości ekranu HD.  Usiądź bliżej i zobacz więcej szczegółów.</Polish>
+			<Portuguese>Uma fantástica experiência de visualização graças à resolução HD do ecrã.  Sente-se mais perto e observe mais detalhes.</Portuguese>
+			<Portuguese_LA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Portuguese_LA>
+			<Romanian>O experiență de vizionare superbă datorită rezoluției HD a ecranului.  Așezați-vă mai aproape și vedeți mai multe detalii.</Romanian>
+			<Russian>Неповторимые возможности просмотра благодаря экрану с разрешением HD.  Окунитесь в мир высочайшей четкости и детализированности.</Russian>
+			<Serbian>Neverovatan doživljaj gledanja sadržaja zahvaljujući HD rezoluciji ekrana.  Sedite bliže i uronite u detalje.</Serbian>
+			<Slovak>Skvelý zážitok z pozerania vďaka HD rozlíšeniu obrazovky.  Sedíte bližšie a vidíte viac detailov.</Slovak>
+			<Slovenian>Izjemna izkušnja gledanja zahvaljujoč ločljivosti zaslona HD.  Sedite bližje in videli boste več podrobnosti.</Slovenian>
+			<Spanish>Asombrosa experiencia de visionado gracias a la resolución de pantalla en HD.  Siéntese cerca y vea más detalles.</Spanish>
+			<Spanish_CA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Spanish_CA>
+			<Spanish_LA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Spanish_LA>
+			<Spanish_NA>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Spanish_NA>
+			<Swedish>Fantastisk tittarupplevelse tack vare HD-skärmupplösning.  Sitt närmare och visa fler detaljer.</Swedish>
+			<Thai>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Thai>
+			<Turkish>HD ekran çözünürlüğü sayesinde mükemmel görüntü deneyimi.  Daha yakın oturun ve daha ayrıntılı izleyin.</Turkish>
+			<Ukrainian>Дивовижне видовище завдяки екрану з роздільною здатністю HD.  Сідайте ближче та переглядайте більше деталей.</Ukrainian>
+			<Uzbek>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Uzbek>
+			<Vietnamese>Amazing viewing experience thanks to HD screen resolution.  Sit closer and see more details.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Micro Dimming">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_MD.png</img_S>
+		<img_D>../images/esticker/esticker_eu_MD_TCL.png</img_D>
+		<title>
+			<Albanian>Micro Dimming</Albanian>
+			<Arabic>Micro Dimming</Arabic>
+			<ArabicEgypt>Micro Dimming</ArabicEgypt>
+			<Bosnian>Micro Dimming</Bosnian>
+			<Bulgarian>Micro Dimming</Bulgarian>
+			<Chinese>Micro Dimming</Chinese>
+			<ChineseTraditional>Micro Dimming</ChineseTraditional>
+			<Croatian>Micro Dimming</Croatian>
+			<Czech>Micro Dimming</Czech>
+			<Danish>Micro Dimming</Danish>
+			<Dutch>Micro Dimming</Dutch>
+			<Egyptian>Micro Dimming</Egyptian>
+			<English>Micro Dimming</English>
+			<English_CA>Micro Dimming</English_CA>
+			<English_LA>Micro Dimming</English_LA>
+			<English_NA>Micro Dimming</English_NA>
+			<Estonian>Micro Dimming</Estonian>
+			<Finnish>Micro Dimming</Finnish>
+			<French>Micro Dimming</French>
+			<French_NA>Micro Dimming</French_NA>
+			<German>Micro Dimming</German>
+			<Greek>Micro Dimming</Greek>
+			<Hebrew>Micro Dimming</Hebrew>
+			<Hungarian>Micro Dimming</Hungarian>
+			<Indonesian>Micro Dimming</Indonesian>
+			<Italian>Micro Dimming</Italian>
+			<Latvian>Micro Dimming</Latvian>
+			<Lithuanian>Micro Dimming</Lithuanian>
+			<Macedonian>Micro Dimming</Macedonian>
+			<Malay>Micro Dimming</Malay>
+			<Mongolian>Micro Dimming</Mongolian>
+			<Norwegian>Micro Dimming</Norwegian>
+			<Persian>Micro Dimming</Persian>
+			<Polish>Micro Dimming</Polish>
+			<Portuguese>Micro Dimming</Portuguese>
+			<Portuguese_LA>Micro Dimming</Portuguese_LA>
+			<Romanian>Micro Dimming</Romanian>
+			<Russian>Micro Dimming</Russian>
+			<Serbian>Micro Dimming</Serbian>
+			<Slovak>Micro Dimming</Slovak>
+			<Slovenian>Micro Dimming</Slovenian>
+			<Spanish>Micro Dimming</Spanish>
+			<Spanish_CA>Micro Dimming</Spanish_CA>
+			<Spanish_LA>Micro Dimming</Spanish_LA>
+			<Spanish_NA>Micro Dimming</Spanish_NA>
+			<Swedish>Micro Dimming</Swedish>
+			<Thai>Micro Dimming</Thai>
+			<Turkish>Micro Dimming</Turkish>
+			<Ukrainian>Micro Dimming</Ukrainian>
+			<Uzbek>Micro Dimming</Uzbek>
+			<Vietnamese>Micro Dimming</Vietnamese>
+		</title>
+		<description>
+			<Albanian>Teknologjia e mikroerrësimit rregullon ndriçimin dhe errësirën duke kontrolluar zona të ndara. Do të shijoni një përvojë fantastike shikimi me kontrastin e mrekullueshëm dhe cilësinë e gjallë të figurës.</Albanian>
+			<Arabic>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Arabic>
+			<ArabicEgypt>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </ArabicEgypt>
+			<Bosnian>Tehnologija mikro zatamnjenja prilagođava osvjetljenje i zatamnjenost putem kontrole zasebnih zona. Imat ćete fantastičan doživljaj gledanja uz odličan kontrast i kvalitet živopisne slike.</Bosnian>
+			<Bulgarian>Технологията с микрозатъмняване регулира яркостта и затъмняването чрез управление на отделни зони. Ще получите фантастично зрително изживяване със страхотен контраст и естествена картина.</Bulgarian>
+			<Chinese>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Chinese>
+			<ChineseTraditional>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </ChineseTraditional>
+			<Croatian>Tehnologija mikro prigušenja prilagođava svjetlinu i zatamnjenje upravljajući zasebnim zonama. Imat ćete nevjerojatno iskustvo gledanja uz veliki kontrast i živopisnu kvalitetu slike.</Croatian>
+			<Czech>Technologie Micro Dimming upravuje jas a tmavost samostatnými zónami kontroly. Budete mít nádherný zážitek ze sledování s jasným kontrastem a nádhernou kvalitou obrazu.</Czech>
+			<Danish>Teknologien mikro-dæmpning justerer lysstyrke og mørkhed ved kontrol af separate zoner. Du får en fantastisk billedoplevelse med den enestående kontrast og livfulde billedkvalitet.</Danish>
+			<Dutch>Micro Dimming-technologie past de helderheid en het contrast aan door afzonderlijke zones te regelen. U heeft een fantastische kijkervaring met het geweldige contrast en de levendige beeldkwaliteit.</Dutch>
+			<Egyptian>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Egyptian>
+			<English>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </English>
+			<English_CA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </English_CA>
+			<English_LA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </English_LA>
+			<English_NA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </English_NA>
+			<Estonian>Mikrohämarustehnoloogia reguleerib heledust ja tumedust eraldiolevate tsoonide haldamisega. Vaatamise teeb suurepäraseks kihvt eristamisfunktsioon ja värvirikas pildikvaliteet.</Estonian>
+			<Finnish>Mikrohimmennystekniikka säätää kirkkauden ja tummuuden ohjaten sitä eri vyöhykkeiden mukaan. Koet fantastisen katselukokemuksen suuren kontrastin ja vivahteikkaan kuvanlaadun ansiosta.</Finnish>
+			<French>La technologie de micro-atténuation règle la luminosité et l’obscurité par commande de zones séparées. Vous aurez une expérience de visionnage en raison du grand contraste et de la qualité d’image saisissante.</French>
+			<French_NA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </French_NA>
+			<German>Die Mikroabblendtechnologie stellt Hell und Dunkel über eine separate Bereichssteuerung ein. Sie erhalten ein fantastisches Seherlebnis mit den schärfsten Kontrasten und strahlender Bildqualität.</German>
+			<Greek>Η τεχνολογία μικρο-εξασθένισης ρυθμίζει τη φωτεινότητα και στο σκότος μέσω ξεχωριστού ελέγχου ζωνών. Θα έχετε μια φανταστική εμπειρία θέασης με μεγάλη αντίθεση και ζωντανή ποιότητα εικόνας.</Greek>
+			<Hebrew>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Hebrew>
+			<Hungarian>A mikro-fényerőszabályozási technológia segítségével állítható a fényerő és a sötétség, zónánkénti vezérléssel. Fantasztikus vizuális élmény nagy kontraszttal és élethű képminőséggel.</Hungarian>
+			<Indonesian>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Indonesian>
+			<Italian>Tecnologia Micro Dimming per regolare la luminosità e l'oscurità con controllo zone separato. Avrai una fantastica esperienza di visione con il grande contrasto e la qualità dell'immagine viva.</Italian>
+			<Latvian>Mikroaptumšošanas tehnoloģija regulē spilgtumu un tumšumu, izmantojot atsevišķu zonu kontroli. Jūs baudīsiet fantastisku skatīšanos ar lielisku kontrastu un izcilu attēla kvalitāti.</Latvian>
+			<Lithuanian>Mikropritemdymo technologija atskirų zonų valdymu sureguliuoja šviesumą ir tamsumą. Puikus kontrastas ir ryškaus vaizdo kokybė palieka neįtikėtinų žiūrėjimo įspūdžių.</Lithuanian>
+			<Macedonian>Технологијата на микрозатемнување го приспособува осветлувањето и затемнувањето  преку контрола на посебните зони. Ќе имате фантастично искуство при гледањето со одличен контраст и живописен квалитет на сликата.</Macedonian>
+			<Malay>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Malay>
+			<Mongolian>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Mongolian>
+			<Norwegian>Med Mikrodimming-teknologien kan du justere lysstyrke og kontrast i skjermens adskilte kontrollsoner. Med de dype kontrastene og den skarpe bildekvaliteten vil du få en fantastisk seeropplevelse.</Norwegian>
+			<Persian>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Persian>
+			<Polish>Technologia mikroprzyciemniania dostosowuje poziom jasności i ciemności poprzez regulację oddzielnych stref. Doświadczysz fantastycznych wrażeń podczas oglądania dzięki świetnemu kontrastowi i żywej jakości obrazu.</Polish>
+			<Portuguese>A tecnologia Micro Dimming ajusta o brilho e os tons de preto através do controlo de diferentes áreas. Desfrutará, assim, de uma fantástica experiência de visualização, com o melhor contraste e uma qualidade de imagem vibrante.</Portuguese>
+			<Portuguese_LA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Portuguese_LA>
+			<Romanian>Tehnologia Micro Dimming reglează luminozitatea și obscuritatea prin separarea controlului zonelor. Veți avea o experiență de vizionare fantastică cu un contrast superb și o calitate a imaginii intensă.</Romanian>
+			<Russian>Функция «Микродимминг» обеспечивает регулировку яркости на отдельных участках экрана. Вы получите незабываемые впечатления от просмотра яркого живого изображения с потрясающей контрастностью.</Russian>
+			<Serbian>Tehnologijom Mikrozatamnjenja mogu se podesiti svetlina i tama kontrolom za zasebne zone. Uživaćete u fantastičnom doživljaju gledanja sadržaja jakog kontrasta i živopisne slike.</Serbian>
+			<Slovak>Technológia mikro stmievania upravuje jasné a tmavé oblasti pomocou samostatného ovládania zón. Získate fantastický zážitok z pozerania s vysokým kontrastom a živou kvalitou obrazu.</Slovak>
+			<Slovenian>Tehnologija mikro zatemnitve prilagodi svetlost in temnost z ločenim upravljanjem območij. Doživeli boste čudovito izkušnjo gledanja z izjemnim kontrastom in kakovostno sliko intenzivnih barv.</Slovenian>
+			<Spanish>La tecnología de micro atenuación ajusta el brillo y la oscuridad por control de zonas. Vivirá una fantástica experiencia de visionado con el gran contraste y la intensa calidad de imagen.</Spanish>
+			<Spanish_CA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Spanish_CA>
+			<Spanish_LA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Spanish_LA>
+			<Spanish_NA>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Spanish_NA>
+			<Swedish>Tekniken micro-gråmarkering justerar ljusstyrkan och mörkret genom separat zonstyrning. Du får en fantastisk tittarupplevelse med den stora kontrasten och den levande bildkvaliteten.</Swedish>
+			<Thai>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Thai>
+			<Turkish>Mikro Karartma teknolojisi, ayrı bölge kontrolüyle parlaklığı ve koyuluğu ayarlar. Mükemmel kontrast ve canlı resim kalitesiyle olağanüstü bir izleme deneyimi yaşayacaksınız.</Turkish>
+			<Ukrainian>Технологія мікрозатемнення змінює яскравість і затемнення, керуючи окремими зонами. Ви отримаєте надзвичайні враження від перегляду завдяки чудовому контрасту та яскравому зображенню.</Ukrainian>
+			<Uzbek>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Uzbek>
+			<Vietnamese>Micro Dimming technology adjusts the brightness and darkness by separate zones control. You will have a fantastic viewing experience with the great contrast and the vivid picture quality.  </Vietnamese>
+		</description>
+	</icon>
+	
+	<icon id = "PPI">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_PPI300.png</img_S>
+		<img_D>../images/esticker/esticker_eu_PPI_TCL.png</img_D>
+		<title>
+			<Albanian>PPI 300</Albanian>
+			<Arabic>PPI 300</Arabic>
+			<ArabicEgypt>PPI 300</ArabicEgypt>
+			<Bosnian>PPI 300</Bosnian>
+			<Bulgarian>PPI 300</Bulgarian>
+			<Chinese>PPI 300</Chinese>
+			<ChineseTraditional>PPI 300</ChineseTraditional>
+			<Croatian>PPI 300</Croatian>
+			<Czech>PPI 300</Czech>
+			<Danish>PPI 300</Danish>
+			<Dutch>PPI 300</Dutch>
+			<Egyptian>PPI 300</Egyptian>
+			<English>PPI 300</English>
+			<English_CA>PPI 300</English_CA>
+			<English_LA>PPI 300</English_LA>
+			<English_NA>PPI 300</English_NA>
+			<Estonian>PPI 300</Estonian>
+			<Finnish>PPI 300</Finnish>
+			<French>PPI 300</French>
+			<French_NA>PPI 300</French_NA>
+			<German>PPI 300</German>
+			<Greek>PPI 300</Greek>
+			<Hebrew>PPI 300</Hebrew>
+			<Hungarian>PPI 300</Hungarian>
+			<Indonesian>PPI 300</Indonesian>
+			<Italian>PPI 300</Italian>
+			<Latvian>PPI 300</Latvian>
+			<Lithuanian>PPI 300</Lithuanian>
+			<Macedonian>PPI 300</Macedonian>
+			<Malay>PPI 300</Malay>
+			<Mongolian>PPI 300</Mongolian>
+			<Norwegian>PPI 300</Norwegian>
+			<Persian>PPI 300</Persian>
+			<Polish>PPI 300</Polish>
+			<Portuguese>PPI 300</Portuguese>
+			<Portuguese_LA>PPI 300</Portuguese_LA>
+			<Romanian>PPI 300</Romanian>
+			<Russian>PPI 300</Russian>
+			<Serbian>PPI 300</Serbian>
+			<Slovak>PPI 300</Slovak>
+			<Slovenian>PPI 300</Slovenian>
+			<Spanish>PPI 300</Spanish>
+			<Spanish_CA>PPI 300</Spanish_CA>
+			<Spanish_LA>PPI 300</Spanish_LA>
+			<Spanish_NA>PPI 300</Spanish_NA>
+			<Swedish>PPI 300</Swedish>
+			<Thai>PPI 300</Thai>
+			<Turkish>PPI 300</Turkish>
+			<Ukrainian>PPI 300</Ukrainian>
+			<Uzbek>PPI 300</Uzbek>
+			<Vietnamese>PPI 300</Vietnamese>
+		</title>
+		<description>
+			<Albanian>Teknologjitë e përparuara të përpunimit të imazhit kombinojnë rezolucionin, kontrastin, gamën e ngjyrave, lëvizjen dhe tipin e ekranit për të përmirësuar cilësinë e figurës.</Albanian>
+			<Arabic>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Arabic>
+			<ArabicEgypt>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</ArabicEgypt>
+			<Bosnian>Tehnologije naprednog obrađivanje slike kombiniraju rezoluciju, kontrast, skalu boja, pokret i tip ekrana kako bi se poboljšao kvalitet like.</Bosnian>
+			<Bulgarian>Усъвършенстваните технологии за обработка на картината обхващат резолюция, контраст, цветова гама, движение и тип на екрана, които подобряват качеството на картината.</Bulgarian>
+			<Chinese>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Chinese>
+			<ChineseTraditional>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</ChineseTraditional>
+			<Croatian>Napredne tehnologije obrade slike kombiniraju razlučivost, kontrast, spektar boja, pokret i vrstu zaslona kako bi poboljšale kvalitetu slike.</Croatian>
+			<Czech>Pokročilé technologie zpracování obrazu zlepšují kvalitu obrazu díky kombinaci rozlišení, kontrastu, barevné škály a typu pohybu a obrazovky.</Czech>
+			<Danish>Avancerede billedbehandlingsteknologier kombinerer opløsning, kontrast, farveskala, bevægelse og skærmtype og forbedrer billedkvaliteten.</Danish>
+			<Dutch>Geavanceerde technologieën voor beeldverwerking combineren resolutie, contrast, kleurenbereik, beweging en schermtype om het beeld te verwijderen.</Dutch>
+			<Egyptian>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Egyptian>
+			<English>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</English>
+			<English_CA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</English_CA>
+			<English_LA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</English_LA>
+			<English_NA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</English_NA>
+			<Estonian>Pildi kvaliteeti parandavad täiuslikud pilditöötluse tehnoloogiad koos kasutatava resolutsiooni, kontrasti, värvispektri, liikuvuse ja ekraani tüübiga.</Estonian>
+			<Finnish>Kehittyneet kuvankäsittelytekniikat yhdistävät resoluution, kontrastin, värintoistoalueen, liikkeen ja näytön tyypin kuvanlaadun parantamiseksi.</Finnish>
+			<French>Les technologies avancées de traitement d’image combinent résolution, contraste, gamme de couleurs, mouvements et type d’écran pour améliorer la qualité de l’image.</French>
+			<French_NA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</French_NA>
+			<German>Erweiterte Bildverarbeitungstechnologie kombiniert im Hinblick auf eine bessere Bildqualität Auflösung, Kontrast, Farbraum, Bewegung und Bildschirmtyp.</German>
+			<Greek>Οι προηγμένες τεχνολογίες επεξεργασίας εικόνας συνδυάζουν την ανάλυση, την αντίθεση, τη χρωματική γκάμα, την κίνηση και τον τύπο οθόνης για τη βελτίωση της ποιότητας της εικόνας.</Greek>
+			<Hebrew>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Hebrew>
+			<Hungarian>A fejlett képfeldolgozási technológiák a felbontás, kontraszt, színtér, mozgás és a képernyőtípus kombinálásával javítják a képminőséget.</Hungarian>
+			<Indonesian>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Indonesian>
+			<Italian>Tecnologie di elaborazione dell’immagine avanzate combinano risoluzione, contrasto, gamma di colori, movimenti e tipo di schermo per una migliore qualità dell’immagine.</Italian>
+			<Latvian>Uzlabotas attēla apstrādes tehnoloģijas apvieno izšķirtspēju, kontrastu, krāsu gammu, kustību un ekrāna veidu, lai uzlabotu attēla kvalitāti.</Latvian>
+			<Lithuanian>Pažangios vaizdo apdorojimo technologijos derina skyrą, kontrastą, spalvas, judesį ir ekrano tipą, kad būtų pagerinta vaizdo kokybė.</Lithuanian>
+			<Macedonian>Напредните технологии за обработка на сликата ги комбинираат резолуцијата, контрастот, спектарот на бои, движењето и типот на екранот за да го подобрат квалитетот на сликата.</Macedonian>
+			<Malay>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Malay>
+			<Mongolian>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Mongolian>
+			<Norwegian>Avansert bildeprosesseringsteknologi kombinerer oppløsning, kontrast, fargeregister, bevegelse og skjermtype slik at bildekvaliteten forbedres.</Norwegian>
+			<Persian>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Persian>
+			<Polish>Zaawansowane technologie przetwarzania obrazu łączą rozdzielczość, kontrast, gamę barw, ruch i typ ekranu, aby poprawić jakość obrazu.</Polish>
+			<Portuguese>As tecnologias avançadas de processamento de imagem combinam a resolução, o contraste, a gama de cores, o movimento e o tipo de ecrã para melhorarem a qualidade da imagem.</Portuguese>
+			<Portuguese_LA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Portuguese_LA>
+			<Romanian>Tehnologiile avansate de procesare a imaginii combină rezoluția, contrastul, gama culorii, mișcarea și tipul ecranului pentru a îmbunătăți calitatea acesteia.</Romanian>
+			<Russian>Передовые технологии обработки изображения, включая разрешение, контраст, цветовую гамму, движение и тип экрана, создают непревзойденное качество изображения.</Russian>
+			<Serbian>Napredne tehnologije obrade slike objedinjuju rezoluciju, kontrast, opseg boje, pokret i tip ekrana zarad poboljšanja kvaliteta slike.</Serbian>
+			<Slovak>Pokročilé technológie spracovania obrazu spájajú rozlíšenie, kontrast, gamut farieb, pohyb a typ obrazovky do vylepšenej kvality obrazu.</Slovak>
+			<Slovenian>Napredne tehnologije procesiranja slike združujejo ločljivost, kontrast, barvno lestvico in tip zaslona; za izboljševanje kakovosti slike.</Slovenian>
+			<Spanish>Las tecnologías de procesamiento de imagen avanzadas combinan la resolución, el contraste, la gama de colores, el movimiento y el tipo de pantalla para mejorar la calidad de la imagen.</Spanish>
+			<Spanish_CA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Spanish_CA>
+			<Spanish_LA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Spanish_LA>
+			<Spanish_NA>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Spanish_NA>
+			<Swedish>Avancerad bildbehandlingsteknik kombinerar upplösning, kontrast, färgbehandling, rörelse och skärmtyp för förbätrad bildkvalitet.</Swedish>
+			<Thai>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Thai>
+			<Turkish>Gelişmiş görüntü işleme teknolojileri, resim kalitesini iyileştirmek için çözünürlüğü, kontrastı, renk skalasını, hareketi ve ekran türünü bir araya getirmektedir.</Turkish>
+			<Ukrainian>Передові технології обробки зображення поєднують роздільну здатність, контрастність, колірну гаму, рух та тип екрана для покращення якості зображення.</Ukrainian>
+			<Uzbek>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Uzbek>
+			<Vietnamese>Advanced image processing technologies are combining resolution, contrast, color gamut, motion and screen type to improve picture quality.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Dolby Audio">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_DA.png</img_S>
+		<img_D>../images/esticker/esticker_eu_DA_TCL.png</img_D>
+		<title>
+			<Albanian>Cinema experts sound</Albanian>
+			<Arabic>Cinema experts sound</Arabic>
+			<ArabicEgypt>Cinema experts sound</ArabicEgypt>
+			<Bosnian>Cinema experts sound</Bosnian>
+			<Bulgarian>Cinema experts sound</Bulgarian>
+			<Chinese>Cinema experts sound</Chinese>
+			<ChineseTraditional>Cinema experts sound</ChineseTraditional>
+			<Croatian>Cinema experts sound</Croatian>
+			<Czech>Cinema experts sound</Czech>
+			<Danish>Cinema experts sound</Danish>
+			<Dutch>Cinema experts sound</Dutch>
+			<Egyptian>Cinema experts sound</Egyptian>
+			<English>Cinema experts sound</English>
+			<English_CA>Cinema experts sound</English_CA>
+			<English_LA>Cinema experts sound</English_LA>
+			<English_NA>Cinema experts sound</English_NA>
+			<Estonian>Cinema experts sound</Estonian>
+			<Finnish>Cinema experts sound</Finnish>
+			<French>Cinema experts sound</French>
+			<French_NA>Cinema experts sound</French_NA>
+			<German>Cinema experts sound</German>
+			<Greek>Cinema experts sound</Greek>
+			<Hebrew>Cinema experts sound</Hebrew>
+			<Hungarian>Cinema experts sound</Hungarian>
+			<Indonesian>Cinema experts sound</Indonesian>
+			<Italian>Cinema experts sound</Italian>
+			<Latvian>Cinema experts sound</Latvian>
+			<Lithuanian>Cinema experts sound</Lithuanian>
+			<Macedonian>Cinema experts sound</Macedonian>
+			<Malay>Cinema experts sound</Malay>
+			<Mongolian>Cinema experts sound</Mongolian>
+			<Norwegian>Cinema experts sound</Norwegian>
+			<Persian>Cinema experts sound</Persian>
+			<Polish>Cinema experts sound</Polish>
+			<Portuguese>Cinema experts sound</Portuguese>
+			<Portuguese_LA>Cinema experts sound</Portuguese_LA>
+			<Romanian>Cinema experts sound</Romanian>
+			<Russian>Cinema experts sound</Russian>
+			<Serbian>Cinema experts sound</Serbian>
+			<Slovak>Cinema experts sound</Slovak>
+			<Slovenian>Cinema experts sound</Slovenian>
+			<Spanish>Cinema experts sound</Spanish>
+			<Spanish_CA>Cinema experts sound</Spanish_CA>
+			<Spanish_LA>Cinema experts sound</Spanish_LA>
+			<Spanish_NA>Cinema experts sound</Spanish_NA>
+			<Swedish>Cinema experts sound</Swedish>
+			<Thai>Cinema experts sound</Thai>
+			<Turkish>Cinema experts sound</Turkish>
+			<Ukrainian>Cinema experts sound</Ukrainian>
+			<Uzbek>Cinema experts sound</Uzbek>
+			<Vietnamese>Cinema experts sound</Vietnamese>
+		</title>
+		<description>
+			<Albanian>Shijoni tingujt Dolby Audio me dialogë të pastër, cilësime tingulli që u përshtaten materialit.</Albanian>
+			<Arabic>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Arabic>
+			<ArabicEgypt>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</ArabicEgypt>
+			<Bosnian>Uživajte u Dolby Audio zvuku s jasnim dijalozima, zvučnim postavkama prilagođenim sadržaju.</Bosnian>
+			<Bulgarian>Наслаждавайте се на звук от Dolby Audio с ясни диалози и звукови настройки, адаптирани според съдържанието.</Bulgarian>
+			<Chinese>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Chinese>
+			<ChineseTraditional>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</ChineseTraditional>
+			<Croatian>Zahvaljujući tehnologiji zvuka Dolby tj. postavkama zvuka prilagođenima sadržaju uživajte u jasnim dijalozima.</Croatian>
+			<Czech>Užijte si zvuk Dolby Audio zajišťující zřetelné dialogy a nastavením zvuku přizpůsobeného obsahu.</Czech>
+			<Danish>Nyd Dolby-lyd med tydelig tale og lydindstillinger, der er tilpasset indholdet.</Danish>
+			<Dutch>Geniet van Dolby Audio-geluid met heldere dialogen, inhoud aangepaste geluidsinstellingen.</Dutch>
+			<Egyptian>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Egyptian>
+			<English>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</English>
+			<English_CA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</English_CA>
+			<English_LA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</English_LA>
+			<English_NA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</English_NA>
+			<Estonian>Dolby Audio heli muudavad nauditavaks arusaadavad dialoogid ja sisupõhised heliseaded.</Estonian>
+			<Finnish>Nauti Dolby Audio -äänestä, joka mahdollistaa selkeät vuoropuhelut, sisältöön mukautetut ääniasetukset.</Finnish>
+			<French>Appréciez le son Dolby Audio avec des dialogues clairs et des paramètres sonores adaptés au contenu.</French>
+			<French_NA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</French_NA>
+			<German>Genießen Sie Dolby-Audioklang mit klaren Dialogen und inhaltsangepassten Klangeinstellungen.</German>
+			<Greek>Απολαύστε ήχο Dolby Audio με σαφείς διαλόγους, περιεχόμενο και προσαρμοσμένες ρυθμίσεις ήχου.</Greek>
+			<Hebrew>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Hebrew>
+			<Hungarian>Élvezze a Dolby Audio hangzást tiszta párbeszédekkel és tartalomhoz illeszkedő hangbeállításokkal.</Hungarian>
+			<Indonesian>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Indonesian>
+			<Italian>Goditi il suono Dolby Audio con dialoghi chiari, impostazioni del suono adattate al contenuto.</Italian>
+			<Latvian>Izbaudiet Dolby Audio skaņu ar skaidriem dialogiem, saturam pielāgotiem skaņas iestatījumiem.</Latvian>
+			<Lithuanian>Mėgaukitės „Dolby Audio“ garsu, kuriam būdingi aiškūs dialogai, pagal turinį pritaikyti garso nustatymai.</Lithuanian>
+			<Macedonian>Уживајте во звукот на Dolby Audio со јасни дијалози и параметри за звук приспособени според содржината.</Macedonian>
+			<Malay>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Malay>
+			<Mongolian>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Mongolian>
+			<Norwegian>Gled deg over Dolby Audio-lyden med klare dialoger, og lydinnstillinger som er godt tilpasset innholdet.</Norwegian>
+			<Persian>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Persian>
+			<Polish>Przyjemny dźwięk Dolby Audio z wyraźnymi dialogami oraz treścią dostosowaną do ustawień dźwięku.</Polish>
+			<Portuguese>Desfrute do som Dolby Audio com diálogos, claros e definições de som adaptadas ao conteúdo.</Portuguese>
+			<Portuguese_LA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Portuguese_LA>
+			<Romanian>Bucurați-vă de sunetul audio Dolby cu dialoguri clare, setările sunetului sunt adaptate la conținut.</Romanian>
+			<Russian>Воспользуйтесь такими преимуществами Dolby Audio, как понятные диалоговые окна и возможность настройки звука под контент.</Russian>
+			<Serbian>Uživajte u Dolby Audio zvuku jasnih dijaloga, sa zvučnim postavkama prilagođenim sadržaju.</Serbian>
+			<Slovak>Vychutnajte si zvuk Dolby Audio s jasnými dialógmi a obsahovo prispôsobenými nastaveniami zvuku.</Slovak>
+			<Slovenian>Uživajte v zvoku Dolby z jasnimi dialogi in vsebino, prilagojeno nastavitvam zvoka.</Slovenian>
+			<Spanish>Disfrute de sonido Dolby Audio con diálogos claros y ajustes de sonido adaptados al contenido.</Spanish>
+			<Spanish_CA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Spanish_CA>
+			<Spanish_LA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Spanish_LA>
+			<Spanish_NA>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Spanish_NA>
+			<Swedish>Njut av Dolby-ljud med tydliga dialoger,innehållsanpassade ljudinställningar.</Swedish>
+			<Thai>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Thai>
+			<Turkish>Net konuşmalara ve içerik uyumlu ses ayarlarına sahip Dolby Audio ses.</Turkish>
+			<Ukrainian>Насолоджуйтесь звуком Dolby Audio з чіткими діалогами та налаштуванням звуку відповідно до змісту.</Ukrainian>
+			<Uzbek>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Uzbek>
+			<Vietnamese>Enjoy Dolby Audio sound with clear dialoges, content adapted sound settings.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "Smart TV.3">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_SmartTV.png</img_S>
+		<img_D>../images/esticker/esticker_eu_SmartTV_D.png</img_D>
+		<title>
+			<Albanian>Enjoy online world</Albanian>
+			<Arabic>Enjoy online world</Arabic>
+			<ArabicEgypt>Enjoy online world</ArabicEgypt>
+			<Bosnian>Enjoy online world</Bosnian>
+			<Bulgarian>Enjoy online world</Bulgarian>
+			<Chinese>Enjoy online world</Chinese>
+			<ChineseTraditional>Enjoy online world</ChineseTraditional>
+			<Croatian>Enjoy online world</Croatian>
+			<Czech>Enjoy online world</Czech>
+			<Danish>Enjoy online world</Danish>
+			<Dutch>Enjoy online world</Dutch>
+			<Egyptian>Enjoy online world</Egyptian>
+			<English>Enjoy online world</English>
+			<English_CA>Enjoy online world</English_CA>
+			<English_LA>Enjoy online world</English_LA>
+			<English_NA>Enjoy online world</English_NA>
+			<Estonian>Enjoy online world</Estonian>
+			<Finnish>Enjoy online world</Finnish>
+			<French>Enjoy online world</French>
+			<French_NA>Enjoy online world</French_NA>
+			<German>Enjoy online world</German>
+			<Greek>Enjoy online world</Greek>
+			<Hebrew>Enjoy online world</Hebrew>
+			<Hungarian>Enjoy online world</Hungarian>
+			<Indonesian>Enjoy online world</Indonesian>
+			<Italian>Enjoy online world</Italian>
+			<Latvian>Enjoy online world</Latvian>
+			<Lithuanian>Enjoy online world</Lithuanian>
+			<Macedonian>Enjoy online world</Macedonian>
+			<Malay>Enjoy online world</Malay>
+			<Mongolian>Enjoy online world</Mongolian>
+			<Norwegian>Enjoy online world</Norwegian>
+			<Persian>Enjoy online world</Persian>
+			<Polish>Enjoy online world</Polish>
+			<Portuguese>Enjoy online world</Portuguese>
+			<Portuguese_LA>Enjoy online world</Portuguese_LA>
+			<Romanian>Enjoy online world</Romanian>
+			<Russian>Enjoy online world</Russian>
+			<Serbian>Enjoy online world</Serbian>
+			<Slovak>Enjoy online world</Slovak>
+			<Slovenian>Enjoy online world</Slovenian>
+			<Spanish>Enjoy online world</Spanish>
+			<Spanish_CA>Enjoy online world</Spanish_CA>
+			<Spanish_LA>Enjoy online world</Spanish_LA>
+			<Spanish_NA>Enjoy online world</Spanish_NA>
+			<Swedish>Enjoy online world</Swedish>
+			<Thai>Enjoy online world</Thai>
+			<Turkish>Enjoy online world</Turkish>
+			<Ukrainian>Enjoy online world</Ukrainian>
+			<Uzbek>Enjoy online world</Uzbek>
+			<Vietnamese>Enjoy online world</Vietnamese>
+		</title>
+		<description>
+			<Albanian>Shumëllojshmëri aplikacionesh online, Shërbime VOD, catch-up TVs dhe navigim në internet.</Albanian>
+			<Arabic>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Arabic>
+			<ArabicEgypt>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</ArabicEgypt>
+			<Bosnian>Bogatstvo online aplikacija, VOD usluge, naknadno gledanje TV programa i internetsko pregledanje weba.</Bosnian>
+			<Bulgarian>Богатство от онлайн приложения, VOD услуги , catch-up TV и търсене в интернет.</Bulgarian>
+			<Chinese>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Chinese>
+			<ChineseTraditional>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</ChineseTraditional>
+			<Croatian>Obilje mrežnih aplikacija, usluga Video na zahtjev, catch-up televizije i internetsko pretraživanje.</Croatian>
+			<Czech>Celá řada online aplikací, služeb VOD, záznamu TV a prohlížení internetu.</Czech>
+			<Danish>Et hav af onlineapplikationer, Video on Demand-tjenester, følg med i tv-udsendelser og surfing på internettet.</Danish>
+			<Dutch>Rijk aan online applicaties, VOD-diensten, uitgesteld tv kijken en internetten op het web.</Dutch>
+			<Egyptian>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Egyptian>
+			<English>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</English>
+			<English_CA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</English_CA>
+			<English_LA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</English_LA>
+			<English_NA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</English_NA>
+			<Estonian>Sisaldab hulgaliselt internetirakendusi, videolaenutusteenuseid, järelvaadatavaid kanaleid ja internetti veebi kuvamiseks.</Estonian>
+			<Finnish>Runsaasti verkkosovelluksia, tilausvideopalveluja, uusintapalveluja ja Internet-selaamista.</Finnish>
+			<French>Profusion d’applications en ligne, de services VOD, de télévision de rattrapage et de navigation de sites Web.</French>
+			<French_NA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</French_NA>
+			<German>Zahllose Online-Anwendungen, Video-Abrufdienste, Internetfernsehen und Surfen im Internet.</German>
+			<Greek>Ποικιλία online εφαρμογών, υπηρεσίες VOD, τηλεοπτικές λήψεις και περιήγηση στο διαδίκτυο.</Greek>
+			<Hebrew>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Hebrew>
+			<Hungarian>Számtalan online alkalmazás, VOD szolgáltatás, catch-up TV szolgáltatás és internetböngészés.</Hungarian>
+			<Indonesian>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Indonesian>
+			<Italian>Ricchezza di applicazioni online, servizi VOD, acquisire TV e navigare in Internet.</Italian>
+			<Latvian>Tiešsaistes lietotnes, video pēc pieprasījuma, arhīvtelevīzija un tīmekļa pārlūkošana.</Latvian>
+			<Lithuanian>Gausus internetinių programėlių pasirinkimas, VOD paslaugos, „Catch-up TV“ įrašai ir interneto žiniatinklių naršymas.</Lithuanian>
+			<Macedonian>Изобилство од онлајн апликации, услуги за видео на барање, одложено гледање телевизија и прелистување на интернет.</Macedonian>
+			<Malay>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Malay>
+			<Mongolian>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Mongolian>
+			<Norwegian>Stort utvalg an online-programmer, VOD-tjenester, catch-up tv og nettlesning over Internett.</Norwegian>
+			<Persian>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Persian>
+			<Polish>Bogactwo aplikacji online, usług VOD, ofert poprzednich programów telewizyjnych oraz surfowania po Internecie.</Polish>
+			<Portuguese>Uma abundância de aplicações online, serviços VOD, catch-up TV e navegação na Internet.</Portuguese>
+			<Portuguese_LA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Portuguese_LA>
+			<Romanian>O bogăție de aplicații online, servicii VOD, posibilitate de urmărire live și browsing web.</Romanian>
+			<Russian>Многообразие онлайн-приложений, видео по запросу, телевидение «вслед за эфиром» и интернет-серфинг.</Russian>
+			<Serbian>Mnoštvo onlajn aplikacija, VOD usluge, video na zahtev i pretraživanje Interneta.</Serbian>
+			<Slovak>Množstvo online aplikácií, služby videa na požiadanie, služby opakovaného prehrávania (catch-up TV) a internetové prehliadanie.</Slovak>
+			<Slovenian>Široka izbira spletnih aplikacij, storitev VOD (video na zahtevo), ogledov nazaj in spletnega brskanja po internetu.</Slovenian>
+			<Spanish>Gran variedad de aplicaciones en línea, servicios de pago por visión, televisión a la carta y navegación web.</Spanish>
+			<Spanish_CA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Spanish_CA>
+			<Spanish_LA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Spanish_LA>
+			<Spanish_NA>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Spanish_NA>
+			<Swedish>Mängd av onlineapplikationer, VOD-tjänster, infångnings-TV och internet för webbläsning.</Swedish>
+			<Thai>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Thai>
+			<Turkish>Çok sayıda çevrimiçi uygulamalar, VOD hizmetleri, catch-up TV'ler ve İnternet web taraması.</Turkish>
+			<Ukrainian>Величезна кількість онлайн програм, відео за запитом, телепрограм, які можна переглядати одразу після трансляції, та можливість вільно блукати Інтернетом.</Ukrainian>
+			<Uzbek>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Uzbek>
+			<Vietnamese>Wealth of online applications, VOD services, catch-up TVs and Internet web browsing.</Vietnamese>
+		</description>
+	</icon>
+
+	<icon id = "T-Cast">
+		<img_L>../images/esticker/esticker_new_bg_info_l_tcl.png</img_L>
+		<img_R>../images/esticker/esticker_new_bg_info_r_tcl.png</img_R>
+		<img_S>../images/esticker/esticker_eu_Tcast.png</img_S>
+		<img_D>../images/esticker/esticker_eu_Tcast_TCL.png</img_D>
+		<title>
+			<Albanian>T-cast</Albanian>
+			<Arabic>T-cast</Arabic>
+			<ArabicEgypt>T-cast</ArabicEgypt>
+			<Bosnian>T-cast</Bosnian>
+			<Bulgarian>T-cast</Bulgarian>
+			<Chinese>T-cast</Chinese>
+			<ChineseTraditional>T-cast</ChineseTraditional>
+			<Croatian>T-cast</Croatian>
+			<Czech>T-cast</Czech>
+			<Danish>T-cast</Danish>
+			<Dutch>T-cast</Dutch>
+			<Egyptian>T-cast</Egyptian>
+			<English>T-cast</English>
+			<English_CA>T-cast</English_CA>
+			<English_LA>T-cast</English_LA>
+			<English_NA>T-cast</English_NA>
+			<Estonian>T-cast</Estonian>
+			<Finnish>T-cast</Finnish>
+			<French>T-cast</French>
+			<French_NA>T-cast</French_NA>
+			<German>T-cast</German>
+			<Greek>T-cast</Greek>
+			<Hebrew>T-cast</Hebrew>
+			<Hungarian>T-cast</Hungarian>
+			<Indonesian>T-cast</Indonesian>
+			<Italian>T-cast</Italian>
+			<Latvian>T-cast</Latvian>
+			<Lithuanian>T-cast</Lithuanian>
+			<Macedonian>T-cast</Macedonian>
+			<Malay>T-cast</Malay>
+			<Mongolian>T-cast</Mongolian>
+			<Norwegian>T-cast</Norwegian>
+			<Persian>T-cast</Persian>
+			<Polish>T-cast</Polish>
+			<Portuguese>T-cast</Portuguese>
+			<Portuguese_LA>T-cast</Portuguese_LA>
+			<Romanian>T-cast</Romanian>
+			<Russian>T-cast</Russian>
+			<Serbian>T-cast</Serbian>
+			<Slovak>T-cast</Slovak>
+			<Slovenian>T-cast</Slovenian>
+			<Spanish>T-cast</Spanish>
+			<Spanish_CA>T-cast</Spanish_CA>
+			<Spanish_LA>T-cast</Spanish_LA>
+			<Spanish_NA>T-cast</Spanish_NA>
+			<Swedish>T-cast</Swedish>
+			<Thai>T-cast</Thai>
+			<Turkish>T-cast</Turkish>
+			<Ukrainian>T-cast</Ukrainian>
+			<Uzbek>T-cast</Uzbek>
+			<Vietnamese>T-cast</Vietnamese>
+		</title>
+		<description>
+			<Albanian>T-Cast e lejon përdorimin e televizorit nëpërmjet telefonit inteligjent, duke projektuar materialet e celularit në ekranin e televizorit dhe materialet e televizorit në celular, përjetimi më i mirë se kurrë, me argëtim pa ndalim.</Albanian>
+			<Arabic>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Arabic>
+			<ArabicEgypt>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</ArabicEgypt>
+			<Bosnian>T-Cast omogućava rukovanje TV-om pomoću pametnog telefona, mogućnost emitovanja mobilnog sadržaja na TV ekranu i TV sadržaja na mobilnom uređaju, najbolji doživljaj ikad s neprestanom zabavom.</Bosnian>
+			<Bulgarian>T-Cast позволява да управлявате телевизора с помощта на смартфон, да предавате мобилно съдържание на телевизионния екран и телевизионно съдържание на мобилно устройство - едно чудесно изживяване с безкрайно развлечение.</Bulgarian>
+			<Chinese>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Chinese>
+			<ChineseTraditional>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</ChineseTraditional>
+			<Croatian>T-Cast omogućuje rad TV-a pomoću pametnog telefona, pruža mogućnost emitiranja sadržaja mobilnog telefona na TV zaslonu i TV sadržaja na mobilnom uređaju. Stalna zabava - najbolje iskustvo do sada.</Croatian>
+			<Czech>T-Cast vám umožňuje ovládat TV pomocí chytrého telefonu, prohlížet si obsah telefonu na TV obrazovce a obsah TV obrazovky na mobilním zařízení, nejlepší zážitek s nepřetržitou zábavou jaký jste kdy měli.</Czech>
+			<Danish>T-Cast lader dig betjene Tv’et med en smartphone, vise mobilt indhold på tv-skærmen og tv-indhold på en mobilenhed. Du får den bedste oplevelse nogensinde med nonstop underholdning.</Danish>
+			<Dutch>T-Cast maakt het mogelijk om de tv te bedienen met een smartphone, mobiele inhoud naar het tv-scherm en tv-inhoud naar een mobiel apparaat te casten, de beste ervaring met non-stop entertainment ooit.</Dutch>
+			<Egyptian>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Egyptian>
+			<English>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</English>
+			<English_CA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</English_CA>
+			<English_LA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</English_LA>
+			<English_NA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</English_NA>
+			<Estonian>T-Cast võimaldab telerit kasutada nutitelefoni kaudu, esitada mobiili sisu teleri ekraanile ja teleri sisu mobiili. Tegemist on siiani parima piiramatut meelelahutust pakkuva võimalusega.</Estonian>
+			<Finnish>T-Cast mahdollistaa TV:n käyttämisen älypuhelimella, jotta mobiilisisältöä voidaan lähettää TV-ruutuun ja TV:n sisältöä mobiililaitteeseen. Paras keskeytymätön viihdekokemus ikinä.</Finnish>
+			<French>T-Cast permet d’utiliser le téléviseur en utilisant un smartphone, vous êtes en mesure de diffuser du contenu mobile sur l’écran du téléviseur et du contenu télévisé vers l’appareil mobile, la meilleure de toutes les expériences avec du divertissement sans relâche.</French>
+			<French_NA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</French_NA>
+			<German>T-Cast ermöglicht die Fernsehbedienung über das Smartphone und kann dabei mobile Inhalte auf dem Fernseher und Fernsehinhalte auf dem Mobilgerät ausgeben – das beste kontinuierliche Entertainmenterlebnis aller Zeiten.</German>
+			<Greek>Το T-Cast επιτρέπει τη λειτουργία της τηλεόρασης με χρήση smartphone, παρέχει δυνατότητα προβολής περιεχομένου από φορητές συσκευές στην οθόνη της τηλεόρασης και περιεχομένου τηλεόρασης σε φορητές συσκευές, καθώς και βέλτιστη εμπειρία με ατέλειωτη ψυχαγωγία.</Greek>
+			<Hebrew>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Hebrew>
+			<Hungarian>A T-Cast lehetővé teszi a TV okostelefonnal való irányítását, mobiltartalmak TV-re vetítését és TV-tartalmak mobileszközre átvitelét, a valaha volt legjobb non-stop szórakoztatást nyújtva a felhasználónak.</Hungarian>
+			<Indonesian>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Indonesian>
+			<Italian>T-Cast consente di utilizzare la TV tramite smartphone, di trasmettere contenuti mobili allo schermo TV e ai contenuti TV su dispositivi mobili, la migliore esperienza di intrattenimento senza interruzioni.</Italian>
+			<Latvian>T-Cast ļauj lietot televizoru, izmantojot viedtālruni, pārraidīt mobilo saturu TV ekrānā un TV saturu mobilajā ierīcē, iegūt vislabāko izklaides pieredzi bez pārtraukuma.</Latvian>
+			<Lithuanian>„T-Cast“ leidžia valdyti televizorių išmaniuoju telefonu, galima perduoti mobilųjį turinį į televizoriaus ekraną, o televizoriaus turinį – į mobilųjį įrenginį, todėl niekada nenutrūkstančios pramogos suteikia geriausių įspūdžių.</Lithuanian>
+			<Macedonian>T-Cast ви дозволува да управувате со ТВ-уредот со помош на паметниот телефон, да може да емитува мобилни содржини на ТВ-екран и ТВ-содржини на мобилен уред, најдобро искуство со нон-стоп забава.</Macedonian>
+			<Malay>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Malay>
+			<Mongolian>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Mongolian>
+			<Norwegian>Med T-Cast kan du styre TV’n din ved hjelp av mobiltelefonen. Du kan caste det du har på mobilen over på TV-skjermen, og omvendt, - non-stop underholdning som overgår det du tidligere har opplevd.</Norwegian>
+			<Persian>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Persian>
+			<Polish>T-Cast pozwala na obsługę telewizora smartfonem, umożliwia nadawanie treści mobilnych na ekranie telewizora oraz treści telewizyjnych na urządzeniu mobilnym. Najlepsza zabawa z niekończącą się rozrywką.</Polish>
+			<Portuguese>O T-Cast permite controlar a TV a partir do smartphone e transmitir conteúdos do dispositivo móvel para o ecrã da TV e desta para o dispositivo móvel; é a melhor experiência de entretenimento contínuo de sempre.</Portuguese>
+			<Portuguese_LA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Portuguese_LA>
+			<Romanian>T-Cast vă permite să manipulați TV-ul prin utilizarea smartphone-lui,  să fiți capabili să proiectați conținut telefonului mobil pe ecranul televizorului și conținutul televizorului pe ecranul telefonului mobil, oferindu-vă cea mai bună experiență cu distracție neoprită.</Romanian>
+			<Russian>Функция T-Cast позволяет управлять телевизором с помощью смартфона и дает возможность предать контент с мобильного устройства на экран телевизора, а также контент с телевизора на мобильное устройство. Надеемся, что эта новая возможность доставит вам истинное удовольствие.</Russian>
+			<Serbian>T-Cast vam omogućuje da upravljate TV-om pomoću pametnog telefona, da preslikavate sadržaj sa mobilnih uređaja na TV-ekran i obratno. Vrhunsko iskustvo, neprekidna zabava.</Serbian>
+			<Slovak>Aplikácia T-Cast umožňuje ovládať televízor pomocou smartfónu, odoslať obsah z mobilu na obrazovku televízora a obsah z televízora do mobilného zariadenia. Zaisťuje najlepší zážitok a nekonečnú zábavu.</Slovak>
+			<Slovenian>Aplikacija T-Cast omogoča upravljanje televizije s pametnim telefonom, možnost prikaza mobilne vsebine na TV-zaslonu in TV-vsebine na mobilni napravi ter najboljšo izkušnjo z neprekinjeno zabavo.</Slovenian>
+			<Spanish>T-Cast permite manejar la televisión desde un smartphone, proyectar contenidos móviles en la pantalla del televisor y contenido de televisión en el dispositivo móvil: la mejor experiencia con entretenimiento ininterrumpido.</Spanish>
+			<Spanish_CA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Spanish_CA>
+			<Spanish_LA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Spanish_LA>
+			<Spanish_NA>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Spanish_NA>
+			<Swedish>Med T-Cast kan man använda TV:n med hjälp av den smarta telefonen, ställa in mobilt innehåll till TV-skärmen och TV-innehåll till mobilenheten, samt den bästa upplevelseen någonsin med oavbruten underhållning.</Swedish>
+			<Thai>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Thai>
+			<Turkish>T-Cast, akıllı telefon kullanarak TV’yi kumanda etmenizi, mobil içerikleri TV ekranına ve TV içeriğini mobil cihaza aktarmanızı ve her zaman kesintisiz eğlenceyle en iyi deneyime sahip olmanızı sağlar.</Turkish>
+			<Ukrainian>T-Cast дозволяє керувати телевізором за допомогою смартфона, передавати вміст з мобільних пристроїв на екран телевізора і навпаки, дозволяючи насолоджуватися надсучасними технологіями.</Ukrainian>
+			<Uzbek>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Uzbek>
+			<Vietnamese>T-Cast allows to operate TV by using smartphone, be able to cast mobile contents to TV screen and TV content to mobile device, best experience with non-stopped entertainment ever.</Vietnamese>
+		</description>
+	</icon>
+
+</root>

@@ -1,0 +1,486 @@
+/*
+    SDL - Simple DirectMedia Layer
+    Copyright (C) 1997-2009 Sam Lantinga
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+    Sam Lantinga
+    slouken@libsdl.org
+*/
+
+#ifndef _SDL_keysym_h
+#define _SDL_keysym_h
+
+/** What we really want is a mapping of every raw key on the keyboard.
+ *  To support international keyboards, we use the range 0xA1 - 0xFF
+ *  as international virtual keycodes.  We'll follow in the footsteps of X11...
+ *  @brief The names of the keys
+ */
+typedef enum {
+        /** @name ASCII mapped keysyms
+         *  The keyboard syms have been cleverly chosen to map to ASCII
+         */
+        /*@{*/
+	SDLK_UNKNOWN		= 0,
+	SDLK_FIRST		= 0,
+	SDLK_BACKSPACE		= 8,
+	SDLK_TAB		= 9,
+	SDLK_CLEAR		= 12,
+	SDLK_RETURN		= 13,
+	SDLK_PAUSE		= 19,
+	SDLK_ESCAPE		= 27,
+	SDLK_SPACE		= 32,
+	SDLK_EXCLAIM		= 33,
+	SDLK_QUOTEDBL		= 34,
+	SDLK_HASH		= 35,
+	SDLK_DOLLAR		= 36,
+	SDLK_PERCENT       = 37,
+	SDLK_AMPERSAND		= 38,
+	SDLK_QUOTE		= 39,
+	SDLK_LEFTPAREN		= 40,
+	SDLK_RIGHTPAREN		= 41,
+	SDLK_ASTERISK		= 42,
+	SDLK_PLUS		= 43,
+	SDLK_COMMA		= 44,
+	SDLK_MINUS		= 45,
+	SDLK_PERIOD		= 46,
+	SDLK_SLASH		= 47,
+	SDLK_0			= 48,
+	SDLK_1			= 49,
+	SDLK_2			= 50,
+	SDLK_3			= 51,
+	SDLK_4			= 52,
+	SDLK_5			= 53,
+	SDLK_6			= 54,
+	SDLK_7			= 55,
+	SDLK_8			= 56,
+	SDLK_9			= 57,
+	SDLK_COLON		= 58,
+	SDLK_SEMICOLON		= 59,
+	SDLK_LESS		= 60,
+	SDLK_EQUALS		= 61,
+	SDLK_GREATER		= 62,
+	SDLK_QUESTION		= 63,
+	SDLK_AT			= 64,
+	/* 
+	   Skip uppercase letters
+	 */
+
+	SDLK_A			= 65,
+	SDLK_B			= 66,
+	SDLK_C			= 67,
+	SDLK_D			= 68,
+	SDLK_E			= 69,
+	SDLK_F			= 70,
+	SDLK_G			= 71,
+	SDLK_H			= 72,
+	SDLK_I			= 73,
+	SDLK_J			= 74,
+	SDLK_K			= 75,
+	SDLK_L			= 76,
+	SDLK_M			= 77,
+	SDLK_N			= 78,
+	SDLK_O			= 79,
+	SDLK_P			= 80,
+	SDLK_Q			= 81,
+	SDLK_R			= 82,
+	SDLK_S			= 83,
+	SDLK_T			= 84,
+	SDLK_U			= 85,
+	SDLK_V			= 86,
+	SDLK_W			= 87,
+	SDLK_X			= 88,
+	SDLK_Y			= 89,
+	SDLK_Z			= 90,
+	
+	SDLK_LEFTBRACKET	= 91,
+	SDLK_BACKSLASH		= 92,
+	SDLK_RIGHTBRACKET	= 93,
+	SDLK_CARET		= 94,
+	SDLK_UNDERSCORE		= 95,
+	SDLK_BACKQUOTE		= 96,
+	SDLK_a			= 97,
+	SDLK_b			= 98,
+	SDLK_c			= 99,
+	SDLK_d			= 100,
+	SDLK_e			= 101,
+	SDLK_f			= 102,
+	SDLK_g			= 103,
+	SDLK_h			= 104,
+	SDLK_i			= 105,
+	SDLK_j			= 106,
+	SDLK_k			= 107,
+	SDLK_l			= 108,
+	SDLK_m			= 109,
+	SDLK_n			= 110,
+	SDLK_o			= 111,
+	SDLK_p			= 112,
+	SDLK_q			= 113,
+	SDLK_r			= 114,
+	SDLK_s			= 115,
+	SDLK_t			= 116,
+	SDLK_u			= 117,
+	SDLK_v			= 118,
+	SDLK_w			= 119,
+	SDLK_x			= 120,
+	SDLK_y			= 121,
+	SDLK_z			= 122,
+	SDLK_LEFTBRACE	= 123,
+	SDLK_SPECIAL 	= 124,
+	SDLK_RIGHTBRACE= 125,
+	SDLK_TILDE		= 126,		
+	SDLK_DELETE		= 127,
+	/* End of ASCII mapped keysyms */
+        /*@}*/
+
+	/** @name International keyboard syms */
+        /*@{*/
+	SDLK_WORLD_0		= 160,		/* 0xA0 */
+	SDLK_WORLD_1		= 161,
+	SDLK_WORLD_2		= 162,
+	SDLK_WORLD_3		= 163,
+	SDLK_WORLD_4		= 164,
+	SDLK_WORLD_5		= 165,
+	SDLK_WORLD_6		= 166,
+	SDLK_WORLD_7		= 167,
+	SDLK_WORLD_8		= 168,
+	SDLK_WORLD_9		= 169,
+	SDLK_WORLD_10		= 170,
+	SDLK_WORLD_11		= 171,
+	SDLK_WORLD_12		= 172,
+	SDLK_WORLD_13		= 173,
+	SDLK_WORLD_14		= 174,
+	SDLK_WORLD_15		= 175,
+	SDLK_WORLD_16		= 176,
+	SDLK_WORLD_17		= 177,
+	SDLK_WORLD_18		= 178,
+	SDLK_WORLD_19		= 179,
+	SDLK_WORLD_20		= 180,
+	SDLK_WORLD_21		= 181,
+	SDLK_WORLD_22		= 182,
+	SDLK_WORLD_23		= 183,
+	SDLK_WORLD_24		= 184,
+	SDLK_WORLD_25		= 185,
+	SDLK_WORLD_26		= 186,
+	SDLK_WORLD_27		= 187,
+	SDLK_WORLD_28		= 188,
+	SDLK_WORLD_29		= 189,
+	SDLK_WORLD_30		= 190,
+	SDLK_WORLD_31		= 191,
+	SDLK_WORLD_32		= 192,
+	SDLK_WORLD_33		= 193,
+	SDLK_WORLD_34		= 194,
+	SDLK_WORLD_35		= 195,
+	SDLK_WORLD_36		= 196,
+	SDLK_WORLD_37		= 197,
+	SDLK_WORLD_38		= 198,
+	SDLK_WORLD_39		= 199,
+	SDLK_WORLD_40		= 200,
+	SDLK_WORLD_41		= 201,
+	SDLK_WORLD_42		= 202,
+	SDLK_WORLD_43		= 203,
+	SDLK_WORLD_44		= 204,
+	SDLK_WORLD_45		= 205,
+	SDLK_WORLD_46		= 206,
+	SDLK_WORLD_47		= 207,
+	SDLK_WORLD_48		= 208,
+	SDLK_WORLD_49		= 209,
+	SDLK_WORLD_50		= 210,
+	SDLK_WORLD_51		= 211,
+	SDLK_WORLD_52		= 212,
+	SDLK_WORLD_53		= 213,
+	SDLK_WORLD_54		= 214,
+	SDLK_WORLD_55		= 215,
+	SDLK_WORLD_56		= 216,
+	SDLK_WORLD_57		= 217,
+	SDLK_WORLD_58		= 218,
+	SDLK_WORLD_59		= 219,
+	SDLK_WORLD_60		= 220,
+	SDLK_WORLD_61		= 221,
+	SDLK_WORLD_62		= 222,
+	SDLK_WORLD_63		= 223,
+	SDLK_WORLD_64		= 224,
+	SDLK_WORLD_65		= 225,
+	SDLK_WORLD_66		= 226,
+	SDLK_WORLD_67		= 227,
+	SDLK_WORLD_68		= 228,
+	SDLK_WORLD_69		= 229,
+	SDLK_WORLD_70		= 230,
+	SDLK_WORLD_71		= 231,
+	SDLK_WORLD_72		= 232,
+	SDLK_WORLD_73		= 233,
+	SDLK_WORLD_74		= 234,
+	SDLK_WORLD_75		= 235,
+	SDLK_WORLD_76		= 236,
+	SDLK_WORLD_77		= 237,
+	SDLK_WORLD_78		= 238,
+	SDLK_WORLD_79		= 239,
+	SDLK_WORLD_80		= 240,
+	SDLK_WORLD_81		= 241,
+	SDLK_WORLD_82		= 242,
+	SDLK_WORLD_83		= 243,
+	SDLK_WORLD_84		= 244,
+	SDLK_WORLD_85		= 245,
+	SDLK_WORLD_86		= 246,
+	SDLK_WORLD_87		= 247,
+	SDLK_WORLD_88		= 248,
+	SDLK_WORLD_89		= 249,
+	SDLK_WORLD_90		= 250,
+	SDLK_WORLD_91		= 251,
+	SDLK_WORLD_92		= 252,
+	SDLK_WORLD_93		= 253,
+	SDLK_WORLD_94		= 254,
+	SDLK_WORLD_95		= 255,		/* 0xFF */
+        /*@}*/
+
+	/** @name Numeric keypad */
+        /*@{*/
+	SDLK_KP0		= 256,
+	SDLK_KP1		= 257,
+	SDLK_KP2		= 258,
+	SDLK_KP3		= 259,
+	SDLK_KP4		= 260,
+	SDLK_KP5		= 261,
+	SDLK_KP6		= 262,
+	SDLK_KP7		= 263,
+	SDLK_KP8		= 264,
+	SDLK_KP9		= 265,
+	SDLK_KP_PERIOD		= 266,
+	SDLK_KP_DIVIDE		= 267,
+	SDLK_KP_MULTIPLY	= 268,
+	SDLK_KP_MINUS		= 269,
+	SDLK_KP_PLUS		= 270,
+	SDLK_KP_ENTER		= 271,
+	SDLK_KP_EQUALS		= 272,
+        /*@}*/
+
+	/** @name Arrows + Home/End pad */
+        /*@{*/
+	SDLK_UP			= 273,
+	SDLK_DOWN		= 274,
+	SDLK_RIGHT		= 275,
+	SDLK_LEFT		= 276,
+	SDLK_INSERT		= 277,
+	SDLK_HOME		= 278,
+	SDLK_END		= 279,
+	SDLK_PAGEUP		= 280,
+	SDLK_PAGEDOWN		= 281,
+        /*@}*/
+
+	/** @name Function keys */
+        /*@{*/
+	SDLK_F1			= 282,
+	SDLK_F2			= 283,
+	SDLK_F3			= 284,
+	SDLK_F4			= 285,
+	SDLK_F5			= 286,
+	SDLK_F6			= 287,
+	SDLK_F7			= 288,
+	SDLK_F8			= 289,
+	SDLK_F9			= 290,
+	SDLK_F10		= 291,
+	SDLK_F11		= 292,
+	SDLK_F12		= 293,
+	SDLK_F13		= 294,
+	SDLK_F14		= 295,
+	SDLK_F15		= 296,
+        /*@}*/
+
+	/** @name Key state modifier keys */
+        /*@{*/
+	SDLK_NUMLOCK		= 300,
+	SDLK_CAPSLOCK		= 301,
+	SDLK_SCROLLOCK		= 302,
+	SDLK_RSHIFT		= 303,
+	SDLK_LSHIFT		= 304,
+	SDLK_RCTRL		= 305,
+	SDLK_LCTRL		= 306,
+	SDLK_RALT		= 307,
+	SDLK_LALT		= 308,
+	SDLK_RMETA		= 309,
+	SDLK_LMETA		= 310,
+	SDLK_LSUPER		= 311,		/**< Left "Windows" key */
+	SDLK_RSUPER		= 312,		/**< Right "Windows" key */
+	SDLK_MODE		= 313,		/**< "Alt Gr" key */
+	SDLK_COMPOSE		= 314,		/**< Multi-key compose key */
+        /*@}*/
+
+	/** @name Miscellaneous function keys */
+        /*@{*/
+	SDLK_HELP		= 315,
+	SDLK_PRINT		= 316,
+	SDLK_SYSREQ		= 317,
+	SDLK_BREAK		= 318,
+	SDLK_MENU		= 319,
+	SDLK_POWER		= 320,		/**< Power Macintosh power key */
+	SDLK_EURO		= 321,		/**< Some european keyboards */
+	SDLK_UNDO		= 322,		/**< Atari keyboard has Undo */
+        /*@}*/
+
+	/* Add any other keys here */
+    SDLK_CHANNEL_UP = 350,
+	SDLK_CHANNEL_DOWN = 351,
+	SDLK_VOLUME_DOWN = 352,
+	SDLK_VOLUME_UP = 353,
+	SDLK_VOLUME_MUTE = 354,
+	SDLK_SOURCE = 355,
+	SDLK_BACK = 356,
+	SDLK_INFO = 357,
+	/*new add*/
+	SDLK_3D = 359,
+	SDLK_TV = 360,
+	SDLK_ECO = 361,
+	SDLK_OPTION = 362,
+	SDLK_SMART_TV = 363,
+	SDLK_GUIDE = 364,
+	SDLK_EXIT = 365,
+	SDLK_ZOOM_DOWN = 366, 
+	SDLK_ZOOM_UP = 367,
+	SDLK_SLEEP = 368,
+	SDLK_PRE_CH = 369,
+	SDLK_FAV = 370,
+	SDLK_LIST = 371,
+	SDLK_LANG = 372,
+	SDLK_SUBTITLE = 373,
+	SDLK_TEXT = 374,
+	SDLK_PREVIOUS = 375,
+	SDLK_STOP = 376,
+	SDLK_PAUSE_PLAY = 377,
+	SDLK_NEXT = 378,
+	SDLK_FAST_BACKWARD = 379,
+	SDLK_RECORD = 380,
+	SDLK_FSAT_FORWARD = 381,
+    SDLK_NETFLIX = 382,
+    SDLK_PLAY = 383,
+     
+	SDLK_FRONT_PANEL_LOCKED = 500,
+	SDLK_WARM_UP_MENU = 501,
+	SDLK_PANEL_OK = 502,
+	SDLK_PANEL_MINUS = 503,
+	SDLK_PANEL_PLUS = 504,
+	SDLK_PANEL_DOWN = 505,
+	SDLK_PANEL_UP = 506,
+	SDLK_PANEL_MENU = 507,
+	SDLK_PANEL_POWER = 508,
+    SDLK_PANEL_LONG_OK = 509,
+    SDLK_KEYBOARD_TEXT = 510,
+	
+
+#if 1//add by chenhua for factory 2014.3.3
+	MUTE_ON = 1000,
+	MUTE_OFF = 1001,
+	AV1 = 1002,
+	AV2 = 1003,
+	VGA = 1004,
+	HDMI1 = 1005,
+	HDMI2 = 1006,
+	HDMI3 = 1007,
+	HDMI4 = 1008,
+	CMP1 = 1009,
+	CMP2 = 1010,
+	USB = 1011,
+	P_ON = 1012,
+	P_OFF = 1013,
+	PW_ON = 1014,
+	PW_OFF = 1015,
+	WIFI = 1016,
+	MIC_ON = 1017,
+	MIC_OFF = 1018,
+	_3D_ON = 1020,
+	_3D_OFF = 1021,
+	SN_ON = 1022,
+	SN_OFF = 1023,
+	OOB = 1024,
+	D_TEST = 10025,
+	SIZE = 1026,
+	RATTLE = 1028,
+	CLR_TEMP = 1029,
+	TV = 1030,
+	SAT = 1031,
+	CABLE = 1032,
+	LIGHT_SNSR_ON = 1033,
+	LIGHT_SNSR_OFF = 1034,
+	GAME_ON = 1035,
+	GAME_OFF = 1036,
+	KET_TEST_ON = 1037,
+	KET_TEST_OFF = 1038,
+    PANEL_TEST_ON = 1039,
+	PANEL_TEST_OFF = 1040,
+    CLONINGUSB2TV_START = 1041,
+    RESETALL_START = 1042,
+    VOLUME_SET = 1043,
+    TERRESTRIALPROGRAM_SELECT = 1044,
+    CABLEPROGRAM_SELECT = 1045,
+    SATELLITEPROGRAM_SELECT = 1046,
+    ERG_ENABLE = 1047,
+    ERG_DISABLE = 1048,
+#endif
+    SDLK_VIRTUAL_LEFT = 1050,
+    SDLK_VIRTUAL_RIGHT = 1051,
+    SDLK_VIRTUAL_UP = 1052,
+    SDLK_VIRTUAL_DOWN= 1053,
+    SDLK_VIRTUAL_OK= 1054,
+    SDLK_VIRTUAL_BACK= 1055,
+    SDLK_VIRTUAL_REMOTE = 1056,
+    SDLK_MEDIA = 1057,
+    SDLK_VIRTUAL_MOUSE = 1058,
+    SDLK_YOUTUBE = 1059,
+    SDLK_SETTING = 1060,
+    SDLK_SOURCE_CMP1 = 1061,
+    SDLK_SOURCE_VGA = 1062,
+    SDLK_SOURCE_AV1 = 1063,
+    SDLK_SOURCE_HDMI1 = 1064,
+    SDLK_SOURCE_HDMI2 = 1065,
+    SDLK_SOURCE_HDMI3 = 1066,
+    SDLK_SOURCE_HDMI4 = 1067,
+    SDLK_PANEL_LEFT = 1071,
+    SDLK_PANEL_RIGHT = 1072,
+    SDLK_PANEL_POWER_OK = 1073,
+    SDLK_PANEL_LONG_POWER_OK = 1074,
+    SDLK_MTS = 1075,
+    SDLK_SOUND = 1076,
+    SDLK_FREEZE = 1077,
+    SDLK_TUNER = 1078,
+    SDLK_PIC = 1079,
+    SDLK_GLOBOPLAY = 1080,
+    SDLK_SMART_KEY = 1081,
+    SDLK_APPSTORE = 1082,
+    SDLK_BROWSER = 1083,
+	SDLK_LAST
+} SDLKey;
+
+/** Enumeration of valid key mods (possibly OR'd together) */
+typedef enum {
+	KMOD_NONE  = 0x0000,
+	KMOD_LSHIFT= 0x0001,
+	KMOD_RSHIFT= 0x0002,
+	KMOD_LCTRL = 0x0040,
+	KMOD_RCTRL = 0x0080,
+	KMOD_LALT  = 0x0100,
+	KMOD_RALT  = 0x0200,
+	KMOD_LMETA = 0x0400,
+	KMOD_RMETA = 0x0800,
+	KMOD_NUM   = 0x1000,
+	KMOD_CAPS  = 0x2000,
+	KMOD_MODE  = 0x4000,
+	KMOD_RESERVED = 0x8000
+} SDLMod;
+
+#define KMOD_CTRL	(KMOD_LCTRL|KMOD_RCTRL)
+#define KMOD_SHIFT	(KMOD_LSHIFT|KMOD_RSHIFT)
+#define KMOD_ALT	(KMOD_LALT|KMOD_RALT)
+#define KMOD_META	(KMOD_LMETA|KMOD_RMETA)
+
+#endif /* _SDL_keysym_h */

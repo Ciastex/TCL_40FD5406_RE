@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<manifest package="amazon.proxy" xmlns:tvos="tvos" >
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <application tvos:persistent="false">
+        <activity
+            tvos:name="AmazonProxy" >
+            <intent-filter>
+                <action tvos:name="tvos.amazon.proxy" />
+            </intent-filter>
+            <intent-filter>
+                <action tvos:name="tvos.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+		
+        <broadcast tvos:name="AmazonDeactivate" >
+            <intent-filter>
+                <action tvos:name="tvos.broadcast.amazon.deactivate" />
+            </intent-filter>
+        </broadcast>
+
+        <broadcast tvos:name="AmazonPoweroff" >
+            <intent-filter>
+                <action tvos:name="tvos.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </broadcast>
+		
+        <broadcast tvos:name="AmazonStandby" >
+            <intent-filter>
+                <action tvos:name="tvos.system.broadcast.standby" />
+            </intent-filter>
+        </broadcast>
+		
+        <broadcast tvos:name="AmazonWakeup" >
+            <intent-filter>
+                <action tvos:name="tvos.system.broadcast.wakeup" />
+            </intent-filter>
+        </broadcast>
+		
+    </application>
+
+</manifest>

@@ -1,0 +1,47 @@
+
+
+/* -------------------------------------------------------------------  */
+
+.virtualremotediv
+{
+	position: absolute;
+
+	left: 1430px;
+	top: 900px;
+	width: 440px;
+	height: 130px;
+	background-image:url("../img/Vkey_bg_5.png");
+	display: inline-table;
+}
+
+
+
+/* ----------------------------------------- 10、播放键：快退、 stop 、快进         不显示 -----------table显示与否设置-------------------*/
+
+.t10_media
+{
+	width:420px;
+    height:90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+
+    border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+    border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+    display: inline-table;
+}
+
+.t10_media td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 140px;
+	height: 90px;
+}
+
+
+
+
+
+

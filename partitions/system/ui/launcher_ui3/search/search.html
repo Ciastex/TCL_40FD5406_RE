@@ -1,0 +1,62 @@
+﻿
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../theme_thomson.css"/>
+<link rel="stylesheet" type="text/css" href="search.css"/>
+<script type="text/javascript" src="search.js"></script>
+<script type="text/javascript" src="../keyboard.js"></script>
+<script type="text/javascript" src="../event.js"></script>
+<script type="text/javascript" src="../generalFun.js"></script>
+<script type="text/javascript" src="../reportData.js"></script>
+</head>
+
+
+<body onload="init();wakeReportTimeInterval();" class="searchBody" onfocus="onBodyFocus()">
+	<h1 id="titleName"></h1>
+	
+	<img id="lineImage" src="../images/whiteline.png?md5=30464ba3ad551ad65ec0e64318dfb70e"></img>
+	<div id= "popResult" style="position:relative ; display:none"><!-----------------------------popular research loacation------------------------------->
+		<p id="popularSearches"></p>
+		
+		<div class = 'defaultPoster' style ="left : 95px "></div>
+		<div   id="pop1" name="pop"   data-up="Frame"  data-right="pop2" data-down="-1"  data-left="pop5" data-focusId="focusPic1"  > 
+			<div id = "focusPic1" class = "backgroundPic_pop" style="display:none" ></div>
+			<span id="title1"  class="videoTitle" ></span>
+		</div>
+		<div class = 'defaultPoster' style ="left : 445px "></div>
+		<div  id="pop2" name="pop"   data-up="Frame"  data-right="pop3" data-down="-1"  data-left="pop1"  data-focusId="focusPic2" > 
+			<div id = "focusPic2" class = "backgroundPic_pop" style="display:none" ></div>
+			<span id="title2" class="videoTitle" ></span>
+		</div>
+		<div class = 'defaultPoster' style ="left : 795px "></div>
+		<div   id="pop3" name="pop"   data-up="Frame"  data-right="pop4" data-down="-1"  data-left="pop2"  data-focusId="focusPic3" > 
+			<div id = "focusPic3" class = "backgroundPic_pop" style="display:none" ></div>
+			<span  id="title3" class="videoTitle" ></span>
+		</div>
+		<div class = 'defaultPoster' style ="left : 1145px "></div>
+		<div   id="pop4" name="pop"   data-up="Frame"  data-right="pop5" data-down="-1"  data-left="pop3" data-focusId="focusPic4" > 
+			<div id = "focusPic4" class = "backgroundPic_pop" style="display:none" ></div>
+			<span id="title4"  class="videoTitle" ></span>
+		</div>
+		<div class = 'defaultPoster' style ="left : 1495px "></div>
+		<div   id="pop5" name="pop"   data-up="Frame"  data-right="pop1" data-down="-1"  data-left="pop4"  data-focusId="focusPic5" > 
+			<div id = "focusPic5" class = "backgroundPic_pop" style="display:none" ></div>
+			<span  id="title5"  class="videoTitle" ></span>
+		</div>
+	
+	</div>
+	<!--------------------get the research info by this form------------------------->
+		<div style="overflow: hidden;"   id="Frame"  data-up="-1"  data-right="Button" data-down="pop1"  data-left="-1"  data-focusId="focusPicSearchFrame"  onclick="inputstate()"> 
+			<img   id="searchFrame" src="../images/searchInput.png?md5=6c529bfbf3f8f9e731081da3f6c3c1fa"/>
+			<div id="searchText" style="position:absolute ;top:20px;left:10px;color:#333538;"></div>
+		</div>
+		<div id = "focusPicSearchFrame" class = "backgroundPic_search" onclick="inputstate()"></div>
+		<div   id="Button"  onclick="search()" data-up="-1"  data-right="Frame" data-down="pop1"  data-left="Frame"  data-focusId="focusPicSearchButton" > 
+			<img   id="searchButton" src="../images/searchButton.png?md5=f1493c878e7fff2a2a76d4855e35dd1d"/>
+			<div id = "focusPicSearchButton" class = "backgroundPic_button" style="display:none" ></div>
+		</div>
+	
+</body>
+
+</html>

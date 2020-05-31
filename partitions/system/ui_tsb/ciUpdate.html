@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+#form
+{
+	position:absolute;
+	top:400px;
+	left:560px;
+	width:800px;
+	height:250px;
+	background-color:#000;
+	opacity:0.8;
+}
+#ciUpdateWords
+{
+	position:absolute;
+	top:30px;
+    left:20px;
+	width:760px;
+	font-size:30px;
+	color:#fff;
+	text-align:left;
+}
+#yes
+{
+	position:absolute;
+	top:160px;
+	width:200px;
+	left:100px;
+	font-size:30px;
+	color:#fff;
+    padding: 9px 0px;
+	text-align:center;
+}
+#no
+{
+	position:absolute;
+	top:160px;
+	width:200px;
+	left:500px;
+	font-size:30px;
+	color:#fff;
+    padding: 9px 0px;
+	text-align:center;
+}
+#focus
+{
+	position:absolute;
+	top:160px;
+	width:200px;
+	height:45px;
+	left:100px;
+	border:medium solid #f00;
+	border-radius:10px;
+	pointer-events:none;
+}
+</style>
+
+<script type="text/javascript">
+top.keySetForUI(1);
+var ciUpdateWords 			= top.ciPromt[0];
+var yesNoWords 				= top.yesNo;
+
+var position_h 				= 0;
+
+document.onkeydown = keyproc;
+document.onsystem = systemeventproc;
+var setting = top.g_setting;
+function keyproc(e)
+{
+	var ret = true;
+	var keycode = e.which;
+	
+	switch (keycode)
+	{
+		case top.VK_MUTE:
+		case top.VK_POWER:
+			top.keyDownProcess(e);
+			return;
+		default:
+			break;
+	}
+	
+	switch(keycode)
+	{
+		case top.VK_LEFT:
+			toLeft();
+			ret = false;
+			break;
+		case top.VK_RIGHT:
+			toRight();
+			ret = false;
+			break;
+		case top.VK_ENTER:
+			doEnter();
+			ret = false;
+			break;
+		default:
+			ret = true;
+			break;
+	}
+	return ret;
+
+}
+
+function systemeventproc(evt)
+{
+    var msg = e.which;
+	
+	switch (msg)
+	{
+		case top.E_CI_AI_PROHIBIT_POWER_OFF:
+		case top.E_CI_AI_POWER_OFF:
+        case top.E_CI_AI_HDS_DISP_REQ:
+        case top.E_CI_AI_HDS_DISP_END:
+            top.systemEventProc(evt);
+            break;
+        default:
+            break;
+    }
+}
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+function toLeft()
+{
+	if(position_h == 0)
+	{
+		position_h = 1;
+		$("focus").style.left = "500px";
+	}
+	else
+	{
+		position_h = 0;
+		$("focus").style.left = "100px";
+	}
+}
+
+function toRight()
+{
+	if(position_h == 0)
+	{
+		position_h = 1;
+		$("focus").style.left = "500px";
+	}
+	else
+	{
+		position_h = 0;
+		$("focus").style.left = "100px";
+	}
+}
+
+function doEnter()
+{
+	top.g_ciIsInUpdateForm = 0;
+	if(top.g_ciUpdateType == 0)//响应消息CI_OP_UPDATE_CHANNEL
+	{
+		top.g_setting.setCIMsgResendFlag(top.E_CI_OP_UPDATE_CHANNEL, 0);
+	}
+	else if(top.g_ciUpdateType == 1)
+	{
+		top.g_setting.setCIMsgResendFlag(top.E_CI_OP_UPDATE_NIT, 0);
+	}
+	if(position_h == 0)
+	{
+		if(top.g_ciUpdateType == 0)//响应消息CI_OP_UPDATE_CHANNEL
+		{
+			setting.ciOpUpdateChannel();
+			top.g_ciUpdateType = -1;
+			window.location.href = "channelPlay.html";
+		}
+		else if(top.g_ciUpdateType == 1)//响应消息CI_OP_UPDATE_NIT
+		{
+			setting.ciOpUpdateNit();
+			top.g_ciUpdateType = -1;
+			window.location.href = "channelPlay.html";
+		}
+	}
+	else
+	{
+		top.g_ciUpdateType = -1;
+		window.location.href = "channelPlay.html";
+	}
+}
+
+function init()
+{
+    top.initTextDirection(window);
+	//面板按键处理场景设置
+	top.stopTimeout();
+	setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	$("ciUpdateWords").innerHTML = ciUpdateWords;
+	$("yes").innerHTML = yesNoWords[0];
+	$("no").innerHTML = yesNoWords[1];
+	position_h = 0;
+	$("focus").style.left = "100px";
+	addMouseListener();
+}
+function uninit()
+{
+	top.timeoutFuc.timeoutEnable=1;
+}
+function addMouseListener()
+{
+	document.body.onmousedown = function(evt){evt.preventDefault();
+	}
+	
+	$("yes").onmousedown = function(evt){
+		if(evt.button == 0){//left key
+			position_h = 0;
+			$("focus").style.left = "100px";
+			doEnter();
+		}
+	}
+	$("no").onmousedown = function(evt){
+		if(evt.button == 0){//left key
+			position_h = 1;
+			$("focus").style.left = "500px";
+			doEnter();
+		}
+	}
+}
+</script>
+</head>
+
+<body onload="init()" onunload="uninit()">
+<div id="form">
+	<span id="ciUpdateWords"></span>
+	<span id="yes"></span>
+    <span id="no"></span>
+    <div id="focus"></div>
+</div>
+</body>
+</html>

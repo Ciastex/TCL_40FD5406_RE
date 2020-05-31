@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../theme_thomson.css" id="theme" />
+<link rel="stylesheet" type="text/css" href="../index.css"/>
+<link rel="stylesheet" type="text/css" href="history.css"/>
+<script type="text/javascript" src="history.js"></script>
+<script type="text/javascript" src="../event.js"></script>
+<script type="text/javascript" src="../generalFun.js"></script>
+<script type="text/javascript" src="../reportData.js"></script>
+</head>
+<body onload ="init();wakeReportTimeInterval();" onfocus="getfocus()" class="body_comm" style="overflow:hidden;">
+<div id="whole" class="includeWhole">
+<div id="delPageBackgroudn" class="delPageType"></div>
+<!-- 标题 -->
+<div id="pageTitle" style="font-family:Arial;position:absolute;z-index:5;display:inline;font-size:60px;color:#e0e0e0;top:68px;left:116px;">
+
+</div>
+<!-- 顶部横线 -->
+<div style="position:absolute;z-index:5;display:inline;top:155px;left:95px;">
+<img src="../images/whiteline.png?md5=30464ba3ad551ad65ec0e64318dfb70e"/>
+</div>
+<!-- 右边提示 -->
+<div id="rightNotice" style="position:absolute;z-index:5;display:inline;font-size:36px;font-family:Arial;color:#e0e0e0;top:83px;right:187px;display:none">
+<div id="beforePic" style="float:left;right:332px;white-space:nowrap;"></div>
+<img id="buttonImg" style="position:relative;z-index:5;display:inline;font-size:36px;font-family:Arial;color:#e0e0e0;top:-8px;" src = '../images/icon-option.png?md5=5a93059ebf57690ebbbdafd40bc1b5fe'></img>
+<div id="afterPic" style="float:right;white-space:nowrap"></div>
+</div>
+
+<!-- 时间轴线 -->
+<div id="timeAxis" style="position:absolute;z-index:5;display:blok;top:220px;left:379px;">
+<img src="../images/TimeAxis.png?md5=e40b8f8b471ca507a27d21c58764e176"/>
+</div>
+
+
+
+
+
+<!-- 滑动区域开始位置 -->
+<div style = "overflow:hidden;position:absolute;display:block;left:0px;top:220px; height:860px;width:1920px;">
+<div id="history" name="historyPage" style="position:absolute;display:block;left:0px;top:0px; height:860px;width:1920px; "></div>
+<!-- 滑动区域结束位置 -->
+</div>
+
+<!-- 下面删除提示背景 -->
+<div id="delOptions" style="position:absolute;z-index:200px;left:0px;bottom:0px;display:none">
+	<img src="../images/deleteBG.png?md5=de4600a5c8e00eccf2e91f232729d8cf"></img> 
+	<div  style="position:absolute;z-index:6;top:15px;left:0px;bottom:0px;width:1920px;height:144px;">
+		<div id="delOne" onclick= "mouseOnclick('delOne')" class="delOneCss"  ></div>
+		<div id="delALL" onclick= "mouseOnclick('delALL')" class="delALLCss"  ></div>
+	</div>
+</div>
+<div id="delNotice" style="position:absolute;z-index:200px;top:438px;left:524px;bottom:0px;display:none">
+<img src="../images/noticeBG.png?md5=6829594200cb4a0196e91f6bf42b9032"></img> 
+<div id="noticePic" style="position:absolute;display:inline;z-index:201;left:70px;top:68px;width:68px;height:68px;font-size:36px;background-image:url('../images/notice.png?md5=e56dc2189f81e1e5114883552a11cf40')"></div>
+<div id="delNoticeWords"  style="position:absolute;display:inline;z-index:201;left:220px;top:77px;height:68px;font-size:30px;color:#ffffff; white-space:nowrap;"></div>
+
+</div>
+
+</div>
+<!-- 空白历史记录提示------------------>
+<div id="blankNotice" style="position:absolute;z-index:200px;top:438px;bottom:0px;display:none">
+<div id="noticeWords"  style="position:absolute;display:block;z-index:201;top:75px;left:0px;height:68px;width:1920px;font-size:36px;color:#ffffff;white-space:nowrap;text-align:center "></div>
+</div>
+</body>
+</html>

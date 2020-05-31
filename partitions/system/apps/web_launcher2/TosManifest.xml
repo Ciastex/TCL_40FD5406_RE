@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="WebBrowser" xmlns:tvos="tvos" >
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <set-env>
+        <env tvos:name="LD_LIBRARY_PATH" tvos:mode="front">/system/tbrowser2/lib</env>
+    </set-env>
+    <application tvos:persistet="true">
+        <activity tvos:name="Address" >
+            <intent-filter>
+                <action tvos:name="tvos.webbrowser.address" />
+            </intent-filter>
+        </activity>
+        <activity tvos:name="TabPage" >
+            <intent-filter>
+                <action tvos:name="tvos.WebLauncher" />
+                <category tvos:name="tvos.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

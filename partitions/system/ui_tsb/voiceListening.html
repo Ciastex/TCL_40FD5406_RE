@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>no title document</title>
+</head>
+<style>
+#listeningPic
+{
+	position:absolute;
+	height:250px;
+	width:1500px;
+	top:734px; 
+	left:200px; 
+    repeat:no-repeat;
+	display:block;
+	z-index:200;
+    background:url(images/voiceUI/bg.png);
+}
+
+
+
+
+</style>
+<body onload="init()">
+
+<div id="listeningPic">
+<img id="picture"
+</div>
+<script>
+
+var loadingTimer = -1;
+function init()
+{
+    loading( 0 );
+}
+function loading( loadingCount ) 
+{
+	var loadingImgs		= ["images/voiceUI/comp0.png",
+						   "images/voiceUI/comp1.png",
+						   "images/voiceUI/comp2.png",
+						   "images/voiceUI/comp3.png",
+						   "images/voiceUI/comp4.png",
+						   "images/voiceUI/comp5.png",
+						   "images/voiceUI/comp6.png",
+						   "images/voiceUI/comp7.png",
+						   "images/voiceUI/comp8.png",
+						   "images/voiceUI/comp9.png",
+						   "images/voiceUI/comp10.png",
+						   "images/voiceUI/comp11.png",
+						   "images/voiceUI/comp12.png",
+						   "images/voiceUI/comp13.png",
+						   "images/voiceUI/comp14.png",
+						   "images/voiceUI/comp15.png",
+						   "images/voiceUI/comp16.png",
+						   "images/voiceUI/comp17.png",
+						   "images/voiceUI/comp18.png",
+						   "images/voiceUI/comp19.png",
+						   "images/voiceUI/comp20.png",
+						   "images/voiceUI/comp21.png",
+						   "images/voiceUI/comp22.png",
+						   "images/voiceUI/comp23.png",
+						   "images/voiceUI/comp24.png",
+						   "images/voiceUI/comp26.png",
+						   "images/voiceUI/comp27.png",
+						   "images/voiceUI/comp28.png",
+						   "images/voiceUI/comp29.png",
+						   "images/voiceUI/comp30.png",
+						   "images/voiceUI/comp31.png",
+						   "images/voiceUI/comp32.png"];
+	document.getElementById("picture").src = loadingImgs[loadingCount%8];
+	loadingCount++;
+	loadingTimer=setTimeout("loading(" + loadingCount + ")",300);
+    console.log(loadingCount);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#regionTips
+{
+	position:absolute;
+	height:410px;
+	width:830px;
+	top:334px; 
+	left:544px; 
+	background:url(images/Bg-Pop_up_box-04.png);
+	display:block;
+	z-index:200;
+}
+
+#dialogContent
+{
+	position:absolute;
+	width:710px;
+	top:125px;
+	color:#b0b0b0; 
+	font-size:28px;
+	left:60px; 
+	text-align:left;
+	line-height:48px;
+}
+#dialogName
+{
+	position:absolute;
+	width:710px;
+	top:30px;
+	color:#b0b0b0; 
+	font-size:32px;
+	left:70px;
+	text-align:left;
+}
+.popList
+{
+    position:relative;
+    width:500px;
+    height:84px;
+    top:80px;
+}
+.popListFirPro
+{
+    position:absolute;
+    left:40px;
+    top:12px;
+    height:40px;
+    line-height:20px;
+    width:250px;
+    font-size:30px;
+    padding-top:10px;
+    text-align:left;
+    color:#fff;
+    overflow:hidden;white-space: nowrap;text-overflow: ellipsis;
+
+    white-space: nowrap;
+    /*overflow: hidden;*/
+
+    /* Safari and Chrome
+    overflow-x:-webkit-marquee;*/
+    -webkit-marquee-direction: backwards;
+    -webkit-marquee-style: scroll;
+    -webkit-marquee-speed: fast;
+    -webkit-marquee-increment: small;
+    -webkit-marquee-repetition: infinite;
+
+    /* W3C
+    overflow-x: marquee-line;*/
+    marquee-direction: forward;
+    marquee-style: scroll;
+    marquee-speed: fast;
+    marquee-play-count: infinite;
+}
+
+</style>
+<body onload="init()">
+
+<div id="regionTips">
+   		<span id="dialogName"></span>
+        <span id="dialogContent" style=""></span>
+        <ul>
+            <li class="popList" >
+                <span class="popListFirPro"></span>
+            </li>
+            <li class="popList" >
+                <span class="popListFirPro"></span>
+            </li>
+            <li class="popList" >
+                <span class="popListFirPro"></span>
+            </li>
+            <li class="popList" >
+                <span class="popListFirPro"></span>
+            </li>
+        </ul>
+        <img id="cancelRemindFocus" style=" position:absolute ;left:40px; top:80px; height:100px; width:400px;" src="images/OP-01-1_Focus.png">
+</div>
+<script>
+document.onsystemevent = top.systemEventProc;
+document.onkeydown = keyproc;
+document.onkeyup = keyupproc;
+var channel = top.g_channel;
+var regionCount         = 0;
+var countryCode         = 0;
+var parseStr            = "";
+var remindButton              = [top.chOptions[0],top.okCancel[0],top.okCancel[1]];
+var positionV                 = 0;
+var keyValue                  = 0xffff;
+function $(id)
+{
+    return document.getElementById(id);
+}
+function init()
+{
+    top.initTextDirection(window);
+	top.g_setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	top.keySetForUI(1);
+	 keyValue = window.location.search;
+	keyValue = keyValue.substring(keyValue.indexOf("?")+1);
+	$("dialogName").innerHTML="Please select one region:";
+    initValue();
+	$("cancelRemindFocus").style.left="40px";
+}
+function keyproc(evt)
+{
+	var ret = true;
+	var keycode = evt.which;
+	switch(keycode)
+	{
+		case top.VK_ENTER:
+			toOK();
+			break ;
+		case top.VK_UP:
+            toUp();
+            break;
+		case top.VK_DOWN:
+            toDown();
+			break;
+        case top.VK_BACK:
+        case top.VK_EXIT:
+            //top.jumpPage();
+            break;
+		case top.VK_POWER://power
+			top.keyDownProcess(evt);
+		 break ;
+	}
+}
+function toUp()
+{
+    if(positionV <= 0)
+    {
+        positionV = regionCount - 1;
+    }else
+    {
+        positionV = positionV -1
+    }
+    $("cancelRemindFocus").style.top=80+positionV*84+"px";
+}
+function toDown()
+{
+    if(positionV >= regionCount -1)
+    {
+        positionV = 0;
+    }else
+    {
+        positionV = positionV +1
+    }
+    $("cancelRemindFocus").style.top=80+positionV*84+"px";
+}
+function initValue()
+{
+    var str = channel.getTargetRegionList();
+    console.log("huangzhming test Region str =  " + str);
+    parseStr = JSON.parse(str);
+    countryCode = parseStr.CountryCode;
+    regionCount = parseStr.primary.length;
+    console.log("huangzhming test Region countryCode =  " + countryCode + "  regionCount = " + regionCount);
+    var spans=$("regionTips").getElementsByTagName("span");
+    for (var i = 0;i<regionCount;i++)
+    {
+        spans[i+2].innerHTML=parseStr.primary[i].name;
+    }
+}
+function keyupproc(evt)
+{
+	var ret = true;
+	var keycode = evt.which;
+	top.g_channel.testLog("zenglm kecodeup is"+keycode);
+	switch(keycode)
+	{
+		case top.VK_ENTER:
+			toUpOK();
+			break ;
+		default:
+			break;
+	}
+}
+function toUpOK()
+{
+	if(positionV)
+	{
+		top.g_channel.testLog("zenglm jumppage 145");
+		//top.jumpPage();
+	}
+}
+function toOK()
+{
+    console.log("huangzhming test Region toOK() positionV =  " + positionV);
+    var currentPrimaryCode = parseStr.primary[positionV].ID
+    console.log("huangzhming test Region toOK() currentPrimaryCode =  " + currentPrimaryCode);
+    channel.setPreferredRegion(1,countryCode,currentPrimaryCode,0,0);
+    top.jumpPage();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apps version="1.0">
+    <app>
+        <![CDATA[
+            <div class="elem" id="apps_01" name="focusBlock" data-up="0" data-down="0" data-left="-1" data-right="apps_02" data-leftPage="tv_03" data-rightPage="tv_12" data-focus_id="border_apps_01" style="top: 63px; left: 95px; height: 572px; width: 572px;" onclick="jumpToApp('zeasn');setFocusId('apps_01');actionFive_Click('5','0_au_apps01_0','zeasn','')">
+               <img src="images/APP_store.png?md5=fdabd820f19a486bc1024f9df9819803" /> 
+                <img src="images/zhezhao_621x621.png?md5=866ca284238dc1907e61c88d27cb90b8" style="display:none"/> 
+                <span class="elem_block_title" style="width: 572px;"></span>
+            </div>
+            <div class="elem_border themeImg_621x621" id="border_apps_01" style="top: 39px; left: 71px; visibility: hidden; height: 621px; width: 621px;" onclick="jumpToApp('zeasn')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+            <div class="appicon" id="apps_02" name="apps_02" data-up="0" data-down="apps_03" data-left="apps_01" data-right="apps_04" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_02" style="top: 63px; left: 677px;" onclick="jumpToApp('netflix');setFocusId('apps_02');actionFive_Click('5','0_au_apps02_0','netflix','')">
+                <img src="images/netflixl_maxi.png?md5=456c7bc2dacf2190adc011f653616c36"/>
+                <span class="elem_block_title">Netflix</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_02" style="top:39px; left: 654px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('netflix')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+            <div class="appicon" id="apps_03" name="apps_03" data-up="apps_02" data-down="0" data-left="apps_01" data-right="apps_05" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_03" style="top: 353px; left: 677px;" onclick="jumpToApp('viewster-v5');setFocusId('apps_03');actionFive_Click('5','0_au_apps03_0','Viewster','')">
+                <img src="images/viewster_maxi.png?md5=d8c92149d0735b427d9af5c6df279131"/>
+                <span class="elem_block_title">Viewster</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_03" style="top: 330px; left: 654px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('viewster-v5')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+            <div class="appicon" id="apps_04" name="apps_04" data-up="0" data-down="apps_05" data-left="apps_02" data-right="apps_06" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_04" style="top:63px; left:968px;" onclick="jumpToApp('youtube');setFocusId('apps_04');actionFive_Click('5','0_au_apps04_0','youtube','')">
+                <img src="images/youtubel_maxi.png?md5=7b176544a74bf963e84722690d58e3d6"/>
+                <span class="elem_block_title">YouTube</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_04" style="top: 39px; left: 945px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('youtube')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+            <div class="appicon" id="apps_05" name="apps_05" data-up="apps_04" data-down="0" data-left="apps_03" data-right="apps_100" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_05" style="top: 353px; left: 968px;" onclick="jumpToApp('lanacion');setFocusId('apps_05');actionFive_Click('5','0_au_apps05_0','Lanacion','')">
+                <img src="images/lanacion_maxi.png?md5=85fa9b9a079f39b3931b3efddeb7b214"/> 
+                <span class="elem_block_title" >Lanacion</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_05" style="top: 330px; left: 945px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('lanacion')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+            <div class="appicon" id="apps_06" name="apps_06" data-up="0" data-down="apps_100" data-left="apps_04" data-right="apps_101" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_06" style="top: 63px; left: 1259px;" onclick="jumpToApp('Crackle');setFocusId('apps_06');actionFive_Click('5','0_au_apps06_0','Crackle','')">
+                <img src="images/cracklel_maxi.png?md5=f845ef5b3efeb9ec65acc6e443d2f61"/> 
+                <span class="elem_block_title">Crackle</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_06" style="top: 39px; left: 1234px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('deezer-foxxum')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+			<div class="appicon" id="apps_100" name="apps_100" data-up="apps_06" data-down="0" data-left="apps_05" data-right="-1" data-leftPage="apps_03" data-rightPage="tv_00" data-focus_id="border_apps_07" style="top: 353px; left: 1259px;" onclick="jumpToApp('browser');setFocusId('apps_07');actionFive_Click('5','0_au_apps07_0','T-Browser','')">
+                <img src="images/t_browser_maxi.png?md5=2848aa6f78ae579666be8bcb65a1792b"/> 
+                <span class="elem_block_title">T-Browser</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_07" style="top: 330px; left: 1234px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpToApp('browser')"></div>
+        ]]>
+    </app>
+    <app>
+        <![CDATA[
+			<div class="appicon" id="apps_101" name="apps_101" data-up="0" data-down="apps_100" data-left="apps_06" data-right="-1" data-leftPage="apps_03" data-rightPage="tv_00" data-focus_id="border_apps_08" style="top:63px; left:1550px;" onclick="jumpLocalApps('nscreen');setFocusId('apps_08');actionFive_Click('5','0_au_apps08_0','nscreen','')">
+                <img src="images/TV-remote_maxi.png?md5=e5b94027d5a3339255e8c1a7d94a9b5a"/> 
+                <span class="elem_block_title">TV Remote</span>
+            </div>
+            <div class="elem_border themeImg_330x330" id="border_apps_08" style="top: 39px; left: 1527px; visibility: hidden; width: 330px; height: 330px;" onclick="jumpLocalApps('nscreen')"></div>
+        ]]>
+    </app>
+</apps>

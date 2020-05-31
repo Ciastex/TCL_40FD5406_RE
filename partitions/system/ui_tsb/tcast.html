@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #contentBox{
+            width: 1920px;
+            height: 1080px;
+            background-color: #15161A;
+            position: relative;
+        }
+        #contentDiv0
+        {
+            width: 1920px;
+            height: 50px;
+            background-color: #15161A;
+        }
+        #contentDiv1{
+            margin-top: 50px;
+            margin-right: 120px;
+            width: 1100px;
+            height: 930px;
+            background-color: #202127;
+            float: right;
+        }
+        #contentDiv1_Pic{
+            position: relative;
+            margin-left: 350px;
+            margin-top: 160px;
+            width: 480px;
+            height: 582px;
+            overflow: hidden;
+        }
+        #contentDiv1_Pic_ul{
+            list-style: none;
+            width: 1440px;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #contentDiv1_Pic_ul li{
+            width: 480px;
+            height: 580px;
+            display: inline-block;
+            float: left;
+        }
+        #contentDiv1_Pic_ul li img{
+            width: 480px;
+            height: 580px;
+            display: block;
+        }
+
+        #contentDiv1_Words_Span{
+            display: block;
+            width: 100%;
+            font-family: NotoSansCJK-Light;
+            font-size: 40px;
+            color: #c3c4d0;
+            line-height: 46px;
+            margin: 0 auto;
+            margin-top: 113px;
+            text-align: center;
+        }
+
+        #contentDiv1_Points{
+            position: absolute;
+            left: 1275px;
+            top: 1030px;
+        }
+        #contentDiv1_Point1{
+            margin-left: 0;
+        }
+        .contentDiv1_point{
+            width: 12px;
+            height: 12px;
+            margin: 0 13px;
+            display: inline-block;
+        }
+
+
+        #contentDiv2{
+            margin-top: 50px;
+            margin-left: 120px;
+            width: 540px;
+            height: 930px;
+            background-color: #232427;
+            float: left;
+        }
+        #contentDiv2_Title{
+            display: block;
+            text-align: center;
+            font-family: NotoSansCJK-Light;
+            font-size: 30px;
+            color: #c3c4d0;
+            margin-top: 100px;
+            line-height: 100px;
+        }
+        #contentDiv2_Pic{
+            width: 294px;
+            height: 294px;
+            background-color: #ffffff;
+            margin: 0 auto;
+            border: 1px solid #ffffff;
+        }
+        #QR_code{
+            display: block;
+            width: 250px;
+            height: 250px;
+            margin: 22px;
+            background-color: #c3c4d0;
+        }
+        #contentDiv2_info{
+            font-family: NotoSansCJK-Light;
+            color: #63636b;
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        #contentDiv2_NetName{
+            font-size: 36px;
+            line-height: 36px;
+            margin-bottom: 20px;
+        }
+        #contentDiv2_NetNameValue{
+            margin-top: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #contentDiv2_TV{
+            margin-top: 50px;
+        }
+        #contentDiv2_TVName{
+            font-size: 36px;
+            line-height: 36px;
+            margin-bottom: 20px;
+        }
+        #contentDiv2_TVNameValue{
+            margin-top: 20px;
+            font-size: 42px;
+        }
+        .contentDiv2_info_words{
+            font-size: 46px;
+            line-height: 46px;
+        }
+
+        #contentDiv3
+        {
+            margin-top: 100px;
+            margin-left: 40px;
+            width: 540px;
+            height: 770px;
+            background-color: #232427;
+            float: left;
+            display: none;
+        }
+        #contentDiv3_img
+        {
+            position: absolute;
+            width: 119px;
+            height: 74px;
+            left: 150px;
+            top: 250px;
+        }
+        #contentDiv3_Words_Span1{
+            display: block;
+            width: 50px;
+            font-family: NotoSansCJK-Light;
+            font-size: 40px;
+            color: #c3c4d0;
+            line-height: 46px;
+            margin: 0 auto;
+            margin-top: 90px;
+            text-align: center;
+        }
+        #contentDiv3_Words_Span2{
+             display: block;
+             width: 90%;
+             font-family: NotoSansCJK-Light;
+             font-size: 40px;
+             color: #c3c4d0;
+             line-height: 46px;
+             margin: 0 auto;
+             margin-top: 150px;
+             text-align: center;
+         }
+        #contentDiv3_Words_TV
+        {
+            font-family: NotoSansCJK-Light;
+            color: #63636b;
+            margin-top: 5px;
+            text-align: center;
+        }
+        #contentDiv3_TVName
+        {
+            font-size: 36px;
+            line-height: 36px;
+            margin-bottom: 20px;
+        }
+        #contentDiv3_TVNameValue
+        {
+            margin-top: 20px;
+            font-size: 42px;
+        }
+        #contentDiv3_button
+        {
+            display: block;
+            font-family: NotoSansCJK-Light;
+            font-size: 30px;
+            width: 300px;
+            background-color: #9A9999;
+            color: #c3c4d0;
+            text-align: center;
+            margin-top: 60px;
+            margin-left: 130px;
+        }
+        #contentDiv3_Words_Span3{
+            display: block;
+            width: 90%;
+            font-family: NotoSansCJK-Light;
+            font-size: 28px;
+            color: #c3c4d0;
+            line-height: 46px;
+            margin: 0 auto;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #contentDiv4
+        {
+            margin-top: 50px;
+            margin-right: 40px;
+            width: 1275px;
+            height: 930px;
+            float: right;
+            /*background-color: #202127;*/
+            display: none;
+        }
+        #contentDiv4_img
+        {
+            position: relative;
+            width: 1275px;
+            height: 770px;
+            top: 50px;
+        }
+    </style>
+</head>
+<body onLoad="init()" onunload="uninit()">
+<div id="contentBox">
+    <div id="contentDiv0">
+        <span id="title1" style="font-size: 40px;padding: 50px;text-align:center;"></span>
+        <span id="title2" style="font-size: 30px;padding-right: 50px;color: #c3c4d0;"></span>
+    </div>
+    <div id="contentDiv1">
+        <div id="contentDiv1_Pic" style="">
+            <ul id="contentDiv1_Pic_ul">
+                <li><img id="contentDiv1_Pic_ul_img1"/></li>
+                <li><img id="contentDiv1_Pic_ul_img2"/></li>
+                <li><img id="contentDiv1_Pic_ul_img3"/></li>
+            </ul>
+        </div>
+        <div id="contentDiv1_Words">
+             <span id="contentDiv1_Words_Span"></span>
+        </div>
+        <div id="contentDiv1_Points">
+            <img id="contentDiv1_Point1" class="contentDiv1_point"/>
+            <img id="contentDiv1_Point2" class="contentDiv1_point"/>
+            <img id="contentDiv1_Point3" class="contentDiv1_point"/>
+        </div>
+    </div>
+    <div id="contentDiv2">
+        <span id="contentDiv2_Title"></span>
+        <div id="contentDiv2_Pic">
+            <img id="QR_code" class=""/>
+        </div>
+        <div id="contentDiv2_info">
+            <div id="contentDiv2_Net">
+                <p id="contentDiv2_NetName"></p>
+                <p id="contentDiv2_NetNameValue" class="contentDiv2_info_words"></p>
+            </div>
+            <div id="contentDiv2_TV">
+                <p id="contentDiv2_TVName"></p>
+                <p id="contentDiv2_TVNameValue" class="contentDiv2_info_words"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="contentDiv3">
+        <div>
+            <img id="contentDiv3_img" src="./images/wifi_display_icon.png"/>
+            <span id="contentDiv3_Words_Span1"></span>
+        </div>
+        <span id="contentDiv3_Words_Span2"></span>
+        <div id="contentDiv3_Words_TV">
+            <p id="contentDiv3_TVName"></p>
+            <p id="contentDiv3_TVNameValue" class="contentDiv2_info_words"></p>
+        </div>
+        <div id="contentDiv3_button"></div>
+
+        <span id="contentDiv3_Words_Span3"></span>
+    </div>
+
+    <div id="contentDiv4">
+        <img id="contentDiv4_img" src="./images/wifi_display_show.png"/>
+        <span id="miracastTips0" style="position:absolute;font-size: 40px;color: #3a567d;left: 660px;top: 180px"></span>
+        <span id="miracastTips1" style="position:absolute;font-size: 28px;color: #e77b7b;width: 200px;left: 920px;top: 325px"></span>
+        <span id="miracastTips2" style="position:absolute;font-size: 28px;color: #2577f2;width: 250px;left: 1240px;top: 595px"></span>
+        <span id="miracastTips3" style="position:absolute;font-size: 28px;color: #329929;width: 250px;left: 1490px;top: 245px"></span>
+        <span id="miracastTips4" style="position:absolute;font-size: 28px;color: #b78218;width: 250px;left: 1580px;top: 775px"></span>
+    </div>
+</div>
+<script type="text/javascript">
+    var contentDiv1_WordsArray = [
+        top.tcastTextPageWords[0],
+        top.tcastTextPageWords[1],
+        top.tcastTextPageWords[2]
+    ];
+
+    var contentDiv1_PicUrlArray = [
+        "./images/tcast_pic1.png",
+        "./images/tcast_pic2.png",
+        "./images/tcast_pic3.png"
+    ];
+
+    var contentOtherWordsArray = [
+        top.tcastOtherWords[0],
+        top.tcastOtherWords[1],
+        top.tcastOtherWords[2]
+    ];
+
+    var underPicPointArray = ["./images/tcast_point1.png","./images/tcast_point2.png"];
+    var QR_codeArray = ["/data/qrcode/qrcode_tcast.png"];
+    var newTimer;   //定时器
+    var currentIndex = 0;
+    var contentDiv1_Pic;
+    var _ul;
+    var lis;
+    var contentDiv1_Points_imgs;
+    var tCastName = "TV_0001";
+
+    document.onkeydown = keyproc;
+    document.onsystemevent = notifyProcess;
+    top.stopTimeout();
+
+    var focusOn = "Tcast"; //Tcast、Wireless
+    var positionV = 0;
+    var operateFlag=0;
+    var setting = top.g_setting;
+    var title = [top.tcastOtherWords[3],top.miracastWords[0]];
+    var miracastRemind = [top.miracastWords[1],top.miracastWords[2],top.miracastRemind[2],top.miracastWords[3]];
+    var tips = [top.miracastTips[0],top.miracastTips[1],top.miracastTips[2],top.miracastTips[3],top.miracastTips[4]];
+
+    function init()
+    {
+        $("title1").style.color = top.uiColourStyle;
+        $("title1").innerHTML = title[0];
+        $("title2").innerHTML = title[1];
+
+        //if (!top.supportWiFiDisplay || top.g_temp=="menu")
+        if (!top.supportWiFiDisplay)
+        {
+            $("title2").style.display = "none";
+        }
+
+        $("contentDiv1_Pic_ul_img1").src= contentDiv1_PicUrlArray[0];
+        $("contentDiv1_Pic_ul_img2").src= contentDiv1_PicUrlArray[1];
+        $("contentDiv1_Pic_ul_img3").src= contentDiv1_PicUrlArray[2];
+        $("QR_code").src = QR_codeArray[0];
+
+        $("contentDiv1_Words_Span").innerHTML = contentDiv1_WordsArray[0];
+        $("contentDiv2_Title").innerHTML = contentOtherWordsArray[0];
+        $("contentDiv2_NetName").innerHTML = contentOtherWordsArray[1];
+        $("contentDiv2_TVName").innerHTML = contentOtherWordsArray[2];
+
+        $("contentDiv1_Point1").src = underPicPointArray[1];
+        $("contentDiv1_Point2").src = underPicPointArray[0];
+        $("contentDiv1_Point3").src = underPicPointArray[0];
+
+        $("contentDiv1_Words_Span").style.direction = top.textDirection;
+        $("contentDiv2_Title").style.direction = top.textDirection;
+        $("contentDiv2_NetName").style.direction = top.textDirection;
+        $("contentDiv2_TVName").style.direction = top.textDirection;
+
+        contentDiv1_Pic = $("contentDiv1_Pic");
+        _ul = contentDiv1_Pic.getElementsByTagName("ul")[0];
+        lis = _ul.getElementsByTagName("li");
+        _ul.style.width = lis[0].offsetWidth * lis.length + "px";
+        contentDiv1_Points_imgs = $("contentDiv1_Points").getElementsByTagName("img");
+
+        startTimer();
+        showCurrentNetNameAndTVName();
+        focusOn = "Tcast";
+    }
+
+    function uninit()
+    {
+        console.log("--hzm uninit -- ");
+        top.$("operatePage").style.display = "block";
+        if(setting.getProperty("app.ui.miracast.disablenetwork","0")== "1")
+        {
+            setting.networkEnable = 1;
+            setting.setProperty("app.ui.miracast.disablenetwork","0");
+        }
+    }
+
+    function keyproc(e)
+    {
+        var ret = true;
+        var keycode = e.which;
+        switch(keycode)
+        {
+            case top.VK_BACK:
+                toBack();
+                break;
+            case top.VK_UP:
+                moveUp();
+                break;
+            case top.VK_DOWN:
+                moveDown();
+                break;
+            case top.VK_LEFT:
+                stopTimer();
+                moveLeft();
+                startTimer();
+                ret = false;
+                break;
+            case top.VK_RIGHT:
+                stopTimer();
+                moveRight();
+                startTimer();
+                ret = false;
+                break;
+            case top.VK_ENTER:
+                doEnter();
+                ret = false;
+                break;
+            case top.VK_HOME:
+                console.log("--hzm vk_home top.preTempPage = " +top.preTempPage + "  top.g_temp = " + top.g_temp);
+                console.log("--hzm vk_home operateFlag = " +operateFlag + "  focusOn = " + focusOn);
+                if(top.g_temp=="homePage")
+                {
+                    if (operateFlag == 1) return;
+                    top.$("otherPage").src = "";
+                    top.$("operatePage").src = "";
+                    top.resumeFocus();
+                    top.setFrameFocusPage("main");
+                }
+                else
+                {
+                    top.keyDownProcess(e);
+                }
+                break;
+            case top.VK_EXIT:
+                if (operateFlag == 1)
+                {
+                    operateFlag = 0;
+                    setting.stopMiracast();
+                    top.$("main").style.display="block";
+                    top.$("otherPage").src = "";
+                    top.$("operatePage").src = "";
+                    top.resumeFocus();
+                    top.setFrameFocusPage("main");
+                }
+                else
+                {
+                    top.keyDownProcess(e);
+                }
+                break;
+            case top.VK_VOLUME_UP:
+                if(top.g_volume_visible == 0)
+                {
+                    top.$('globleShow').contentWindow.initVolume();
+                    top.clearVolumeTimer();
+                }
+                if(top.$('globleShow').contentWindow.volumeCount > 0)
+                {
+                    top.g_volume_visible = 1;
+                    top.$("globleShow").contentWindow.$("adjustProgressBox").style.display = "block";
+                    showVolume(1);
+                    top.$("globleShow").contentWindow.setVolumeByType(top.$("globleShow").contentWindow.curVolumeType,top.$("globleShow").contentWindow.volume);
+                }
+                break;
+            case top.VK_VOLUME_DOWN:
+                if(top.g_volume_visible == 0)
+                {
+                    top.$('globleShow').contentWindow.initVolume();
+                    top.clearVolumeTimer();
+                }
+                if(top.$('globleShow').contentWindow.volumeCount > 0)
+                {
+                    top.g_volume_visible = 1;
+                    top.$("globleShow").contentWindow.$("adjustProgressBox").style.display = "block";
+                    showVolume(-1);
+                    top.$("globleShow").contentWindow.setVolumeByType(top.$("globleShow").contentWindow.curVolumeType,top.$("globleShow").contentWindow.volume);
+                }
+                break;
+            case top.VK_MUTE:
+            //case top.VK_SOURCE:
+            //case top.VK_TV://tv
+            //case top.VK_NETFLIX:
+            //case top.VK_YOUTUBE:
+            //case top.VK_GLOBOPLAY:
+            //case top.VK_MENU:
+            case top.VK_POWER:
+            case top.VK_FRONT_PANEL_LOCKED:
+                top.keyDownProcess(e);
+                break;
+            default:
+                break;
+        }
+        return ret;
+    }
+
+    function toBack()
+    {
+        console.log("--hzm toBack top.preTempPage = " +top.preTempPage + "  top.g_temp = " + top.g_temp);
+        if (top.g_temp=="homePage") return;
+        if (operateFlag == 1)
+        {
+            operateFlag = 0;
+            setting.stopMiracast();
+        }
+        if (top.g_volume_visible == 1)
+        {
+            hideVolume();
+        }
+        top.restartTimeout();
+        parent.returnPopWindow(2);
+    }
+
+    function notifyProcess(evt)
+    {
+        var msg = evt.which;
+        var param = evt.modifiers;
+        console.log("----------------------------msg=="+msg+"param==="+param);
+        switch(msg)
+        {
+            case top.E_WIRELESS_CONNECT_FAILURE:
+            {
+                if(setting.networkEnable == 0)//避免wifi打开的情况下启动miracast发生coredump
+                {
+                    startMiracast();
+                }
+                break;
+            }
+            case top.E_MEDIA_USB_INSERTED://usb insert
+                break;
+            case top.E_WFD_STATUS:
+            {
+                switch(param)
+                {
+                    case 0:
+                    case 1:
+                        break;
+                    case 2:
+                    case 3:
+                        $("contentDiv3_button").innerHTML = miracastRemind[2];
+                        break;
+                    case 4:
+                        top.$("main").style.display="none";
+                        top.$("operatePage").style.display="none";
+                        top.$("otherPage").style.display="none";
+                        break;
+                    case 5:
+                        $("contentDiv3_button").innerHTML = miracastRemind[1];
+                        setting.stopMiracast();
+                        break;
+                    case 11:
+                        //exitMiracast();
+                        if (operateFlag == 1)
+                        {
+                            operateFlag = 0;
+                            setting.stopMiracast();
+                            $("contentDiv3_button").innerHTML = miracastRemind[1];
+                        }
+                        top.$("main").style.display="block";
+                        top.$("otherPage").style.display="block";
+                        top.$("operatePage").style.display="block";
+                        break;
+                    case 13:
+                        //toBack();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
+            case top.E_STR_SCREEN_OFF:
+                console.log("--hzm E_STR_SCREEN_OFF -- operateFlag = " + operateFlag);
+                if (operateFlag == 1)
+                {
+                    operateFlag = 0;
+                    setting.stopMiracast();
+                }
+                top.$("main").style.display="block";
+                top.$("otherPage").src = "";
+                top.$("operatePage").src = "";
+                top.resumeFocus();
+                top.setFrameFocusPage("main");
+                top.systemEventProc(evt);
+                break;
+            default:
+                top.systemEventProc(evt);
+                break;
+        }
+    }
+
+    function startTimer(){
+        newTimer = setInterval(cycle,5000);
+    }
+
+    function stopTimer()
+    {
+        clearInterval(newTimer);
+    }
+
+    //获取网络并展示
+    function showCurrentNetNameAndTVName(){
+        var mac_addr = setting.networkMACByDevice(0);
+        if(mac_addr != "null")
+        {
+            tCastName = "TV_" + mac_addr.split(":")[4] + mac_addr.split(":")[5];
+        }
+        console.log("zhaokun --------------------------TV tCastName: " + tCastName);
+        if(top.netCheckStatus == 1){
+            if(top.g_setting.netSSID){
+                $("contentDiv2_NetNameValue").innerHTML = top.g_setting.netSSID;
+                //$("contentDiv2_TVNameValue").innerHTML = "TV(" + top.g_setting.networkIP + ")";
+                $("contentDiv2_TVNameValue").innerHTML = tCastName + "(" + top.g_setting.networkIP + ")";
+            }else if(top.g_setting.networkIP && !top.g_setting.netSSID){
+                $("contentDiv2_NetNameValue").innerHTML = top.g_setting.networkIP;
+                //$("contentDiv2_TVNameValue").innerHTML = "TV(" + top.g_setting.networkIP + ")";
+                $("contentDiv2_TVNameValue").innerHTML = tCastName + "(" + top.g_setting.networkIP + ")";
+            }
+        }else{
+            $("contentDiv2_Net").style.display = "none";
+            //$("contentDiv2_TVNameValue").innerHTML = "TV";
+            $("contentDiv2_TVNameValue").innerHTML = tCastName;
+        }
+
+    }
+
+    function moveUp() {
+        if (focusOn == "Wireless" && positionV == 1)
+        {
+            positionV = 0;
+            $("title2").style.color = top.uiColourStyle;
+            $("contentDiv3_button").style.backgroundColor = "#9A9999";
+        }
+    }
+
+    function moveDown() {
+        if (focusOn == "Wireless" && positionV == 0)
+        {
+            positionV = 1;
+            $("title2").style.color = "#9A9999";
+            $("contentDiv3_button").style.backgroundColor = top.uiColourStyle;
+        }
+    }
+
+    function moveRight(){
+        //if (!top.supportWiFiDisplay || top.g_temp=="menu") return;
+        if (!top.supportWiFiDisplay) return;
+        if (focusOn == "Tcast")
+        {
+            $("title1").style.color = "#c3c4d0";
+            $("title1").style.fontSize = 30+"px";
+            $("title2").style.color = top.uiColourStyle;
+            $("title2").style.fontSize = 40+"px";
+            showMiracast();
+            focusOn = "Wireless";
+        }
+    }
+
+    function moveLeft(){
+        //if (!top.supportWiFiDisplay  || top.g_temp=="menu") return;
+        if (!top.supportWiFiDisplay) return;
+        if (focusOn == "Wireless" && positionV == 0)
+        {
+            if (operateFlag == 1)
+            {
+                operateFlag = 0;
+                setting.stopMiracast();
+            }
+            if(setting.getProperty("app.ui.miracast.disablenetwork","0")== "1")
+            {
+                setting.networkEnable = 1;
+                setting.setProperty("app.ui.miracast.disablenetwork","0");
+            }
+            $("title1").style.color = top.uiColourStyle;
+            $("title1").style.fontSize = 40+"px";
+            $("title2").style.color = "#c3c4d0";
+            $("title2").style.fontSize = 30+"px";
+            showTCast();
+            focusOn = "Tcast";
+        }
+    }
+
+    function doEnter() {
+        if (focusOn == "Wireless" && positionV == 1)
+        {
+            $("contentDiv3_button").innerHTML = miracastRemind[2];
+            console.log("--hzm miracastInfo = " + setting.miracastInfo());
+            if(setting.networkConnectType == 2 && setting.networkEnable == 1)//wireless
+            {
+                setting.setProperty("app.ui.miracast.disablenetwork","1");
+                setting.networkEnable = 0;
+                console.log("--hzm disable network!");
+            }
+            else
+            {
+                startMiracast();
+            }
+        }
+    }
+
+    function startMiracast()
+    {
+        if (setting.startMiracast())//open miracast success
+        {
+            console.log("--hzm open miracast success!");
+            operateFlag=1;
+        }
+        else
+        {
+            console.log("--hzm open miracast fail!");
+        }
+    }
+
+    function exitMiracast()
+    {
+
+    }
+    function hideVolume()
+    {
+        top.keySetForUI(0);
+        top.$("globleShow").contentWindow.$("adjustProgressBox").style.display = "none";
+        top.g_volume_visible = 0;
+    }
+    function clearVolumeTimer()
+    {
+        clearTimeout(top.g_volume_timer);
+    }
+    function startVolumeTimer()
+    {
+        top.g_volume_timer = setTimeout("hideVolume()",3000);
+    }
+    function showVolume(distance)
+    {
+        clearVolumeTimer();
+        if(distance>0&&top.mute_status>0)
+        {
+            top.showMute(0);
+        }
+        if (top.g_volume_visible)
+        {
+            top.$("globleShow").contentWindow.volume += distance;
+            if(top.$("globleShow").contentWindow.volume < 0)
+            {
+                top.$("globleShow").contentWindow.volume = 0;
+            }
+            else if(top.$("globleShow").contentWindow.volume > top.$("globleShow").contentWindow.maxVolume)
+            {
+                top.$("globleShow").contentWindow.volume = top.$("globleShow").contentWindow.maxVolume;
+            }
+
+            top.$("globleShow").contentWindow.$("adjustProgBar").getElementsByTagName("div")[0].style.width = parseInt(top.$("globleShow").contentWindow.volume*9) + "px";
+            top.$("globleShow").contentWindow.$("adjustProgBar").getElementsByTagName("div")[2].style.width = parseInt((100-top.$("globleShow").contentWindow.volume)*9) + "px";
+        }
+        else
+        {
+            top.$("globleShow").contentWindow.$("adjustProgBar").getElementsByTagName("div")[0].style.width = parseInt(top.$("globleShow").contentWindow.volume*9) + "px";
+            top.$("globleShow").contentWindow.$("adjustProgBar").getElementsByTagName("div")[2].style.width = parseInt((100-top.$("globleShow").contentWindow.volume)*9) + "px";
+            top.$("globleShow").contentWindow.$("adjustProgressBox").style.display = "block";
+            top.g_volume_visible = 1;
+        }
+
+        top.$("globleShow").contentWindow.$("adjustProgValue").innerHTML = top.$("globleShow").contentWindow.volume;
+        startVolumeTimer();
+    }
+
+
+    function showTCast()
+    {
+        $("contentDiv1").style.display = "block";
+        $("contentDiv2").style.display = "block";
+        $("contentDiv3").style.display = "none";
+        $("contentDiv4").style.display = "none";
+    }
+    function showMiracast(){
+        $("contentDiv3_Words_Span1").innerHTML = title[1];
+        $("contentDiv3_Words_Span2").innerHTML = miracastRemind[0];
+        $("contentDiv3_button").innerHTML = miracastRemind[1];
+        $("contentDiv3_Words_Span3").innerHTML = miracastRemind[3];
+        $("contentDiv3_TVName").innerHTML = contentOtherWordsArray[2];
+        $("contentDiv3_TVNameValue").innerHTML = tCastName;
+        $("miracastTips0").innerHTML = tips[0];
+        $("miracastTips1").innerHTML = tips[1];
+        $("miracastTips2").innerHTML = tips[2];
+        $("miracastTips3").innerHTML = tips[3];
+        $("miracastTips4").innerHTML = tips[4];
+
+        $("contentDiv1").style.display = "none";
+        $("contentDiv2").style.display = "none";
+        $("contentDiv3").style.display = "block";
+        $("contentDiv4").style.display = "block";
+    }
+
+    function cycle() {
+        if(currentIndex == 2){
+            currentIndex = -1;
+            _ul.style.left = 0;
+        }
+        _ul.style.left = -lis[0].offsetWidth * (currentIndex+1) + "px";
+        $("contentDiv1_Words_Span").innerHTML = contentDiv1_WordsArray[currentIndex+1];
+
+        for(var i= 0;i<contentDiv1_Points_imgs.length;i++){
+            contentDiv1_Points_imgs[i].src = underPicPointArray[0];
+        }
+        contentDiv1_Points_imgs[currentIndex+1].src = underPicPointArray[1];
+        currentIndex++;
+    }
+    //根据id获取元素
+    function $(eleId){
+        return document.getElementById(eleId);
+    }
+</script>
+</body>
+</html>

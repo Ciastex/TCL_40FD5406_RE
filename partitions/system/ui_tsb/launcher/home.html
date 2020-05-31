@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" id="theme" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<link rel="stylesheet" type="text/css" href="carousel.css"/>
+<script type="text/javascript">
+
+function setFocusId(id)
+{
+	parent.FocusId(id)
+}
+
+document.onmousemove = function()
+{
+	parent.focus();
+}
+
+document.onclick = function()
+{
+	if(top.$("otherPage").src.indexOf("connectNetworkRemind.html")==-1)
+	{
+		parent.focus();
+	}
+}
+
+var homePageWords = [top.homePageWords[0],top.homePageWords[1]];
+function initSpanName()
+{
+	var needTranslateSpans = document.getElementsByName("needTranslate");
+	for(var i = 0; i < needTranslateSpans.length; i++)
+	{
+		needTranslateSpans[i].innerHTML = homePageWords[i];
+	}
+	
+}
+
+</script>
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+</head>
+<!--  <body   onload="carouselInit(); "  class="body_comm">  -----------------  轮播使用 ，替换下面的一行------------ -->
+<body onload="initSpanName()" class="body_comm" >
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+	<!-- ---------------------------------------------------------------------- home ------------------------------------------------------------------------- -->
+	<!--  data-up(0：上标题；）  data-right（-1：下一页） data-down（0：下标题，当前页的标题集焦）  data-left（-1：上一页"）data-leftPage(上一页id号) data-rightPage(下一页id号)-->
+
+	<div id="homePage" name="subwindow" class="window" style="display: block; left: 0px; top: 220px;">
+
+		<!-- 1、History -->
+		<div class="elem" id="home_01" name="focusBlock"
+			onclick="setFocusId('home_01');actionFive_Click('2','990_4440_35568_38187','History','');jumpToSubpage('history/history.html?tplid=location&tab_id=home&ids=0_0_0_0');"
+			data-up="0" data-right="home_03" data-down="home_02" data-left="-1"
+			data-leftPage="apps_100" data-focus_id="border_home_01"
+			style="top: 63px; left: 95px; height: 281px; width: 281px;">
+			<img src="images/History.png?md5=54d28eda8afd221f4f07134a3de5a4e6" /> 
+			<span  class="elem_block_title"  name = "needTranslate" style="width: 251px;"></span>
+		</div>
+
+		<div class="elem_border themeImg_330x330" id="border_home_01" onclick="jumpToSubpage('history/history.html?tplid=location&tab_id=home&ids=0_0_0_0');actionFive_Click('2','0_0_0_0','History','');"
+			style="top: 38px; left: 70px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+		<!-- 应用 NETFLIX -->
+        <div class="elem" id="home_02" name="home_02" data-up="home_01"
+			data-right="home_03" data-down="0" data-left="-1"
+			data-leftPage="apps_100" data-rightPage="apps_03"
+			data-focus_id="border_home_02"
+            onclick="jumpToApp('netflix');setFocusId('home_02')"
+			style="top:353px; left:95px; height: 281px; width: 281px;">
+            <img src="images/APP_bg.png?md5=606d3cca9424a58a1ea63f54eb8523d5"/>
+			<img src="images/NETFLIX.png?md5=c60b18796798b357a0a44f82ff5505ba" style="left:87px;top:60px"/>
+            <span  class="elem_block_title" style="width: 251px;">Netflix</span>
+		</div>
+
+		<div class="elem_border themeImg_330x330" id="border_home_02" onclick="jumpToApp('netflix')"
+			style="top: 328px; left: 70px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+		<!-- 3、视频-魔兽世界 图   -->
+		<div class="elem" id="home_03" name="home_03"
+			onclick="setFocusId('home_03');jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=2Rxoz13Bthc&title=Warcraft - Official Trailer&pic_url=images/big-2-2warcraft.png');actionOne_videoPlayer('1','111_222_333_444','Warcraft - Official Trailer','2Rxoz13Bthc');actionFive_Click('1','990_4440_35552_38249','Warcraft - Official Trailer','');"
+			data-up="0" data-right="home_04" data-down="0" data-left="home_01"
+			data-focus_id="border_home_03"
+			style="top: 63px; left: 386px; height: 572px; width: 572px;">
+			<img src="images/big-2-2warcraft.png?md5=a0c01b202fd8eb7b42ffcf5d19efd8c5"style="height: 572px; width: 572px;" /> 
+            <img src="images/zhezhao_621x621.png?md5=866ca284238dc1907e61c88d27cb90b8"/>
+			<span class="elem_block_title" style="width: 542px;"></span>
+		</div>
+
+		<div class="elem_border themeImg_621x621" id="border_home_03" onclick="jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=2Rxoz13Bthc&title=Warcraft - Official Trailer&pic_url=images/big-2-2warcraft.png');actionOne_videoPlayer('1','111_222_333_444','Warcraft - Official Trailer (HD)','2Rxoz13Bthc');actionFive_Click('1','990_4440_35552_38249','Warcraft - Official Trailer','');"
+			style="top: 38px; left: 361px; visibility: hidden; height: 621px; width: 621px;">
+		</div>
+        
+        
+        <!-- 魔法球  图 -->
+		<div class="elem" id="home_04" name="home_04"
+			onclick="setFocusId('home_04');jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=h6cVyoMH4QE&title=KRAMPUS&pic_url=images/big-2-1krampus.png');actionOne_videoPlayer('1','111_222_333_444','KRAMPUS','h6cVyoMH4QE');actionFive_Click('1','990_4440_35552_38249','KRAMPUS','');"
+			data-up="0"
+			data-right="home_06" data-down="home_05" data-left="home_03"
+			data-focus_id="border_home_04"
+			style="top: 63px; left: 968px; height: 281px; width: 572px;">
+			<!--<img src="http://oss.launcher.tcloudfamily.com/i18n/31a3730d53ec40e29eaa28bcaead6321.png?md5=4b5278dcc311337659a28d0f885ff6c6" alt="hot" class="blockResImg"></img>-->
+			<img src="images/big-2-1krampus.png?md5=a49a8caf566fd5a31e6119919248b309" /> 
+            <img src="images/zhezhao_621x330.png?md5=2a5dbf3c60688d369a4efd54a57f564e" /> 
+            <span class="elem_block_title" style="width: 542px;"></span>
+		</div>
+
+
+		<div class="elem_border themeImg_621x330" id="border_home_04" onclick="jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=h6cVyoMH4QE&title=KRAMPUS&pic_url=images/big-2-1krampus.png');actionOne_videoPlayer('1','111_222_333_444','KRAMPUS','h6cVyoMH4QE');actionFive_Click('1','990_4440_35552_38249','KRAMPUS','');"
+			style="top: 38px; left: 943px; visibility: hidden; height: 330px; width: 621px;">
+		</div>
+
+		<!-- 鲸鱼尾巴  图 -->
+		<div class="elem" id="home_05" name="home_05" 
+			onclick="setFocusId('home_05');jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=K-H35Mpj4uk&title=IntheHeartoftheSea-FinalTrailer[HD]&pic_url=images/big-2-1intheheartofthesea.png');actionOne_videoPlayer('1','111_222_333_444','IntheHeartoftheSea-FinalTrailer[HD]','H35Mpj4uk');actionFive_Click('1','990_4440_35552_38249','IntheHeartoftheSea-FinalTrailer[HD]','');"
+			data-up="home_04"
+			data-right="home_07" data-down="0" data-left="home_03"
+			data-focus_id="border_home_05"
+			style="top: 353px; left: 968px; height: 281px; width: 572px;">
+			<img src="images/big-2-1intheheartofthesea.png?md5=a14b67d3521bd9c967816627788fbece" /> 
+            <img src="images/zhezhao_621x330.png?md5=2a5dbf3c60688d369a4efd54a57f564e" /> 
+            <span class="elem_block_title" style="width: 542px;"></span>
+		</div>
+
+
+		<div class="elem_border themeImg_621x330" id="border_home_05" onclick="jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=K-H35Mpj4uk&title=IntheHeartoftheSea-FinalTrailer[HD]&pic_url=images/big-2-1intheheartofthesea.png');actionOne_videoPlayer('1','111_222_333_444','IntheHeartoftheSea-FinalTrailer[HD]','H35Mpj4uk');actionFive_Click('1','990_4440_35552_38249','IntheHeartoftheSea-FinalTrailer[HD]','');"
+			style="top: 328px; left: 943px; visibility: hidden; height: 330px; width: 621px;">
+		</div>
+		
+        <!-- ------------------------------------  轮播替换块的开始 ----------------------------------------------------------------  -->
+		
+		<!-- 气球 图 -->
+		<div class="elem" id="home_06" name="home_06" 
+			onclick="setFocusId('home_06');jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=1-XrMUM5EFo&title=Glowie-Party&pic_url=images/big-1-1growieparty.png');actionOne_videoPlayer('1','111_222_333_444','Glowie-Party','1-XrMUM5EFo');actionFive_Click('1','990_4440_35552_38249','Glowie-Party','');"
+			data-up="0"
+			data-right="-1" data-down="home_07" data-left="home_04"			
+			data-rightPage="videos_01" data-focus_id="border_home_06"
+			style="top: 63px; left: 1550px; height: 281px; width: 281px;">
+			<img src="images/big-1-1growieparty.png?md5=1925f8cd8990a66eb8c459bf8d35f0be" /> 
+            <img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" /> 
+            <span class="elem_block_title" style="width: 251px;"></span>
+		</div>
+		<!-- ------------------------------------  轮播替换块的结束----------------------------------------------------------------  -->	
+		<!--    ------------------------------------  轮播使用时，替换上面从“轮播替换块的开始” 到“轮播替换块的结束” 这部分内容- ---------------------------------------------------------------  -->
+		 <!-- 
+        <div  class="elem carousel"  id="home_04" name="home_04"  onclick="setFocusId('home_04');enterCarousel(this);" 
+        data-up="0"  data-right="home_06" data-down="home_05" data-left="home_03" data-focus_id="border_home_04"  data-Interval="6000" 
+			style="top: 63px; left: 968px; height: 281px; width: 281px;">
+			
+			<div class="img-ct" style="height: 281px; width: 281px;">
+			
+				<div class="elemCarousel " id="home_car_041" name="home_car_04" 
+				onclick="jumpToPlayVideo('player','41','d88APYIGkjk','TheDanishGirlOfficialTrailer','url','990','4440','1080','THOM-EU-MT56-S2','432h14l32h14','19831111','en','hk');actionOne_videoPlayer('1','111_222_333_444','Warcraft - Official Trailer (HD)','2Rxoz13Bthc');actionFive_Click('1','990_4440_35552_38249','Warcraft - Official Trailer (HD)','');"
+				style="height: 281px; width: 281px;">
+					<img src="images/big-1-1danish.png?md5=cbe5507acfa1c7d92592ee2e145e1bd3"   style="height: 281px; width: 281px;" />
+					<img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+					<span class="elem_block_title" style="width: 251px;">My Sassy Girl</span>
+					<b class="tvMarkedBg"></b>
+					<em class="MarkedText">VIP</em>
+				</div>
+				<div class="elemCarousel " id="home_car_051" name="home_car_05" 
+				onclick="jumpToPlayVideo('player','41','fGPPfZIvtCw','KungFuPanda3','url','990','4440','1080','THOM-EU-MT56-S2','432h14l32h14','19831111','en','hk');actionOne_videoPlayer('1','111_222_333_444','Warcraft - Official Trailer (HD)','2Rxoz13Bthc');actionFive_Click('1','990_4440_35552_38249','Warcraft - Official Trailer (HD)','');"
+				style="height: 281px; width: 281px;">
+					 
+					<img src="images/big-1-1panda.png?md5=03b7ebb69702b45ab2351833b0ba2a94"  style="height: 281px; width: 281px;"/>
+					<img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+					<span class="elem_block_title" style="width: 251px;">Teenage Mutant Ninja Turtles</span>
+				</div>
+			</div>
+		</div>
+		
+         -->
+
+		<div class="elem_border themeImg_330x330" id="border_home_06" onclick="jumpToPlayVideo('tplid=location&tab_id=home&ids=0_0_0_0&licence_id=41&vid=1-XrMUM5EFo&title=Glowie-Party&pic_url=images/big-1-1growieparty.png');actionOne_videoPlayer('1','111_222_333_444','Glowie-Party','1-XrMUM5EFo');actionFive_Click('1','990_4440_35552_38249','Glowie-Party','');"
+			style="top: 38px; left: 1525px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+        
+        <!-- Search -->
+		<div class="elem " id="home_07" name="home_07"
+			onclick="setFocusId('home_07'); actionFive_Click('7','990_4440_35569_38189','Search','');jumpToSubpage('search/search.html?tplid=location&tab_id=home&ids=0_0_0_0');"
+			data-up="home_06" data-right="-1" data-down="0" data-left="home_05"
+			data-rightPage="videos_01" data-focus_id="border_home_07"
+			style="top: 353px; left: 1550px; height: 281px; width: 281px;">
+			<img src="images/Search1.png?md5=c2b0d5b587bbcc3d320c626ae460c12f" /> 
+			<span  class="elem_block_title"  name = "needTranslate" style="width: 251px;"></span>
+
+		</div>
+        
+        <div class="elem_border themeImg_330x330" id="border_home_07" onclick="jumpToSubpage('search/search.html?tplid=location&tab_id=home&ids=0_0_0_0'); actionFive_Click('7','990_4440_35569_38189','Search','');"
+			style="top: 328px; left: 1525px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+	</div>
+    </div>
+    <!--  <script type="text/javascript" src="carousel.js"></script>  -----------------  轮播的使用 ------------ --> 
+</body>
+</html>

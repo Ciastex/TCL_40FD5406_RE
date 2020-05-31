@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="initDisclaimerTips.js"></script>
+<style>
+    #disclaimerDiv
+    {
+        position: absolute;
+        top: 135px;
+        left: 420px;
+        width: 1080px;
+        height: 810px;
+        padding: 0px; /*必须有，因为ul默认的padding是40px*/
+        background: url(../images/Bg-SmartTvPolicy.png);
+        display: none;
+    }
+    #disclaimerText
+    {
+        position: absolute;
+        width: 900px;
+        height: 600px;
+        top: 140px;
+        left: 90px;
+        font-size: 28px;
+        color: #ffffff;
+        overflow: auto;
+    }
+    #titleName {
+        position: absolute;
+        color: #ffffff;
+        font-size: 32px;
+        font-weight:bold;
+        top: 30px;
+        left: 60px;
+    }
+    #ScrollBar
+    {
+        position:absolute;
+        width:10px;
+        height:70px;
+        left:1010px;
+        top:150px;
+    }
+    #okButton
+    {
+        position:absolute;
+        left:440px;
+        top:742px;
+        background:url(../images/Focus-02-no.png);
+        width:204px;
+        height:64px;
+        line-height:64px;
+        text-align:center;
+        color:#FFFFFF;
+        font-size:24px;
+        font-weight:bold;
+    }
+    #TipsButtonFocus
+    {
+        position: absolute;
+        top:742px;
+        left: 440px;
+        pointer-events:none;
+    }
+</style>
+</head>
+
+<body onload="init()">
+
+        <!-----------------------主页面内容---------------------------------->
+        <div id="disclaimerDiv">
+            <img id="ScrollBar" src="../images/Scroll_bar-Vertical.png"/>
+            <div id="titleName"></div>
+            <div id="disclaimerText" ></div>
+            <div id="okButton" ></div>
+            <img id="TipsButtonFocus" src="../images/Focus-02.png" />
+        </div>
+</body>
+</html>

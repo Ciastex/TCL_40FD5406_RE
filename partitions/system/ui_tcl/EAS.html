@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> New Document </title>
+<meta name="Generator" content="EditPlus">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+
+<style>
+body
+{
+    background: transparent;
+}
+
+.remind
+{
+	position: absolute;
+    left: 710px;
+    top: 440px;
+    width: 500px;
+    height: 200px;
+	line-height:200px;
+    background: rgba(0,0,0,0.8);
+    border:solid 4px #1b1b1b;
+    color:#fff;
+    font-size:28px;
+    font-weight:bold;
+    text-align: center;
+	white-space:nowrap;
+}
+</style>
+
+<script>
+top.keySetForUI(1);
+
+function init()
+{
+    top.initTextDirection(window);
+	//面板按键处理场景设置
+	top.g_setting.contextOf5in1 = top.CONTEXT_MENU_SELECT;
+	top.showBackground(0);
+	var EASString =  top.g_channel.getEASString();
+	console.log("EASString : " +  EASString + "  EASString.length : " +  EASString.length );
+	if(EASString.length > 0){
+		$("EASsubtitle").innerHTML = EASString;
+		$("EASsubtitle").style.display = "block"
+		isOverflowed($("EASsubtitle"));
+	}else{
+		$("EASsubtitle").style.display = "none"
+	}
+}
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+document.onkeydown = keyproc;
+
+function keyproc(evt)
+{
+	var keycode = evt.which;
+	console.log("keycode is "+keycode+" isEASFlag is "+top.isEASFlag);
+	if(top.isEASFlag == 1)//只能响应静音与待机键
+	{
+		switch(keycode)
+		{
+			case top.VK_POWER://power
+			case top.VK_MUTE://mute
+				top.keyDownProcess(evt);
+				break;
+			case top.VK_VOLUME_UP://volume up
+			case top.VK_VOLUME_DOWN://volume down
+				top.$('globleShow').contentWindow.initVolume();
+				if(top.$('globleShow').contentWindow.volumeCount > 0)
+				{
+					top.g_volume_visible = 1;
+					top.$("operatePage").src = "";
+					top.setFrameFocusPage("globleShow");
+					top.$("globleShow").contentWindow.$("adjustProgressBox").style.display = 'block';
+					top.requestFocus(top.globleShow, 0);
+					//top.startVolumeTimer();
+				}
+				break;
+			default:
+				break;
+		}
+
+	}
+	else
+	{
+		exitEAS();
+	}
+}
+document.onsystemevent = notifyProcess;
+function notifyProcess(evt)
+{
+	var msg = evt.which;
+	var p1 = evt.modifiers;
+	console.log("notifyProcess receive event "+msg+" p1 is "+p1);
+	//全局消息
+	switch(msg)
+	{
+		case top.E_EAS:
+				if(!p1)//p1 = 0 则退出EAS
+				{
+					exitEAS();
+				}
+			break;
+		case top.E_STR_SCREEN_OFF_EX:
+			top.systemEventProc(evt);
+			break;
+		case top.E_STR_SCREEN_OFF:
+			exitEAS();
+			top.systemEventProc(evt);
+			break;
+		/*default:
+			top.systemEventProc(evt);
+			break;*/
+	}
+}
+
+function exitEAS()
+{
+	top.isEASFlag = 0;
+	top.$("main").src="channelPlay.html";
+	top.requestFocus(top.main, 1);
+	top.setFrameFocusPage("main");
+}
+
+function isOverflowed(element)
+{
+	if (element.scrollWidth > element.clientWidth)
+	{
+		element.innerHTML = '<marquee behavior="scroll" align="middle" direction="left" scrollamount="10" >' + element.innerHTML+ '</marquee>'
+	}
+}
+</script>
+</head>
+
+<body onload="init()" >
+<div id = "EASsubtitle" class="remind"></div>
+</body>
+</html>

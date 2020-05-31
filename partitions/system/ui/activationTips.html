@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="activationTips.js"></script>
+<script type="text/javascript" src="initSetup/QRCode.js"></script>
+<script type="text/javascript" src="initSetup/md5.js"></script>
+<style>
+/*---------------------分割----------------------------------*/
+#activationDiv
+{
+    position: absolute;
+    top: 135px;
+    left: 420px;
+    width: 1080px;
+    height: 550px;
+    padding: 0px; /*必须有，因为ul默认的padding是40px*/
+    opacity: 0.92;
+    border-bottom: 4px solid #272727;
+    background: url(./images/Bg-SmartTvPolicy.png);
+    display: block;
+}
+#titleName {
+    position: absolute;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight:bold;
+    top: 30px;
+    left: 60px;
+    right:60px;
+}
+#descriptionWords
+{
+    position: absolute;
+    width: 900px;
+    top: 100px;
+    left: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: #ffffff;
+    overflow: auto;
+}
+#checkCodeInput/*对话框中输入框容器*/
+{
+    position:absolute;
+    width:500px;
+    height:35px;
+    left:450px;
+    top:280px;
+    color:#FFFFFF;
+    display: none;
+}
+#inputFocus/*对话框中输入框焦点样式*/
+{
+    position:absolute;
+    left:451px;
+    right:1062px;
+    top:330px;
+    height:72px;
+    width:370px;
+    display:block;
+    pointer-events:none;
+}
+#buttonList
+{
+    position:absolute;
+    top:500px;
+    left:450px;
+    height:50px;
+    width:530px;
+    color:#b0b0b0;
+}
+#dialogButtonFocus/*对话框中按钮样式的焦点*/
+{
+    position: absolute;
+    left: 200px;
+    top:30px;
+    display:none;
+    pointer-events:none;
+}
+#QRSacn
+{
+    position:absolute;
+    left:880px;/*650px;*/
+    width:400px;
+    opacity:0.92;
+    height:500px;
+    top:290px;
+    display:none;
+}
+#scandescription
+{
+    position:absolute;
+    list-style:none;
+    width:300px;
+    top: 10px;
+    left:170px;
+    right:-210px;
+    color: #fff;
+    font-size: 25px;
+}
+#scandescription li
+{
+    margin-top: 20px;
+    width:380px;
+    color: #fff;
+    font-size: 25px;
+}
+
+#customerCenter
+{
+    position:absolute;
+    left:450px;/*650px;*/
+    width:600px;
+    opacity:0.92;
+    height:500px;
+    top:320px;
+    display:none;
+}
+.dialogInputName/*对话框中输入框输入选项名称提示*/
+{
+    position:absolute;
+    left:0px;
+    font-size:25px;
+    color: #fff;
+}
+#remindWord
+{
+    position: absolute;
+    left: 750px;
+    top: 620px;
+    height: 70px;
+    color:#F00;
+    font-size: 28px;
+    text-align:center;
+    width: 400px;
+    display:none;
+}
+</style>
+</head>
+
+<body onload="init()">
+
+    <!-----------------------主页面内容---------------------------------->
+    <div id="activationDiv">
+        <div id="titleName"></div>
+        <div id="descriptionWords"></div>
+    </div>
+
+    <div id="checkCodeInput">
+        <span id="checkCodeTitle" class="dialogInputName" style="position:absolute;top:5px;left:10px;right:125px;"></span>
+        <div id="checkCodeContent" style="position:absolute; top:60px; left:10px;right:100px; width:350px; height:50px; font-size:28px; line-height:50px; text-align:center; border:2px solid #666; border-radius:10px;overflow:hidden;"></div>
+    </div>
+
+    <img id="inputFocus" src="images/Focus_Frame/Focus.png" />
+
+    <div id="buttonList">
+        <div style="position:absolute;left:0px; top:30px; background:url(images/Focus-02-no.png); width:204px; height:64px; line-height:64px; text-align:center;  font-size:28px; font-weight:bold;"></div>
+        <div style="position:absolute;left:200px; top:30px; background:url(images/Focus-02-no.png); width:204px; height:64px; line-height:64px; text-align:center;  font-size:28px; font-weight:bold;"></div>
+        <img id="dialogButtonFocus" src="images/Focus-02.png" />
+    </div>
+
+    <div id="QRSacn">
+        <div id="scanWords" style="position:absolute;top:0px;left:10px; right:-160px;font-size:28px; color: #fff; width:600px;"></div>
+        <img id="loading" style="position:absolute;top:70px;width:200px; height:200px;border:none;right: 210px;" src="images/Loading-01.png"/>
+<!--
+        <img id="loading" style="position:absolute;top:70px;width:200px; height:200px;" src="images/nScreen_andriod_2D-code.png"/>
+-->
+        <div id="qrcode" style="position:absolute;top:70px;width:200px; height:200px;border:none;right: 210px;"></div>
+        <ul id="scandescription">
+            <li>
+                <div id="qrcodetitle"></div>
+            </li>
+            <li>
+                <div id="qrcodcontent"></div>
+            </li>
+            <li>
+                <div id="snNum"></div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="customerCenter">
+        <div id="ccInput">
+            <!-- name-->
+            <span id="ccInputnameTitle" class="dialogInputName" style="top:25px;left:-15px;right:10px;"></span>
+            <div id="ccInputnameContent" style="position:absolute; color:#fff;top:20px; left:120px;right:199px; width:350px; height:50px; font-size:28px; line-height:50px; text-align:center; border:2px solid #666; border-radius:10px;overflow:hidden;"></div>
+            <!-- e-mail-->
+            <span id="ccInputmailTitle" class="dialogInputName" style="top:95px;left:-15px;right:10px;"></span>
+            <div id="ccInputmailContent" style="position:absolute; color:#fff;top:80px; left:120px;right:199px; width:350px; height:50px; font-size:28px; line-height:50px; text-align:center; border:2px solid #666; border-radius:10px;overflow:hidden;"></div>
+            <!-- mobile-->
+            <span id="ccInputmobileTitle" class="dialogInputName" style="top:155px;left:-15px;right:10px;"></span>
+            <div id="ccInputmobileContent" style="position:absolute; color:#fff;top:140px; left:120px;right:199px; width:350px; height:50px; font-size:28px; line-height:50px; text-align:center; border:2px solid #666; border-radius:10px;overflow:hidden;"></div>
+
+        </div>
+    </div>
+    <div id="remindWord"></div>
+</body>
+</html>

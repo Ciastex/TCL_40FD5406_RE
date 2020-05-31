@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="TplayerServer" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <application tvos:persistent="true">
+       <service tvos:name="sbinder_fpp_space_server" >
+            <intent-filter>
+                <action tvos:name="tvos.tplayer.service" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

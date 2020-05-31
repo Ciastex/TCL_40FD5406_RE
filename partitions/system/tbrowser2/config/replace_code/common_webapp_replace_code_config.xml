@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fixer>
+    <element>
+                <notation>解决EROSNOW-MOVIES播放视频页面无焦点的问题</notation>
+                <targetFile>erosnowhtml.erosnow.com/assets/js/modules/detail.js</targetFile>
+                <node>
+                        <org_code>if (detail.movieData.isdrmprotected &amp;&amp; !config.drmSupportEnabled) {</org_code>
+                        <replace_code>if (detail.movieData &amp;&amp; detail.movieData.isdrmprotected &amp;&amp; !config.drmSupportEnabled) {</replace_code>
+                </node>
+    </element>
+</fixer>

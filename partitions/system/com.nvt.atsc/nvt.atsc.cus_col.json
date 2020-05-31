@@ -1,0 +1,20 @@
+{
+    "column":[
+    {
+      "name" : "audio_delay",
+      "type" : "integer"
+    },
+    {
+      "name" : "fav_channel_no",
+      "type" : "integer"
+    },
+    {
+      "name" : "program_edit_flag",
+      "type" : "integer"
+    },
+    {
+      "name" : "is_have_unlocked",
+      "type" : "integer"
+    }
+  ]
+}   

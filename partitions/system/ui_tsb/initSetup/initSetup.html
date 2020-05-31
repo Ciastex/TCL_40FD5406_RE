@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body
+{
+	background:url(../images/BG_60.jpg);
+	width:1920px;
+	height:1080px;
+    margin:0px;
+}
+#initSetupItem
+{
+    position:absolute;
+	width:1360px;
+	height:816px;
+	background:url(../images/Bg-Card-1.png);
+	top:200px;
+	left:280px;
+}
+
+#initStep
+{
+	position:absolute;
+	width:1920px;
+	height:82px;
+	top:120px;
+}
+.initStepimg
+{
+	position:absolute;
+    height:82px;
+    -webkit-transition-duration:1000ms;
+}
+#initTitle/*初始化对话框上面的标题样式*/
+{
+	position:absolute;
+	top:56px;
+	width:1920px;
+	font-size:48px;
+	color:#CCC;
+	font-weight:bold;
+	text-align:center;
+}
+</style>
+<script type="text/javascript">
+
+var initNetImg = new Image("../images/Pic-Network_Wireless.png");
+var stepimgs = ["../images/Step_Small-01.png","../images/Step_Small-02.png","../images/Step_Small-03.png","../images/Step_Small-04.png","../images/Step_Small-05.png","../images/Step_Small-06.png"];
+var stepimgs_B = ["../images/Step_big-01.png","../images/Step_big-02.png","../images/Step_big-03.png","../images/Step_big-04.png","../images/Step_big-05.png","../images/Step_big-06.png","../images/Step_big-00.png"];
+var step;
+var lines;
+var steps;
+var littleIndex;
+var bigIndex;
+
+function init()
+{
+    top.initTextDirection(window);
+	if(top.isGingaOn && top.GingaObj.isInit == top.GingaStates.True)//UI显示需要暂停Ginga,发送暂停信号到中间件
+	{
+	//	top.gingaEvtProc(top.GingaStates.Events.GINGA_EVT_PAUSE_FOR_CONTROL_LOST);
+        top.g_ginga.setNetworkEvent(top.GingaStates.NetworkEvents.GINGA_NW_EVT_TS_UNSELECTED);
+	}
+    updateInitTitle(top.initialTitle[1]);
+	top.requestFocus(initSetupItem, 1);
+    var imgs = $("initStep").getElementsByTagName("img");
+    //console.log(imgs.length);
+    steps = [imgs[2],imgs[4],imgs[5],imgs[6],imgs[7],imgs[8]];
+    lines = [imgs[1],imgs[3]];
+    step = 0;
+}
+
+function $(id)
+{
+	return document.getElementById(id);
+}
+
+function updateInitTitle(value)
+{
+    $("initTitle").innerHTML = value;
+}
+
+function updateImageL(evt)
+{
+    //evt.target.src=stepimgs[littleIndex];
+    evt.target.removeEventListener("webkitTransitionEnd",updateImageL,false);
+}
+
+function updateImageB(evt)
+{
+    //evt.target.src=stepimgs_B[bigIndex];
+    evt.target.removeEventListener("webkitTransitionEnd",updateImageB,false);
+}
+
+function updateInitProgress(direction)
+{
+    console.log("updateInitProgress "+step+" direction is "+direction);
+	//Avoid some unexpected problems
+	if(step > 5)
+	{
+		if(direction == 1)
+		{
+			step = step -1;
+		}
+		else if(direction == 2)
+		{
+			step = step -2;
+		}
+		else
+		{
+			step = 5;
+		}
+	}
+    if (direction==1)
+    {
+        littleIndex = step;
+        steps[step].src = stepimgs[littleIndex];
+        steps[step].style.left = 0+(step+1)*48+"px";
+        steps[step].addEventListener("webkitTransitionEnd",updateImageL,false);
+        lines[0].style.left = 48+(step+1)*48+"px";
+        lines[0].style.width = 872-(step+1)*48+"px";
+        bigIndex = step+1;
+		steps[step+1].src = stepimgs_B[bigIndex];
+        steps[step+1].style.left = "920px";
+        steps[step+1].addEventListener("webkitTransitionEnd",updateImageB,false);
+        lines[1].style.width = 678+(step+1)*48+"px";
+    }
+    else if (direction==2)
+    {
+        littleIndex = step;
+        steps[step].src = stepimgs[littleIndex];
+        steps[step].style.left = 0+(step+1)*48+"px";
+        steps[step+1].style.left = 0+(step+2)*48+"px";
+        steps[step].addEventListener("webkitTransitionEnd",updateImageL,false);
+        lines[0].style.left = 48+(step+2)*48+"px";
+        lines[0].style.width = 872-(step+2)*48+"px";
+        bigIndex = step+2;
+		steps[step+2].src = stepimgs_B[bigIndex];
+        steps[step+2].style.left = "920px";
+        steps[step+2].addEventListener("webkitTransitionEnd",updateImageB,false);
+        lines[1].style.width = 678+(step+2)*48+"px";
+    }
+    else if (direction==-1)
+    {
+        littleIndex = step;
+        steps[step].src = stepimgs[littleIndex];
+        steps[step].style.left = 1680+(step-1)*48+"px";
+        steps[step].addEventListener("webkitTransitionEnd",updateImageL,false);
+        lines[0].style.left = 48+(step-1)*48+"px";
+        lines[0].style.width = 872-(step-1)*48+"px";
+        bigIndex = step-1;
+		steps[step-1].src = stepimgs_B[bigIndex];
+        steps[step-1].style.left = "920px";
+        steps[step-1].addEventListener("webkitTransitionEnd",updateImageB,false);
+        lines[1].style.width = 678+(step-1)*48+"px";
+    }
+    else if (direction==-2)
+    {
+        littleIndex = step;
+        steps[step].src = stepimgs[littleIndex];
+        steps[step].style.left = 1680+(step-1)*48+"px";
+        steps[step-1].style.left = 1680+(step-2)*48+"px";
+        steps[step].addEventListener("webkitTransitionEnd",updateImageL,false);
+        lines[0].style.left = 48+(step-2)*48+"px";
+        lines[0].style.width = 872-(step-2)*48+"px";
+        bigIndex = step-2;
+		steps[step-2].src = stepimgs_B[bigIndex];
+        steps[step-2].style.left = "920px";
+        steps[step-2].addEventListener("webkitTransitionEnd",updateImageB,false);
+        lines[1].style.width = 678+(step-2)*48+"px";
+    }
+    else if (direction==0)
+    {
+        littleIndex = step;
+        steps[step].src = stepimgs[littleIndex];
+        steps[step].style.left = 0+(step+1)*48+"px";
+        steps[step].addEventListener("webkitTransitionEnd",updateImageL,false);
+        lines[0].style.left = 48+(step+1)*48+"px";
+        lines[0].style.width = 872-(step+1)*48+"px";
+        bigIndex = 5;
+		steps[5].src = stepimgs_B[bigIndex];
+        steps[5].style.left = "920px";
+        steps[5].addEventListener("webkitTransitionEnd",updateImageB,false);
+        lines[1].style.width = "0px";
+        $("initSetupItem").style.background = "url(../images/Bg-Card-2.png)";
+    }
+    step += direction;
+}
+
+</script>
+</head>
+
+<body onload="init()">
+	<span id="initTitle"></span>
+    <!-----------大圆居中，大圆加上后面的小圆、连线的总长度是1000px,大圆前面的总长度是920px-->
+    <div id="initStep" style="left:0px;">
+    	<img class="initStepimg" src="../images/Step_Small-00.png" style="left:0px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Line.png" style="left:48px;top:0px;width:872px;" />
+        <img class="initStepimg" src="../images/Step_big-01.png" style="left:920px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Line.png" style="left:1002px;top:0px;width:678px;" />
+        <img class="initStepimg" src="../images/Step_Small-02.png" style="left:1680px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Small-03.png" style="left:1728px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Small-04.png" style="left:1776px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Small-05.png" style="left:1824px;top:0px;"/>
+        <img class="initStepimg" src="../images/Step_Small-06.png" style="left:1870px;top:0px;"/>
+    </div>
+    
+    <iframe id="initSetupItem" name="initSetupItem" src="initEnvironmentSet.html" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">
+    	
+    </iframe>
+</body>
+</html>

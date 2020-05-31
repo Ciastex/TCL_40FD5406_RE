@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../all.css">
+<title> New Document </title>
+<style>
+body
+{
+    background:transparent;
+}
+#netConnectWin
+{
+    position:absolute;
+    width:800px;
+    border:4px  solid #1b1b1b;
+    opacity:0.8;
+    top:900px;
+    background:#000;
+}
+.netConnectRemind
+{
+    position: absolute;
+    height: 60px;
+    top:46px;
+    line-height:30px;
+    color:#666666;
+    font-size: 28px;
+    width:750px;/*500px;*/
+    left:25px;
+    text-align:center;
+}
+</style>
+<script type="text/javascript">
+var picPreset               = top.picPreset;
+var positionPop=0;
+
+document.onkeydown = keyProcess;
+document.onsystemevent = notifyProcess;
+
+function $(id)
+{
+    return document.getElementById(id);
+}
+
+function notifyProcess(evt)
+{
+    top.systemEventProc(evt);
+}
+
+function keyProcess(e)
+{
+	var ret = true;
+	var keycode = e.which;
+	switch(keycode)
+	{
+		default:
+			break;
+	}
+	return ret;
+}
+
+function toBack()
+{
+	top.$("otherPage").src = "";
+}
+
+function doEnter()
+{
+
+}
+
+function toLeft()
+{
+
+}
+
+function toRight()
+{
+
+}
+
+function init()
+{
+    console.log("quanhw test factoryPromptDialog.html");
+    var url = document.location.search;//获取URL携带参数
+    var tempStr=url.substring(url.indexOf("?")+1);
+    var tempValue=tempStr.split("&");
+    if(tempValue[0]=="pictureMode")
+    {
+        var num=parseInt(tempValue[1]);
+        $("popContent").innerHTML = "picture preset mode ["+ picPreset[num]+"]";
+    }
+    else if(tempValue[0]=="usbUpdate")
+    {
+        switch(tempValue[1])
+        {
+            case "7":
+                $("popContent").innerHTML = "USB to TV [all] success";
+                break;
+            case "8":
+                $("popContent").innerHTML = "TV to USB [all] success";
+                break;
+            case "9":
+                $("popContent").innerHTML = "USB to TV [CH list] success";
+                break;
+            case "10":
+                $("popContent").innerHTML = "TV to USB [CH list] success";
+                break;
+            case "13":
+                $("popContent").innerHTML = "USB to TV [User Data] success";
+                break;
+            case "14":
+                $("popContent").innerHTML = "TV to USB [User Data] success";
+                break;
+            default :
+                $("popContent").innerHTML = "USB  clone";
+                break;
+        }
+    }
+    else if(tempValue[0]=="usbUpdateFail")
+    {
+        switch(tempValue[1])
+        {
+            case "7":
+                $("popContent").innerHTML = "USB to TV [all] failure";
+                break;
+            case "8":
+                $("popContent").innerHTML = "TV to USB [all] failure";
+                break;
+            case "9":
+                $("popContent").innerHTML = "USB to TV [CH list] failure";
+                break;
+            case "10":
+                $("popContent").innerHTML = "TV to USB [CH list] failure";
+                break;
+            case "13":
+                $("popContent").innerHTML = "USB to TV [User Data] failure";
+                break;
+            case "14":
+                $("popContent").innerHTML = "TV to USB [User Data] failure";
+                break;
+            default :
+                $("popContent").innerHTML = "USB  clone";
+                break;
+        }
+
+    }
+	setTimeout("toBack()",3*1000);
+}
+
+function uninit()
+{
+
+}
+</script>
+</head>
+
+
+<!--******************************** net connect **************************************-->
+<body onLoad="init()" onunload="uninit()">
+     <div id="netConnectWin" style="left:560px; height:120px;">
+         <div id="popContent" class="netConnectRemind">
+         </div>
+     </div>
+</body>
+</html>

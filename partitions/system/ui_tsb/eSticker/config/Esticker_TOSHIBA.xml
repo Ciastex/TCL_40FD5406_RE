@@ -1,0 +1,89 @@
+<root>
+	<static_icon id = "TCL">
+		<img>../images/esticker/TOSHIBA.png</img>
+	</static_icon>
+	<static_icon id = "TCL_right">
+		<img>../images/esticker/TOSHIBA.png</img>
+	</static_icon>
+
+	<icon id = "Netflix">
+		<img_L>../images/esticker/Esticker_Netflix_B_l_Brazil.png</img_L>
+		<img_R>../images/esticker/Esticker_Netflix_B_r_Brazil.png</img_R>
+		<img_S>../images/esticker/esticker_netflix.png</img_S>
+		<title>
+			<English_LA>Assista Netflix*</English_LA>
+			<Portuguese_LA>Assista Netflix*</Portuguese_LA>
+			<Spanish_LA>Assista Netflix*</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>Suas séries preferidas e os melhores filmes diretamente na sua TV, na hora que &lt;br / &gt;você quiser, e com a melhor qualidade de imagem.&lt;br / &gt;* O acesso ao serviço Netflix requer assinatura e acesso à internet.</English_LA>
+			<Portuguese_LA>Suas séries preferidas e os melhores filmes diretamente na sua TV, na hora que &lt;br / &gt;você quiser, e com a melhor qualidade de imagem.&lt;br / &gt;* O acesso ao serviço Netflix requer assinatura e acesso à internet.</Portuguese_LA>
+			<Spanish_LA>Suas séries preferidas e os melhores filmes diretamente na sua TV, na hora que &lt;br / &gt;você quiser, e com a melhor qualidade de imagem.&lt;br / &gt;* O acesso ao serviço Netflix requer assinatura e acesso à internet.</Spanish_LA>
+		</description>
+	</icon>
+
+	<icon id = "YouTube">
+		<img_L>../images/esticker/Esticker_Youtube_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Youtube_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_youtube.png</img_S>
+		<title>
+			<English_LA>YouTube</English_LA>
+			<Portuguese_LA>YouTube</Portuguese_LA>
+			<Spanish_LA>YouTube</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>No Youtube você pode assistir o que o mundo está vendo, desde os clipes mais tocados até as tendências de jogos, entretenimento, notícias e muito mais. Tudo isso no conforto da sua casa.</English_LA>
+			<Portuguese_LA>No Youtube você pode assistir o que o mundo está vendo, desde os clipes mais tocados até as tendências de jogos, entretenimento, notícias e muito mais. Tudo isso no conforto da sua casa.</Portuguese_LA>
+			<Spanish_LA>No Youtube você pode assistir o que o mundo está vendo, desde os clipes mais tocados até as tendências de jogos, entretenimento, notícias e muito mais. Tudo isso no conforto da sua casa.</Spanish_LA>
+		</description>
+	</icon>
+
+	<icon id = "Golobo Play">
+		<img_L>../images/esticker/Esticker_Globoplay_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_Globoplayx_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_Globoplay.png</img_S>
+		<title>
+			<English_LA>globoplay</English_LA>
+			<Portuguese_LA>globoplay</Portuguese_LA>
+			<Spanish_LA>globoplay</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>Você dá um play em tudo da Globo. A qualquer hora. Em todo o lugar.</English_LA>
+			<Portuguese_LA>Você dá um play em tudo da Globo. A qualquer hora. Em todo o lugar.</Portuguese_LA>
+			<Spanish_LA>Você dá um play em tudo da Globo. A qualquer hora. Em todo o lugar.</Spanish_LA>
+		</description>
+	</icon>
+
+	<icon id = "Wifi">
+		<img_L>../images/esticker/Esticker_wifi_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_wifi_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_wifi.png</img_S>
+		<title>
+			<English_LA>Wi-Fi Integrado</English_LA>
+			<Portuguese_LA>Wi-Fi Integrado</Portuguese_LA>
+			<Spanish_LA>Wi-Fi Integrado</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>Aproveite todo potencial das funções Smart com a comodidade da tecnologia de Wi-Fi integrado, que dispensa cabos e outros acessórios.</English_LA>
+			<Portuguese_LA>Aproveite todo potencial das funções Smart com a comodidade da tecnologia de Wi-Fi integrado, que dispensa cabos e outros acessórios.</Portuguese_LA>
+			<Spanish_LA>Aproveite todo potencial das funções Smart com a comodidade da tecnologia de Wi-Fi integrado, que dispensa cabos e outros acessórios.</Spanish_LA>
+		</description>
+	</icon>
+
+	<icon id = "DTVi">
+		<img_L>../images/esticker/Esticker_DTVi_B_l.png</img_L>
+		<img_R>../images/esticker/Esticker_DTVi_B_r.png</img_R>
+		<img_S>../images/esticker/esticker_DTVi.png</img_S>
+		<title>
+			<English_LA>Pronta para o Sinal Digital</English_LA>
+			<Portuguese_LA>Pronta para o Sinal Digital</Portuguese_LA>
+			<Spanish_LA>Pronta para o Sinal Digital</Spanish_LA>
+		</title>
+		<description>
+			<English_LA>Graças ao receptor de sinal digital integrado, você irá aproveitar sua programação preferida sem problemas de transmissão como chuviscos ou ruídos de áudio.</English_LA>
+			<Portuguese_LA>Graças ao receptor de sinal digital integrado, você irá aproveitar sua programação preferida sem problemas de transmissão como chuviscos ou ruídos de áudio.</Portuguese_LA>
+			<Spanish_LA>Graças ao receptor de sinal digital integrado, você irá aproveitar sua programação preferida sem problemas de transmissão como chuviscos ou ruídos de áudio.</Spanish_LA>
+		</description>
+	</icon>
+
+</root>

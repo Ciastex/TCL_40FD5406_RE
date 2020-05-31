@@ -1,0 +1,50 @@
+[{
+	"name": "YouTube",
+	"icon": "http://s3.tcllauncher.com/html5/images/YouTube.png",
+	"issysapp": "1"
+},
+{
+	"name": "Globo Play",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_globo.png",
+	"issysapp": "1"
+},
+{
+	"name": "Looke",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_looke.png",
+	"issysapp": "1"
+},
+{
+	"name": "Crackle",
+	"icon": "http://s3.tcllauncher.com/html5/images/Crackle.png",
+	"issysapp": "1"
+},
+{
+	"name": "SBT",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_sbt.png",
+	"issysapp": "1"
+},
+{
+	"name": "PlayKids",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_kidsplay.jpg",
+	"issysapp": "1"
+},
+{
+	"name": "Viewster",
+	"icon": "http://s3.tcllauncher.com/html5/images/viewster.png",
+	"issysapp": "1"
+},
+{
+	"name": "T-Browser",
+	"icon": "http://s3.tcllauncher.com/html5/images/T-Browser.png",
+	"issysapp": "1"
+},
+{
+	"name": "Deezer",
+	"icon": "http://s3.tcllauncher.com/html5/images/DEEZER.png",
+	"issysapp": "1"
+},
+{
+	"name": "Dailymotion",
+	"icon": "http://s3.tcllauncher.com/html5/images/Dailymotion.png",
+	"issysapp": "1"
+}]

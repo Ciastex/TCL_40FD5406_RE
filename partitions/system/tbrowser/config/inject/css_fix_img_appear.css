@@ -1,0 +1,12 @@
+#application img {
+    left: 0;
+    position: absolute;
+    top: 5%;
+    -webkit-animation: slidediv 7s forwards;
+    transform: translate3d(0, 0, 0);
+}
+
+@-webkit-keyframes slidediv {
+    0% {left: -33rem;}
+    15% {left: 0;}
+}

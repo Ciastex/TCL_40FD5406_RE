@@ -1,0 +1,1 @@
+Util.setEnv("TBROWSER_SHOULD_SET_FOCUS", "0");

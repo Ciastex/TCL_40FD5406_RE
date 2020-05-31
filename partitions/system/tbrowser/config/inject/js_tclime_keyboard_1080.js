@@ -1,0 +1,5318 @@
+var ime_hostSystemevent = document.onsystemevent;//\u4FDD\u5B58\u539F\u6765\u7684systemevent
+document.onsystemevent = ime_keyDown;//\u76D1\u542Consystemevent
+
+Util.setEnv("TBROWSER_IME_SWITCH", "1");
+
+var ime_is_tv_first_on = "ime.is.tv.first.on";//\u7B2C\u4E00\u6B21\u5F00\u673A\u7684\u6807\u5FD7
+var ime_g_setting = tcl.setting; //tcl ime_g_setting
+
+var ime_notice_change_language;
+
+var ime_button_proxy;//\u6309button ok\u65F6\u5B9E\u9645\u54CD\u5E94\u7684\u7C7B
+
+var imagepath;
+var ime_setting;
+var ime_specialflag = 0;
+var ime_candidate;
+var ime_repeatTimerIndex = 0;
+var ime_mouseflag = 0;
+
+function ime_getEID(id)
+{
+    return document.getElementById(id);
+}
+
+//\u6309\u952E\u4EE3\u7406\u7C7B
+var IME_Button_Proxy = function () {
+
+};
+IME_Button_Proxy.prototype.ime_setLanguage = function (ime_language) {
+    this.ime_language = ime_language;
+};
+IME_Button_Proxy.prototype.ime_press_enter = function (ime_letter) {
+
+    switch(ime_letter)
+    {
+        case "enter":
+            ime_candidate.ime_submitString();
+            break;
+        case "delete":
+            if (ime_repeatTimerIndex != 0)
+            {
+                clearInterval(ime_repeatTimerIndex);
+                ime_repeatTimerIndex = 0;
+            }
+            ime_candidate.ime_deleteString();
+            if (ime_mouseflag == 0)
+            {
+                ime_repeatTimerIndex = setInterval(function () {
+                    ime_candidate.ime_deleteString();
+                }, 400);
+            }
+            ime_mouseflag = 0;
+            break;
+        case "setting":
+            ime_setting.ime_showLangSetting();
+            break;
+        case "language":
+            ime_candidate.ime_back();
+            ime_setting.ime_change_language();
+            break;
+        case "shift":
+            var string = ime_candidate.ime_getInputString();
+            ime_candidate.ime_back();
+            ime_switchShift();
+            if(string != undefined  &&string!=null && string!="")
+            {
+                ime_candidate.ime_candidateInit(string);
+                this.ime_language.ime_press_enter(string);
+                ime_candidate._ime_findchar();
+            }
+            break;
+        case "123#":
+            var string = ime_candidate.ime_getInputString();
+            ime_candidate.ime_back();
+            ime_switchKeyboard();
+            ime_display_number();
+            if(string != undefined  &&string!=null&& string!="")
+            {
+                ime_candidate.ime_candidateInit(string);
+                this.ime_language.ime_press_enter(string);
+                ime_candidate._ime_findchar();
+            }
+            break;
+        case  "abc":
+            var string = ime_candidate.ime_getInputString();
+            ime_display_language(ime_curLanguageSymbol);
+            if(string != undefined  &&string!=null&& string!="")
+            {
+                ime_candidate.ime_candidateInit(string);
+                this.ime_language.ime_press_enter(string);
+                ime_candidate._ime_findchar();
+            }
+            break;
+        case  "<1/2>":
+            ime_display_symbol();
+            break;
+        case  "<2/2>":
+            ime_display_number();
+            break;
+        default:
+
+            ime_candidate.ime_candidateInit(ime_letter);
+
+            this.ime_language.ime_press_enter(ime_letter);
+
+            ime_candidate._ime_findchar();//\u5B57\u7B26\u4E32\u7B49\u5DF2\u5904\u7406\u5B8C\u6BD5\u5F00\u59CB\u4E0EIQQI\u5F15\u64CE\u4EA4\u4E92
+            break;
+    }
+
+
+};
+
+
+//\u72B6\u6001
+var IME_Language = function(){};
+IME_Language.prototype.ime_press_enter = function ()
+{
+    throw new Error("\u8BE5\u65B9\u6CD5\u5FC5\u987B\u88AB\u91CD\u8F7D!");
+};
+
+//IME_English\u72B6\u6001
+var IME_English = function ()
+{
+    IME_Language.apply(this);
+};
+IME_English.prototype = new IME_Language();
+IME_English.prototype.ime_press_enter = function(ime_letter) {
+   // window.alert("IME_English : " + ime_letter);
+
+
+};
+
+//IME_French\u72B6\u6001
+var IME_French = function ()
+{
+    IME_Language.apply(this);
+};
+IME_French.prototype = new IME_Language();
+IME_French.prototype.ime_press_enter = function(ime_letter) {
+    // window.alert("french : "+ Integer.valueOf(ime_letter));
+
+    ime_candidate.ime_french_compositeSymbol();
+};
+
+
+
+//IME_Number\u72B6\u6001
+var IME_Number = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Number.prototype = new IME_Language();
+IME_Number.prototype.ime_press_enter = function(ime_letter)
+{
+
+   // window.alert("number : "+ime_letter);
+
+};
+
+//IME_Portugal
+var IME_Portugal = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Portugal.prototype = new IME_Language();
+IME_Portugal.prototype.ime_press_enter = function(ime_letter)
+{
+
+    ime_candidate.ime_portuguese_compositeSymbol();
+};
+
+//IME_Spanish\u72B6\u6001
+var IME_Spanish = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Spanish.prototype = new IME_Language();
+IME_Spanish.prototype.ime_press_enter = function(ime_letter)
+{
+   // window.alert("IME_Spanish : "+ime_letter);
+};
+
+//IME_Deutsch
+var IME_Deutsch = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Deutsch.prototype = new IME_Language();
+IME_Deutsch.prototype.ime_press_enter = function(ime_letter)
+{
+   // window.alert("IME_Deutsch : "+ime_letter);
+};
+
+
+//IME_Polski
+var IME_Polski = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Polski.prototype = new IME_Language();
+IME_Polski.prototype.ime_press_enter = function(ime_letter)
+{
+  //  window.alert("IME_Polski : "+ime_letter);
+};
+
+
+//IME_Svenska
+var IME_Svenska = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Svenska.prototype = new IME_Language();
+IME_Svenska.prototype.ime_press_enter = function(ime_letter)
+{
+    //window.alert("IME_Svenska : "+ime_letter);
+};
+
+
+//IME_Italian
+var IME_Italian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Italian.prototype = new IME_Language();
+IME_Italian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Russian
+var IME_Russian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Russian.prototype = new IME_Language();
+IME_Russian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Czech
+var IME_Czech = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Czech.prototype = new IME_Language();
+IME_Czech.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+
+//IME_Croatian
+var IME_Croatian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Croatian.prototype = new IME_Language();
+IME_Croatian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Latvian
+var IME_Latvian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Latvian.prototype = new IME_Language();
+IME_Latvian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Hungarian
+var IME_Hungarian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Hungarian.prototype = new IME_Language();
+IME_Hungarian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Romanian
+var IME_Romanian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Romanian.prototype = new IME_Language();
+IME_Romanian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Norwegian
+var IME_Norwegian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Norwegian.prototype = new IME_Language();
+IME_Norwegian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Slovenian
+var IME_Slovenian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Slovenian.prototype = new IME_Language();
+IME_Slovenian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+
+//IME_Turkish
+var IME_Turkish = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Turkish.prototype = new IME_Language();
+IME_Turkish.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Ukrainain
+var IME_Ukrainain = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Ukrainain.prototype = new IME_Language();
+IME_Ukrainain.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Greek
+var IME_Greek = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Greek.prototype = new IME_Language();
+IME_Greek.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Lithuanian
+var IME_Lithuanian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Lithuanian.prototype = new IME_Language();
+IME_Lithuanian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Esthonian
+var IME_Esthonian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Esthonian.prototype = new IME_Language();
+IME_Esthonian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Bulgarian
+var IME_Bulgarian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Bulgarian.prototype = new IME_Language();
+IME_Bulgarian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Danish
+var IME_Danish = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Danish.prototype = new IME_Language();
+IME_Danish.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Finnish
+var IME_Finnish = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Finnish.prototype = new IME_Language();
+IME_Finnish.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Dutch
+var IME_Dutch = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Dutch.prototype = new IME_Language();
+IME_Dutch.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Slovak
+var IME_Slovak = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Slovak.prototype = new IME_Language();
+IME_Slovak.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+//IME_Serbian
+var IME_Serbian = function ()
+{
+    IME_Language.apply(this);
+};
+IME_Serbian.prototype = new IME_Language();
+IME_Serbian.prototype.ime_press_enter = function(ime_letter)
+{
+
+
+};
+
+
+
+//\u54CD\u5E94\u901A\u77E5\uFF0C\u5177\u4F53\u8BBE\u7F6E\u54EA\u79CD\u8BED\u8A00
+var ime_set_press_language = function(language)
+{
+    var ime_language_class;
+    var ime_curlanguageindex;//IQQI\u8BED\u8A00ID
+    switch(language)
+    {
+        case ime_Languages.getLanguage("ENGLISH"):
+            ime_language_class = new IME_English();
+            ime_curlanguageindex = ime_Languages.getLanguageID("ENGLISH");
+            break;
+        case ime_Languages.getLanguage("FRANCAISE"):
+            ime_language_class = new IME_French();
+            ime_curlanguageindex = ime_Languages.getLanguageID("FRANCAISE");
+            break;
+        case ime_Languages.getLanguage("PORTUGAL"):
+            ime_language_class = new IME_Portugal();
+            ime_curlanguageindex = ime_Languages.getLanguageID("PORTUGAL");
+            break;
+        case ime_Languages.getLanguage("SPANISH"):
+            ime_language_class = new IME_Spanish();
+            ime_curlanguageindex = ime_Languages.getLanguageID("SPANISH");
+            break;
+        case ime_Languages.getLanguage("DEUTSCH"):
+            ime_language_class = new IME_Deutsch();
+            ime_curlanguageindex = ime_Languages.getLanguageID("DEUTSCH");
+            break;
+        case ime_Languages.getLanguage("POLSKI"):
+            ime_language_class = new IME_Polski();
+            ime_curlanguageindex = ime_Languages.getLanguageID("POLSKI");
+            break;
+        case ime_Languages.getLanguage("SVENSKA"):
+            ime_language_class = new IME_Svenska();
+            ime_curlanguageindex = ime_Languages.getLanguageID("SVENSKA");
+            break;
+        case ime_Languages.getLanguage("ITALIAN"):
+            ime_language_class = new IME_Italian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("ITALIAN");
+            break;
+        case ime_Languages.getLanguage("RUSSIAN"):
+            ime_language_class = new IME_Russian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("RUSSIAN");
+            break;
+        case ime_Languages.getLanguage("CZECH"):
+            ime_language_class = new IME_Czech();
+            ime_curlanguageindex = ime_Languages.getLanguageID("CZECH");
+            break;
+        case ime_Languages.getLanguage("CROATIAN"):
+            ime_language_class = new IME_Croatian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("CROATIAN");
+            break;
+        case ime_Languages.getLanguage("LATVIAN"):
+            ime_language_class = new IME_Latvian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("LATVIAN");
+            break;
+        case ime_Languages.getLanguage("LITHUANIAN"):
+            ime_language_class = new IME_Lithuanian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("LITHUANIAN");
+            break;
+        case ime_Languages.getLanguage("ROMANIAN"):
+            ime_language_class = new IME_Romanian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("ROMANIAN");
+            break;
+        case ime_Languages.getLanguage("NORWEGIAN"):
+            ime_language_class = new IME_Norwegian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("NORWEGIAN");
+            break;
+        case ime_Languages.getLanguage("SLOVENIAN"):
+            ime_language_class = new IME_Slovenian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("SLOVENIAN");
+            break;
+        case ime_Languages.getLanguage("TURKISH"):
+            ime_language_class = new IME_Turkish();
+            ime_curlanguageindex = ime_Languages.getLanguageID("TURKISH");
+            break;
+        case ime_Languages.getLanguage("UKRAINAIN"):
+            ime_language_class = new IME_Ukrainain();
+            ime_curlanguageindex = ime_Languages.getLanguageID("UKRAINAIN");
+            break;
+        case ime_Languages.getLanguage("GREEK"):
+            ime_language_class = new IME_Greek();
+            ime_curlanguageindex = ime_Languages.getLanguageID("GREEK");
+            break;
+        case ime_Languages.getLanguage("HUNGARIAN"):
+            ime_language_class = new IME_Hungarian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("HUNGARIAN");
+            break;
+        case ime_Languages.getLanguage("ESTHONIAN"):
+            ime_language_class = new IME_Esthonian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("ESTHONIAN");
+            break;
+        case ime_Languages.getLanguage("BULGARIAN"):
+            ime_language_class = new IME_Bulgarian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("BULGARIAN");
+            break;
+        case ime_Languages.getLanguage("DANISH"):
+            ime_language_class = new IME_Danish();
+            ime_curlanguageindex = ime_Languages.getLanguageID("DANISH");
+            break;
+        case ime_Languages.getLanguage("FINNISH"):
+            ime_language_class = new IME_Finnish();
+            ime_curlanguageindex = ime_Languages.getLanguageID("FINNISH");
+            break;
+        case ime_Languages.getLanguage("DUTCH"):
+            ime_language_class = new IME_Dutch();
+            ime_curlanguageindex = ime_Languages.getLanguageID("DUTCH");
+            break;
+        case ime_Languages.getLanguage("SLOVAK"):
+            ime_language_class = new IME_Slovak();
+            ime_curlanguageindex = ime_Languages.getLanguageID("SLOVAK");
+            break;
+        case ime_Languages.getLanguage("SERBIAN"):
+            ime_language_class = new IME_Serbian();
+            ime_curlanguageindex = ime_Languages.getLanguageID("SERBIAN");
+            break;
+    }
+    ime_button_proxy.ime_setLanguage(ime_language_class);//\u8BBE\u7F6E\u5BF9\u5E94\u7684\u8BED\u8A00\u7C7B
+    ime_candidate.ime_setCurLanguage(ime_curlanguageindex);//\u8BBE\u7F6EIQQI\u8BED\u8A00
+};
+
+/**
+ *
+* \u89C2\u5BDF\u8005\u6A21\u5F0F\u5DE5\u5177\u7C7B
+* @param name
+* @constructor
+*/
+var IME_Notice = function(name)
+{
+    this.name = name;
+    this.registers = [];//\u6BCF\u4E00\u4E2A\u5143\u7D20\u662F\u51FD\u6570\u7C7B\u578B
+};
+//IME_Notice\u7C7B\u7684\u5B9E\u4F8B\u5BF9\u8C61\u53BB\u53D1\u5E03\u6D88\u606F
+IME_Notice.prototype.ime_notice = function(news)
+{
+    var ime_notice = this;
+    this.registers.forEach(function(fn){
+        fn(news,ime_notice);//\u628A\u65B0\u6D88\u606F\u53D1\u7ED9\u8BA2\u9605\u8005
+    });
+    return this;
+};
+
+//\u8BA2\u9605\u7684\u65B9\u6CD5
+Function.prototype.ime_regist = function(ime_notice)
+{
+    var sub = this;//\u53D6\u5F97\u5177\u4F53\u8BA2\u9605\u8005\u8FD9\u4E2A\u4EBA
+    var alreadyExists = ime_notice.registers.some(function(item){
+        return item === sub;
+    });
+    if(!alreadyExists)
+    {
+        ime_notice.registers.push(this);
+    }
+    return this;
+};
+
+
+var ime_Keyboard = (function ()
+{
+    /**
+     *\u95ED\u5305\u5355\u4F8B\u6A21\u5F0F
+     */
+    function keyboard(buttonProxy)
+    {
+        var _languageJson;//\u4F20\u8FDB\u6765\u7684json\u6570\u636E
+        var ime_body;//\u952E\u76D8\u63D2\u5165\u9875\u7684body
+        var rows;//\u952E\u76D8\u5171\u6709\u51E0\u884C
+        var columns;//\u952E\u76D8\u6BCF\u884C\u5171\u6709\u51E0\u4E2A\u6309\u952E
+
+        var cur_row;//\u4E0A\u4E0B\u5DE6\u53F3\u79FB\u52A8\u7528\u5230\u7684
+        var cur_column;//\u4E0A\u4E0B\u5DE6\u53F3\u79FB\u52A8\u7528\u5230\u7684
+        var ime_keyboard_ui;
+        var _buttonProxy = buttonProxy;
+        var keboardTransportView;
+
+        function ime_getEID(id){
+            return document.getElementById(id);
+        }
+        /**
+         *\u8BBE\u7F6E\u8BED\u8A00\u51FD\u6570,\u4E3B\u8981\u4E3A\u4E86\u662F4\u884C\u8FD8\u662F5\u884C
+         */
+        var ime_setLanguage = function(languageJson)
+        {
+            if(_languageJson != languageJson)
+            {
+            
+            	_languageJson = languageJson;
+	            rows = _languageJson.length;
+	            columns = _languageJson[0].length;
+	            
+	            for(var i = 0; i < rows; i++)
+	            {
+	                for(var j = 0; j < columns; j++)
+	                {
+	                	var normalimg = languageJson[i][j].normal_img;
+	                	var focusimg  = languageJson[i][j].focus_img;
+	                	_languageJson[i][j].normal_img =  normalimg.replace("url(images","url("+imagepath+"images");
+	                	_languageJson[i][j].focus_img  =  focusimg.replace("url(images","url("+imagepath+"images");
+	                }
+	            }
+            }
+
+          
+            if(ime_body != null || ime_body != undefined )//\u5207\u6362\u884C\u6570\u65F6\u5148\u79FB\u9664\u539F\u6765\u7684
+            {
+                ime_body.removeChild(ime_keyboard_ui);
+            }
+            if(keboardTransportView!=null || keboardTransportView != undefined)
+            {
+            	ime_body.removeChild(keboardTransportView);
+            }
+        };
+
+        /**
+         *\u7ED8\u5236\u952E\u76D8\u51FD\u6570
+         */
+        var ime_DrawKeyboard = function()
+        {
+            cur_row = 0;
+            cur_column = 0;
+            rows = _languageJson.length;
+            columns = _languageJson[0].length;
+            ime_body = document.getElementsByTagName("body")[0];
+            
+            
+            keboardTransportView = document.createElement("div");
+            keboardTransportView.style.cssText = " height: 1080px;width: 1920px;bottom:0px;position:fixed;z-index: 10000;background-color: rgba(0,0,0,0)";
+            keboardTransportView.id = "keboardTransport";
+            document.body.appendChild(keboardTransportView);
+            
+             keboardTransportView.onmousedown=function(evt)
+            {
+            	evt.preventDefault();
+                //document.body.removeChild(setDivBgRight);
+                 ime_closeKeyBoard();
+               
+            };
+            
+            
+            
+            //\u6574\u4E2AUI div
+            ime_keyboard_ui = document.createElement("div");
+            ime_keyboard_ui.id = "ime_keyboard_ui";
+            ime_keyboard_ui.style.cssText = "width: 1920px; height: 465px; position: absolute; z-index: 10001; bottom:0px;position:fixed";
+            ime_body.appendChild(ime_keyboard_ui);
+
+            ime_keyboard_ui.onmousedown = function(evt)
+            {
+                evt.preventDefault();
+                if(evt.button == 2)
+                {
+                    ime_closeKeyBoard();
+                }
+
+            }
+
+            //\u952E\u76D8\u90E8\u5206div
+            var ime_keyboard_ui_main = document.createElement("div");
+            ime_keyboard_ui_main.style.cssText = "width: 1920px; height: 381px; margin: 84px auto; background-image: url("+imagepath+"images/imeui/bg_keyboard.png) ; position: absolute; z-index: 10001;";
+            ime_keyboard_ui.appendChild(ime_keyboard_ui_main);
+            //\u952E\u76D8\u548C\u5019\u9009\u8BCD\u5206\u5272\u7EBFdiv
+            var ime_keyboard_ui_line = document.createElement("div");
+            ime_keyboard_ui_line.style.cssText = "width: 1920px; height: 1px; margin: 83px auto; background-image: url("+imagepath+"images/imeui/bg_line.png) ; position: absolute; z-index: 10001;";
+            ime_keyboard_ui.appendChild(ime_keyboard_ui_line);
+
+            //\u952E\u76D8ul
+            var ime_keyboard_ui_main_ul = document.createElement("ul");
+            ime_keyboard_ui_main_ul.id = "ime_keyboard_ui_main_ul";
+            ime_keyboard_ui_main_ul.style.cssText = " width: 1400px; height: 368px; margin: 5px 260px auto; padding: 0px; list-style-type: none;";
+            ime_keyboard_ui_main.appendChild(ime_keyboard_ui_main_ul);
+            //\u521B\u5EFA\u9664\u53BB\u6700\u540E\u4E00\u884C\u7684\u6309\u952E
+
+            for(var i = 0; i < rows-1; i++)
+            {
+                for(var j = 0; j < columns; j++)
+                {
+                    var ime_keyboard_letters_li = document.createElement("li");
+                    ime_keyboard_letters_li.id = _languageJson[i][j].li_id;
+                    var ime_keyboard_letters = document.createElement("input");
+                    ime_keyboard_letters.id = _languageJson[i][j].input_id;
+                    ime_keyboard_letters.type = "button";
+                    ime_keyboard_letters.value = _languageJson[i][j].input_value;
+                    ime_keyboard_letters_li.appendChild(ime_keyboard_letters);
+                    ime_keyboard_ui_main_ul.appendChild(ime_keyboard_letters_li);
+                    if(rows == 4)//4\u884C\u952E\u76D8\u7684\u6837\u5F0F
+                    {
+                        ime_keyboard_letters_li.style.cssText = "width: auto; height: 92px; border: 0px; float:left; padding: 0px; margin: -3px -2px auto;list-style-type: none;";
+                        ime_keyboard_letters.style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                    }else if(rows == 5)//5\u884C\u952E\u76D8\u7684\u6837\u5F0F
+                    {
+                        ime_keyboard_letters_li.style.cssText = "width: auto; height: 64px; border: 0px; float:left; padding: 0px; margin: 7px -2px auto;list-style-type: none;";
+                        ime_keyboard_letters.style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/frenchui/normal_letters.png); width: 131px; height: 64px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                    }
+                    ime_keyboard_letters.setAttribute("newAttrC",j);
+                    ime_keyboard_letters.setAttribute("newAttrR",i);
+                    ime_keyboard_letters.onmousedown = function(evt)
+                    {
+                        evt.preventDefault();
+                        if(evt.button == 0)
+                        {
+                            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                            cur_row = parseInt(this.getAttribute("newAttrR"));
+                            cur_column = parseInt(this.getAttribute("newAttrC"));
+                            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+                            //ime_enter();
+                        }
+                    }
+                    ime_keyboard_letters.onmouseup = function(evt)
+                    {
+                        ime_mouseflag = 1;
+                    }
+                }
+            }
+            //delete\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[0][columns-1].li_id).style.backgroundImage = _languageJson[0][columns-1].normal_img;
+            //shift\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[rows-2][0].li_id).style.backgroundImage = _languageJson[rows-2][0].normal_img;
+            //\u6700\u540E\u4E00\u884C\u6309\u952E
+            for(var k = 0; k < columns; k++)
+            {
+                if(_languageJson[rows - 1][k].repeat_flag != 0)//\u91CD\u590D\u7684\u6309\u952E\u4E0D\u521B\u5EFA
+                {
+
+                    var ime_keyboard_letters_li = document.createElement("li");
+                    ime_keyboard_letters_li.id = _languageJson[rows - 1][k].li_id;
+                    var ime_keyboard_letters = document.createElement("input");
+                    ime_keyboard_letters.id = _languageJson[rows - 1][k].input_id;
+                    ime_keyboard_letters.type = "button";
+                    ime_keyboard_letters.value = _languageJson[rows - 1][k].input_value;
+                    ime_keyboard_letters_li.appendChild(ime_keyboard_letters);
+                    ime_keyboard_ui_main_ul.appendChild(ime_keyboard_letters_li);
+                    if(rows == 4)
+                    {
+                        ime_keyboard_letters_li.style.cssText = "width: auto; height: auto; border: 0px; float:left; padding: 0px; margin: -3px -2px auto;list-style-type: none;";
+                    }else if(rows == 5)
+                    {
+                        ime_keyboard_letters_li.style.cssText = "width: auto; height: auto; border: 0px; float:left; padding: 0px; margin: 7px -2px auto;list-style-type: none;";
+                    }
+                    ime_keyboard_letters.setAttribute("newAttrC",k);
+                    ime_keyboard_letters.setAttribute("newAttrR",rows - 1);
+                    ime_keyboard_letters.onmousedown = function(evt)
+                    {
+                        evt.preventDefault();
+                        if(evt.button == 0)
+                        {
+                            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                            cur_row = parseInt(this.getAttribute("newAttrR"));
+                            cur_column = parseInt(this.getAttribute("newAttrC"));
+                            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+                           // ime_enter();
+                        }
+                    }
+                }
+            }
+            if(rows == 4 && _languageJson[rows-1][3].repeat_flag == 5)//4\u884C\u952E\u76D8\u7A7A\u683C\u53605\u4E2A\u5B57\u7B26\u7684\u6837\u5F0F
+            {
+                ime_getEID(_languageJson[rows-1][0].input_id).style.cssText = "outline:none; width: 194px; height: 92px; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][2].input_id).style.cssText = "outline:none; width: 194px; height: 92px; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][3].input_id).style.cssText = "outline:none; width: 639px; height: 92px; background-image:url("+imagepath+"images/imeui/normal_space.png); border: 0px; background-color: transparent;margin:0;";
+                ime_getEID(_languageJson[rows-1][8].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][9].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/setting.png); width: 131px; height: 92px; border: 0px; padding: 0px;margin:0;";
+                ime_getEID(_languageJson[rows-1][10].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/enter.png); width: 131px; height: 92px; border: 0px; padding: 0px;margin:0;";
+                //space\u6309\u952E\u53E0\u52A0\u5C42
+                ime_getEID(_languageJson[rows-1][3].li_id).style.backgroundImage = "url("+imagepath+"images/imeui/space.png)";
+            }else if(rows == 4 && _languageJson[rows-1][3].repeat_flag == 2)//4\u884C\u952E\u76D8\u7A7A\u683C\u53602\u4E2A\u5B57\u7B26\u7684\u6837\u5F0F
+            {
+                ime_getEID(_languageJson[rows-1][0].input_id).style.cssText = "outline:none; width: 194px; height: 92px; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][2].input_id).style.cssText = "outline:none; width: 194px; height: 92px; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][3].input_id).style.cssText = "outline:none; width: 258px; height: 92px; background-image:url("+imagepath+"images/imeui/normal_space_2.png); border: 0px; background-color: transparent;margin:0;";
+                ime_getEID(_languageJson[rows-1][5].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][6].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][7].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][8].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/normal_letters.png); width: 131px; height: 92px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][9].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/setting.png); width: 131px; height: 92px; border: 0px; padding: 0px;margin:0;";
+                ime_getEID(_languageJson[rows-1][10].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/imeui/enter.png); width: 131px; height: 92px; border: 0px; padding: 0px;margin:0;";
+                //space\u6309\u952E\u53E0\u52A0\u5C42
+                ime_getEID(_languageJson[rows-1][3].li_id).style.backgroundImage = "url("+imagepath+"images/imeui/space_2.png)";
+            }else if(rows == 5)//5\u884C\u952E\u76D8\u7684\u6837\u5F0F
+            {
+                ime_getEID(_languageJson[rows-1][0].input_id).style.cssText = "outline:none; width: 194px; height: 64px; background-color: transparent; background-image: url("+imagepath+"images/frenchui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][2].input_id).style.cssText = "outline:none; width: 194px; height: 64px; background-color: transparent; background-image: url("+imagepath+"images/frenchui/normal_language.png); border: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][3].input_id).style.cssText = "outline:none; width: 639px; height: 64px; background-image:url("+imagepath+"images/frenchui/normal_space.png); border: 0px; background-color: transparent;margin:0;";
+                ime_getEID(_languageJson[rows-1][8].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/frenchui/normal_letters.png); width: 131px; height: 64px; border: 0px; padding: 0px; font-size: 30px; font-weight:bold; color: white;margin:0;";
+                ime_getEID(_languageJson[rows-1][9].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/frenchui/setting.png); width: 131px; height: 64px; border: 0px; padding: 0px;margin:0;";
+                ime_getEID(_languageJson[rows-1][10].input_id).style.cssText = "outline:none; background-color: transparent; background-image: url("+imagepath+"images/frenchui/enter.png); width: 131px; height: 64px; border: 0px; padding: 0px;margin:0;";
+                //space\u6309\u952E\u53E0\u52A0\u5C42
+                ime_getEID(_languageJson[rows-1][3].li_id).style.backgroundImage = "url("+imagepath+"images/frenchui/space.png)";
+            }
+
+            //language\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[rows-1][0].li_id).style.backgroundImage = _languageJson[rows-1][0].normal_img;
+            //number\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[rows-1][2].li_id).style.backgroundImage = _languageJson[rows-1][2].normal_img;
+
+            //setting\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[rows-1][9].li_id).style.backgroundImage = _languageJson[rows-1][9].normal_img;
+            //enter\u6309\u952E\u53E0\u52A0\u5C42
+            ime_getEID(_languageJson[rows-1][10].li_id).style.backgroundImage = _languageJson[rows-1][10].normal_img;
+
+            //\u7ED8\u5236\u5B8C\u6BD5\u540E\u8BA9\u6309\u952E\u805A\u7126
+            ime_getEID(_languageJson[0][0].input_id).style.backgroundImage = _languageJson[0][0].focus_img;
+
+        };
+
+        var ime_enter = function()
+        {
+           // alert("the input value is " +(_languageJson[cur_row][cur_column].input_value));
+            if((ime_getEID(_languageJson[cur_row][cur_column].input_id).value) == "" || _languageJson[cur_row][cur_column].input_name == "language" )
+                _buttonProxy.ime_press_enter((_languageJson[cur_row][cur_column].input_name));
+            else
+                _buttonProxy.ime_press_enter((ime_getEID(_languageJson[cur_row][cur_column].input_id).value));
+        };
+
+        var ime_hardkeyboard = function(value)
+        {
+            _buttonProxy.ime_press_enter(value);
+        };
+
+        var ime_right = function()
+        {
+            if(cur_row < rows-1)//\u4E0D\u662F\u6700\u540E\u4E00\u884C
+            {
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                if(cur_column < columns-1)
+                {
+                    cur_column+=1;
+                }else
+                {
+                    cur_column = 0;
+                }
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+            }else//\u6700\u540E\u4E00\u884C
+            {
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                if(cur_column < columns-1)
+                {
+                    var ime_cur_button = _languageJson[cur_row][cur_column].input_id;
+                    cur_column += 1;
+                    for(;cur_column < columns;cur_column++)//\u53BB\u9664\u91CD\u590D\u7684\u5143\u7D20
+                    {
+                        if(ime_cur_button !=  _languageJson[cur_row][cur_column].input_id)
+                        {
+                            break;
+                        }
+                    }
+                }else
+                {
+                    cur_column = 0;
+
+                }
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+            }
+        };
+
+        var ime_left = function()
+        {
+            if(cur_row < rows-1)//\u4E0D\u662F\u6700\u540E\u4E00\u884C
+            {
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                if(cur_column == 0)
+                {
+                    cur_column = columns - 1;
+                }else
+                {
+                    cur_column -= 1;
+                }
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+
+            }else//\u6700\u540E\u4E00\u884C
+            {
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+                if(cur_column == 0 || cur_column == 1)
+                {
+                    cur_column = columns -1;
+                }
+                else
+                {
+                    var ime_cur_button = _languageJson[cur_row][cur_column].input_id;
+                    cur_column -= 1;
+                    for(;cur_column > 0;cur_column--)//\u53BB\u9664\u91CD\u590D\u7684\u5143\u7D20
+                    {
+
+                        if(ime_cur_button !=  _languageJson[cur_row][cur_column].input_id)
+                        {
+                            break;
+                        }
+                    }
+                }
+                ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+            }
+        };
+
+        var ime_down = function()
+        {
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+            if(cur_row < rows -1)
+            {
+                cur_row += 1;
+            }else
+            {
+                cur_row = 0;
+            }
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+        };
+
+        var ime_up = function()
+        {
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+            if(cur_row == 0)
+            {
+                cur_row = rows - 1;
+            }else
+            {
+                cur_row -= 1;
+            }
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+        };
+
+        var ime_cur_row =function()///\u5F97\u5230\u5F53\u524D\u6240\u5728\u884C
+        {
+            return cur_row;
+        };
+
+        var ime_cur_rownum =function()///\u5F97\u5230\u5F53\u524D\u952E\u76D8\u603B\u884C\u6570
+        {
+            return rows;
+        };
+
+        var ime_lostfocus = function()//\u952E\u76D8\u5931\u7126\u70B9\u5230\u5019\u9009\u8BCD\u6846
+        {
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].normal_img;
+        };
+
+        var ime_setfocus = function(row,column)
+        {
+            cur_row = row;
+            cur_column = column;
+        }
+
+        var ime_getfocus = function()//\u952E\u76D8\u5F97\u5230\u7126\u70B9
+        {
+            ime_getEID(_languageJson[cur_row][cur_column].input_id).style.backgroundImage = _languageJson[cur_row][cur_column].focus_img;
+        };
+        var ime_destoryKeyboard = function()//\u952E\u76D8\u5F97\u5230\u7126\u70B9
+        {
+            ime_body = undefined;
+            ime_keyboard_ui = undefined;
+            keboardTransportView = undefined;
+        };
+        /**
+         * \u66B4\u9732\u7684public\u65B9\u6CD5\u548C\u5C5E\u6027
+         */
+        return{
+        ime_setLanguage:ime_setLanguage,
+        ime_DrawKeyboard:ime_DrawKeyboard,
+        ime_right:ime_right,
+        ime_left:ime_left,
+        ime_down:ime_down,
+        ime_up:ime_up,
+        ime_enter:ime_enter,
+        ime_cur_row:ime_cur_row,
+        ime_cur_rownum:ime_cur_rownum,
+        ime_lostfocus:ime_lostfocus,
+        ime_getfocus:ime_getfocus,
+        ime_destoryKeyboard:ime_destoryKeyboard,
+        ime_setfocus:ime_setfocus,
+        ime_hardkeyboard:ime_hardkeyboard
+    };
+
+    }
+
+    /**
+     * \u5B9E\u4F8B\u5BB9\u5668
+     */
+    var instance;
+
+    return {
+        getInstance: function (buttonProxy)
+        {
+            if (instance === undefined)
+            {
+                instance =  keyboard(buttonProxy);
+            }
+            return instance;
+        }
+    };
+})();
+
+
+var number_values = [{"inputid":"ime_keyboard_letters_Q","value":"1"},{"inputid":"ime_keyboard_letters_W","value":"2"},
+    {"inputid":"ime_keyboard_letters_E","value":"3"},{"inputid":"ime_keyboard_letters_R","value":"4"},{"inputid":"ime_keyboard_letters_T","value":"5"},
+    {"inputid":"ime_keyboard_letters_Y","value":"6"},{"inputid":"ime_keyboard_letters_U","value":"7"},{"inputid":"ime_keyboard_letters_I","value":"8"},
+    {"inputid":"ime_keyboard_letters_O","value":"9"},{"inputid":"ime_keyboard_letters_P","value":"0"},{"inputid":"ime_keyboard_letters_A","value":"\\"},
+    {"inputid":"ime_keyboard_letters_S","value":"#"},{"inputid":"ime_keyboard_letters_D","value":"$"},{"inputid":"ime_keyboard_letters_F","value":"%"},
+    {"inputid":"ime_keyboard_letters_G","value":"&"},{"inputid":"ime_keyboard_letters_H","value":"*"},{"inputid":"ime_keyboard_letters_J","value":"("},
+    {"inputid":"ime_keyboard_letters_K","value":")"},{"inputid":"ime_keyboard_letters_L","value":"/"},{"inputid":"ime_keyboard_letters_exclamation","value":"_"},
+    {"inputid":"ime_keyboard_letters_slash","value":"..."},{"inputid":"ime_keyboard_letters_shift","value":"<1/2>"},{"inputid":"ime_keyboard_letters_Z","value":","},
+    {"inputid":"ime_keyboard_letters_X","value":"."},{"inputid":"ime_keyboard_letters_C","value":"?"},{"inputid":"ime_keyboard_letters_V","value":"!"},
+    {"inputid":"ime_keyboard_letters_B","value":":"},{"inputid":"ime_keyboard_letters_N","value":";"},{"inputid":"ime_keyboard_letters_M","value":"\""},
+    {"inputid":"ime_keyboard_letters_comma","value":"\'"},{"inputid":"ime_keyboard_letters_point","value":"<"},{"inputid":"ime_keyboard_letters_question","value":">"},
+    {"inputid":"ime_keyboard_letters_number","value":"abc"}
+];
+//\u7B26\u53F7\u9875\u9762\u7684value\u503C
+var symbol_values = [{"inputid":"ime_keyboard_letters_Q","value":"["},{"inputid":"ime_keyboard_letters_W","value":"]"},
+    {"inputid":"ime_keyboard_letters_E","value":"{"},{"inputid":"ime_keyboard_letters_R","value":"}"},{"inputid":"ime_keyboard_letters_T","value":"+"},
+    {"inputid":"ime_keyboard_letters_Y","value":"-"},{"inputid":"ime_keyboard_letters_U","value":"\u00D7"},{"inputid":"ime_keyboard_letters_I","value":"\u00F7"},
+    {"inputid":"ime_keyboard_letters_O","value":"="},{"inputid":"ime_keyboard_letters_P","value":"\u00B1"},{"inputid":"ime_keyboard_letters_A","value":"\u00AB"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u00BB"},{"inputid":"ime_keyboard_letters_D","value":"\u00A6"},{"inputid":"ime_keyboard_letters_F","value":"\u00B4"},
+    {"inputid":"ime_keyboard_letters_G","value":"^"},{"inputid":"ime_keyboard_letters_H","value":"~"},{"inputid":"ime_keyboard_letters_J","value":"\u00A9"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u00AE"},{"inputid":"ime_keyboard_letters_L","value":"\u00A5"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00A3"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u20AC"},{"inputid":"ime_keyboard_letters_shift","value":"<2/2>"},{"inputid":"ime_keyboard_letters_Z","value":"www."},
+    {"inputid":"ime_keyboard_letters_X","value":"wap."},{"inputid":"ime_keyboard_letters_C","value":".com"},{"inputid":"ime_keyboard_letters_V","value":".cn"},
+    {"inputid":"ime_keyboard_letters_B","value":".org"},{"inputid":"ime_keyboard_letters_N","value":".net"},{"inputid":"ime_keyboard_letters_M","value":"bbs."},
+    {"inputid":"ime_keyboard_letters_comma","value":"blog."},{"inputid":"ime_keyboard_letters_point","value":"http:"},{"inputid":"ime_keyboard_letters_question","value":"3g."},
+    {"inputid":"ime_keyboard_letters_number","value":"abc"}
+];
+//\u82F1\u8BED\u5927\u5199\u5B57\u6BCD\u7684value\u503C
+var english_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"English"}
+];
+//\u82F1\u8BED\u5C0F\u5199\u5199\u5B57\u6BCD\u7684value\u503C
+var english_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"English"}
+];
+
+var english_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"/","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"?","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"&","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":":","keycode":0x3A},{"value":";","keycode":0x3B},{"value":"\"","keycode":0x22},
+    {"value":"\'","keycode":0x127},{"value":"<","keycode":0x3C},{"value":">","keycode":0x3E},
+    {"value":"[","keycode":0x5B},{"value":"]","keycode":0x5D},
+    {"value":"{","keycode":0x7B},{"value":"}","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"@","keycode":0x40},{"value":"|","keycode":0x7C}, {"value":"^","keycode":0x5E},{"value":"~","keycode":0x7E},
+];
+
+
+var italian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00EC"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00C8"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00D2"},{"inputid":"ime_keyboard_letters_point","value":"\u00C0"},{"inputid":"ime_keyboard_letters_question","value":"\u00D9"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Italian"}
+];
+
+var italian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q","keycode":0x171},{"inputid":"ime_keyboard_letters_W","value":"w","keycode":0x177},
+    {"inputid":"ime_keyboard_letters_E","value":"e","keycode":0x165},{"inputid":"ime_keyboard_letters_R","value":"r","keycode":0x172},{"inputid":"ime_keyboard_letters_T","value":"t","keycode":0x174},
+    {"inputid":"ime_keyboard_letters_Y","value":"y","keycode":0x179},{"inputid":"ime_keyboard_letters_U","value":"u","keycode":0x175},{"inputid":"ime_keyboard_letters_I","value":"i","keycode":0x169},
+    {"inputid":"ime_keyboard_letters_O","value":"o","keycode":0x16F},{"inputid":"ime_keyboard_letters_P","value":"p","keycode":0x170},{"inputid":"ime_keyboard_letters_A","value":"a","keycode":0x161},
+    {"inputid":"ime_keyboard_letters_S","value":"s","keycode":0x173},{"inputid":"ime_keyboard_letters_D","value":"d","keycode":0x164},{"inputid":"ime_keyboard_letters_F","value":"f","keycode":0x166},
+    {"inputid":"ime_keyboard_letters_G","value":"g","keycode":0x167},{"inputid":"ime_keyboard_letters_H","value":"h","keycode":0x168},{"inputid":"ime_keyboard_letters_J","value":"j","keycode":0x16A},
+    {"inputid":"ime_keyboard_letters_K","value":"k","keycode":0x16B},{"inputid":"ime_keyboard_letters_L","value":"l","keycode":0x16C},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00EC","keycode":0x3D},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00E8","keycode":0x5B},{"inputid":"ime_keyboard_letters_Z","value":"z","keycode":0x17A},
+    {"inputid":"ime_keyboard_letters_X","value":"x","keycode":0x178},{"inputid":"ime_keyboard_letters_C","value":"c","keycode":0x163},{"inputid":"ime_keyboard_letters_V","value":"v","keycode":0x176},
+    {"inputid":"ime_keyboard_letters_B","value":"b","keycode":0x162},{"inputid":"ime_keyboard_letters_N","value":"n","keycode":0x16E},{"inputid":"ime_keyboard_letters_M","value":"m","keycode":0x16D},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00F2","keycode":0x3B},{"inputid":"ime_keyboard_letters_point","value":"\u00E0","keycode":0x127},{"inputid":"ime_keyboard_letters_question","value":"\u00F9","keycode":0x5C},
+    {"inputid":"ime_keyboard_letters_number","value":"123#","keycode":0xFFF},{"inputid":"ime_keyboard_letters_1","value":"\\","keycode":0x60},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Italian"}
+];
+
+var italian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u00F9","keycode":0x5C},
+    {"value":"\u00A3","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00E7","keycode":0x3A},{"value":"\u00F2","keycode":0x3B},{"value":"\u00B0","keycode":0x22},
+    {"value":"\u00E0","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00E8","keycode":0x5B},{"value":"+","keycode":0x5D},
+    {"value":"\u00E9","keycode":0x7B},{"value":"*","keycode":0x7D},{"value":"^","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"\u00EC","keycode":0x3D},{"value":"\\","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u00A7","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"|","keycode":0x7E},
+    {"value":"\u20AC","keycode":0x235},{"value":"\u20AC","keycode":0x365},{"value":"[","keycode":0x25B},{"value":"]","keycode":0x25D},
+    {"value":"#","keycode":0x327},{"value":"@","keycode":0x23B},
+];
+
+var portuguese_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00C7"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00B4"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"^"},{"inputid":"ime_keyboard_letters_point","value":"~"},{"inputid":"ime_keyboard_letters_question","value":"`"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Portuguese"}
+];
+
+var portuguese_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00E7"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00B4"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"^"},{"inputid":"ime_keyboard_letters_point","value":"~"},{"inputid":"ime_keyboard_letters_question","value":"`"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Portuguese"}
+];
+
+var portuguese_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"~","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00C7","keycode":0x3A},{"value":"\u00E7","keycode":0x3B},{"value":"\u00AA","keycode":0x22},
+    {"value":"\u00BA","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"+","keycode":0x5B},{"value":"\u00B4","keycode":0x5D},
+    {"value":"*","keycode":0x7B},{"value":"`","keycode":0x7D},{"value":"\u00BB","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"\u00AB","keycode":0x3D},{"value":"\\","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"^","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"|","keycode":0x7E},
+    {"value":"@","keycode":0x232},
+    {"value":"\u00A3","keycode":0x233},{"value":"\u00A7","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u20AC","keycode":0x365},{"value":"\u00A8","keycode":0x25B},{"value":"]","keycode":0x25D},
+];
+
+var portuguese_specialhardkeyboard_values = [
+    {"value":"\u00E7","keycode":0x3A},{"value":"\u00C7","keycode":0x3B}
+];
+
+var russian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0419"},{"inputid":"ime_keyboard_letters_W","value":"\u0426"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0423"},{"inputid":"ime_keyboard_letters_R","value":"\u041A"},{"inputid":"ime_keyboard_letters_T","value":"\u0415"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u041D"},{"inputid":"ime_keyboard_letters_U","value":"\u0413"},{"inputid":"ime_keyboard_letters_I","value":"\u0428"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0429"},{"inputid":"ime_keyboard_letters_P","value":"\u0417"},{"inputid":"ime_keyboard_letters_A","value":"\u0424"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u042B"},{"inputid":"ime_keyboard_letters_D","value":"\u0412"},{"inputid":"ime_keyboard_letters_F","value":"\u0410"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u041F"},{"inputid":"ime_keyboard_letters_H","value":"\u0420"},{"inputid":"ime_keyboard_letters_J","value":"\u041E"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u041B"},{"inputid":"ime_keyboard_letters_L","value":"\u0414"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0416"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u042D"},{"inputid":"ime_keyboard_letters_Z","value":"\u042F"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u0427"},{"inputid":"ime_keyboard_letters_C","value":"\u0421"},{"inputid":"ime_keyboard_letters_V","value":"\u041C"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0418"},{"inputid":"ime_keyboard_letters_N","value":"\u0422"},{"inputid":"ime_keyboard_letters_M","value":"\u042C"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0411"},{"inputid":"ime_keyboard_letters_point","value":"\u042E"},{"inputid":"ime_keyboard_letters_question","value":"\u0425"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":","},{"inputid":"ime_keyboard_letters_2","value":"."},
+    {"inputid":"ime_keyboard_letters_3","value":"\u0401"},{"inputid":"ime_keyboard_letters_at","value":"\u042A"},{"inputid":"ime_keyboard_letters_language","value":"Russian"}
+];
+
+var russian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0439"},{"inputid":"ime_keyboard_letters_W","value":"\u0446"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0443"},{"inputid":"ime_keyboard_letters_R","value":"\u043A"},{"inputid":"ime_keyboard_letters_T","value":"\u0435"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u043D"},{"inputid":"ime_keyboard_letters_U","value":"\u0433"},{"inputid":"ime_keyboard_letters_I","value":"\u0448"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0449"},{"inputid":"ime_keyboard_letters_P","value":"\u0437"},{"inputid":"ime_keyboard_letters_A","value":"\u0444"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u044B"},{"inputid":"ime_keyboard_letters_D","value":"\u0432"},{"inputid":"ime_keyboard_letters_F","value":"\u0430"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u043F"},{"inputid":"ime_keyboard_letters_H","value":"\u0440"},{"inputid":"ime_keyboard_letters_J","value":"\u043E"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u043B"},{"inputid":"ime_keyboard_letters_L","value":"\u0434"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0436"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u044D"},{"inputid":"ime_keyboard_letters_Z","value":"\u044F"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u0447"},{"inputid":"ime_keyboard_letters_C","value":"\u0441"},{"inputid":"ime_keyboard_letters_V","value":"\u043C"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0438"},{"inputid":"ime_keyboard_letters_N","value":"\u0442"},{"inputid":"ime_keyboard_letters_M","value":"\u044C"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0431"},{"inputid":"ime_keyboard_letters_point","value":"\u044E"},{"inputid":"ime_keyboard_letters_question","value":"\u0445"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":","},{"inputid":"ime_keyboard_letters_2","value":"."},
+    {"inputid":"ime_keyboard_letters_3","value":"\u0451"},{"inputid":"ime_keyboard_letters_at","value":"\u044A"},{"inputid":"ime_keyboard_letters_language","value":"Russian"}
+];
+
+var russian_hardkeyboard_values = [
+    {"value":"\u0439","keycode":0x171},{"value":"\u0446","keycode":0x177},
+    {"value":"\u0443","keycode":0x165},{"value":"\u043A","keycode":0x172},{"value":"\u0435","keycode":0x174},
+    {"value":"\u043D","keycode":0x179},{"value":"\u0433","keycode":0x175},{"value":"\u0448","keycode":0x169},
+    {"value":"\u0449","keycode":0x16F},{"value":"\u0437","keycode":0x170},{"value":"\u0444","keycode":0x161},
+    {"value":"\u044B","keycode":0x173},{"value":"\u0432","keycode":0x164},{"value":"\u0430","keycode":0x166},
+    {"value":"\u043F","keycode":0x167},{"value":"\u0440","keycode":0x168},{"value":"\u043E","keycode":0x16A},
+    {"value":"\u043B","keycode":0x16B},{"value":"\u0434","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":".","keycode":0x2F},{"value":"\u044F","keycode":0x17A},
+    {"value":"\u0447","keycode":0x178},{"value":"\u0441","keycode":0x163},{"value":"\u043C","keycode":0x176},
+    {"value":"\u0438","keycode":0x162},{"value":"\u0442","keycode":0x16E},{"value":"\u044C","keycode":0x16D},
+    {"value":"\u0431","keycode":0x2C},{"value":"\u044E","keycode":0x2E},{"value":",","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"\u0419","keycode":0x51},{"value":"\u0426","keycode":0x57},
+    {"value":"\u0423","keycode":0x45},{"value":"\u041A","keycode":0x52},{"value":"\u0415","keycode":0x54},
+    {"value":"\u041D","keycode":0x59},{"value":"\u0413","keycode":0x55},{"value":"\u0428","keycode":0x49},
+    {"value":"\u0429","keycode":0x4F},{"value":"\u0417","keycode":0x50},{"value":"\u0424","keycode":0x41},
+    {"value":"\u042B","keycode":0x53},{"value":"\u0412","keycode":0x44},{"value":"\u0410","keycode":0x46},
+    {"value":"\u041F","keycode":0x47},{"value":"\u0420","keycode":0x48},{"value":"\u041E","keycode":0x4A},
+    {"value":"\u041B","keycode":0x4B},{"value":"\u0414","keycode":0x4C},{"value":"\u042F","keycode":0x5A},
+    {"value":"\u0427","keycode":0x58},{"value":"\u0421","keycode":0x43},{"value":"\u041C","keycode":0x56},
+    {"value":"\u0418","keycode":0x42},{"value":"\u0422","keycode":0x4E},{"value":"\u042C","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"\u2116","keycode":0x23},{"value":";","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"?","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":"\u0416","keycode":0x3A},{"value":"\u0436","keycode":0x3B},{"value":"\u042D","keycode":0x22},
+    {"value":"\u044D","keycode":0x127},{"value":"\u0411","keycode":0x3C},{"value":"\u042E","keycode":0x3E},
+    {"value":"\u0445","keycode":0x5B},{"value":"\u044A","keycode":0x5D},
+    {"value":"\u0425","keycode":0x7B},{"value":"\u042A","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"\u0451","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"/","keycode":0x7C}, {"value":":","keycode":0x5E},{"value":"\u0401","keycode":0x7E},
+    {"value":"[","keycode":0x25B},{"value":"]","keycode":0x25D},
+];
+
+var russian_specialhardkeyboard_values = [
+    {"value":"\u0401","keycode":0x60},{"value":"\u0451","keycode":0x7E},{"value":"\u0425","keycode":0x5B},{"value":"\u0445","keycode":0x7B},
+    {"value":"\u042A","keycode":0x5D}, {"value":"\u044A","keycode":0x7D},{"value":"\u0436","keycode":0x3A},{"value":"\u0416","keycode":0x3B},
+    {"value":"\u044D","keycode":0x22}, {"value":"\u042D","keycode":0x127},{"value":"\u0411","keycode":0x2C},{"value":"\u0431","keycode":0x3C},
+    {"value":"\u044E","keycode":0x3E},{"value":"\u042E","keycode":0x2E},
+];
+
+
+var french_big_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00C9"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\""},{"inputid":"ime_keyboard_letters_single_quotation","value":"\'"},{"inputid":"ime_keyboard_letters_left_bracket","value":"("},
+    {"inputid":"ime_keyboard_letters_midline","value":"-"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00C8"},{"inputid":"ime_keyboard_letters_baseline","value":"_"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00C7"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00C0"},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"A"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Y"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"^"},{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"M"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00D9"},
+    {"inputid":"ime_keyboard_letters_W","value":"W"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},
+    {"inputid":"ime_keyboard_letters_semicolon","value":";"},{"inputid":"ime_keyboard_letters_colon","value":":"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"French"}
+];
+
+var french_small_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00E9"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\""},{"inputid":"ime_keyboard_letters_single_quotation","value":"\'"},{"inputid":"ime_keyboard_letters_left_bracket","value":"("},
+    {"inputid":"ime_keyboard_letters_midline","value":"-"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00E8"},{"inputid":"ime_keyboard_letters_baseline","value":"_"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00E7"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00E0"},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"a"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"y"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"^"},{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"m"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00F9"},
+    {"inputid":"ime_keyboard_letters_W","value":"w"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},
+    {"inputid":"ime_keyboard_letters_semicolon","value":";"},{"inputid":"ime_keyboard_letters_colon","value":":"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"French"}
+];
+
+var french_hardkeyboard_values = [
+    {"value":"a","keycode":0x171},{"value":"z","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"q","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"1","keycode":0x21},
+    {"value":"!","keycode":0x2F},{"value":"w","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":",","keycode":0x16D},
+    {"value":";","keycode":0x2C},{"value":":","keycode":0x2E},{"value":"\u00A7","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"A","keycode":0x51},{"value":"Z","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"Q","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"W","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"?","keycode":0x4D},
+    {"value":"&","keycode":0x31},{"value":"\u00E9","keycode":0x32},
+    {"value":"\"","keycode":0x33},{"value":"\'","keycode":0x34},{"value":"(","keycode":0x35},
+    {"value":"-","keycode":0x36},{"value":"\u00E8","keycode":0x37},{"value":"_","keycode":0x38},
+    {"value":"\u00E7","keycode":0x39},{"value":"\u00E0","keycode":0x30},{"value":"*","keycode":0x5C},
+    {"value":"3","keycode":0x23},{"value":"4","keycode":0x24},{"value":"5","keycode":0x125},
+    {"value":"7","keycode":0x126},{"value":"8","keycode":0x2A},{"value":"9","keycode":0x128},
+    {"value":"0","keycode":0x29},{"value":"\u00B0","keycode":0x5F},
+    {"value":"M","keycode":0x3A},{"value":"m","keycode":0x3B},{"value":"%","keycode":0x22},
+    {"value":"\u00F9","keycode":0x127},{"value":".","keycode":0x3C},{"value":"/","keycode":0x3E},
+    {"value":"^","keycode":0x5B},{"value":"$","keycode":0x5D},
+    {"value":"\u00A8","keycode":0x7B},{"value":"\u00A3","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":")","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"\u00B2","keycode":0x60},
+    {"value":"2","keycode":0x40},{"value":"\u00B5","keycode":0x7C}, {"value":"6","keycode":0x5E},{"value":"\u00B2","keycode":0x7E},
+    {"value":"~","keycode":0x232},{"value":"\u00A4","keycode":0x25D},
+    {"value":"#","keycode":0x233},{"value":"{","keycode":0x234},{"value":"[","keycode":0x235},
+    {"value":"|","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\\","keycode":0x238},
+    {"value":"^","keycode":0x239},{"value":"@","keycode":0x230},
+    {"value":"]","keycode":0x22D}, {"value":"}","keycode":0x23D}, {"value":"\u20AC","keycode":0x365},
+
+];
+
+var french_specialhardkeyboard_values = [
+    {"value":"\u00C9","keycode":0x32},{"value":"\u00C8","keycode":0x37},{"value":"\u00C7","keycode":0x39},{"value":"\u00C0","keycode":0x30},
+    {"value":"M","keycode":0x3B},{"value":"\u00D9","keycode":0x127},{"value":",","keycode":0x4D},
+];
+
+var spanish_big_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00DC"},{"inputid":"ime_keyboard_letters_double_quotation","value":","},{"inputid":"ime_keyboard_letters_single_quotation","value":"."},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u00BF"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\\"},{"inputid":"ime_keyboard_letters_\u00E8","value":"*"},{"inputid":"ime_keyboard_letters_baseline","value":"\""},{"inputid":"ime_keyboard_letters_\u00E7","value":"#"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"Q"},{"inputid":"ime_keyboard_letters_Z","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Y"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00DA"},{"inputid":"ime_keyboard_letters_Q","value":"A"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"\u00CD"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00C9"},
+    {"inputid":"ime_keyboard_letters_W","value":"Z"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":"M"},{"inputid":"ime_keyboard_letters_point","value":"\u00D3"},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"\u00C1"},{"inputid":"ime_keyboard_letters_colon","value":"\u00D1"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Spanish"}
+];
+
+var spanish_small_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00FC"},{"inputid":"ime_keyboard_letters_double_quotation","value":","},{"inputid":"ime_keyboard_letters_single_quotation","value":"."},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u00BF"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\\"},{"inputid":"ime_keyboard_letters_\u00E8","value":"*"},{"inputid":"ime_keyboard_letters_baseline","value":"\""},{"inputid":"ime_keyboard_letters_\u00E7","value":"#"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"y"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00FA"},{"inputid":"ime_keyboard_letters_Q","value":"a"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"\u00ED"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00E9"},
+    {"inputid":"ime_keyboard_letters_W","value":"z"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":"m"},{"inputid":"ime_keyboard_letters_point","value":"\u00F3"},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"\u00E1"},{"inputid":"ime_keyboard_letters_colon","value":"\u00F1"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Spanish"}
+];
+
+var spanish_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u00E7","keycode":0x5C},
+    {"value":"\u00B7","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D1","keycode":0x3A},{"value":"\u00F1","keycode":0x3B},{"value":"\u00A8","keycode":0x22},
+    {"value":"\u00B4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"`","keycode":0x5B},{"value":"+","keycode":0x5D},
+    {"value":"^","keycode":0x7B},{"value":"*","keycode":0x7D},{"value":"\u00BF","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"\u00A1","keycode":0x3D},{"value":"\u00BA","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u00C7","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00AA","keycode":0x7E},
+
+    {"value":"|","keycode":0x231},{"value":"@","keycode":0x232},
+    {"value":"#","keycode":0x233},{"value":"~","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"\u00AC","keycode":0x236},{"value":"\u20AC","keycode":0x365}, {"value":"[","keycode":0x25B},{"value":"]","keycode":0x25D},
+    {"value":"{","keycode":0x327},{"value":"}","keycode":0x25C},{"value":"\\","keycode":0x260},
+];
+
+var spanish_specialhardkeyboard_values = [
+    {"value":"\u00E7","keycode":0x7C},{"value":"\u00C7","keycode":0x5C},
+];
+
+var polski_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Polski"}
+];
+
+var polski_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Polski"}
+];
+
+var polski_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"/","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"?","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"&","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":":","keycode":0x3A},{"value":";","keycode":0x3B},{"value":"\"","keycode":0x22},
+    {"value":"\'","keycode":0x127},{"value":"<","keycode":0x3C},{"value":">","keycode":0x3E},
+    {"value":"[","keycode":0x5B},{"value":"]","keycode":0x5D},
+    {"value":"{","keycode":0x7B},{"value":"}","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"@","keycode":0x40},{"value":"|","keycode":0x7C}, {"value":"^","keycode":0x5E},{"value":"~","keycode":0x7E},
+
+    {"value":"\u00A1","keycode":0x231},{"value":"\u00B2","keycode":0x232},
+    {"value":"\u00B3","keycode":0x233},{"value":"\u00A4","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"\u00BC","keycode":0x236},{"value":"\u00BD","keycode":0x237},{"value":"\u00BE","keycode":0x238},
+    {"value":"\u2018","keycode":0x239},{"value":"\u2019","keycode":0x230},{"value":"\u00A5","keycode":0x22D}, {"value":"\u00D7","keycode":0x23D},
+    {"value":"\u00E4","keycode":0x371},{"value":"\u00E5","keycode":0x377},
+    {"value":"\u00E9","keycode":0x365},{"value":"\u00AE","keycode":0x372},{"value":"\u00FE","keycode":0x374},
+    {"value":"\u00FC","keycode":0x379},{"value":"\u00FA","keycode":0x375},{"value":"\u00ED","keycode":0x369},
+    {"value":"\u00F3","keycode":0x36F},{"value":"\u00F6","keycode":0x370},
+    {"value":"\u00AB","keycode":0x25B},{"value":"\u00BB","keycode":0x25D},{"value":"\u00AC","keycode":0x25C},
+    {"value":"\u00E1","keycode":0x361},
+    {"value":"\u00DF","keycode":0x373},{"value":"\u00F0","keycode":0x364},
+    {"value":"\u00F8","keycode":0x36C},{"value":"\u00B6","keycode":0x23B},{"value":"\u00B4","keycode":0x327},
+    {"value":"\u00E6","keycode":0x37A}, {"value":"\u00A9","keycode":0x363},{"value":"\u00F1","keycode":0x36E},{"value":"\u00B5","keycode":0x36D},
+    {"value":"\u00E7","keycode":0x22C}, {"value":"\u00BF","keycode":0x22F},
+
+];
+
+var svenska_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00C5"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00D6"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00C4"},{"inputid":"ime_keyboard_letters_point","value":"\uFF01"},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Svenska"}
+];
+
+var svenska_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00E5"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00F6"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00E4"},{"inputid":"ime_keyboard_letters_point","value":"\uFF01"},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Svenska"}
+];
+
+var svenska_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\'","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"\u00A4","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D6","keycode":0x3A},{"value":"\u00F6","keycode":0x3B},{"value":"\u00C4","keycode":0x22},
+    {"value":"\u00E4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00E5","keycode":0x5B},{"value":"\u00A8","keycode":0x5D},
+    {"value":"\u00C5","keycode":0x7B},{"value":"^","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"+","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":"\u00A7","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"*","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00BD","keycode":0x7E},
+    {"value":"@","keycode":0x232}, {"value":"\u00A3","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},{"value":"\\","keycode":0x22D},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u20AC","keycode":0x365},{"value":"~","keycode":0x25D},
+    {"value":"\u00B5","keycode":0x36D},
+
+];
+
+
+var svenska_specialhardkeyboard_values = [
+    {"value":"\u00E5","keycode":0x7B},{"value":"\u00C5","keycode":0x5B},{"value":"\u00C4","keycode":0x127},{"value":"\u00E4","keycode":0x22},
+    {"value":"\u00F6","keycode":0x3A},{"value":"\u00D6","keycode":0x3B},
+];
+
+var deutsch_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Z"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00DC"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00DF"},{"inputid":"ime_keyboard_letters_Z","value":"Y"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00D6"},{"inputid":"ime_keyboard_letters_point","value":"\u00C4"},{"inputid":"ime_keyboard_letters_question","value":"\uFF1F"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"German"}
+];
+
+var deutsch_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"z"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00FC"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00DF"},{"inputid":"ime_keyboard_letters_Z","value":"y"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00F6"},{"inputid":"ime_keyboard_letters_point","value":"\u00E4"},{"inputid":"ime_keyboard_letters_question","value":"\uFF1F"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"German"}
+];
+
+var deutsch_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"z","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"y","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Z","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Y","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"#","keycode":0x5C},
+    {"value":"\u00A7","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D6","keycode":0x3A},{"value":"\u00F6","keycode":0x3B},{"value":"\u00C4","keycode":0x22},
+    {"value":"\u00E4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00FC","keycode":0x5B},{"value":"+","keycode":0x5D},
+    {"value":"\u00DC","keycode":0x7B},{"value":"*","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"\u00DF","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":"^","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\'","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00B0","keycode":0x7E},
+
+    {"value":"\u00B2","keycode":0x232},{"value":"~","keycode":0x25D},
+    {"value":"\u00B3","keycode":0x233},{"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\\","keycode":0x22D},
+    {"value":"@","keycode":0x371},{"value":"\u20AC","keycode":0x365},{"value":"\u00B5","keycode":0x36D},
+
+];
+
+var deutsch_specialhardkeyboard_values = [
+    {"value":"\u00DC","keycode":0x5B},{"value":"\u00FC","keycode":0x7B},{"value":"\u00F6","keycode":0x3A},{"value":"\u00D6","keycode":0x3B},
+    {"value":"\u00E4","keycode":0x22}, {"value":"\u00C4","keycode":0x127},
+];
+
+var esthonian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00DC"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00D5"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00D6"},{"inputid":"ime_keyboard_letters_point","value":"\u00C4"},{"inputid":"ime_keyboard_letters_question","value":"\uFF1F"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Estonian"}
+];
+
+var esthonian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00FC"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00F5"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00F6"},{"inputid":"ime_keyboard_letters_point","value":"\u00E4"},{"inputid":"ime_keyboard_letters_question","value":"\uFF1F"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Estonian"}
+];
+
+
+var esthonian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\'","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"\u00A4","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D6","keycode":0x3A},{"value":"\u00F6","keycode":0x3B},{"value":"\u00C4","keycode":0x22},
+    {"value":"\u00E4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00FC","keycode":0x5B},{"value":"\u00F5","keycode":0x5D},
+    {"value":"\u00DC","keycode":0x7B},{"value":"\u00D5","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"+","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":"\u02C7","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"*","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"~","keycode":0x7E},
+    {"value":"@","keycode":0x232}, {"value":"\u00A3","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u20AC","keycode":0x365},{"value":"\u00A7","keycode":0x25D},
+    {"value":"\u0161","keycode":0x373},{"value":"\u017E","keycode":0x37A},{"value":"\u00BD","keycode":0x25C}, {"value":"\\","keycode":0x22D},
+
+];
+
+var esthonian_specialhardkeyboard_values = [
+    {"value":"\u00DC","keycode":0x5B},{"value":"\u00FC","keycode":0x7B},{"value":"\u00D5","keycode":0x5D}, {"value":"\u00F5","keycode":0x7D},
+    {"value":"\u00F6","keycode":0x3A},{"value":"\u00D6","keycode":0x3B},{"value":"\u00E4","keycode":0x22}, {"value":"\u00C4","keycode":0x127},
+];
+
+var bulgarian_big_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u0406"},{"inputid":"ime_keyboard_letters_double_quotation","value":"V"},{"inputid":"ime_keyboard_letters_single_quotation","value":","},{"inputid":"ime_keyboard_letters_left_bracket","value":"."},
+    {"inputid":"ime_keyboard_letters_midline","value":"\\"},{"inputid":"ime_keyboard_letters_\u00E8","value":"*"},{"inputid":"ime_keyboard_letters_baseline","value":"\""},{"inputid":"ime_keyboard_letters_\u00E7","value":"#"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"\u042B"},{"inputid":"ime_keyboard_letters_Z","value":"Y"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0415"},{"inputid":"ime_keyboard_letters_R","value":"\u0418"},{"inputid":"ime_keyboard_letters_T","value":"\u0428"},{"inputid":"ime_keyboard_letters_Y","value":"\u0429"},
+    {"inputid":"ime_keyboard_letters_U","value":"\u041A"},{"inputid":"ime_keyboard_letters_I","value":"\u0421"},{"inputid":"ime_keyboard_letters_O","value":"\u0414"},{"inputid":"ime_keyboard_letters_P","value":"\u0417"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u0426"},{"inputid":"ime_keyboard_letters_Q","value":"\u042C"},{"inputid":"ime_keyboard_letters_S","value":"\u042F"},{"inputid":"ime_keyboard_letters_D","value":"\u0410"},
+    {"inputid":"ime_keyboard_letters_F","value":"\u041E"},{"inputid":"ime_keyboard_letters_G","value":"\u0416"},{"inputid":"ime_keyboard_letters_H","value":"\u0413"},{"inputid":"ime_keyboard_letters_J","value":"\u0422"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u041D"},{"inputid":"ime_keyboard_letters_L","value":"\u0412"},{"inputid":"ime_keyboard_letters_M","value":"\u041C"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u0427"},
+    {"inputid":"ime_keyboard_letters_W","value":"\u042E"},{"inputid":"ime_keyboard_letters_X","value":"\u0419"},{"inputid":"ime_keyboard_letters_C","value":"\u042A"},{"inputid":"ime_keyboard_letters_V","value":"\u042D"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0424"},{"inputid":"ime_keyboard_letters_N","value":"\u0425"},{"inputid":"ime_keyboard_letters_comma","value":"\u041F"},{"inputid":"ime_keyboard_letters_point","value":"\u0420"},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"\u041B"},{"inputid":"ime_keyboard_letters_colon","value":"\u0411"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Bulgarian"}
+];
+
+var bulgarian_small_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u0456"},{"inputid":"ime_keyboard_letters_double_quotation","value":"v"},{"inputid":"ime_keyboard_letters_single_quotation","value":","},{"inputid":"ime_keyboard_letters_left_bracket","value":"."},
+    {"inputid":"ime_keyboard_letters_midline","value":"\\"},{"inputid":"ime_keyboard_letters_\u00E8","value":"*"},{"inputid":"ime_keyboard_letters_baseline","value":"\""},{"inputid":"ime_keyboard_letters_\u00E7","value":"#"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"\u044B"},{"inputid":"ime_keyboard_letters_Z","value":"\u0443"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0435"},{"inputid":"ime_keyboard_letters_R","value":"\u0438"},{"inputid":"ime_keyboard_letters_T","value":"\u0448"},{"inputid":"ime_keyboard_letters_Y","value":"\u0449"},
+    {"inputid":"ime_keyboard_letters_U","value":"\u043A"},{"inputid":"ime_keyboard_letters_I","value":"\u0441"},{"inputid":"ime_keyboard_letters_O","value":"\u0434"},{"inputid":"ime_keyboard_letters_P","value":"\u0437"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u0446"},{"inputid":"ime_keyboard_letters_Q","value":"\u044C"},{"inputid":"ime_keyboard_letters_S","value":"\u044F"},{"inputid":"ime_keyboard_letters_D","value":"\u0430"},
+    {"inputid":"ime_keyboard_letters_F","value":"\u043E"},{"inputid":"ime_keyboard_letters_G","value":"\u0436"},{"inputid":"ime_keyboard_letters_H","value":"\u0433"},{"inputid":"ime_keyboard_letters_J","value":"\u0442"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u043D"},{"inputid":"ime_keyboard_letters_L","value":"\u0432"},{"inputid":"ime_keyboard_letters_M","value":"\u043C"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u0447"},
+    {"inputid":"ime_keyboard_letters_W","value":"\u044E"},{"inputid":"ime_keyboard_letters_X","value":"\u0439"},{"inputid":"ime_keyboard_letters_C","value":"\u044A"},{"inputid":"ime_keyboard_letters_V","value":"\u044D"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0444"},{"inputid":"ime_keyboard_letters_N","value":"\u0445"},{"inputid":"ime_keyboard_letters_comma","value":"\u043F"},{"inputid":"ime_keyboard_letters_point","value":"\u0440"},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"\u043B"},{"inputid":"ime_keyboard_letters_colon","value":"\u0431"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Bulgarian"}
+];
+
+var bulgarian_hardkeyboard_values = [
+    {"value":",","keycode":0x171},{"value":"\u0443","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"\u0438","keycode":0x172},{"value":"\u0448","keycode":0x174},
+    {"value":"\u0449","keycode":0x179},{"value":"\u043A","keycode":0x175},{"value":"\u0441","keycode":0x169},
+    {"value":"\u0434","keycode":0x16F},{"value":"\u0437","keycode":0x170},{"value":"\u044C","keycode":0x161},
+    {"value":"\u044F","keycode":0x173},{"value":"\u0430","keycode":0x164},{"value":"\u043E","keycode":0x166},
+    {"value":"\u0436","keycode":0x167},{"value":"\u0433","keycode":0x168},{"value":"\u0442","keycode":0x16A},
+    {"value":"\u043D","keycode":0x16B},{"value":"\u0432","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"\u0431","keycode":0x2F},{"value":"\u044E","keycode":0x17A},
+    {"value":"\u0439","keycode":0x178},{"value":"\u044A","keycode":0x163},{"value":"\u044D","keycode":0x176},
+    {"value":"\u0444","keycode":0x162},{"value":"\u0445","keycode":0x16E},{"value":"\u043F","keycode":0x16D},
+    {"value":"\u0440","keycode":0x2C},{"value":"\u043B","keycode":0x2E},{"value":"\u0411","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"\u044B","keycode":0x51},{"value":"\u0423","keycode":0x57},
+    {"value":"\u0415","keycode":0x45},{"value":"\u0418","keycode":0x52},{"value":"\u0428","keycode":0x54},
+    {"value":"\u0429","keycode":0x59},{"value":"\u041A","keycode":0x55},{"value":"\u0421","keycode":0x49},
+    {"value":"\u0414","keycode":0x4F},{"value":"\u0417","keycode":0x50},{"value":"\u042C","keycode":0x41},
+    {"value":"\u042F","keycode":0x53},{"value":"\u0410","keycode":0x44},{"value":"\u041E","keycode":0x46},
+    {"value":"\u0416","keycode":0x47},{"value":"\u0413","keycode":0x48},{"value":"\u0422","keycode":0x4A},
+    {"value":"\u041D","keycode":0x4B},{"value":"\u0412","keycode":0x4C},{"value":"\u042E","keycode":0x5A},
+    {"value":"\u0419","keycode":0x58},{"value":"\u042A","keycode":0x43},{"value":"\u042D","keycode":0x56},
+    {"value":"\u0424","keycode":0x42},{"value":"\u0425","keycode":0x4E},{"value":"\u041F","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"(","keycode":0x5C},
+    {"value":"+","keycode":0x23},{"value":"\"","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":":","keycode":0x126},{"value":"/","keycode":0x2A},{"value":"_","keycode":0x128},
+    {"value":"\u2116","keycode":0x29},{"value":"\u0406","keycode":0x5F},
+    {"value":"\u041C","keycode":0x3A},{"value":"\u043C","keycode":0x3B},{"value":"\u0427","keycode":0x22},
+    {"value":"\u0447","keycode":0x127},{"value":"\u0420","keycode":0x3C},{"value":"\u041B","keycode":0x3E},
+    {"value":"\u0446","keycode":0x5B},{"value":";","keycode":0x5D},
+    {"value":"\u0426","keycode":0x7B},{"value":"\u00A7","keycode":0x7D},{"value":"V","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":".","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"?","keycode":0x40},{"value":")","keycode":0x7C}, {"value":"=","keycode":0x5E},{"value":"~","keycode":0x7E},
+];
+
+var bulgarian_specialhardkeyboard_values = [
+    {"value":"\u044B","keycode":0x171},{"value":"\uFF0C","keycode":0x51},{"value":"\u0426","keycode":0x5B},{"value":"\u0446","keycode":0x7B},
+    {"value":"\u043C","keycode":0x3A},{"value":"\u041C","keycode":0x3B},{"value":"\u0447","keycode":0x22}, {"value":"\u0427","keycode":0x127},
+    {"value":"\u0420","keycode":0x2C},{"value":"\u0440","keycode":0x3C},{"value":"\u043B","keycode":0x3E},{"value":"\u041B","keycode":0x2E},
+    {"value":"\u0411","keycode":0x2F},{"value":"\u0431","keycode":0x3F},
+];
+
+var danish_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00C6"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00D8"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00C5"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Danish"}
+];
+
+var danish_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00E6"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00F8"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00E5"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Danish"}
+];
+
+var danish_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\'","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"\u00A4","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00C6","keycode":0x3A},{"value":"\u00E6","keycode":0x3B},{"value":"\u00D8","keycode":0x22},
+    {"value":"\u00F8","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00E5","keycode":0x5B},{"value":"\u00A8","keycode":0x5D},
+    {"value":"\u00C5","keycode":0x7B},{"value":"^","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"+","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":"\u00BD","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"*","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00A7","keycode":0x7E},
+    {"value":"@","keycode":0x232}, {"value":"\u00A3","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u20AC","keycode":0x365},{"value":"~","keycode":0x25D},
+    {"value":"|","keycode":0x23D},{"value":"\u00B5","keycode":0x36D},
+];
+
+
+var danish_specialhardkeyboard_values = [
+    {"value":"\u00E6","keycode":0x3A},{"value":"\u00C6","keycode":0x3B},{"value":"\u00F8","keycode":0x22}, {"value":"\u00D8","keycode":0x127},
+    {"value":"\u00C5","keycode":0x5B},{"value":"\u00E5","keycode":0x7B},
+];
+
+var finnish_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00C5"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00D6"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00C4"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Finnish"}
+];
+
+var finnish_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00E5"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00F6"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00E4"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Finnish"}
+];
+
+var finnish_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\'","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"\u00A4","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D6","keycode":0x3A},{"value":"\u00F6","keycode":0x3B},{"value":"\u00C4","keycode":0x22},
+    {"value":"\u00E4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00E5","keycode":0x5B},{"value":"\u00A8","keycode":0x5D},
+    {"value":"\u00C5","keycode":0x7B},{"value":"^","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"+","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":"\u00A7","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"*","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00BD","keycode":0x7E},
+    {"value":"@","keycode":0x232}, {"value":"\u00A3","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u20AC","keycode":0x365},{"value":"\\","keycode":0x22D},
+    {"value":"\u00E2","keycode":0x371},{"value":"\u0167","keycode":0x374},{"value":"\u00EF","keycode":0x369},
+    {"value":"\u00F5","keycode":0x36F},{"value":"~","keycode":0x25D},{"value":"\u00E1","keycode":0x361},
+    {"value":"\u0161","keycode":0x373},{"value":"\u0111","keycode":0x364},{"value":"\u01E5","keycode":0x366},
+    {"value":"\u01E7","keycode":0x367},{"value":"\u021F","keycode":0x368},{"value":"\u01E9","keycode":0x36B},{"value":"\u00F8","keycode":0x23B},
+    {"value":"\u00E6","keycode":0x327},{"value":"\u017E","keycode":0x37A},
+    {"value":"\u010D","keycode":0x363},{"value":"\u01EF" ,"keycode":0x376},
+    {"value":"\u0292","keycode":0x362},{"value":"\u014B","keycode":0x36E},{"value":"\u00B5","keycode":0x36D},
+];
+
+var finnish_specialhardkeyboard_values = [
+    {"value":"\u00C5","keycode":0x5B}, {"value":"\u00E5","keycode":0x7B},{"value":"\u00F6","keycode":0x3A},{"value":"\u00D6","keycode":0x3B},
+    {"value":"\u00E4","keycode":0x22}, {"value":"\u00C4","keycode":0x127},
+];
+
+var dutch_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Dutch"}
+];
+
+var dutch_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Dutch"}
+];
+
+var dutch_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"=","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"<","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"_","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"\'","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00B1","keycode":0x3A},{"value":"+","keycode":0x3B},{"value":"`","keycode":0x22},
+    {"value":"\u00B4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00A8","keycode":0x5B},{"value":"*","keycode":0x5D},
+    {"value":"^","keycode":0x7B},{"value":"|","keycode":0x7D},{"value":"~","keycode":0x2B},
+    {"value":"/","keycode":0x2D}, {"value":"\u00B0","keycode":0x3D},{"value":"@","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":">","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00A7","keycode":0x7E},
+
+    {"value":"\u00B9","keycode":0x231},{"value":"\u00B2","keycode":0x232},
+    {"value":"\u00B3","keycode":0x233},{"value":"\u00BC","keycode":0x234},{"value":"\u00BD","keycode":0x235},
+    {"value":"\u00BE","keycode":0x236},{"value":"\u00A3","keycode":0x237},{"value":"{","keycode":0x238},
+    {"value":"}","keycode":0x239},
+    {"value":"\u20AC","keycode":0x365},{"value":"\u00B6","keycode":0x372},
+    {"value":"\u00DF","keycode":0x373},{"value":"\u00AB","keycode":0x37A},
+    {"value":"\u00BB","keycode":0x378},{"value":"\u00A2","keycode":0x363},{"value":"\u00B5","keycode":0x36D},
+    {"value":".","keycode":0x22E},{"value":"\\","keycode":0x22D}, {"value":"\u00B8","keycode":0x23D},
+    {"value":"\u00AC","keycode":0x260},
+];
+
+var czech_big_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u011A"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u0160"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u010C"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0158"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u017D"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00DD"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00C1"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00CD"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00C9"},{"inputid":"ime_keyboard_letters_right_bracket","value":"/"},{"inputid":"ime_keyboard_letters_A","value":"Q"},{"inputid":"ime_keyboard_letters_Z","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Z"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00DA"},{"inputid":"ime_keyboard_letters_Q","value":"A"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"\u016E"},{"inputid":"ime_keyboard_letters_\u00F9","value":"!"},
+    {"inputid":"ime_keyboard_letters_W","value":"Y"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":"M"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Czech"}
+];
+
+var czech_small_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u011B"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u0161"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u010D"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0159"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u017E"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00FD"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00E1"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00ED"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00E9"},{"inputid":"ime_keyboard_letters_right_bracket","value":"/"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"z"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00FA"},{"inputid":"ime_keyboard_letters_Q","value":"a"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"\u016F"},{"inputid":"ime_keyboard_letters_\u00F9","value":"!"},
+    {"inputid":"ime_keyboard_letters_W","value":"y"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":"m"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Czech"}
+];
+
+var czech_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"z","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"1","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"y","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Z","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Y","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"+","keycode":0x31},{"value":"\u011B","keycode":0x32},
+    {"value":"\u0161","keycode":0x33},{"value":"\u010D","keycode":0x34},{"value":"\u0159","keycode":0x35},
+    {"value":"\u017E","keycode":0x36},{"value":"\u00FD","keycode":0x37},{"value":"\u00E1","keycode":0x38},
+    {"value":"\u00ED","keycode":0x39},{"value":"\u00E9","keycode":0x30},{"value":"\u00A8","keycode":0x5C},
+    {"value":"3","keycode":0x23},{"value":"4","keycode":0x24},{"value":"5","keycode":0x125},
+    {"value":"7","keycode":0x126},{"value":"8","keycode":0x2A},{"value":"9","keycode":0x128},
+    {"value":"0","keycode":0x29},{"value":"%","keycode":0x5F},
+    {"value":"\"","keycode":0x3A},{"value":"\u016F","keycode":0x3B},{"value":"!","keycode":0x22},
+    {"value":"\u00A7","keycode":0x127},{"value":"?","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00FA","keycode":0x5B},{"value":")","keycode":0x5D},
+    {"value":"/","keycode":0x7B},{"value":"(","keycode":0x7D},{"value":"\u02C7","keycode":0x2B},
+    {"value":"=","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":";","keycode":0x60},
+    {"value":"2","keycode":0x40},{"value":"\u2018","keycode":0x7C}, {"value":"6","keycode":0x5E},{"value":"\u00B0","keycode":0x7E},
+
+    {"value":"\\","keycode":0x371},{"value":"|","keycode":0x377},
+    {"value":"\u20AC","keycode":0x365},
+    {"value":"\u0111","keycode":0x373},{"value":"\u0110","keycode":0x364},{"value":"[","keycode":0x366},
+    {"value":"]","keycode":0x367},
+    {"value":"\u0142","keycode":0x36B},{"value":"\u0141","keycode":0x36C},
+    {"value":"*","keycode":0x22F},
+    {"value":"#","keycode":0x378},{"value":"&","keycode":0x363},{"value":"@","keycode":0x376},
+    {"value":"{","keycode":0x362},{"value":"}","keycode":0x36E},
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\"","keycode":0x230},
+    {"value":"\u00F7","keycode":0x25B},{"value":"\u00D7","keycode":0x25D},
+    {"value":"\u00A8","keycode":0x22D}, {"value":"\u00B8","keycode":0x23D},{"value":"\u00A4","keycode":0x25C},
+    {"value":"$","keycode":0x23B}, {"value":"\u00DF","keycode":0x327},
+    {"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+
+];
+
+var czech_specialhardkeyboard_values = [
+    {"value":"\u011A","keycode":0x32},{"value":"\u0160","keycode":0x33},{"value":"\u010C","keycode":0x34},{"value":"\u0158","keycode":0x35},
+    {"value":"\u017D","keycode":0x36},{"value":"\u00DD","keycode":0x37},{"value":"\u00C1","keycode":0x38},
+    {"value":"\u00CD","keycode":0x39},{"value":"\u00C9","keycode":0x30},{"value":"\u00DA","keycode":0x5B},{"value":"\u016E","keycode":0x3B},
+];
+
+var croatian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Z"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0160"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0110"},{"inputid":"ime_keyboard_letters_Z","value":"Y"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u017D"},{"inputid":"ime_keyboard_letters_point","value":"\u010C"},{"inputid":"ime_keyboard_letters_question","value":"\u0106"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Croatian"}
+];
+
+var croatian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"z"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0161"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0111"},{"inputid":"ime_keyboard_letters_Z","value":"y"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u017E"},{"inputid":"ime_keyboard_letters_point","value":"\u010D"},{"inputid":"ime_keyboard_letters_question","value":"\u0107"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Croatian"}
+];
+
+var croatian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"z","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"y","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Z","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Y","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u017E","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u010C","keycode":0x3A},{"value":"\u010D","keycode":0x3B},{"value":"\u0106","keycode":0x22},
+    {"value":"\u0107","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u0161","keycode":0x5B},{"value":"\u0111","keycode":0x5D},
+    {"value":"\u0160","keycode":0x7B},{"value":"\u0110","keycode":0x7D},{"value":"*","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"+","keycode":0x3D},{"value":"\u00B8","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u017D","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00A8","keycode":0x7E},
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\u02DD","keycode":0x230},{"value":"\u00A8","keycode":0x22D},
+    {"value":"\u00B8","keycode":0x23D},{"value":"\\","keycode":0x371},{"value":"|","keycode":0x377},
+    {"value":"\u20AC","keycode":0x365},{"value":"\u00F7","keycode":0x25B},{"value":"\u00D7","keycode":0x25D},
+    {"value":"\u00A4","keycode":0x25C},{"value":"[","keycode":0x366},
+    {"value":"]","keycode":0x367}, {"value":"\u0142","keycode":0x36B},{"value":"\u0141","keycode":0x36C},
+    {"value":"\u00DF","keycode":0x327},{"value":"@","keycode":0x376},
+    {"value":"{","keycode":0x362},{"value":"}","keycode":0x36E},{"value":"\u00A7","keycode":0x36D},
+    {"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+];
+
+
+var croatian_specialhardkeyboard_values = [
+    {"value":"\u0160","keycode":0x5B},{"value":"\u0161","keycode":0x7B},{"value":"\u0110","keycode":0x5D}, {"value":"\u0111","keycode":0x7D},
+    {"value":"\u017E","keycode":0x7C},{"value":"\u017D","keycode":0x5C},{"value":"\u010D","keycode":0x3A},{"value":"\u010C","keycode":0x3B},
+    {"value":"\u0107","keycode":0x22}, {"value":"\u0106","keycode":0x127},
+];
+
+var latvian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u016A"},{"inputid":"ime_keyboard_letters_W","value":"G"},
+    {"inputid":"ime_keyboard_letters_E","value":"J"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"M"},
+    {"inputid":"ime_keyboard_letters_Y","value":"V"},{"inputid":"ime_keyboard_letters_U","value":"N"},{"inputid":"ime_keyboard_letters_I","value":"Z"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0112"},{"inputid":"ime_keyboard_letters_P","value":"\u010C"},{"inputid":"ime_keyboard_letters_A","value":"\u0160"},
+    {"inputid":"ime_keyboard_letters_S","value":"U"},{"inputid":"ime_keyboard_letters_D","value":"S"},{"inputid":"ime_keyboard_letters_F","value":"I"},
+    {"inputid":"ime_keyboard_letters_G","value":"L"},{"inputid":"ime_keyboard_letters_H","value":"D"},{"inputid":"ime_keyboard_letters_J","value":"A"},
+    {"inputid":"ime_keyboard_letters_K","value":"T"},{"inputid":"ime_keyboard_letters_L","value":"E"},{"inputid":"ime_keyboard_letters_exclamation","value":"C"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u017D"},{"inputid":"ime_keyboard_letters_Z","value":"\u0122"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u0145"},{"inputid":"ime_keyboard_letters_C","value":"B"},{"inputid":"ime_keyboard_letters_V","value":"\u012A"},
+    {"inputid":"ime_keyboard_letters_B","value":"K"},{"inputid":"ime_keyboard_letters_N","value":"P"},{"inputid":"ime_keyboard_letters_M","value":"O"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0100"},{"inputid":"ime_keyboard_letters_point","value":"H"},{"inputid":"ime_keyboard_letters_question","value":"\u0136"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"F"},{"inputid":"ime_keyboard_letters_2","value":"\u013B"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Latvian"}
+];
+
+var latvian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u016B"},{"inputid":"ime_keyboard_letters_W","value":"g"},
+    {"inputid":"ime_keyboard_letters_E","value":"j"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"m"},
+    {"inputid":"ime_keyboard_letters_Y","value":"v"},{"inputid":"ime_keyboard_letters_U","value":"n"},{"inputid":"ime_keyboard_letters_I","value":"z"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0113"},{"inputid":"ime_keyboard_letters_P","value":"\u010D"},{"inputid":"ime_keyboard_letters_A","value":"\u0161"},
+    {"inputid":"ime_keyboard_letters_S","value":"u"},{"inputid":"ime_keyboard_letters_D","value":"s"},{"inputid":"ime_keyboard_letters_F","value":"i"},
+    {"inputid":"ime_keyboard_letters_G","value":"l"},{"inputid":"ime_keyboard_letters_H","value":"d"},{"inputid":"ime_keyboard_letters_J","value":"a"},
+    {"inputid":"ime_keyboard_letters_K","value":"t"},{"inputid":"ime_keyboard_letters_L","value":"e"},{"inputid":"ime_keyboard_letters_exclamation","value":"c"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u017E"},{"inputid":"ime_keyboard_letters_Z","value":"\u0123"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u0146"},{"inputid":"ime_keyboard_letters_C","value":"b"},{"inputid":"ime_keyboard_letters_V","value":"\u012B"},
+    {"inputid":"ime_keyboard_letters_B","value":"k"},{"inputid":"ime_keyboard_letters_N","value":"p"},{"inputid":"ime_keyboard_letters_M","value":"o"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0101"},{"inputid":"ime_keyboard_letters_point","value":"h"},{"inputid":"ime_keyboard_letters_question","value":"\u0137"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"f"},{"inputid":"ime_keyboard_letters_2","value":"\u013C"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Latvian"}
+];
+
+var latvian_hardkeyboard_values = [
+    {"value":"\u016B","keycode":0x171},{"value":"g","keycode":0x177},
+    {"value":"j","keycode":0x165},{"value":"r","keycode":0x172},{"value":"m","keycode":0x174},
+    {"value":"v","keycode":0x179},{"value":"n","keycode":0x175},{"value":"z","keycode":0x169},
+    {"value":"\u0113","keycode":0x16F},{"value":"\u010D","keycode":0x170},{"value":"\u0161","keycode":0x161},
+    {"value":"u","keycode":0x173},{"value":"s","keycode":0x164},{"value":"i","keycode":0x166},
+    {"value":"l","keycode":0x167},{"value":"d","keycode":0x168},{"value":"a","keycode":0x16A},
+    {"value":"t","keycode":0x16B},{"value":"e","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"\u013C","keycode":0x2F},{"value":"\u0146","keycode":0x17A},
+    {"value":"b","keycode":0x178},{"value":"\u012B","keycode":0x163},{"value":"k","keycode":0x176},
+    {"value":"p","keycode":0x162},{"value":"o","keycode":0x16E},{"value":"\u0101","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"\u013B","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"\u016A","keycode":0x51},{"value":"G","keycode":0x57},
+    {"value":"J","keycode":0x45},{"value":"R","keycode":0x52},{"value":"M","keycode":0x54},
+    {"value":"V","keycode":0x59},{"value":"N","keycode":0x55},{"value":"Z","keycode":0x49},
+    {"value":"\u0112","keycode":0x4F},{"value":"\u010C","keycode":0x50},{"value":"\u0160","keycode":0x41},
+    {"value":"U","keycode":0x53},{"value":"S","keycode":0x44},{"value":"I","keycode":0x46},
+    {"value":"L","keycode":0x47},{"value":"D","keycode":0x48},{"value":"A","keycode":0x4A},
+    {"value":"T","keycode":0x4B},{"value":"E","keycode":0x4C},{"value":"\u0145","keycode":0x5A},
+    {"value":"B","keycode":0x58},{"value":"\u012A","keycode":0x43},{"value":"K","keycode":0x56},
+    {"value":"P","keycode":0x42},{"value":"O","keycode":0x4E},{"value":"\u0100","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u0137","keycode":0x5C},
+    {"value":"\u00BB","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"&","keycode":0x126},{"value":"\u00D7","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":"C","keycode":0x3A},{"value":"c","keycode":0x3B},{"value":"\u00B0","keycode":0x22},
+    {"value":"\u00B4","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u017E","keycode":0x5B},{"value":"h","keycode":0x5D},
+    {"value":"\u017D","keycode":0x7B},{"value":"H","keycode":0x7D},{"value":"F","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"f","keycode":0x3D},{"value":"-","keycode":0x60},
+    {"value":"\u00AB","keycode":0x40},{"value":"\u0136","keycode":0x7C}, {"value":"/","keycode":0x5E},{"value":"?","keycode":0x7E},
+
+    {"value":"\u00AB","keycode":0x231},{"value":"\u20AC","keycode":0x234},{"value":"\"","keycode":0x235},
+    {"value":"\'","keycode":0x236},{"value":":","keycode":0x238}, {"value":"\u2013","keycode":0x22D}, {"value":"=","keycode":0x23D},
+    {"value":"q","keycode":0x371},{"value":"\u0123","keycode":0x377},
+    {"value":"\u0157","keycode":0x372},{"value":"w","keycode":0x374},
+    {"value":"y","keycode":0x379}, {"value":"[","keycode":0x25B},{"value":"]","keycode":0x25D},{"value":"\u20AC","keycode":0x36C},
+    {"value":"\u00B4","keycode":0x327},{"value":"x","keycode":0x378},{"value":"\u0137","keycode":0x376},
+    {"value":"\u00F5","keycode":0x36E},{"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+
+];
+
+var latvian_specialhardkeyboard_values = [
+    {"value":"f","keycode":0x2B},{"value":"F","keycode":0x3D},{"value":"\u017D","keycode":0x5B},{"value":"\u017E","keycode":0x7B},
+    {"value":"H","keycode":0x5D},{"value":"h","keycode":0x7D},{"value":"\u0137","keycode":0x7C},{"value":"\u0136","keycode":0x5C},
+    {"value":"c","keycode":0x3A},{"value":"C","keycode":0x3B}, {"value":"\u013B","keycode":0x2F},{"value":"\u013C","keycode":0x3F},
+];
+
+var lithuanian_big_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u0104"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u010C"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u0118"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0116"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u012E"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u0160"},{"inputid":"ime_keyboard_letters_baseline","value":"\u0172"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u016A"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Y"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u017D"},{"inputid":"ime_keyboard_letters_Q","value":"A"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"!"},{"inputid":"ime_keyboard_letters_\u00F9","value":"/"},
+    {"inputid":"ime_keyboard_letters_W","value":"Z"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":"M"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Lithuanian"}
+];
+
+var lithuanian_small_values=[
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u0105"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u010D"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u0119"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0117"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u012F"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u0161"},{"inputid":"ime_keyboard_letters_baseline","value":"\u0173"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u016B"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"y"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u017E"},{"inputid":"ime_keyboard_letters_Q","value":"a"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"!"},{"inputid":"ime_keyboard_letters_\u00F9","value":"/"},
+    {"inputid":"ime_keyboard_letters_W","value":"z"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":"m"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Lithuanian"}
+];
+
+var lithuanian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"\u0104","keycode":0x21},
+    {"value":"/","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"?","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"\u0105","keycode":0x31},{"value":"\u010D","keycode":0x32},
+    {"value":"\u0119","keycode":0x33},{"value":"\u0117","keycode":0x34},{"value":"\u012F","keycode":0x35},
+    {"value":"\u0161","keycode":0x36},{"value":"\u0173","keycode":0x37},{"value":"\u016B","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"\u0118","keycode":0x23},{"value":"\u0116","keycode":0x24},{"value":"\u012E","keycode":0x125},
+    {"value":"\u0172","keycode":0x126},{"value":"\u016A","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":":","keycode":0x3A},{"value":";","keycode":0x3B},{"value":"\"","keycode":0x22},
+    {"value":"\'","keycode":0x127},{"value":"<","keycode":0x3C},{"value":">","keycode":0x3E},
+    {"value":"[","keycode":0x5B},{"value":"]","keycode":0x5D},
+    {"value":"{","keycode":0x7B},{"value":"}","keycode":0x7D},{"value":"\u017D","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"\u017E","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"\u010C","keycode":0x40},{"value":"|","keycode":0x7C}, {"value":"\u0160","keycode":0x5E},{"value":"~","keycode":0x7E},
+    {"value":"1","keycode":0x231},{"value":"2","keycode":0x232},
+    {"value":"3","keycode":0x233},{"value":"4","keycode":0x234},{"value":"5","keycode":0x235},
+    {"value":"6","keycode":0x236},{"value":"7","keycode":0x237},{"value":"8","keycode":0x238},
+    {"value":"9","keycode":0x239},{"value":"0","keycode":0x230},
+    {"value":"=","keycode":0x23D},{"value":"\u20AC","keycode":0x365},
+];
+
+var lithuanian_specialhardkeyboard_values = [
+    {"value":"\u0105","keycode":0x21},{"value":"\u0104","keycode":0x31},{"value":"\u010D","keycode":0x40},{"value":"\u010C","keycode":0x32},
+    {"value":"\u0119","keycode":0x23},{"value":"\u0118","keycode":0x33},{"value":"\u0117","keycode":0x24},{"value":"\u0116","keycode":0x34},
+    {"value":"\u012E","keycode":0x35},{"value":"\u012F","keycode":0x125},{"value":"\u0160","keycode":0x36},{"value":"\u0161","keycode":0x5E},
+    {"value":"\u0172","keycode":0x37},{"value":"\u0173","keycode":0x126},{"value":"\u016B","keycode":0x2A},{"value":"\u016A","keycode":0x38},
+    {"value":"\u017E","keycode":0x2B},{"value":"\u017D","keycode":0x3D}
+];
+
+
+var romanian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0218"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u021A"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0102"},{"inputid":"ime_keyboard_letters_point","value":"\u00CE"},{"inputid":"ime_keyboard_letters_question","value":"\u00C2"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Romanian"}
+];
+
+var romanian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0219"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u021B"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0103"},{"inputid":"ime_keyboard_letters_point","value":"\u00EE"},{"inputid":"ime_keyboard_letters_question","value":"\u00E2"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Romanian"}
+];
+
+
+var romanian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"/","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"?","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u00E2","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"&","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":"\u0218","keycode":0x3A},{"value":"\u0219","keycode":0x3B},{"value":"\u021A","keycode":0x22},
+    {"value":"\u021B","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u0103","keycode":0x5B},{"value":"\u00EE","keycode":0x5D},
+    {"value":"\u0102","keycode":0x7B},{"value":"\u00CE","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"\u201E","keycode":0x60},
+    {"value":"@","keycode":0x40},{"value":"\u00C2","keycode":0x7C}, {"value":"^","keycode":0x5E},{"value":"\u201D","keycode":0x7E},
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},{"value":"`","keycode":0x260},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\u02DD","keycode":0x230},{"value":"\u00A8","keycode":0x22D},
+    {"value":"\u00B8","keycode":0x23D},{"value":"\u20AC","keycode":0x365},{"value":"\u00A7","keycode":0x370},
+    {"value":"[","keycode":0x25B},{"value":"]","keycode":0x25D},{"value":"\\","keycode":0x25C},
+    {"value":"\u00DF","keycode":0x373},{"value":"\u0111","keycode":0x364},{"value":"\u0142","keycode":0x36C},
+    {"value":";","keycode":0x23B},{"value":"\'","keycode":0x327},{"value":"\u00A9","keycode":0x363},
+    {"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+];
+
+var romanian_specialhardkeyboard_values = [
+    {"value":"\u0102","keycode":0x5B},{"value":"\u0103","keycode":0x7B},{"value":"\u00CE","keycode":0x5D}, {"value":"\u00EE","keycode":0x7D},
+    {"value":"\u00E2","keycode":0x7C},{"value":"\u00C2","keycode":0x5C}, {"value":"\u0219","keycode":0x3A},{"value":"\u0218","keycode":0x3B},
+    {"value":"\u021B","keycode":0x22}, {"value":"\u021A","keycode":0x127},
+];
+
+var norwegian_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Z"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00D8"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00C6"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"Y"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00C5"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Norwegian"}
+];
+
+var norwegian_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"z"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u00F8"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u00E6"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"y"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"\u00E5"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Norwegian"}
+];
+
+var norwegian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\'","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"\u00A4","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u00D8","keycode":0x3A},{"value":"\u00F8","keycode":0x3B},{"value":"\u00C6","keycode":0x22},
+    {"value":"\u00E6","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00E5","keycode":0x5B},{"value":"\u00A8","keycode":0x5D},
+    {"value":"\u00C5","keycode":0x7B},{"value":"^","keycode":0x7D},{"value":"`","keycode":0x2B},
+    {"value":"+","keycode":0x2D}, {"value":"\\","keycode":0x3D},{"value":"|","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"*","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00A7","keycode":0x7E},
+
+    {"value":"@","keycode":0x232},{"value":"~","keycode":0x25D},{"value":"\u00B5","keycode":0x36D},
+    {"value":"\u00A3","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u20AC","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},{"value":"\u20AC","keycode":0x365},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},{"value":"\u00B4","keycode":0x23D},
+
+];
+
+var norwegian_specialhardkeyboard_values = [
+    {"value":"\u00C5","keycode":0x5B},{"value":"\u00E5","keycode":0x7B},{"value":"\u00F8","keycode":0x3A},{"value":"\u00D8","keycode":0x3B},
+    {"value":"\u00E6","keycode":0x22}, {"value":"\u00C6","keycode":0x127},
+];
+
+var slovenian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Z"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u010C"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0106"},{"inputid":"ime_keyboard_letters_Z","value":"Y"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0160"},{"inputid":"ime_keyboard_letters_point","value":"\u0110"},{"inputid":"ime_keyboard_letters_question","value":"\u017D"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Slovenian"}
+];
+
+var slovenian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"z"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u010D"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0107"},{"inputid":"ime_keyboard_letters_Z","value":"y"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0161"},{"inputid":"ime_keyboard_letters_point","value":"\u0111"},{"inputid":"ime_keyboard_letters_question","value":"\u017E"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Slovenian"}
+];
+
+var slovenian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"z","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"y","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Z","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Y","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u017E","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u010C","keycode":0x3A},{"value":"\u010D","keycode":0x3B},{"value":"\u0106","keycode":0x22},
+    {"value":"\u0107","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u0161","keycode":0x5B},{"value":"\u0111","keycode":0x5D},
+    {"value":"\u0160","keycode":0x7B},{"value":"\u0110","keycode":0x7D},{"value":"*","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"+","keycode":0x3D},{"value":"\u00B8","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u017D","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00A8","keycode":0x7E},
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\u02DD","keycode":0x230},{"value":"\u00A8","keycode":0x22D},
+    {"value":"\u00B8","keycode":0x23D},{"value":"\\","keycode":0x371},{"value":"|","keycode":0x377},
+    {"value":"\u20AC","keycode":0x365},{"value":"\u00F7","keycode":0x25B},{"value":"\u00D7","keycode":0x25D},
+    {"value":"\u00A4","keycode":0x25C},{"value":"[","keycode":0x366},
+    {"value":"]","keycode":0x367}, {"value":"\u0142","keycode":0x36B},{"value":"\u0141","keycode":0x36C},
+    {"value":"\u00DF","keycode":0x327},{"value":"@","keycode":0x376},
+    {"value":"{","keycode":0x362},{"value":"}","keycode":0x36E},{"value":"\u00A7","keycode":0x36D},
+    {"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+];
+
+var slovenian_specialhardkeyboard_values = [
+    {"value":"\u0160","keycode":0x5B},{"value":"\u0161","keycode":0x7B},{"value":"\u0110","keycode":0x5D},{"value":"\u0111","keycode":0x7D},
+    {"value":"\u010D","keycode":0x3A},{"value":"\u010C","keycode":0x3B},{"value":"\u0107","keycode":0x22}, {"value":"\u0106","keycode":0x127},
+    {"value":"\u017D","keycode":0x5C},{"value":"\u017E","keycode":0x7C}
+];
+
+var turkish_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"Q"},{"inputid":"ime_keyboard_letters_W","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},
+    {"inputid":"ime_keyboard_letters_Y","value":"Y"},{"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},
+    {"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},{"inputid":"ime_keyboard_letters_A","value":"A"},
+    {"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},{"inputid":"ime_keyboard_letters_F","value":"F"},
+    {"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u015E"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0130"},{"inputid":"ime_keyboard_letters_Z","value":"Z"},
+    {"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_M","value":"M"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00D6"},{"inputid":"ime_keyboard_letters_point","value":"\u00C7"},{"inputid":"ime_keyboard_letters_question","value":"\u011E"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\u00DC"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Turkish"}
+];
+
+var turkish_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"q"},{"inputid":"ime_keyboard_letters_W","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},
+    {"inputid":"ime_keyboard_letters_Y","value":"y"},{"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},
+    {"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},{"inputid":"ime_keyboard_letters_A","value":"a"},
+    {"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},{"inputid":"ime_keyboard_letters_F","value":"f"},
+    {"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u015F"},
+    {"inputid":"ime_keyboard_letters_slash","value":"i"},{"inputid":"ime_keyboard_letters_Z","value":"z"},
+    {"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_M","value":"m"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u00F6"},{"inputid":"ime_keyboard_letters_point","value":"\u00E7"},{"inputid":"ime_keyboard_letters_question","value":"\u011F"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\u00FC"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Turkish"}
+];
+
+var turkish_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":".","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":"\u00F6","keycode":0x2C},{"value":"\u00E7","keycode":0x2E},{"value":":","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":",","keycode":0x5C},
+    {"value":"^","keycode":0x23},{"value":"+","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u015E","keycode":0x3A},{"value":"\u015F","keycode":0x3B},{"value":"\u0130","keycode":0x22},
+    {"value":"i","keycode":0x127},{"value":"\u00D6","keycode":0x3C},{"value":"\u00C7","keycode":0x3E},
+    {"value":"\u011F","keycode":0x5B},{"value":"\u00FC","keycode":0x5D},
+    {"value":"\u011E","keycode":0x7B},{"value":"\u00DC","keycode":0x7D},{"value":"_","keycode":0x2B},
+    {"value":"*","keycode":0x2D}, {"value":"-","keycode":0x3D},{"value":"\"","keycode":0x60},
+    {"value":"\'","keycode":0x40},{"value":";","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"\u00E9","keycode":0x7E},
+    {"value":">","keycode":0x231},{"value":"\u00A3","keycode":0x232},
+    {"value":"#","keycode":0x233},{"value":"$","keycode":0x234},{"value":"\u00BD","keycode":0x235},
+    {"value":"{","keycode":0x237},{"value":"[","keycode":0x238},
+    {"value":"]","keycode":0x239},{"value":"}","keycode":0x230},
+    {"value":"\\","keycode":0x22D}, {"value":"|","keycode":0x23D},
+    {"value":"@","keycode":0x371},{"value":"\u20AC","keycode":0x365},{"value":"i","keycode":0x369},
+    {"value":"\u00A8","keycode":0x25B},{"value":"~","keycode":0x25D},{"value":"`","keycode":0x25C},{"value":"<","keycode":0x260},
+    {"value":"\u00E6","keycode":0x361}, {"value":"\u00DF","keycode":0x373},{"value":"\u00B4","keycode":0x23B},
+
+];
+
+var turkish_specialhardkeyboard_values = [
+    {"value":"\u011E","keycode":0x5B},{"value":"\u011F","keycode":0x7B},{"value":"\u00DC","keycode":0x5D},{"value":"\u00FC","keycode":0x7D},
+    {"value":"\u015F","keycode":0x3A},{"value":"\u015E","keycode":0x3B},{"value":"i","keycode":0x22},{"value":"\u0130","keycode":0x169},
+    {"value":"\u00D6","keycode":0x2C},{"value":"\u00F6","keycode":0x3C},{"value":"\u00E7","keycode":0x3E},{"value":"\u00C7","keycode":0x2E},
+];
+
+var ukrainain_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0419"},{"inputid":"ime_keyboard_letters_W","value":"\u0426"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0423"},{"inputid":"ime_keyboard_letters_R","value":"\u041A"},{"inputid":"ime_keyboard_letters_T","value":"\u0415"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u041D"},{"inputid":"ime_keyboard_letters_U","value":"\u0413"},{"inputid":"ime_keyboard_letters_I","value":"\u0428"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0429"},{"inputid":"ime_keyboard_letters_P","value":"\u0417"},{"inputid":"ime_keyboard_letters_A","value":"\u0424"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u0406"},{"inputid":"ime_keyboard_letters_D","value":"\u0412"},{"inputid":"ime_keyboard_letters_F","value":"\u0410"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u043F"},{"inputid":"ime_keyboard_letters_H","value":"\u0420"},{"inputid":"ime_keyboard_letters_J","value":"\u041E"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u041B"},{"inputid":"ime_keyboard_letters_L","value":"\u0414"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0416"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0404"},{"inputid":"ime_keyboard_letters_Z","value":"\u0490"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u042F"},{"inputid":"ime_keyboard_letters_C","value":"\u0427"},{"inputid":"ime_keyboard_letters_V","value":"\u0421"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u041C"},{"inputid":"ime_keyboard_letters_N","value":"\u0418"},{"inputid":"ime_keyboard_letters_M","value":"\u0422"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u042C"},{"inputid":"ime_keyboard_letters_point","value":"\u0411"},{"inputid":"ime_keyboard_letters_question","value":"\u042E"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\u0425"},{"inputid":"ime_keyboard_letters_2","value":"\u0407"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Ukrainain"}
+];
+
+var ukrainain_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0439"},{"inputid":"ime_keyboard_letters_W","value":"\u0446"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0443"},{"inputid":"ime_keyboard_letters_R","value":"\u043A"},{"inputid":"ime_keyboard_letters_T","value":"\u0435"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u043D"},{"inputid":"ime_keyboard_letters_U","value":"\u0433"},{"inputid":"ime_keyboard_letters_I","value":"\u0448"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u0449"},{"inputid":"ime_keyboard_letters_P","value":"\u0437"},{"inputid":"ime_keyboard_letters_A","value":"\u0444"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u0456"},{"inputid":"ime_keyboard_letters_D","value":"\u0432"},{"inputid":"ime_keyboard_letters_F","value":"\u0430"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u043F"},{"inputid":"ime_keyboard_letters_H","value":"\u0440"},{"inputid":"ime_keyboard_letters_J","value":"\u043E"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u043B"},{"inputid":"ime_keyboard_letters_L","value":"\u0434"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0436"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u0454"},{"inputid":"ime_keyboard_letters_Z","value":"\u0491"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u044F"},{"inputid":"ime_keyboard_letters_C","value":"\u0447"},{"inputid":"ime_keyboard_letters_V","value":"\u0441"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u043C"},{"inputid":"ime_keyboard_letters_N","value":"\u0438"},{"inputid":"ime_keyboard_letters_M","value":"\u0442"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u044C"},{"inputid":"ime_keyboard_letters_point","value":"\u0431"},{"inputid":"ime_keyboard_letters_question","value":"\u044E"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\u0445"},{"inputid":"ime_keyboard_letters_2","value":"\u0457"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Ukrainain"}
+];
+
+var ukrainain_hardkeyboard_values = [
+    {"value":"\u0439","keycode":0x171},{"value":"\u0446","keycode":0x177},
+    {"value":"\u0443","keycode":0x165},{"value":"\u043A","keycode":0x172},{"value":"\u0435","keycode":0x174},
+    {"value":"\u043D","keycode":0x179},{"value":"\u0433","keycode":0x175},{"value":"\u0448","keycode":0x169},
+    {"value":"\u0449","keycode":0x16F},{"value":"\u0437","keycode":0x170},{"value":"\u0444","keycode":0x161},
+    {"value":"\u0456","keycode":0x173},{"value":"\u0432","keycode":0x164},{"value":"\u0430","keycode":0x166},
+    {"value":"\u043F","keycode":0x167},{"value":"\u0440","keycode":0x168},{"value":"\u043E","keycode":0x16A},
+    {"value":"\u043B","keycode":0x16B},{"value":"\u0434","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":".","keycode":0x2F},{"value":"\u044F","keycode":0x17A},
+    {"value":"\u0447","keycode":0x178},{"value":"\u0441","keycode":0x163},{"value":"\u043C","keycode":0x176},
+    {"value":"\u0438","keycode":0x162},{"value":"\u0442","keycode":0x16E},{"value":"\u044C","keycode":0x16D},
+    {"value":"\u0431","keycode":0x2C},{"value":"\u044E","keycode":0x2E},{"value":",","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"\u0419","keycode":0x51},{"value":"\u0426","keycode":0x57},
+    {"value":"\u0423","keycode":0x45},{"value":"\u041A","keycode":0x52},{"value":"\u0415","keycode":0x54},
+    {"value":"\u041D","keycode":0x59},{"value":"\u0413","keycode":0x55},{"value":"\u0428","keycode":0x49},
+    {"value":"\u0429","keycode":0x4F},{"value":"\u0417","keycode":0x50},{"value":"\u0424","keycode":0x41},
+    {"value":"\u0406","keycode":0x53},{"value":"\u0412","keycode":0x44},{"value":"\u0410","keycode":0x46},
+    {"value":"\u041F","keycode":0x47},{"value":"\u0420","keycode":0x48},{"value":"\u041E","keycode":0x4A},
+    {"value":"\u041B","keycode":0x4B},{"value":"\u0414","keycode":0x4C},{"value":"\u042F","keycode":0x5A},
+    {"value":"\u0427","keycode":0x58},{"value":"\u0421","keycode":0x43},{"value":"\u041C","keycode":0x56},
+    {"value":"\u0418","keycode":0x42},{"value":"\u0422","keycode":0x4E},{"value":"\u042C","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"\u2116","keycode":0x23},{"value":";","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"?","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":"\u0416","keycode":0x3A},{"value":"\u0436","keycode":0x3B},{"value":"\u0404","keycode":0x22},
+    {"value":"\u0454","keycode":0x127},{"value":"\u0411","keycode":0x3C},{"value":"\u042E","keycode":0x3E},
+    {"value":"\u0445","keycode":0x5B},{"value":"\u0457","keycode":0x5D},
+    {"value":"\u0425","keycode":0x7B},{"value":"\u0407","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"\'","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"/","keycode":0x7C}, {"value":":","keycode":0x5E},{"value":"\u20B4","keycode":0x7E},
+    {"value":"\u0491","keycode":0x375}
+
+];
+
+var ukrainain_specialhardkeyboard_values = [
+    {"value":"\u0425","keycode":0x5B},{"value":"\u0445","keycode":0x7B},{"value":"\u0407","keycode":0x5D},{"value":"\u0457","keycode":0x7D},
+    {"value":"\u0436","keycode":0x3A},{"value":"\u0416","keycode":0x3B},{"value":"\u0454","keycode":0x22},
+    {"value":"\u0404","keycode":0x127},{"value":"\u0411","keycode":0x2C},{"value":"\u0431","keycode":0x3C},
+    {"value":"\u044E","keycode":0x3E},{"value":"\u042E","keycode":0x2E},
+];
+
+var greek_big_values = [{"inputid":"ime_keyboard_letters_Q","value":"\u0395"},{"inputid":"ime_keyboard_letters_W","value":"\u03A1"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u03A4"},{"inputid":"ime_keyboard_letters_R","value":"\u03A5"},{"inputid":"ime_keyboard_letters_T","value":"\u0398"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u0399"},{"inputid":"ime_keyboard_letters_U","value":"\u039F"},{"inputid":"ime_keyboard_letters_I","value":"\u03A0"},
+    {"inputid":"ime_keyboard_letters_O","value":"("},{"inputid":"ime_keyboard_letters_P","value":")"},{"inputid":"ime_keyboard_letters_A","value":"\u0391"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u03A3"},{"inputid":"ime_keyboard_letters_D","value":"\u0394"},{"inputid":"ime_keyboard_letters_F","value":"\u03A6"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u0393"},{"inputid":"ime_keyboard_letters_H","value":"\u0397"},{"inputid":"ime_keyboard_letters_J","value":"\u039E"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u039A"},{"inputid":"ime_keyboard_letters_L","value":"\u039B"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"\u0396"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u03A7"},{"inputid":"ime_keyboard_letters_C","value":"\u03A8"},{"inputid":"ime_keyboard_letters_V","value":"\u03A9"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0392"},{"inputid":"ime_keyboard_letters_N","value":"\u039D"},{"inputid":"ime_keyboard_letters_M","value":"\u039C"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Greek"}
+];
+
+var greek_small_values = [{"inputid":"ime_keyboard_letters_Q","value":"\u03C2"},{"inputid":"ime_keyboard_letters_W","value":"\u03B5"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u03C1"},{"inputid":"ime_keyboard_letters_R","value":"\u03C4"},{"inputid":"ime_keyboard_letters_T","value":"\u03C5"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u03B8"},{"inputid":"ime_keyboard_letters_U","value":"\u03B9"},{"inputid":"ime_keyboard_letters_I","value":"\u03BF"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u03C0"},{"inputid":"ime_keyboard_letters_P","value":"#"},{"inputid":"ime_keyboard_letters_A","value":"\u03B1"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u03C3"},{"inputid":"ime_keyboard_letters_D","value":"\u03B4"},{"inputid":"ime_keyboard_letters_F","value":"\u03C6"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u03B3"},{"inputid":"ime_keyboard_letters_H","value":"\u03B7"},{"inputid":"ime_keyboard_letters_J","value":"\u03BE"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u03BA"},{"inputid":"ime_keyboard_letters_L","value":"\u03BB"},{"inputid":"ime_keyboard_letters_exclamation","value":"!"},
+    {"inputid":"ime_keyboard_letters_slash","value":"/"},{"inputid":"ime_keyboard_letters_shift","value":""},{"inputid":"ime_keyboard_letters_Z","value":"\u03B6"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u03C7"},{"inputid":"ime_keyboard_letters_C","value":"\u03C8"},{"inputid":"ime_keyboard_letters_V","value":"\u03C9"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u03B2"},{"inputid":"ime_keyboard_letters_N","value":"\u03BD"},{"inputid":"ime_keyboard_letters_M","value":"\u03BC"},
+    {"inputid":"ime_keyboard_letters_comma","value":","},{"inputid":"ime_keyboard_letters_point","value":"."},{"inputid":"ime_keyboard_letters_question","value":"?"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_language","value":"Greek"}
+];
+
+var greek_hardkeyboard_values = [
+    {"value":";","keycode":0x171},{"value":"\u03C2","keycode":0x177},
+    {"value":"\u03B5","keycode":0x165},{"value":"\u03C1","keycode":0x172},{"value":"\u03C4","keycode":0x174},
+    {"value":"\u03C5","keycode":0x179},{"value":"\u03B8","keycode":0x175},{"value":"\u03B9","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"\u03C0","keycode":0x170},{"value":"\u03B1","keycode":0x161},
+    {"value":"\u03C3","keycode":0x173},{"value":"\u03B4","keycode":0x164},{"value":"\u03C6","keycode":0x166},
+    {"value":"\u03B3","keycode":0x167},{"value":"\u03B7","keycode":0x168},{"value":"\u03BE","keycode":0x16A},
+    {"value":"\u03BA","keycode":0x16B},{"value":"\u03BB","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"/","keycode":0x2F},{"value":"\u03B6","keycode":0x17A},
+    {"value":"\u03C7","keycode":0x178},{"value":"\u03C8","keycode":0x163},{"value":"\u03C9","keycode":0x176},
+    {"value":"\u03B2","keycode":0x162},{"value":"\u03BD","keycode":0x16E},{"value":"\u03BC","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"?","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":":","keycode":0x51},{"value":"\u0385","keycode":0x57},
+    {"value":"\u0395","keycode":0x45},{"value":"\u03A1","keycode":0x52},{"value":"\u03A4","keycode":0x54},
+    {"value":"\u03A5","keycode":0x59},{"value":"\u0398","keycode":0x55},{"value":"\u0399","keycode":0x49},
+    {"value":"\u039F","keycode":0x4F},{"value":"\u03A0","keycode":0x50},{"value":"\u0391","keycode":0x41},
+    {"value":"\u03A3","keycode":0x53},{"value":"\u0394","keycode":0x44},{"value":"\u03A6","keycode":0x46},
+    {"value":"\u0393","keycode":0x47},{"value":"\u0397","keycode":0x48},{"value":"\u039E","keycode":0x4A},
+    {"value":"\u039A","keycode":0x4B},{"value":"\u039B","keycode":0x4C},{"value":"\u0396","keycode":0x5A},
+    {"value":"\u03A7","keycode":0x58},{"value":"\u03A8","keycode":0x43},{"value":"\u03A9","keycode":0x56},
+    {"value":"\u0392","keycode":0x42},{"value":"\u039D","keycode":0x4E},{"value":"\u039C","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\\","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"&","keycode":0x126},{"value":"*","keycode":0x2A},{"value":"(","keycode":0x128},
+    {"value":")","keycode":0x29},{"value":"_","keycode":0x5F},
+    {"value":"\u00A8","keycode":0x3A},{"value":"\u0384","keycode":0x3B},{"value":"\"","keycode":0x22},
+    {"value":"\'","keycode":0x127},{"value":"<","keycode":0x3C},{"value":">","keycode":0x3E},
+    {"value":"[","keycode":0x5B},{"value":"]","keycode":0x5D},
+    {"value":"{","keycode":0x7B},{"value":"}","keycode":0x7D},{"value":"+","keycode":0x2B},
+    {"value":"-","keycode":0x2D}, {"value":"=","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"@","keycode":0x40},{"value":"|","keycode":0x7C}, {"value":"^","keycode":0x5E},{"value":"~","keycode":0x7E},
+    {"value":"\u00B2","keycode":0x232},
+    {"value":"\u00B3","keycode":0x233},{"value":"\u00A3","keycode":0x234},{"value":"\u00A7","keycode":0x235},
+    {"value":"\u00B6","keycode":0x236},{"value":"\u00A4","keycode":0x238},
+    {"value":"\u00A6","keycode":0x239},{"value":"\u00B0","keycode":0x230},
+    {"value":"\u00B1","keycode":0x22D}, {"value":"\u00BD","keycode":0x23D}, {"value":"\u20AC","keycode":0x365},
+    {"value":"\u00AE","keycode":0x372}, {"value":"\u00A5","keycode":0x379},
+    {"value":"\u00AB","keycode":0x25B},{"value":"\u00BB","keycode":0x25D},{"value":"\u00AC","keycode":0x25C},
+    {"value":"\u0385","keycode":0x23B},
+    {"value":"\u00A9","keycode":0x363},
+];
+
+var greek_specialhardkeyboard_values = [
+    {"value":";","keycode":0x51},{"value":":","keycode":0x171},{"value":"\u03C2","keycode":0x57},{"value":"\u0385","keycode":0x177},
+];
+
+var hungarian_big_values = [
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00CD"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u00DC"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u00D3"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u00DA"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u0170"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00D6"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00C9"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00C1"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"Q"},{"inputid":"ime_keyboard_letters_Z","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Y"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u0150"},{"inputid":"ime_keyboard_letters_Q","value":"A"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"!"},{"inputid":"ime_keyboard_letters_\u00F9","value":"/"},
+    {"inputid":"ime_keyboard_letters_W","value":"Z"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":"M"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Hungarian"}
+];
+
+var hungarian_small_values = [
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u00ED"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u00FC"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u00F3"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u00FA"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u0171"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00F6"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00E9"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00E1"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"("},{"inputid":"ime_keyboard_letters_right_bracket","value":")"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"y"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u0151"},{"inputid":"ime_keyboard_letters_Q","value":"a"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"!"},{"inputid":"ime_keyboard_letters_\u00F9","value":"/"},
+    {"inputid":"ime_keyboard_letters_W","value":"z"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":"m"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"?"},{"inputid":"ime_keyboard_letters_at","value":"@"},{"inputid":"ime_keyboard_letters_language","value":"Hungarian"}
+];
+
+var hungarian_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"z","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"\'","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"y","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Z","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Y","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"\u00F6","keycode":0x30},{"value":"\u0171","keycode":0x5C},
+    {"value":"+","keycode":0x23},{"value":"!","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"=","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"\u00D6","keycode":0x29},{"value":"\u00DC","keycode":0x5F},
+    {"value":"\u00C9","keycode":0x3A},{"value":"\u00E9","keycode":0x3B},{"value":"\u00C1","keycode":0x22},
+    {"value":"\u00E1","keycode":0x127},{"value":"?","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u0151","keycode":0x5B},{"value":"\u00FA","keycode":0x5D},
+    {"value":"\u0150","keycode":0x7B},{"value":"\u00DA","keycode":0x7D},{"value":"\u00D3","keycode":0x2B},
+    {"value":"\u00FC","keycode":0x2D}, {"value":"\u00F3","keycode":0x3D},{"value":"0","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u0170","keycode":0x7C}, {"value":"/","keycode":0x5E},{"value":"\u00A7","keycode":0x7E},
+
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\u02DD","keycode":0x230}, {"value":"\u00A8","keycode":0x22D}, {"value":"\u00B8","keycode":0x23D},
+    {"value":"\\","keycode":0x371},{"value":"|","keycode":0x377},
+    {"value":"\u00C4","keycode":0x365},{"value":"\u20AC","keycode":0x375},{"value":"\u00CD","keycode":0x369},
+    {"value":"\u00E4","keycode":0x361},
+    {"value":"\u0111","keycode":0x373},{"value":"\u0110","keycode":0x364},{"value":"[","keycode":0x366},
+    {"value":"]","keycode":0x367},{"value":"\u00ED","keycode":0x36A},
+    {"value":"\u0142","keycode":0x36B},{"value":"\u0141","keycode":0x36C},{"value":">","keycode":0x37A},
+    {"value":"#","keycode":0x378},{"value":"$","keycode":0x363},{"value":"@","keycode":0x376},
+    {"value":"{","keycode":0x362},{"value":"}","keycode":0x36E},{"value":"<","keycode":0x36D},
+    {"value":"\u00F7","keycode":0x25B},{"value":"\u00D7","keycode":0x25D},{"value":"\u00A4","keycode":0x25C},
+    {"value":"$","keycode":0x23B}, {"value":"\u00DF","keycode":0x327},{"value":"*","keycode":0x22F},
+    {"value":";","keycode":0x22C},{"value":">","keycode":0x22E},
+];
+
+var hungarian_specialhardkeyboard_values = [
+    {"value":"\u00D6","keycode":0x30},{"value":"\u00F6","keycode":0x29},{"value":"\u00FC","keycode":0x5F},{"value":"\u00DC","keycode":0x2D},
+    {"value":"\u00D3","keycode":0x3D},{"value":"\u00F3","keycode":0x2B},{"value":"\u0150","keycode":0x5B},{"value":"\u0151","keycode":0x7B},
+    {"value":"\u00DA","keycode":0x5D},{"value":"\u00FA","keycode":0x7D},{"value":"\u0171","keycode":0x7C},{"value":"\u0170","keycode":0x5C},
+    {"value":"\u00E9","keycode":0x3A},{"value":"\u00C9","keycode":0x3B},{"value":"\u00E1","keycode":0x22}, {"value":"\u00C1","keycode":0x127},
+];
+
+var slovak_big_values = [
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u013D"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u0160"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u010C"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0164"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u017D"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00DD"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00C1"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00CD"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00C9"},{"inputid":"ime_keyboard_letters_right_bracket","value":"\u0147"},{"inputid":"ime_keyboard_letters_A","value":"Q"},{"inputid":"ime_keyboard_letters_Z","value":"W"},
+    {"inputid":"ime_keyboard_letters_E","value":"E"},{"inputid":"ime_keyboard_letters_R","value":"R"},{"inputid":"ime_keyboard_letters_T","value":"T"},{"inputid":"ime_keyboard_letters_Y","value":"Z"},
+    {"inputid":"ime_keyboard_letters_U","value":"U"},{"inputid":"ime_keyboard_letters_I","value":"I"},{"inputid":"ime_keyboard_letters_O","value":"O"},{"inputid":"ime_keyboard_letters_P","value":"P"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00DA"},{"inputid":"ime_keyboard_letters_Q","value":"A"},{"inputid":"ime_keyboard_letters_S","value":"S"},{"inputid":"ime_keyboard_letters_D","value":"D"},
+    {"inputid":"ime_keyboard_letters_F","value":"F"},{"inputid":"ime_keyboard_letters_G","value":"G"},{"inputid":"ime_keyboard_letters_H","value":"H"},{"inputid":"ime_keyboard_letters_J","value":"J"},
+    {"inputid":"ime_keyboard_letters_K","value":"K"},{"inputid":"ime_keyboard_letters_L","value":"L"},{"inputid":"ime_keyboard_letters_M","value":"\u00D4"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00C4"},
+    {"inputid":"ime_keyboard_letters_W","value":"Y"},{"inputid":"ime_keyboard_letters_X","value":"X"},{"inputid":"ime_keyboard_letters_C","value":"C"},{"inputid":"ime_keyboard_letters_V","value":"V"},
+    {"inputid":"ime_keyboard_letters_B","value":"B"},{"inputid":"ime_keyboard_letters_N","value":"N"},{"inputid":"ime_keyboard_letters_comma","value":"M"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"\u010E"},{"inputid":"ime_keyboard_letters_at","value":"\u0154"},{"inputid":"ime_keyboard_letters_language","value":"Slovak"}
+];
+
+var slovak_small_values = [
+    {"inputid":"ime_keyboard_letters_\u00E9","value":"\u013E"},{"inputid":"ime_keyboard_letters_double_quotation","value":"\u0161"},{"inputid":"ime_keyboard_letters_single_quotation","value":"\u010D"},{"inputid":"ime_keyboard_letters_left_bracket","value":"\u0165"},
+    {"inputid":"ime_keyboard_letters_midline","value":"\u017E"},{"inputid":"ime_keyboard_letters_\u00E8","value":"\u00FD"},{"inputid":"ime_keyboard_letters_baseline","value":"\u00E1"},{"inputid":"ime_keyboard_letters_\u00E7","value":"\u00ED"},
+    {"inputid":"ime_keyboard_letters_\u00E0","value":"\u00E9"},{"inputid":"ime_keyboard_letters_right_bracket","value":"\u0148"},{"inputid":"ime_keyboard_letters_A","value":"q"},{"inputid":"ime_keyboard_letters_Z","value":"w"},
+    {"inputid":"ime_keyboard_letters_E","value":"e"},{"inputid":"ime_keyboard_letters_R","value":"r"},{"inputid":"ime_keyboard_letters_T","value":"t"},{"inputid":"ime_keyboard_letters_Y","value":"z"},
+    {"inputid":"ime_keyboard_letters_U","value":"u"},{"inputid":"ime_keyboard_letters_I","value":"i"},{"inputid":"ime_keyboard_letters_O","value":"o"},{"inputid":"ime_keyboard_letters_P","value":"p"},
+    {"inputid":"ime_keyboard_letters_^","value":"\u00FA"},{"inputid":"ime_keyboard_letters_Q","value":"a"},{"inputid":"ime_keyboard_letters_S","value":"s"},{"inputid":"ime_keyboard_letters_D","value":"d"},
+    {"inputid":"ime_keyboard_letters_F","value":"f"},{"inputid":"ime_keyboard_letters_G","value":"g"},{"inputid":"ime_keyboard_letters_H","value":"h"},{"inputid":"ime_keyboard_letters_J","value":"j"},
+    {"inputid":"ime_keyboard_letters_K","value":"k"},{"inputid":"ime_keyboard_letters_L","value":"l"},{"inputid":"ime_keyboard_letters_M","value":"\u00F4"},{"inputid":"ime_keyboard_letters_\u00F9","value":"\u00E4"},
+    {"inputid":"ime_keyboard_letters_W","value":"y"},{"inputid":"ime_keyboard_letters_X","value":"x"},{"inputid":"ime_keyboard_letters_C","value":"c"},{"inputid":"ime_keyboard_letters_V","value":"v"},
+    {"inputid":"ime_keyboard_letters_B","value":"b"},{"inputid":"ime_keyboard_letters_N","value":"n"},{"inputid":"ime_keyboard_letters_comma","value":"m"},{"inputid":"ime_keyboard_letters_point","value":","},
+    {"inputid":"ime_keyboard_letters_semicolon","value":"."},{"inputid":"ime_keyboard_letters_colon","value":"\u010F"},{"inputid":"ime_keyboard_letters_at","value":"\u0155"},{"inputid":"ime_keyboard_letters_language","value":"Slovak"}
+];
+
+
+var slovak_hardkeyboard_values = [
+    {"value":"q","keycode":0x171},{"value":"w","keycode":0x177},
+    {"value":"e","keycode":0x165},{"value":"r","keycode":0x172},{"value":"t","keycode":0x174},
+    {"value":"y","keycode":0x179},{"value":"u","keycode":0x175},{"value":"i","keycode":0x169},
+    {"value":"o","keycode":0x16F},{"value":"p","keycode":0x170},{"value":"a","keycode":0x161},
+    {"value":"s","keycode":0x173},{"value":"d","keycode":0x164},{"value":"f","keycode":0x166},
+    {"value":"g","keycode":0x167},{"value":"h","keycode":0x168},{"value":"j","keycode":0x16A},
+    {"value":"k","keycode":0x16B},{"value":"l","keycode":0x16C},{"value":"1","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"z","keycode":0x17A},
+    {"value":"x","keycode":0x178},{"value":"c","keycode":0x163},{"value":"v","keycode":0x176},
+    {"value":"b","keycode":0x162},{"value":"n","keycode":0x16E},{"value":"m","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"Q","keycode":0x51},{"value":"W","keycode":0x57},
+    {"value":"E","keycode":0x45},{"value":"R","keycode":0x52},{"value":"T","keycode":0x54},
+    {"value":"Y","keycode":0x59},{"value":"U","keycode":0x55},{"value":"I","keycode":0x49},
+    {"value":"O","keycode":0x4F},{"value":"P","keycode":0x50},{"value":"A","keycode":0x41},
+    {"value":"S","keycode":0x53},{"value":"D","keycode":0x44},{"value":"F","keycode":0x46},
+    {"value":"G","keycode":0x47},{"value":"H","keycode":0x48},{"value":"J","keycode":0x4A},
+    {"value":"K","keycode":0x4B},{"value":"L","keycode":0x4C},{"value":"Z","keycode":0x5A},
+    {"value":"X","keycode":0x58},{"value":"C","keycode":0x43},{"value":"V","keycode":0x56},
+    {"value":"B","keycode":0x42},{"value":"N","keycode":0x4E},{"value":"M","keycode":0x4D},
+    {"value":"+","keycode":0x31},{"value":"\u013E","keycode":0x32},
+    {"value":"\u0161","keycode":0x33},{"value":"\u010D","keycode":0x34},{"value":"\u0165","keycode":0x35},
+    {"value":"\u017E","keycode":0x36},{"value":"\u00FD","keycode":0x37},{"value":"\u00E1","keycode":0x38},
+    {"value":"\u00ED","keycode":0x39},{"value":"\u00E9","keycode":0x30},{"value":"\u0148","keycode":0x5C},
+    {"value":"3","keycode":0x23},{"value":"4","keycode":0x24},{"value":"5","keycode":0x125},
+    {"value":"7","keycode":0x126},{"value":"8","keycode":0x2A},{"value":"9","keycode":0x128},
+    {"value":"0","keycode":0x29},{"value":"%","keycode":0x5F},
+    {"value":"\"","keycode":0x3A},{"value":"\u00F4","keycode":0x3B},{"value":"!","keycode":0x22},
+    {"value":"\u00A7","keycode":0x127},{"value":"?","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u00FA","keycode":0x5B},{"value":"\u00E4","keycode":0x5D},
+    {"value":"/","keycode":0x7B},{"value":"(","keycode":0x7D},{"value":"\u02C7","keycode":0x2B},
+    {"value":"=","keycode":0x2D}, {"value":"\u00B4","keycode":0x3D},{"value":";","keycode":0x60},
+    {"value":"2","keycode":0x40},{"value":")","keycode":0x7C}, {"value":"6","keycode":0x5E},{"value":"\u00B0","keycode":0x7E},
+
+    {"value":"~","keycode":0x231},{"value":"\u02C7","keycode":0x232},
+    {"value":"^","keycode":0x233},{"value":"\u02D8","keycode":0x234},{"value":"\u00B0","keycode":0x235},
+    {"value":"\u02DB","keycode":0x236},{"value":"`","keycode":0x237},{"value":"\u02D9","keycode":0x238},
+    {"value":"\u00B4","keycode":0x239},{"value":"\u02DD","keycode":0x230}, {"value":"\u00A8","keycode":0x22D}, {"value":"\u00B8","keycode":0x23D},
+    {"value":"\\","keycode":0x371},{"value":"|","keycode":0x377},
+    {"value":"\u20AC","keycode":0x365},{"value":"\'","keycode":0x370},
+    {"value":"\u0111","keycode":0x373},{"value":"\u0110","keycode":0x364},{"value":"[","keycode":0x366},
+    {"value":"]","keycode":0x367},
+    {"value":"\u0142","keycode":0x36B},{"value":"\u0141","keycode":0x36C},{"value":">","keycode":0x37A},
+    {"value":"#","keycode":0x378},{"value":"$","keycode":0x363},{"value":"@","keycode":0x376},
+    {"value":"{","keycode":0x362},{"value":"}","keycode":0x36E},{"value":"<","keycode":0x22C},
+    {"value":"\u00F7","keycode":0x25B},{"value":"\u00D7","keycode":0x25D},{"value":"\u00A4","keycode":0x25C},
+    {"value":"$","keycode":0x23B}, {"value":"\u00DF","keycode":0x327},{"value":"*","keycode":0x22F},
+    {"value":">","keycode":0x22E},
+];
+
+var serbian_big_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0409"},{"inputid":"ime_keyboard_letters_W","value":"\u040A"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0415"},{"inputid":"ime_keyboard_letters_R","value":"\u0420"},{"inputid":"ime_keyboard_letters_T","value":"\u0422"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u0417"},{"inputid":"ime_keyboard_letters_U","value":"\u0423"},{"inputid":"ime_keyboard_letters_I","value":"\u0418"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u041E"},{"inputid":"ime_keyboard_letters_P","value":"\u041F"},{"inputid":"ime_keyboard_letters_A","value":"\u0410"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u0421"},{"inputid":"ime_keyboard_letters_D","value":"\u0414"},{"inputid":"ime_keyboard_letters_F","value":"\u0424"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u0413"},{"inputid":"ime_keyboard_letters_H","value":"\u0425"},{"inputid":"ime_keyboard_letters_J","value":"\u0408"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u041A"},{"inputid":"ime_keyboard_letters_L","value":"\u041B"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0427"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u040B"},{"inputid":"ime_keyboard_letters_Z","value":"\u0405"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u040F"},{"inputid":"ime_keyboard_letters_C","value":"\u0426"},{"inputid":"ime_keyboard_letters_V","value":"\u0412"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0411"},{"inputid":"ime_keyboard_letters_N","value":"\u041D"},{"inputid":"ime_keyboard_letters_M","value":"\u041C"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0428"},{"inputid":"ime_keyboard_letters_point","value":"\u0402"},{"inputid":"ime_keyboard_letters_question","value":"\u0416"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Serbian"}
+];
+
+var serbian_small_values=[{"inputid":"ime_keyboard_letters_Q","value":"\u0459"},{"inputid":"ime_keyboard_letters_W","value":"\u045A"},
+    {"inputid":"ime_keyboard_letters_E","value":"\u0435"},{"inputid":"ime_keyboard_letters_R","value":"\u0440"},{"inputid":"ime_keyboard_letters_T","value":"\u0442"},
+    {"inputid":"ime_keyboard_letters_Y","value":"\u0437"},{"inputid":"ime_keyboard_letters_U","value":"\u0443"},{"inputid":"ime_keyboard_letters_I","value":"\u0438"},
+    {"inputid":"ime_keyboard_letters_O","value":"\u043E"},{"inputid":"ime_keyboard_letters_P","value":"\u043F"},{"inputid":"ime_keyboard_letters_A","value":"\u0430"},
+    {"inputid":"ime_keyboard_letters_S","value":"\u0441"},{"inputid":"ime_keyboard_letters_D","value":"\u0434"},{"inputid":"ime_keyboard_letters_F","value":"\u0444"},
+    {"inputid":"ime_keyboard_letters_G","value":"\u0433"},{"inputid":"ime_keyboard_letters_H","value":"\u0445"},{"inputid":"ime_keyboard_letters_J","value":"\u0458"},
+    {"inputid":"ime_keyboard_letters_K","value":"\u043A"},{"inputid":"ime_keyboard_letters_L","value":"\u043B"},{"inputid":"ime_keyboard_letters_exclamation","value":"\u0447"},
+    {"inputid":"ime_keyboard_letters_slash","value":"\u045B"},{"inputid":"ime_keyboard_letters_Z","value":"\u0455"},
+    {"inputid":"ime_keyboard_letters_X","value":"\u045F"},{"inputid":"ime_keyboard_letters_C","value":"\u0446"},{"inputid":"ime_keyboard_letters_V","value":"\u0432"},
+    {"inputid":"ime_keyboard_letters_B","value":"\u0431"},{"inputid":"ime_keyboard_letters_N","value":"\u043D"},{"inputid":"ime_keyboard_letters_M","value":"\u043C"},
+    {"inputid":"ime_keyboard_letters_comma","value":"\u0448"},{"inputid":"ime_keyboard_letters_point","value":"\u0452"},{"inputid":"ime_keyboard_letters_question","value":"\u0436"},
+    {"inputid":"ime_keyboard_letters_number","value":"123#"},{"inputid":"ime_keyboard_letters_1","value":"\\"},{"inputid":"ime_keyboard_letters_2","value":"@"},
+    {"inputid":"ime_keyboard_letters_3","value":","},{"inputid":"ime_keyboard_letters_at","value":"."},{"inputid":"ime_keyboard_letters_language","value":"Serbian"}
+];
+
+
+var serbian_hardkeyboard_values = [
+    {"value":"\u0459","keycode":0x171},{"value":"\u045A","keycode":0x177},
+    {"value":"\u0435","keycode":0x165},{"value":"\u0440","keycode":0x172},{"value":"\u0442","keycode":0x174},
+    {"value":"\u0437","keycode":0x179},{"value":"\u0443","keycode":0x175},{"value":"\u0438","keycode":0x169},
+    {"value":"\u043E","keycode":0x16F},{"value":"\u043F","keycode":0x170},{"value":"\u0430","keycode":0x161},
+    {"value":"\u0441","keycode":0x173},{"value":"\u0434","keycode":0x164},{"value":"\u0444","keycode":0x166},
+    {"value":"\u0433","keycode":0x167},{"value":"\u0445","keycode":0x168},{"value":"\u0458","keycode":0x16A},
+    {"value":"\u043A","keycode":0x16B},{"value":"\u043B","keycode":0x16C},{"value":"!","keycode":0x21},
+    {"value":"-","keycode":0x2F},{"value":"\u0455","keycode":0x17A},
+    {"value":"\u045F","keycode":0x178},{"value":"\u0446","keycode":0x163},{"value":"\u0432","keycode":0x176},
+    {"value":"\u0431","keycode":0x162},{"value":"\u043D","keycode":0x16E},{"value":"\u043C","keycode":0x16D},
+    {"value":",","keycode":0x2C},{"value":".","keycode":0x2E},{"value":"_","keycode":0x3F},
+    {"value":" ","keycode":0x20}, {"value":"\u0409","keycode":0x51},{"value":"\u040A","keycode":0x57},
+    {"value":"\u0415","keycode":0x45},{"value":"\u0420","keycode":0x52},{"value":"\u0422","keycode":0x54},
+    {"value":"\u0417","keycode":0x59},{"value":"\u0423","keycode":0x55},{"value":"\u0418","keycode":0x49},
+    {"value":"\u041E","keycode":0x4F},{"value":"\u041F","keycode":0x50},{"value":"\u0410","keycode":0x41},
+    {"value":"\u0421","keycode":0x53},{"value":"\u0414","keycode":0x44},{"value":"\u0424","keycode":0x46},
+    {"value":"\u0413","keycode":0x47},{"value":"\u0425","keycode":0x48},{"value":"\u0408","keycode":0x4A},
+    {"value":"\u041A","keycode":0x4B},{"value":"\u041B","keycode":0x4C},{"value":"\u0405","keycode":0x5A},
+    {"value":"\u040F","keycode":0x58},{"value":"\u0426","keycode":0x43},{"value":"\u0412","keycode":0x56},
+    {"value":"\u0411","keycode":0x42},{"value":"\u041D","keycode":0x4E},{"value":"\u041C","keycode":0x4D},
+    {"value":"1","keycode":0x31},{"value":"2","keycode":0x32},
+    {"value":"3","keycode":0x33},{"value":"4","keycode":0x34},{"value":"5","keycode":0x35},
+    {"value":"6","keycode":0x36},{"value":"7","keycode":0x37},{"value":"8","keycode":0x38},
+    {"value":"9","keycode":0x39},{"value":"0","keycode":0x30},{"value":"\u0436","keycode":0x5C},
+    {"value":"#","keycode":0x23},{"value":"$","keycode":0x24},{"value":"%","keycode":0x125},
+    {"value":"/","keycode":0x126},{"value":"(","keycode":0x2A},{"value":")","keycode":0x128},
+    {"value":"=","keycode":0x29},{"value":"?","keycode":0x5F},
+    {"value":"\u0427","keycode":0x3A},{"value":"\u0447","keycode":0x3B},{"value":"\u040B","keycode":0x22},
+    {"value":"\u045B","keycode":0x127},{"value":";","keycode":0x3C},{"value":":","keycode":0x3E},
+    {"value":"\u0448","keycode":0x5B},{"value":"\u0452","keycode":0x5D},
+    {"value":"\u0428","keycode":0x7B},{"value":"\u0402","keycode":0x7D},{"value":"*","keycode":0x2B},
+    {"value":"\'","keycode":0x2D}, {"value":"+","keycode":0x3D},{"value":"`","keycode":0x60},
+    {"value":"\"","keycode":0x40},{"value":"\u0416","keycode":0x7C}, {"value":"&","keycode":0x5E},{"value":"~","keycode":0x7E},
+    {"value":"\u20AC","keycode":0x365},{"value":"<","keycode":0x22C},{"value":">","keycode":0x22E},
+];
+
+var serbian_specialhardkeyboard_values = [
+    {"value":"\u0428","keycode":0x5B},{"value":"\u0448","keycode":0x7B},{"value":"\u0402","keycode":0x5D}, {"value":"\u0452","keycode":0x7D},
+    {"value":"\u0416","keycode":0x5C},{"value":"\u0436","keycode":0x7C},{"value":"\u0447","keycode":0x3A},{"value":"\u0427","keycode":0x3B},
+    {"value":"\u045B","keycode":0x22}, {"value":"\u040B","keycode":0x127},
+];
+
+var ime_lastKeyboardType = 0;
+var ime_curLanguageSymbol = "";
+var ime_curShift = 0;//0 :small  1:big
+//\u663E\u793A\u6570\u5B57\u9875\u9762
+function ime_switchKeyboard()
+{
+    ime_english_keyboard_json[2][0].normal_img = "url("+imagepath+"images/imeui/normal_letters.png)";
+    if (ime_lastKeyboardType != 4) {
+        ime_keyboard.ime_setLanguage(ime_english_keyboard_json);
+        ime_keyboard.ime_DrawKeyboard();
+        ime_candidate.ime_drawCandidateBar();
+        ime_lastKeyboardType = 4;
+    }
+    ime_getEID("ime_keyboard_letters_language").value = ime_curLanguageSymbol;
+}
+
+function ime_display_number()
+{
+    var number_length = eval(number_values).length;
+    for(var i = 0; i < number_length; i++)
+    {
+        ime_getEID(number_values[i].inputid).value = number_values[i].value;
+    }
+}
+//\u663E\u793A\u7B26\u53F7\u9875\u9762
+function ime_display_symbol()
+{
+
+    //  symbol_values[6].value = String.fromCharCode(215);//\u00D7
+    var number_length = eval(symbol_values).length;
+    for(var i = 0; i < number_length; i++)
+    {
+        ime_getEID(symbol_values[i].inputid).value = symbol_values[i].value;
+    }
+
+}
+
+function ime_language_specialHardKeyBoard(keycode) {
+    var language = ime_curLanguageSymbol;
+    var language_length = 0;
+    var i;
+
+    ime_specialflag = 0;
+    switch (language) {
+        case ime_Languages.getLanguage("SPANISH"):
+            language_length = eval(spanish_specialhardkeyboard_values).length;
+            language = spanish_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("DEUTSCH"):
+            language_length = eval(deutsch_specialhardkeyboard_values).length;
+            language = deutsch_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("SVENSKA"):
+            language_length = eval(svenska_specialhardkeyboard_values).length;
+            language = svenska_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("PORTUGAL"):
+            language_length = eval(portuguese_specialhardkeyboard_values).length;
+            language = portuguese_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("RUSSIAN"):
+            language_length = eval(russian_specialhardkeyboard_values).length;
+            language = russian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("FRANCAISE")://\u7C7B\u578B3
+            language_length = eval(french_specialhardkeyboard_values).length;
+            language = french_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("CZECH"):
+            language_length = eval(czech_specialhardkeyboard_values).length;
+            language = czech_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("CROATIAN"):
+            language_length = eval(croatian_specialhardkeyboard_values).length;
+            language = croatian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("LATVIAN"):
+            language_length = eval(latvian_specialhardkeyboard_values).length;
+            language = latvian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("LITHUANIAN"):
+            language_length = eval(lithuanian_specialhardkeyboard_values).length;
+            language = lithuanian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("ROMANIAN"):
+            language_length = eval(romanian_specialhardkeyboard_values).length;
+            language = romanian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("NORWEGIAN"):
+            language_length = eval(norwegian_specialhardkeyboard_values).length;
+            language = norwegian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("SLOVENIAN"):
+            language_length = eval(slovenian_specialhardkeyboard_values).length;
+            language = slovenian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("TURKISH"):
+            language_length = eval(turkish_specialhardkeyboard_values).length;
+            language = turkish_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("UKRAINAIN"):
+            language_length = eval(ukrainain_specialhardkeyboard_values).length;
+            language = ukrainain_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("GREEK"):
+            language_length = eval(greek_specialhardkeyboard_values).length;
+            language = greek_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("HUNGARIAN"):
+            language_length = eval(hungarian_specialhardkeyboard_values).length;
+            language = hungarian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("ESTHONIAN"):
+            language_length = eval(esthonian_specialhardkeyboard_values).length;
+            language = esthonian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("BULGARIAN"):
+            language_length = eval(bulgarian_specialhardkeyboard_values).length;
+            language = bulgarian_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("DANISH"):
+            language_length = eval(danish_specialhardkeyboard_values).length;
+            language = danish_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("FINNISH"):
+            language_length = eval(finnish_specialhardkeyboard_values).length;
+            language = finnish_specialhardkeyboard_values;
+            break;
+        case ime_Languages.getLanguage("SERBIAN"):
+            language_length = eval(serbian_specialhardkeyboard_values).length;
+            language = serbian_specialhardkeyboard_values;
+            break;
+    }
+    for (i = 0; i < language_length; i++) {
+        if (keycode == language[i].keycode) {
+            ime_keyboard.ime_hardkeyboard(language[i].value);
+            break;
+        }
+    }
+
+    if (language_length != i)
+    {
+        ime_specialflag = 1;
+        ime_keyboard.ime_lostfocus();
+        ime_candidate.ime_candidateWordsGetFocus();
+    }
+}
+
+function ime_language_hardKeyBoard(keycode) {
+    var language = ime_curLanguageSymbol;
+    var language_length = 0;
+    var i;
+    switch (language) {
+            case ime_Languages.getLanguage("ENGLISH")://\u7C7B\u578B1
+                language_length = eval(english_hardkeyboard_values).length;
+                language = english_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("SPANISH"):
+                language_length = eval(spanish_hardkeyboard_values).length;
+                language = spanish_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("DEUTSCH"):
+                language_length = eval(deutsch_hardkeyboard_values).length;
+                language = deutsch_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("POLSKI"):
+                language_length = eval(polski_hardkeyboard_values).length;
+                language = polski_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("SVENSKA"):
+                language_length = eval(svenska_hardkeyboard_values).length;
+                language = svenska_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("ITALIAN")://\u7C7B\u578B2
+                language_length = eval(italian_hardkeyboard_values).length;
+                language = italian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("PORTUGAL"):
+                language_length = eval(portuguese_hardkeyboard_values).length;
+                language = portuguese_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("RUSSIAN"):
+                language_length = eval(russian_hardkeyboard_values).length;
+                language = russian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("FRANCAISE")://\u7C7B\u578B3
+                language_length = eval(french_hardkeyboard_values).length;
+                language = french_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("CZECH"):
+                language_length = eval(czech_hardkeyboard_values).length;
+                language = czech_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("CROATIAN"):
+                language_length = eval(croatian_hardkeyboard_values).length;
+                language = croatian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("LATVIAN"):
+                language_length = eval(latvian_hardkeyboard_values).length;
+                language = latvian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("LITHUANIAN"):
+                language_length = eval(lithuanian_hardkeyboard_values).length;
+                language = lithuanian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("ROMANIAN"):
+                language_length = eval(romanian_hardkeyboard_values).length;
+                language = romanian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("NORWEGIAN"):
+                language_length = eval(norwegian_hardkeyboard_values).length;
+                language = norwegian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("SLOVENIAN"):
+                language_length = eval(slovenian_hardkeyboard_values).length;
+                language = slovenian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("TURKISH"):
+                language_length = eval(turkish_hardkeyboard_values).length;
+                language = turkish_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("UKRAINAIN"):
+                language_length = eval(ukrainain_hardkeyboard_values).length;
+                language = ukrainain_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("GREEK"):
+                language_length = eval(greek_hardkeyboard_values).length;
+                language = greek_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("HUNGARIAN"):
+                language_length = eval(hungarian_hardkeyboard_values).length;
+                language = hungarian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("ESTHONIAN"):
+                language_length = eval(esthonian_hardkeyboard_values).length;
+                language = esthonian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("BULGARIAN"):
+                language_length = eval(bulgarian_hardkeyboard_values).length;
+                language = bulgarian_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("DANISH"):
+                language_length = eval(danish_hardkeyboard_values).length;
+                language = danish_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("FINNISH"):
+                language_length = eval(finnish_hardkeyboard_values).length;
+                language = finnish_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("DUTCH"):
+                language_length = eval(dutch_hardkeyboard_values).length;
+                language = dutch_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("SLOVAK"):
+                language_length = eval(slovak_hardkeyboard_values).length;
+                language = slovak_hardkeyboard_values;
+                break;
+            case ime_Languages.getLanguage("SERBIAN"):
+                language_length = eval(serbian_hardkeyboard_values).length;
+                language = serbian_hardkeyboard_values;
+                break;
+        }
+    for (i = 0; i < language_length; i++) {
+        if (language[i].keycode == 0xFFF)
+            continue;
+        if (keycode == language[i].keycode) {
+            ime_keyboard.ime_hardkeyboard(language[i].value);
+            break;
+        }
+    }
+    if (language_length != i)
+    {
+        ime_keyboard.ime_lostfocus();
+        ime_candidate.ime_candidateWordsGetFocus();
+    }
+}
+
+function ime_switchShift()
+{
+    if(ime_curShift)
+    {
+        ime_display_language_small();
+        ime_curShift = 0;
+    }
+    else
+    {
+        ime_display_language_big();
+        ime_curShift = 1;
+    }
+}
+//\u663E\u793A\u5927\u5199\u8BED\u8A00\u9875\u9762
+function ime_display_language_big()
+{
+    var language_big_length;
+    var language_big;
+    var language = ime_curLanguageSymbol;
+    switch(language)
+    {
+        case ime_Languages.getLanguage("ENGLISH")://\u7C7B\u578B1
+            language_big_length = eval(english_big_values).length;
+            language_big = english_big_values;
+            break;
+        case ime_Languages.getLanguage("SPANISH"):
+            language_big_length = eval(spanish_big_values).length;
+            language_big = spanish_big_values;
+            break;
+        case ime_Languages.getLanguage("DEUTSCH"):
+            language_big_length = eval(deutsch_big_values).length;
+            language_big = deutsch_big_values;
+            break;
+        case ime_Languages.getLanguage("POLSKI"):
+            language_big_length = eval(polski_big_values).length;
+            language_big = polski_big_values;
+            break;
+        case ime_Languages.getLanguage("SVENSKA"):
+            language_big_length = eval(svenska_big_values).length;
+            language_big = svenska_big_values;
+            break;
+        case ime_Languages.getLanguage("ITALIAN")://\u7C7B\u578B2
+            language_big_length = eval(italian_big_values).length;
+            language_big = italian_big_values;
+            break;
+        case ime_Languages.getLanguage("PORTUGAL"):
+            language_big_length = eval(portuguese_big_values).length;
+            language_big = portuguese_big_values;
+            break;
+        case ime_Languages.getLanguage("RUSSIAN"):
+            language_big_length = eval(russian_big_values).length;
+            language_big = russian_big_values;
+            break;
+        case ime_Languages.getLanguage("FRANCAISE")://\u7C7B\u578B3
+            ime_keyboard.ime_setLanguage(ime_french_keyboard_json);
+            ime_keyboard.ime_DrawKeyboard();
+            ime_candidate.ime_drawCandidateBar();
+            ime_lastKeyboardType = 3;
+            language_big_length = eval(french_big_values).length;
+            language_big = french_big_values;
+            break;
+        case ime_Languages.getLanguage("CZECH"):
+            language_big_length = eval(czech_big_values).length;
+            language_big = czech_big_values;
+            break;
+        case ime_Languages.getLanguage("CROATIAN"):
+            language_big_length = eval(croatian_big_values).length;
+            language_big = croatian_big_values;
+            break;
+        case ime_Languages.getLanguage("LATVIAN"):
+            language_big_length = eval(latvian_big_values).length;
+            language_big = latvian_big_values;
+            break;
+        case ime_Languages.getLanguage("LITHUANIAN"):
+            language_big_length = eval(lithuanian_big_values).length;
+            language_big = lithuanian_big_values;
+            break;
+        case ime_Languages.getLanguage("ROMANIAN"):
+            language_big_length = eval(romanian_big_values).length;
+            language_big = romanian_big_values;
+            break;
+        case ime_Languages.getLanguage("NORWEGIAN"):
+            language_big_length = eval(norwegian_big_values).length;
+            language_big = norwegian_big_values;
+            break;
+        case ime_Languages.getLanguage("SLOVENIAN"):
+            language_big_length = eval(slovenian_big_values).length;
+            language_big = slovenian_big_values;
+            break;
+        case ime_Languages.getLanguage("TURKISH"):
+            language_big_length = eval(turkish_big_values).length;
+            language_big = turkish_big_values;
+            break;
+        case ime_Languages.getLanguage("UKRAINAIN"):
+            language_big_length = eval(ukrainain_big_values).length;
+            language_big = ukrainain_big_values;
+            break;
+        case ime_Languages.getLanguage("GREEK"):
+            language_big_length = eval(greek_big_values).length;
+            language_big = greek_big_values;
+            break;
+        case ime_Languages.getLanguage("HUNGARIAN"):
+            language_big_length = eval(hungarian_big_values).length;
+            language_big = hungarian_big_values;
+            break;
+        case ime_Languages.getLanguage("ESTHONIAN"):
+            language_big_length = eval(esthonian_big_values).length;
+            language_big = esthonian_big_values;
+            break;
+        case ime_Languages.getLanguage("BULGARIAN"):
+            language_big_length = eval(bulgarian_big_values).length;
+            language_big = bulgarian_big_values;
+            break;
+        case ime_Languages.getLanguage("DANISH"):
+            language_big_length = eval(danish_big_values).length;
+            language_big = danish_big_values;
+            break;
+        case ime_Languages.getLanguage("FINNISH"):
+            language_big_length = eval(finnish_big_values).length;
+            language_big = finnish_big_values;
+            break;
+        case ime_Languages.getLanguage("DUTCH"):
+            language_big_length = eval(dutch_big_values).length;
+            language_big = dutch_big_values;
+            break;
+        case ime_Languages.getLanguage("SLOVAK"):
+            language_big_length = eval(slovak_big_values).length;
+            language_big = slovak_big_values;
+            break;
+        case ime_Languages.getLanguage("SERBIAN"):
+            language_big_length = eval(serbian_big_values).length;
+            language_big = serbian_big_values;
+            break;
+    }
+    for(var i = 0; i < language_big_length; i++)
+    {
+        ime_getEID(language_big[i].inputid).value = language_big[i].value;
+    }
+}
+
+//\u663E\u793A\u5927\u5199\u8BED\u8A00\u9875\u9762
+function ime_display_language_small()
+{
+    var language_small_length;
+    var language_small;
+    var language = ime_curLanguageSymbol;
+    switch(language)
+    {
+        case ime_Languages.getLanguage("ENGLISH")://\u7C7B\u578B1
+            language_small_length = eval(english_small_values).length;
+            language_small = english_small_values;
+            break;
+        case ime_Languages.getLanguage("SPANISH"):
+            language_small_length = eval(spanish_small_values).length;
+            language_small = spanish_small_values;
+            break;
+        case ime_Languages.getLanguage("DEUTSCH"):
+            language_small_length = eval(deutsch_small_values).length;
+            language_small = deutsch_small_values;
+            break;
+        case ime_Languages.getLanguage("POLSKI"):
+            language_small_length = eval(polski_small_values).length;
+            language_small = polski_small_values;
+            break;
+        case ime_Languages.getLanguage("SVENSKA"):
+            language_small_length = eval(svenska_small_values).length;
+            language_small = svenska_small_values;
+            break;
+        case ime_Languages.getLanguage("ITALIAN")://\u7C7B\u578B2
+            language_small_length = eval(italian_small_values).length;
+            language_small = italian_small_values;
+            break;
+        case ime_Languages.getLanguage("PORTUGAL"):
+            language_small_length = eval(portuguese_small_values).length;
+            language_small = portuguese_small_values;
+            break;
+        case ime_Languages.getLanguage("RUSSIAN"):
+            language_small_length = eval(russian_small_values).length;
+            language_small = russian_small_values;
+            break;
+        case ime_Languages.getLanguage("FRANCAISE")://\u5927\u5199\u952E\u76D8\u7C7B\u578B1
+            ime_keyboard.ime_setLanguage(ime_french_keyboard_json);
+            ime_keyboard.ime_DrawKeyboard();
+            ime_candidate.ime_drawCandidateBar();
+            ime_lastKeyboardType = 3;
+            language_small_length = eval(french_small_values).length;
+            language_small = french_small_values;
+            break;
+        case ime_Languages.getLanguage("CZECH"):
+            language_small_length = eval(czech_small_values).length;
+            language_small = czech_small_values;
+            break;
+        case ime_Languages.getLanguage("CROATIAN"):
+            language_small_length = eval(croatian_small_values).length;
+            language_small = croatian_small_values;
+            break;
+        case ime_Languages.getLanguage("LATVIAN"):
+            language_small_length = eval(latvian_small_values).length;
+            language_small = latvian_small_values;
+            break;
+        case ime_Languages.getLanguage("LITHUANIAN"):
+            language_small_length = eval(lithuanian_small_values).length;
+            language_small = lithuanian_small_values;
+            break;
+        case ime_Languages.getLanguage("ROMANIAN"):
+            language_small_length = eval(romanian_small_values).length;
+            language_small = romanian_small_values;
+            break;
+        case ime_Languages.getLanguage("NORWEGIAN"):
+            language_small_length = eval(norwegian_small_values).length;
+            language_small = norwegian_small_values;
+            break;
+        case ime_Languages.getLanguage("SLOVENIAN"):
+            language_small_length = eval(slovenian_small_values).length;
+            language_small = slovenian_small_values;
+            break;
+        case ime_Languages.getLanguage("TURKISH"):
+            language_small_length = eval(turkish_small_values).length;
+            language_small = turkish_small_values;
+            break;
+        case ime_Languages.getLanguage("UKRAINAIN"):
+            language_small_length = eval(ukrainain_small_values).length;
+            language_small = ukrainain_small_values;
+            break;
+        case ime_Languages.getLanguage("GREEK"):
+            language_small_length = eval(greek_small_values).length;
+            language_small = greek_small_values;
+            break;
+        case ime_Languages.getLanguage("HUNGARIAN"):
+            language_small_length = eval(hungarian_small_values).length;
+            language_small = hungarian_small_values;
+            break;
+        case ime_Languages.getLanguage("ESTHONIAN"):
+            language_small_length = eval(esthonian_small_values).length;
+            language_small = esthonian_small_values;
+            break;
+        case ime_Languages.getLanguage("BULGARIAN"):
+            language_small_length = eval(bulgarian_small_values).length;
+            language_small = bulgarian_small_values;
+            break;
+        case ime_Languages.getLanguage("DANISH"):
+            language_small_length = eval(danish_small_values).length;
+            language_small = danish_small_values;
+            break;
+        case ime_Languages.getLanguage("FINNISH"):
+            language_small_length = eval(finnish_small_values).length;
+            language_small = finnish_small_values;
+            break;
+        case ime_Languages.getLanguage("DUTCH"):
+            language_small_length = eval(dutch_small_values).length;
+            language_small = dutch_small_values;
+            break;
+        case ime_Languages.getLanguage("SLOVAK"):
+            language_small_length = eval(slovak_small_values).length;
+            language_small = slovak_small_values;
+            break;
+        case ime_Languages.getLanguage("SERBIAN"):
+            language_small_length = eval(serbian_small_values).length;
+            language_small = serbian_small_values;
+            break;
+    }
+    for(var i = 0; i < language_small_length; i++)
+    {
+        ime_getEID(language_small[i].inputid).value = language_small[i].value;
+    }
+}
+
+
+//\u54CD\u5E94\u901A\u77E5\uFF0C\u663E\u793A\u5177\u4F53\u8BED\u8A00\u7684\u51FD\u6570
+var ime_display_language = function(language)
+{
+    ime_english_keyboard_json[2][0].normal_img = "url("+imagepath+"images/imeui/shift.png)";
+    switch(language) {
+        case ime_Languages.getLanguage("ENGLISH")://\u7C7B\u578B1        
+        case ime_Languages.getLanguage("POLSKI"):
+        case ime_Languages.getLanguage("NORWEGIAN"):
+        case ime_Languages.getLanguage("GREEK"):
+        case ime_Languages.getLanguage("DANISH"):
+        case ime_Languages.getLanguage("FINNISH"):
+        case ime_Languages.getLanguage("DUTCH"):
+            if (ime_lastKeyboardType != 1) {
+                ime_keyboard.ime_setLanguage(ime_english_keyboard_json);
+                ime_keyboard.ime_DrawKeyboard();
+                ime_candidate.ime_drawCandidateBar();
+                ime_lastKeyboardType = 1;
+            }
+            break;
+        case ime_Languages.getLanguage("ITALIAN"):
+        case ime_Languages.getLanguage("PORTUGAL"):
+        case ime_Languages.getLanguage("RUSSIAN"):
+        case ime_Languages.getLanguage("DEUTSCH"):
+        case ime_Languages.getLanguage("SVENSKA"):
+        case ime_Languages.getLanguage("CROATIAN"):
+        case ime_Languages.getLanguage("LATVIAN"):
+        case ime_Languages.getLanguage("ROMANIAN"):
+        case ime_Languages.getLanguage("SLOVENIAN"):
+        case ime_Languages.getLanguage("TURKISH"):
+        case ime_Languages.getLanguage("UKRAINAIN"):
+        case ime_Languages.getLanguage("ESTHONIAN"):
+        case ime_Languages.getLanguage("SERBIAN"):
+            if (ime_lastKeyboardType != 2) {
+                ime_keyboard.ime_setLanguage(ime_russian_keyboard_json);
+                ime_keyboard.ime_DrawKeyboard();
+                ime_candidate.ime_drawCandidateBar();
+                ime_lastKeyboardType = 2;
+
+            }
+            break;
+        case ime_Languages.getLanguage("BULGARIAN"):
+        case ime_Languages.getLanguage("FRANCAISE"):
+	    case ime_Languages.getLanguage("SPANISH"):
+        case ime_Languages.getLanguage("CZECH"):
+        case ime_Languages.getLanguage("LITHUANIAN"):
+        case ime_Languages.getLanguage("SLOVAK"):
+        case ime_Languages.getLanguage("HUNGARIAN"):
+            if (ime_lastKeyboardType != 3)
+            {
+                ime_keyboard.ime_setLanguage(ime_french_keyboard_json);
+                ime_keyboard.ime_DrawKeyboard();
+                ime_candidate.ime_drawCandidateBar();
+                ime_lastKeyboardType = 3;
+             }
+            break;
+    }
+    ime_candidate.ime_back();
+    ime_curLanguageSymbol =language;
+    ime_display_language_small();
+    ime_curShift = 0;
+};
+
+/**
+ * Created by rengb on 2015/11/23.
+ *
+ * hold json data of every language
+ *
+ * json\u4E8C\u7EF4\u6570\u7EC4\uFF0C\u4E8C\u7EF4\u6570\u7EC4\u957F\u5EA6\u5373\u952E\u76D8\u7684\u5217\u6570
+ */
+
+
+/**
+ * \u56DB\u884C\u7684\u4E8C\u7EF4json\u6570\u7EC4
+ */
+
+
+var ime_english_keyboard_json = [
+    [
+        {"li_id":"ime_keyboard_Q","input_id":"ime_keyboard_letters_Q","input_value":"Q","input_name":"Q","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_W","input_id":"ime_keyboard_letters_W","input_value":"W","input_name":"W","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_E","input_id":"ime_keyboard_letters_E","input_value":"E","input_name":"E","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_R","input_id":"ime_keyboard_letters_R","input_value":"R","input_name":"R","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_T","input_id":"ime_keyboard_letters_T","input_value":"T","input_name":"T","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_Y","input_id":"ime_keyboard_letters_Y","input_value":"Y","input_name":"Y","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_U","input_id":"ime_keyboard_letters_U","input_value":"U","input_name":"U","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_I","input_id":"ime_keyboard_letters_I","input_value":"I","input_name":"I","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_O","input_id":"ime_keyboard_letters_O","input_value":"O","input_name":"O","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_P","input_id":"ime_keyboard_letters_P","input_value":"P","input_name":"P","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_delete","input_id":"ime_keyboard_letters_delete","input_value":"","input_name":"delete","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/delete.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_A","input_id":"ime_keyboard_letters_A","input_value":"A","input_name":"A","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_S","input_id":"ime_keyboard_letters_S","input_value":"S","input_name":"S","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_D","input_id":"ime_keyboard_letters_D","input_value":"D","input_name":"D","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_F","input_id":"ime_keyboard_letters_F","input_value":"F","input_name":"F","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_G","input_id":"ime_keyboard_letters_G","input_value":"G","input_name":"G","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_H","input_id":"ime_keyboard_letters_H","input_value":"H","input_name":"H","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_J","input_id":"ime_keyboard_letters_J","input_value":"J","input_name":"J","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_K","input_id":"ime_keyboard_letters_K","input_value":"K","input_name":"K","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_L","input_id":"ime_keyboard_letters_L","input_value":"L","input_name":"L","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_exclamation","input_id":"ime_keyboard_letters_exclamation","input_value":"!","input_name":"exclamation","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_slash","input_id":"ime_keyboard_letters_slash","input_value":"/","input_name":"slash","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_shift","input_id":"ime_keyboard_letters_shift","input_value":"","input_name":"shift","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/shift.png)"},
+        {"li_id":"ime_keyboard_Z","input_id":"ime_keyboard_letters_Z","input_value":"Z","input_name":"Z","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_X","input_id":"ime_keyboard_letters_X","input_value":"X","input_name":"X","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_C","input_id":"ime_keyboard_letters_C","input_value":"C","input_name":"C","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_V","input_id":"ime_keyboard_letters_V","input_value":"V","input_name":"V","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_B","input_id":"ime_keyboard_letters_B","input_value":"B","input_name":"B","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_N","input_id":"ime_keyboard_letters_N","input_value":"N","input_name":"N","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_M","input_id":"ime_keyboard_letters_M","input_value":"M","input_name":"M","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_comma","input_id":"ime_keyboard_letters_comma","input_value":",","input_name":"comma","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_point","input_id":"ime_keyboard_letters_point","input_value":".","input_name":"point","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_question","input_id":"ime_keyboard_letters_question","input_value":"?","input_name":"question","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"}
+    ],
+
+    [
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":2,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_number","input_id":"ime_keyboard_letters_number","input_value":"123#","input_name":"number","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":5,"focus_img":"url("+imagepath+"images/imeui/focus_space.png)","normal_img":"url("+imagepath+"images/imeui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_space.png)","normal_img":"url("+imagepath+"images/imeui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_space.png)","normal_img":"url("+imagepath+"images/imeui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_space.png)","normal_img":"url("+imagepath+"images/imeui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_space.png)","normal_img":"url("+imagepath+"images/imeui/normal_space.png)"},
+        {"li_id":"ime_keyboard_at","input_id":"ime_keyboard_letters_at","input_value":"@","input_name":"at","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_function_setting","input_id":"ime_keyboard_letters_setting","input_value":"","input_name":"setting","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/setting.png)"},
+        {"li_id":"ime_keyboard_function_enter","input_id":"ime_keyboard_letters_enter","input_value":"","input_name":"enter","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/enter.png)"}
+    ]
+];
+
+/*russian*/
+
+var ime_russian_keyboard_json = [
+    [
+        {"li_id":"ime_keyboard_Q","input_id":"ime_keyboard_letters_Q","input_value":"\u0439","input_name":"Q","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_W","input_id":"ime_keyboard_letters_W","input_value":"\u0446","input_name":"W","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_E","input_id":"ime_keyboard_letters_E","input_value":"\u0443","input_name":"E","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_R","input_id":"ime_keyboard_letters_R","input_value":"\u043A","input_name":"R","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_T","input_id":"ime_keyboard_letters_T","input_value":"\u0435","input_name":"T","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_Y","input_id":"ime_keyboard_letters_Y","input_value":"\u043D","input_name":"Y","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_U","input_id":"ime_keyboard_letters_U","input_value":"\u0433","input_name":"U","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_I","input_id":"ime_keyboard_letters_I","input_value":"\u0448","input_name":"I","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_O","input_id":"ime_keyboard_letters_O","input_value":"\u0449","input_name":"O","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_P","input_id":"ime_keyboard_letters_P","input_value":"\u0437","input_name":"P","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_delete","input_id":"ime_keyboard_letters_delete","input_value":"","input_name":"delete","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/delete.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_A","input_id":"ime_keyboard_letters_A","input_value":"\u0444","input_name":"A","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_S","input_id":"ime_keyboard_letters_S","input_value":"\u044B","input_name":"S","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_D","input_id":"ime_keyboard_letters_D","input_value":"\u0432","input_name":"D","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_F","input_id":"ime_keyboard_letters_F","input_value":"\u0430","input_name":"F","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_G","input_id":"ime_keyboard_letters_G","input_value":"\u043F","input_name":"G","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_H","input_id":"ime_keyboard_letters_H","input_value":"\u0440","input_name":"H","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_J","input_id":"ime_keyboard_letters_J","input_value":"\u043E","input_name":"J","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_K","input_id":"ime_keyboard_letters_K","input_value":"\u043B","input_name":"K","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_L","input_id":"ime_keyboard_letters_L","input_value":"\u0434","input_name":"L","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_exclamation","input_id":"ime_keyboard_letters_exclamation","input_value":"\u0436","input_name":"exclamation","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_slash","input_id":"ime_keyboard_letters_slash","input_value":"\u044D","input_name":"slash","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_shift","input_id":"ime_keyboard_letters_shift","input_value":"","input_name":"shift","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/shift.png)"},
+        {"li_id":"ime_keyboard_Z","input_id":"ime_keyboard_letters_Z","input_value":"\u044F","input_name":"Z","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_X","input_id":"ime_keyboard_letters_X","input_value":"\u0447","input_name":"X","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_C","input_id":"ime_keyboard_letters_C","input_value":"\u0441","input_name":"C","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_V","input_id":"ime_keyboard_letters_V","input_value":"\u043C","input_name":"V","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_B","input_id":"ime_keyboard_letters_B","input_value":"\u0438","input_name":"B","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_N","input_id":"ime_keyboard_letters_N","input_value":"\u0442","input_name":"N","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_M","input_id":"ime_keyboard_letters_M","input_value":"\u044C","input_name":"M","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_comma","input_id":"ime_keyboard_letters_comma","input_value":"\u0431","input_name":"comma","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_point","input_id":"ime_keyboard_letters_point","input_value":"\u044E","input_name":"point","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_question","input_id":"ime_keyboard_letters_question","input_value":"\u0445","input_name":"question","focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"}
+    ],
+
+    [
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":2,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_number","input_id":"ime_keyboard_letters_number","input_value":"123#","input_name":"number","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_languages.png)","normal_img":"url("+imagepath+"images/imeui/normal_language.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":2,"focus_img":"url("+imagepath+"images/imeui/focus_space_2.png)","normal_img":"url("+imagepath+"images/imeui/normal_space_2.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/imeui/focus_space_2.png)","normal_img":"url("+imagepath+"images/imeui/normal_space_2.png)"},
+        {"li_id":"ime_keyboard_1","input_id":"ime_keyboard_letters_1","input_value":",","input_name":"1","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_2","input_id":"ime_keyboard_letters_2","input_value":".","input_name":"2","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_3","input_id":"ime_keyboard_letters_3","input_value":"\u0451","input_name":"3","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_at","input_id":"ime_keyboard_letters_at","input_value":"\u044A","input_name":"at","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_function_setting","input_id":"ime_keyboard_letters_setting","input_value":"","input_name":"setting","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/setting.png)"},
+        {"li_id":"ime_keyboard_function_enter","input_id":"ime_keyboard_letters_enter","input_value":"","input_name":"enter","repeat_flag":1,"focus_img":"url("+imagepath+"images/imeui/focus_letters.png)","normal_img":"url("+imagepath+"images/imeui/enter.png)"}
+    ]
+];
+
+/**
+ * \u4E94\u884C\u7684\u4E8C\u7EF4json\u6570\u7EC4
+ */
+
+
+var ime_french_keyboard_json = [
+    [
+        {"li_id":"ime_keyboard_?","input_id":"ime_keyboard_letters_\u00E9","input_value":"\u00E9","input_name":"?","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_double_quotation" ,"input_id":"ime_keyboard_letters_double_quotation","input_value":"\"","input_name":"double_quotation","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_single_quotation","input_id":"ime_keyboard_letters_single_quotation","input_value":"\'","input_name":"single_quotation","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_left_bracket","input_id":"ime_keyboard_letters_left_bracket","input_value":"(","input_name":"left_bracket","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_midline","input_id":"ime_keyboard_letters_midline","input_value":"-","input_name":"midline","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_?","input_id":"ime_keyboard_letters_\u00E8","input_value":"\u00E8","input_name":"?","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_baseline","input_id":"ime_keyboard_letters_baseline","input_value":"_","input_name":"baseline","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_?","input_id":"ime_keyboard_letters_\u00E7","input_value":"\u00E7","input_name":"?","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_?","input_id":"ime_keyboard_letters_\u00E0","input_value":"\u00E0","input_name":"?","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_right_bracket","input_id":"ime_keyboard_letters_right_bracket","input_value":")","input_name":"right_bracket","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_delete","input_id":"ime_keyboard_letters_delete","input_value":"","input_name":"delete","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/delete.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_A","input_id":"ime_keyboard_letters_A","input_value":"a","input_name":"A","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_Z","input_id":"ime_keyboard_letters_Z","input_value":"z","input_name":"Z","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_E","input_id":"ime_keyboard_letters_E","input_value":"e","input_name":"E","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_R","input_id":"ime_keyboard_letters_R","input_value":"r","input_name":"R","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_T","input_id":"ime_keyboard_letters_T","input_value":"t","input_name":"T","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_Y","input_id":"ime_keyboard_letters_Y","input_value":"y","input_name":"Y","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_U","input_id":"ime_keyboard_letters_U","input_value":"u","input_name":"U","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_I","input_id":"ime_keyboard_letters_I","input_value":"i","input_name":"I","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_O","input_id":"ime_keyboard_letters_O","input_value":"o","input_name":"O","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_P","input_id":"ime_keyboard_letters_P","input_value":"p","input_name":"P","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_^","input_id":"ime_keyboard_letters_^","input_value":"^","input_name":"^","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_Q","input_id":"ime_keyboard_letters_Q","input_value":"q","input_name":"Q","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_S","input_id":"ime_keyboard_letters_S","input_value":"s","input_name":"S","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_D","input_id":"ime_keyboard_letters_D","input_value":"d","input_name":"D","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_F","input_id":"ime_keyboard_letters_F","input_value":"f","input_name":"F","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_G","input_id":"ime_keyboard_letters_G","input_value":"g","input_name":"G","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_H","input_id":"ime_keyboard_letters_H","input_value":"h","input_name":"H","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_J","input_id":"ime_keyboard_letters_J","input_value":"j","input_name":"J","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_K","input_id":"ime_keyboard_letters_K","input_value":"k","input_name":"K","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_L","input_id":"ime_keyboard_letters_L","input_value":"l","input_name":"L","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_M","input_id":"ime_keyboard_letters_M","input_value":"m","input_name":"M","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_?","input_id":"ime_keyboard_letters_\u00F9","input_value":"\u00F9","input_name":"?","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_shift","input_id":"ime_keyboard_letters_shift","input_value":"","input_name":"shift","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/shift.png)"},
+        {"li_id":"ime_keyboard_W","input_id":"ime_keyboard_letters_W","input_value":"w","input_name":"W","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_X","input_id":"ime_keyboard_letters_X","input_value":"x","input_name":"X","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_C","input_id":"ime_keyboard_letters_C","input_value":"c","input_name":"C","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_V","input_id":"ime_keyboard_letters_V","input_value":"v","input_name":"V","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_B","input_id":"ime_keyboard_letters_B","input_value":"b","input_name":"B","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_N","input_id":"ime_keyboard_letters_N","input_value":"n","input_name":"N","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_comma","input_id":"ime_keyboard_letters_comma","input_value":",","input_name":"comma","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_point","input_id":"ime_keyboard_letters_point","input_value":".","input_name":"point","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_semicolon","input_id":"ime_keyboard_letters_semicolon","input_value":";","input_name":"semicolon","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_colon","input_id":"ime_keyboard_letters_colon","input_value":":","input_name":"colon","focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"}
+    ],
+    [
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":2,"focus_img":"url("+imagepath+"images/frenchui/focus_languages.png)","normal_img":"url("+imagepath+"images/frenchui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_english","input_id":"ime_keyboard_letters_language","input_value":"English","input_name":"language","repeat_flag":0,"focus_img":"url("+imagepath+"images/frenchui/focus_languages.png)","normal_img":"url("+imagepath+"images/frenchui/normal_language.png)"},
+        {"li_id":"ime_keyboard_language_button_number","input_id":"ime_keyboard_letters_number","input_value":"123#","input_name":"number","repeat_flag":1,"focus_img":"url("+imagepath+"images/frenchui/focus_languages.png)","normal_img":"url("+imagepath+"images/frenchui/normal_language.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":5,"focus_img":"url("+imagepath+"images/frenchui/focus_space.png)","normal_img":"url("+imagepath+"images/frenchui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/frenchui/focus_space.png)","normal_img":"url("+imagepath+"images/frenchui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/frenchui/focus_space.png)","normal_img":"url("+imagepath+"images/frenchui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/frenchui/focus_space.png)","normal_img":"url("+imagepath+"images/frenchui/normal_space.png)"},
+        {"li_id":"ime_keyboard_space","input_id":"ime_keyboard_letters_space","input_value":" ","input_name":"space","repeat_flag":0,"focus_img":"url("+imagepath+"images/frenchui/focus_space.png)","normal_img":"url("+imagepath+"images/frenchui/normal_space.png)"},
+        {"li_id":"ime_keyboard_at","input_id":"ime_keyboard_letters_at","input_value":"@","input_name":"at","repeat_flag":1,"focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/normal_letters.png)"},
+        {"li_id":"ime_keyboard_function_setting","input_id":"ime_keyboard_letters_setting","input_value":"","input_name":"setting","repeat_flag":1,"focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/setting.png)"},
+        {"li_id":"ime_keyboard_function_enter","input_id":"ime_keyboard_letters_enter","input_value":"","input_name":"enter","repeat_flag":1,"focus_img":"url("+imagepath+"images/frenchui/focus_letters.png)","normal_img":"url("+imagepath+"images/frenchui/enter.png)"}
+    ]
+];
+/**
+ * Created by rengb on 2015/12/4.
+ */
+/**
+ * \u5E38\u91CF\u7C7B\uFF0C\u7528\u6765\u4FDD\u5B58\u6240\u6709\u56FD\u5BB6\u8BED\u8A00
+ */
+var ime_Languages = (function() {
+    // Constants(Created as private static attributes)
+    var constants = {
+        ENGLISH     : "English",
+        FRANCAISE   : "French",
+        PORTUGAL    : "Portuguese",
+        SPANISH     : "Spanish",
+        DEUTSCH     : "German",
+        POLSKI      : "Polski",
+        SVENSKA     : "Svenska",
+        ITALIAN     : "Italian",
+        RUSSIAN     : "Russian",
+        CZECH       : "Czech",
+        CROATIAN    :"Croatian",
+        LATVIAN     :"Latvian",
+        LITHUANIAN   :"Lithuanian",
+        ROMANIAN     :"Romanian",
+        NORWEGIAN    :"Norwegian",
+        SLOVENIAN    :"Slovenian",
+        TURKISH      :"Turkish",
+        UKRAINAIN    : "Ukrainain",
+        GREEK         :"Greek",
+        HUNGARIAN   :"Hungarian",
+        ESTHONIAN    :"Estonian",
+        BULGARIAN    :  "Bulgarian",
+        DANISH       :  "Danish",
+        FINNISH      :"Finnish",
+        DUTCH        :"Dutch",
+        SLOVAK       :"Slovakian",
+        SERBIAN      :"Serbian",
+
+    };
+    var language_id = {
+        ENGLISH : 0,
+        FRANCAISE : 12,
+        PORTUGAL : 0,//\u6682\u65E0\u8461\u8404\u7259\u8BED
+        SPANISH : 15,
+        DEUTSCH : 11,
+        POLSKI : 34,
+        SVENSKA : 31,
+        ITALIAN : 13,
+        RUSSIAN : 14,
+        CZECH       : 55,
+        CROATIAN    :40,
+        LATVIAN     :58,
+        HUNGARIAN   :35,
+        ROMANIAN     :51,
+        NORWEGIAN    :29,
+        SLOVENIAN    :42,
+        TURKISH      :27,
+        UKRAINAIN    :46,
+        GREEK         :36,
+        LITHUANIAN   :54,
+        ESTHONIAN    :53,
+        BULGARIAN    :45,
+        DANISH       :30,
+        FINNISH      :37,
+        DUTCH        :33,
+        SLOVAK       :41,
+        SERBIAN      :38,
+    };
+    var languages = [];//\u4ECEsetting\u4E2D\u79FB\u5230\u4E86\u8FD9\u91CC\uFF0C\u4FDD\u8BC1\u540E\u7EED\u4FEE\u6539\u8BED\u8A00\u65F6\u53EA\u4FEE\u6539\u5E38\u91CF\u7C7B\u5373\u53EF
+    for(var str in constants)
+    {
+        languages.push(constants[str]);
+    }
+    var ime_language_property_names =[];
+    for(var str in constants)
+    {
+        ime_language_property_names.push("ime.ui.language."+constants[str]);
+    }
+    var ctor = function( constructorArguments ) {
+
+    };
+    // privileged static method
+    ctor.getLanguage  = function( name ) {
+        return constants[name ];
+    };
+    ctor.getLanguageID  = function( name ) {
+        return language_id[name ];
+    };
+    ctor.getLanguageCount = function()
+    {
+        return languages.length;
+    };
+    ctor.getLanguagesArray = function()
+    {
+
+        return languages;
+    };
+    ctor.getLanguagePropertyNames = function()
+    {
+        return ime_language_property_names;
+    };
+    return ctor;
+})();
+
+var ime_Setting = (function ()
+{
+    /**
+     *\u95ED\u5305\u5355\u4F8B\u6A21\u5F0F
+     */
+    function setting(ime_notice,ime_g_setting)
+    {
+        var ime_checkImg                  =[""+imagepath+"images/imeui/unselected.png",""+imagepath+"images/imeui/selected.png"];
+        var ime_focusImg                  = ["url('')","url('"+imagepath+"images/imeui/bg_normal_focus.png')"];
+        var ime_setPositionH              =0;
+        var ime_selectImgList;
+        var ime_focusImgList;
+        var ime_countryList               =[-1,-1,-1];
+        var ime_countryCount              = 0;
+        var ime_curCountry                =  "ime_cur_country";
+        var ime_keyBoardFocus                 ="keyboard";
+        var ime_mouseCallBack             = {Url:"",funcOk:function(){ime_toOkGetChar();},funcBack:function(){ime_hiddenKeySetting();}};
+        var ime_KEY_SETTING_TOP_START    = 112;
+        var ime_KEY_SETTING_TOP_STEP     = 90;
+        var ime_prograssbarheigth = 0;
+        var ime_onepagecount = 8;
+        var ime_onepageheigth = 755;
+        var ime_former_keydown;//\u539F\u6765\u7684onkeydown\u4E8B\u4EF6
+	    var  ime_tips_flag = false;
+	    
+        function ime_getEID(id)
+        {
+            return document.getElementById(id);
+        }
+
+        function getCurCountry()
+        {
+            return ime_curCountry;
+        }
+
+        function ime_checkKeyBoardEnable()//\u83B7\u53D6\u4FDD\u5B58\u7684\u8BED\u8A00\u5C5E\u6027
+        {
+            var k=0;
+            for(var i=0;i<ime_Languages.getLanguageCount();i++)
+            {
+
+                if(ime_g_setting.getProperty(ime_Languages.getLanguagePropertyNames()[i],"0")=="1")
+                {
+                    ime_countryList[k]=i;
+                    k++;
+
+                }
+                if(k>=3)
+                {
+                    break;
+                }
+            }
+            ime_countryCount=k;
+        }
+
+        function ime_hiddenKeySetting()//\u9690\u85CF\u8BED\u8A00\u9009\u62E9\u6846
+        {
+            document.body.removeChild(ime_getEID("bgRight"));
+             document.body.removeChild(ime_getEID("settingTransportView"));
+            ime_setPositionH=0;
+            ime_keyBoardFocus = "keyboard";
+            ime_checkKeyBoardEnable();//\u8BBE\u7F6E\u5B8C\u6BD5\u66F4\u65B0\u72B6\u6001,\u8FD9\u6837language button\u624D\u80FD\u6B63\u786E\u54CD\u5E94
+            document.onsystemevent = ime_former_keydown;//\u9690\u85CF\u540E\u5C06\u6309\u952E\u4E8B\u4EF6\u8FD8\u7ED9\u539F\u6765\u7684
+        }
+
+        function ime_showLangSetting()//\u663E\u793A\u8BED\u8A00\u9009\u62E9\u6846
+        {
+            ime_former_keydown = document.onsystemevent;
+            document.onsystemevent = ime_settingKeyDown;
+            
+            
+            var transportView = document.createElement("div");
+            transportView.style.cssText = " height: 1080px;width: 1920px;bottom:0px;position:fixed;z-index: 10005;background-color: rgba(0,0,0,0)";
+            transportView.id = "settingTransportView";
+            document.body.appendChild(transportView);
+            
+            var setDivBgRight = document.createElement("div");
+            setDivBgRight.style.position="fixed";
+            setDivBgRight.style.height="870px";
+            setDivBgRight.style.width="887px";
+            setDivBgRight.style.bottom="150px";
+            setDivBgRight.style.left="516px";
+       //     setDivBgRight.style.opacity="0.92";
+            setDivBgRight.id="bgRight";
+            setDivBgRight.style.zIndex="10006";
+            setDivBgRight.style.backgroundImage="url('"+imagepath+"images/imeui/bg_setting.png')";
+            setDivBgRight.onmousedown = function(evt){
+                //   top.timeoutFuc.osdTimeoutEndFuc();
+                evt.preventDefault();
+                if(evt.button == 2){
+                    //right key
+                    if(ime_keyBoardFocus == "keySetting")
+                    {
+                        ime_mouseCallBack.funcBack()
+                    }
+                }
+                //	top.timeoutFuc.osdTimeoutStartFuc();
+            };
+
+            document.body.appendChild(setDivBgRight);
+            
+             transportView.onmousedown=function(evt)
+            {
+            	evt.preventDefault();
+                //document.body.removeChild(setDivBgRight);
+                ime_mouseCallBack.funcBack()
+               
+            };
+
+            var remindSpan   = document.createElement("div");
+            remindSpan.style.position="absolute";
+            remindSpan.style.width ="704px";
+            remindSpan.style.top = "10px";
+            remindSpan.style.left = "40px";
+            remindSpan.style.height="100px"
+            remindSpan.style.color="#FFFFFF";
+            remindSpan.style.fontSize="36px"
+            remindSpan.style.lineHeight="100px";
+            remindSpan.innerHTML="Keyboard and input methods";
+            ime_getEID("bgRight").appendChild(remindSpan);
+
+            var selectdiv = document.createElement("div");
+            selectdiv.style.position="absolute";
+            selectdiv.style.top=112+"px";
+            selectdiv.style.left=2+"px";
+            selectdiv.style.width="883px";
+            selectdiv.style.height="720px";
+            selectdiv.id="selectdiv";
+            selectdiv.style.overflow="hidden";
+
+            ime_getEID("bgRight").appendChild(selectdiv);
+            var selectul = document.createElement("ul");
+            selectul.id = "selectul";
+            selectul.style.position="absolute";
+            selectul.style.top = "0px";
+            selectul.style.left = "0px";
+            selectul.style.margin = "0px";
+            selectul.style.padding = "0px";
+            ime_getEID("selectdiv").appendChild(selectul);
+            for(var i=0;i<ime_Languages.getLanguageCount();i++)
+            {
+                var selectli = document.createElement("li");
+                selectli.style.top=112+"px";
+                selectli.style.left=2+"px";
+                selectli.style.width="867px";
+                selectli.style.height="90px";
+                selectli.style.listStyle = "none";
+                selectli.float = "left";
+                selectli.setAttribute("newAttr",i);
+                selectli.id = "selectli"+i;
+                ime_getEID("selectul").appendChild(selectli);
+
+                var selectImgFocus = document.createElement("div");
+                selectImgFocus.style.position="absolute";
+                selectImgFocus.style.top=i*90+"px";
+                selectImgFocus.style.left="0px";
+                selectImgFocus.style.width="867px";
+                selectImgFocus.style.height="90px";
+                selectImgFocus.style.backgroundImage=ime_focusImg[0];
+
+                var selectImg = document.createElement("img");
+                selectImg.src=ime_checkImg[0];
+                selectImg.style.position="absolute";
+                selectImg.style.top=12+i*90+"px";
+                selectImg.style.left="20px";
+                var selectSpan = document.createElement("span");
+                selectSpan.style.position="absolute";
+                selectSpan.style.top=12+i*90+"px";
+                selectSpan.style.left=200+"px";
+                selectSpan.style.width="500px";
+                selectSpan.style.height="90px";
+                selectSpan.style.color="#ffffff";
+                selectSpan.style.fontSize="36px";
+                selectSpan.innerHTML=ime_Languages.getLanguagesArray()[i];
+                selectli.onmousedown = function(evt){
+                    if(evt.button == 0){
+                        evt.preventDefault();
+                        //right key
+                        if(ime_keyBoardFocus == "keySetting")
+                        {
+                            ime_focusImgList[ime_setPositionH].style.backgroundImage=ime_focusImg[0];
+                            ime_setPositionH = parseInt(this.getAttribute("newAttr"));
+                            ime_focusImgList[ime_setPositionH].style.backgroundImage=ime_focusImg[1];
+                            ime_mouseCallBack.funcOk();
+                        }
+                    }
+                };
+                ime_getEID("selectli"+ i).appendChild(selectImgFocus);
+                ime_getEID("selectli"+ i).appendChild(selectImg);
+                ime_getEID("selectli"+ i).appendChild(selectSpan);
+            }
+
+            var progressBarBg   = document.createElement("img");
+            progressBarBg.style.position="absolute";
+            progressBarBg.style.width ="16px";
+            progressBarBg.style.top = "112px";
+            progressBarBg.style.left = "869px";
+            progressBarBg.style.height="755px"
+            progressBarBg.src=""+imagepath+"images/imeui/settscrollbarbg.png";
+            progressBarBg.id="progressBarBg";
+
+            ime_getEID("bgRight").appendChild(progressBarBg);
+            
+            var limitTips = document.createElement("div");//tips
+            limitTips.id = "LimitTips";
+            limitTips.style.cssText = " background-color:rgba(32,32,33,1);height: 60px;line-height:60px;width: 877px; position: absolute ;font-size: 27px;color:white;font-weight:bold;z-index: 10007; text-align: center;vertical-align: middle;margin:355px 545px auto;display:none;border:5px solid;border-color:rgb(55,62,63)";
+			
+			document.body.appendChild(limitTips);
+
+            var progressBar   = document.createElement("img");
+            progressBar.style.position="absolute";
+            progressBar.style.width ="16px";
+            progressBar.style.top = "112px";
+            progressBar.style.left = "869px";
+            progressBar.style.height="720px";
+            progressBar.src=""+imagepath+"images/imeui/settscrollbar.png";
+            progressBar.id="progressBar";
+            ime_getEID("bgRight").appendChild(progressBar);
+            progressBarBg.onmousedown = function(evt){
+                if(evt.button == 0){
+                    evt.preventDefault();
+                    //right key
+                    if(ime_keyBoardFocus == "keySetting") {
+                    	var heightFlag = getAbsoluteTop(progressBar) + parseInt(progressBar.style.height);
+                    	var moveHeight = (parseInt(progressBarBg.style.height)-ime_prograssbarheigth)/(ime_Languages.getLanguageCount()-ime_onepagecount);
+                    	moveHeight.toFixed(10);
+                    	if(evt.clientY > heightFlag){
+                    		 
+				            progressBar.style.top = (parseFloat(progressBar.style.top)+moveHeight).toFixed(10)+'px';
+				             
+				            selectul.style.top = parseInt(selectul.style.top)-90+'px';
+				        }else if(evt.clientY < getAbsoluteTop(progressBar)){
+				        
+				            progressBar.style.top =  (parseFloat(progressBar.style.top)-moveHeight).toFixed(10)+'px';
+				             
+				            selectul.style.top = parseInt(selectul.style.top)+90+'px';
+				        }
+                	}
+                }
+            };
+            if(ime_Languages.getLanguageCount()> ime_onepagecount)
+                ime_prograssbarheigth =ime_onepagecount * ime_onepageheigth/ime_Languages.getLanguageCount();
+            else
+                ime_prograssbarheigth =(ime_onepagecount * ime_KEY_SETTING_TOP_STEP);
+            ime_getEID("progressBar").style.height=ime_prograssbarheigth + "px";
+
+            ime_focusImgList=ime_getEID("selectul").getElementsByTagName("div");
+            ime_focusImgList[0].style.backgroundImage=ime_focusImg[1];
+
+            ime_selectImgList=ime_getEID("selectul").getElementsByTagName("img");
+            for(var i=0;i<ime_countryCount;i++)
+            {
+                ime_selectImgList[ime_countryList[i]].src=ime_checkImg[1];
+            }
+            ime_keyBoardFocus = "keySetting";
+        }
+		function getAbsoluteTop(e){
+	        var offset=e.offsetTop;
+	        if(e.offsetParent!=null) offset+=getAbsoluteTop(e.offsetParent);
+	        return offset;
+  		}
+
+        function ime_moveLeft()
+        {
+            ime_hiddenKeySetting();
+        }
+
+        function ime_moveRight()
+        {
+            ime_toOkGetChar();
+        }
+        function ime_moveUp()
+        {
+            var position = 0;
+
+            ime_focusImgList[ime_setPositionH ].style.backgroundImage=ime_focusImg[0];
+            ime_setPositionH--;
+            if(ime_setPositionH<0)
+            {
+                ime_setPositionH=ime_selectImgList.length - 1;
+            }
+            if(ime_setPositionH >=7)
+            {
+                position = 7;
+                ime_getEID("selectul").style.top=-(ime_setPositionH-position)*90+"px";
+            }
+            else
+                position = ime_setPositionH;
+            ime_focusImgList[ime_setPositionH ].style.backgroundImage=ime_focusImg[1];
+            if(ime_setPositionH >7)
+                ime_getEID("progressBar").style.top=112 + (ime_setPositionH-7) * ime_prograssbarheigth/ime_onepagecount + "px";
+            else
+                ime_getEID("progressBar").style.top="112px";
+        }
+        function ime_moveDown()
+        {
+            var position = 0;
+
+            ime_focusImgList[ime_setPositionH ].style.backgroundImage=ime_focusImg[0];
+            ime_setPositionH++;
+            if(ime_setPositionH>=ime_selectImgList.length)
+            {
+                ime_setPositionH=0;
+                ime_getEID("selectul").style.top="0px";
+            }
+            if(ime_setPositionH >=7)
+            {
+                position = 7;
+                ime_getEID("selectul").style.top=-(ime_setPositionH-position)*90+"px";
+            }
+            else
+                position = ime_setPositionH;
+
+            ime_focusImgList[ime_setPositionH ].style.backgroundImage=ime_focusImg[1];
+
+            if(ime_setPositionH >7)
+                ime_getEID("progressBar").style.top=112 + (ime_setPositionH-7) * ime_prograssbarheigth/ime_onepagecount + "px";
+            else
+                ime_getEID("progressBar").style.top="112px";
+        }
+
+        function ime_toOkGetChar()
+        {
+            for (var i=0;i<ime_countryCount;i++)
+            {
+                if(ime_setPositionH==ime_countryList[i])
+                {
+                    //  if(ime_setPositionH==localStorage.getItem(ime_curCountry))//\u5220\u9664\u5F53\u524D\u6B63\u5728\u4F7F\u7528\u7684\u8BED\u8A00\uFF0C\u5FFD\u7565\u5220\u9664\u64CD\u4F5C
+                    if(ime_setPositionH==ime_g_setting.getProperty(ime_curCountry,0))//\u5220\u9664\u5F53\u524D\u6B63\u5728\u4F7F\u7528\u7684\u8BED\u8A00\uFF0C\u5FFD\u7565\u5220\u9664\u64CD\u4F5C
+                    {
+                    	cancelTipsDisplay();
+                        return;
+                    }
+                    else
+                    {
+
+                        ime_selectImgList[ime_setPositionH].src=ime_checkImg[0];
+                        ime_deleteLang(ime_setPositionH);
+
+                        ime_g_setting.setProperty(ime_Languages.getLanguagePropertyNames()[ime_setPositionH],"0");
+                    }
+                    return;
+                }
+            }
+
+            if(ime_countryCount<3)//\u8BED\u8A00\u6700\u591A\u4E09\u79CD
+            {
+                ime_selectImgList[ime_setPositionH].src=ime_checkImg[1];
+                ime_addLang(ime_setPositionH);
+                ime_g_setting.setProperty(ime_Languages.getLanguagePropertyNames()[ime_setPositionH],"1");
+
+            }else{
+            	limitTipsDisplay();
+            }
+        }
+
+        function ime_deleteLang(index)//\u5220\u9664\u8BED\u8A00
+        {
+            for(var i=0;i<ime_countryList.length;i++)
+            {
+                if(ime_countryList[i]==index)
+                {
+                    for(var j=i;j<ime_countryList.length;j++)
+                    {
+                        ime_countryList[j]=ime_countryList[j+1];
+                    }
+                    ime_countryList[ime_countryList.length-1]=-1;
+                    ime_countryCount--;
+                    break;
+                }
+            }
+        }
+        function ime_addLang(index)//\u6DFB\u52A0\u8BED\u8A00
+        {
+            ime_countryList[ime_countryCount]=index;
+            ime_countryCount++;
+        }
+
+        function ime_change_language()//\u6309language button\u5207\u6362\u8BED\u8A00
+        {
+            var i = 0;
+            // var ime_cur = localStorage.getItem(ime_curCountry);
+            var ime_cur =  ime_g_setting.getProperty(ime_curCountry,0);
+            for(;i < ime_countryCount; i++)
+            {
+                if(ime_cur == ime_countryList[i])//\u83B7\u53D6\u5F53\u524D\u8BED\u8A00\u5728imecountryList\u4E2D\u7684index
+                {
+                    break;
+                }
+            }
+            if(i+1 < ime_countryCount)
+            {
+                i +=1;
+            }else
+            {
+                i = 0;
+            }
+            ime_notice.ime_notice(ime_Languages.getLanguagesArray()[ime_countryList[i]]);//\u901A\u77E5\u663E\u793A\u54EA\u79CD\u8BED\u8A00
+            //  localStorage.setItem(ime_curCountry,ime_countryList[i]);//\u8BBE\u7F6E\u5F53\u524D\u8BED\u8A00\u7684index
+            ime_g_setting.setProperty(ime_curCountry,ime_countryList[i]);
+        }
+		
+		function drawTips(str)
+		{
+			 var tips = document.createElement("div");
+             tips.style.cssText = "height: 832px;width: 887px;position: absolute;background-color: rgba(0,0,0,0.8)";
+          	ime_getEID("bgRight").appendChild(tips);
+             var tipsImg = document.createElement("div");
+             tipsImg.style.cssText = "width: 798px;height: 179px;position: absolute;margin-left: 44px;margin-top: 336px;";
+             tipsImg.style.backgroundImage = "url("+imagepath+"images/imeui/settingTip.png)";
+             tips.appendChild(tipsImg);
+             var tipSpan = document.createElement("div");
+             tipSpan.style.cssText = " position: absolute;font-size: 30px;color: #AFB5BA;margin-left: 160px;margin-top: 70px;width: 600px;height: auto;text-align: center;";
+             tipSpan.innerHTML = str;
+             tipsImg.appendChild(tipSpan);
+             setTimeout(function(){ ime_tips_flag = false; ime_getEID("bgRight").removeChild(tips);},3000);
+		}
+		 function limitTipsDisplay()
+        {
+        	ime_tips_flag = true;
+            drawTips("You can choose three language at most.");
+        }
+        
+        function cancelTipsDisplay()
+        {
+            ime_tips_flag = true;
+            drawTips("The current language can't be cancelled.");
+        }
+
+        //\u76D1\u542C\u6309\u952E\u4E8B\u4EF6
+        function ime_settingKeyDown(evt)
+        {
+            var code = evt.keyCode;
+			if(ime_tips_flag)
+				return;
+            switch(code) {
+                case 8://\u54CD\u5E94back\u6309\u952E
+                    ime_hiddenKeySetting();
+                    break;
+                case 40://down
+                    ime_moveDown();
+                    break;
+                case 38://up
+                    ime_moveUp();
+                    break;
+                case 13://ok
+                    if(evt.modifiers == 0)
+                        ime_toOkGetChar();
+                    break;
+            }
+        }
+
+
+
+
+
+        /**
+         * \u66B4\u9732\u7684public\u65B9\u6CD5\u548C\u5C5E\u6027
+         */
+        return{
+            ime_change_language:ime_change_language,//\u6309\u8BED\u8A00\u6309\u952E\u65F6\u5207\u6362\u8BED\u8A00
+            ime_showLangSetting:ime_showLangSetting,//\u663E\u793Asetting
+            getCurCountry:getCurCountry,//\u83B7\u53D6\u5F53\u524D\u7684country
+            ime_checkKeyBoardEnable:ime_checkKeyBoardEnable//\u8BBE\u7F6E\u540E\u6216\u5F00\u673A\u65F6\u68C0\u7D22\u54EA\u4E9B\u8BED\u8A00\u88AB\u9009\u4E2D\u4E86
+        };
+
+    }
+
+/**
+ * \u5B9E\u4F8B\u5BB9\u5668
+ */
+var instance;
+
+return {
+    getInstance: function (ime_notice,ime_g_setting)
+    {
+        if (instance === undefined)
+        {
+            instance =  setting(ime_notice,ime_g_setting);
+        }
+        return instance;
+    }
+};
+})();
+
+var ime_Candidate = (function ()
+{
+    /**
+     *\u95ED\u5305\u5355\u4F8B\u6A21\u5F0F
+     */
+    function candidate()
+    {
+        var ime_position  = 0;
+        var ime_MAX_NUM_LINE = 5;
+        var ime_drawposition = 0;
+        var ime_mulCharList;
+        var ime_count = 0;
+        var  ime_inputstring ="";
+        var  ime_focusonmulchar = 0;
+        var  ime_Stringlist ;
+        var  ime_editprestring ;
+        var  ime_curlanguageIndex = 0;
+
+        var ime_unicodeVector = ime_g_setting.aPI_IQQI_GetUnicodeVector();
+
+
+        var ime_littlechar ='';
+        var ime_portuguese_compositeSymbol_smallLetterList = ["\u00E2","\u00E3","\u00E0","\u00E1","\u00E4","\u00EA","\u1EBD","\u00E8","\u00E9","\u00EB","\u00EE","\u0129","\u00EC","\u00ED","\u00EF","\u00F4","\u00F5","\u00F2","\u00F3","\u00F6","\u00FB","\u0169","\u00F9","\u00FA","\u00FC","\u00FD","\u00FF","\u00F1"];
+        var ime_portuguese_compositeSymbol_CaptialLetterList = ["\u00C2","\u00C3","\u00C0","\u00C1","\u00C4","\u00CA","\u1EBC","\u00C8","\u00C9","\u00CB","\u00CE","\u0128","\u00CC","\u00CD","\u00CF","\u00D4","\u00D5","\u00D2","\u00D3","\u00D6","\u00DB","\u0168","\u00D9","\u00DA","\u00DC","\u00DD","\u0178","\u00D1"];
+        var ime_i_index = -1, ime_j_index = -1;
+        var ime_letterflag = -1;
+
+        var ime_get_count = 0;//\u5B9E\u9645\u4F20\u7ED9\u5F15\u64CE\u7684\u6570\u91CF
+        var ime_move_count = 0;//\u53F3\u79FB\u52A0\u4E00\uFF0C\u5DE6\u79FB\u51CF\u4E00
+
+        function ime_setCurLanguage(language)
+        {
+            ime_curlanguageIndex = language;
+            ime_g_setting.aPI_IQQI_setCurrentIMECode(ime_curlanguageIndex);//\u8BBE\u7F6EIQQI\u8BED\u8A00
+        }
+
+        function ime_getEID(id){
+            return document.getElementById(id);
+        }
+
+        function ime_drawCandidateBar()
+        {
+
+            var ime_keyboard_ui_bar = document.createElement("div");
+            ime_keyboard_ui_bar.style.cssText = " width: 1920px; height: 83px; margin: 0px auto; background-image: url("+imagepath+"images/imeui/bg_bar.png) ; position: absolute; z-index: 10001;";
+            ime_keyboard_ui_bar.style.display = "none";
+            ime_keyboard_ui_bar.id= "ime_keyboard_ui_bar";
+            ime_getEID("ime_keyboard_ui").appendChild(ime_keyboard_ui_bar);
+
+            for(var i = 1;i<=ime_MAX_NUM_LINE;i++)
+            {
+                var ime_keyboard_char_span=document.createElement("span");
+                ime_keyboard_char_span.style.cssText= "position: absolute; width: 222px; height: 45px; top: 10px; text-align: center; line-height: 45px; color: #ffffff; overflow: hidden; font-size: 36px; -webkit-marquee-direction: backwards; -webkit-marquee-style: scroll; -webkit-marquee-speed: fast; -webkit-marquee-increment: small; -webkit-marquee-repetition: infinite; marquee-direction: forward; marquee-style: scroll; marqueepeed: fast; marquee-play-count: infinite";
+                ime_keyboard_char_span.innerHTML=" ";
+                ime_keyboard_char_span.style.left=i*284+"px";
+                ime_keyboard_ui_bar.appendChild(ime_keyboard_char_span);
+
+                ime_keyboard_char_span.setAttribute("newAttr",i);
+                ime_keyboard_char_span.onmousedown = function(evt)
+                {
+                    var index = 0;
+                    evt.preventDefault();
+                    index = parseInt(this.getAttribute("newAttr"));
+                    if(evt.button == 0) {
+                        if (ime_count >= index)
+                        {
+                            ime_drawposition = index - 1;
+                            ime_char_enter();
+                         }
+                    }
+                }
+
+
+
+            }
+
+            var ime_keyboard_leftarrow=document.createElement("img");
+            ime_keyboard_leftarrow.id= "ime_keyboard_leftarrow";
+            ime_keyboard_leftarrow.src = ""+imagepath+"images/imeui/left.png";
+            ime_keyboard_leftarrow.style.cssText= "position: absolute; top: 24px; left:200px;width: 20px; height: 34px; ";
+            ime_keyboard_leftarrow.style.display = "none";
+            ime_keyboard_ui_bar.appendChild(ime_keyboard_leftarrow);
+
+            var ime_keyboard_rightarrow=document.createElement("img");
+            ime_keyboard_rightarrow.src = ""+imagepath+"images/imeui/right.png";
+            ime_keyboard_rightarrow.id = "ime_keyboard_rightarrow";
+            ime_keyboard_rightarrow.style.cssText= "position: absolute;  top: 24px; left:1700px;width: 20px; height: 34px; ";
+            ime_keyboard_rightarrow.style.display = "none";
+            ime_keyboard_ui_bar.appendChild(ime_keyboard_rightarrow);
+
+            var ime_keyboard_char_focus=document.createElement("img");
+            ime_keyboard_char_focus.id= "ime_keyboard_char_focus";
+            ime_keyboard_char_focus.src = ""+imagepath+"images/imeui/focus_words.png";
+            ime_keyboard_char_focus.style.cssText= "position: absolute;  top: 0px; left:284px;width: 222px; height: 82px; ";
+            ime_keyboard_char_focus.style.display = "none";
+            ime_keyboard_ui_bar.appendChild(ime_keyboard_char_focus);
+
+            ime_mulCharList = ime_getEID("ime_keyboard_ui_bar").getElementsByTagName("span");
+        }
+
+        function ime_showstring()
+        {
+        	for(var i = 0; i < ime_MAX_NUM_LINE; i ++)
+        	{
+        		if(typeof(ime_mulCharList[i]) != "object")
+        		{
+        			break;
+        		}
+        		 if((ime_mulCharList[i].scrollWidth > ime_mulCharList[i].clientWidth))
+	            {
+	                console.log("youhao scroll");
+	                ime_mulCharList[i].style.overflowX = "-webkit-marquee";
+	                ime_mulCharList[i].style.textOverflow = "clip";
+	            }
+	            else
+	            {
+	                console.log("youhao Static");
+	                ime_mulCharList[i].style.overflowX = "hidden";
+	                ime_mulCharList[i].style.textOverflow = "ellipsis";
+	            }
+        	}
+           
+        }
+
+        function ime_candidate_moveright()
+        {
+            if(ime_count <= 1)
+            {
+                return ;
+            }else if(ime_count <= ime_MAX_NUM_LINE)
+            {
+              //  ime_mulCharList[ime_drawposition].style.overflowX = "hidden";
+             //   ime_mulCharList[ime_drawposition].style.textOverflow = "ellipsis";
+                ime_drawposition++;
+                if(ime_drawposition >= ime_count)
+                {
+                    ime_drawposition = 0;
+                }
+
+            }else
+            {
+              //  ime_mulCharList[ime_drawposition].style.overflowX = "hidden";
+             //   ime_mulCharList[ime_drawposition].style.textOverflow = "ellipsis";
+                if(ime_drawposition <= 3 && ime_drawposition < ime_count- ime_move_count*ime_MAX_NUM_LINE -1)
+                {
+                    ime_drawposition++;
+                }else
+                {
+                    ime_drawposition = 0;
+                    if(ime_count-(ime_move_count+1)*ime_MAX_NUM_LINE > 0)
+                    {
+                        ime_move_count++;
+                        console.log("ime_inputstring="+ime_inputstring);
+                        ime_findchar(ime_inputstring, ime_move_count);
+                    }else
+                    {
+                        ime_move_count = 0;
+                        console.log("else ime_inputstring="+ime_inputstring);
+                        ime_findchar(ime_inputstring, 0);
+                    }
+                }
+            }
+            ime_getEID("ime_keyboard_char_focus").style.left =  ((ime_drawposition+1) * 284 )+"px";
+        //    ime_showstring();
+
+        }
+        function ime_candidate_moveleft()
+        {
+            if(ime_drawposition > 0)
+            {
+             //   ime_mulCharList[ime_drawposition].style.overflowX = "hidden";
+           //     ime_mulCharList[ime_drawposition].style.textOverflow = "ellipsis";
+                ime_drawposition--;
+
+            }else if(ime_drawposition == 0 && ime_move_count > 0)
+            {
+                ime_move_count--;
+                ime_findchar(ime_inputstring, ime_move_count);
+            }
+            ime_getEID("ime_keyboard_char_focus").style.left =  ((ime_drawposition+1) * 284 )+"px";
+ //           ime_showstring();
+        }
+
+        function ime_char_enter()
+        {
+
+           // document.activeElement.value = ime_editprestring + ime_mulCharList[ime_drawposition].innerHTML;
+            ime_unicodeVector.clearUnicode();
+            for(var i = 0; i < ime_mulCharList[ime_drawposition].innerHTML.length; i++)
+            {
+                ime_unicodeVector.appendUnicode(ime_mulCharList[ime_drawposition].innerHTML.charCodeAt(i));
+                Util.sendKeyboardCHNEvent(ime_mulCharList[ime_drawposition].innerHTML.charCodeAt(i));
+            }
+            ime_g_setting.aPI_IQQI_LearnWord(ime_curlanguageIndex,ime_unicodeVector,ime_unicodeVector);
+            ime_back();
+        }
+
+        function _ime_findchar()
+        {
+            ime_inputstring = ime_inputstring+ime_littlechar;
+
+            ime_findchar(ime_inputstring, 0);
+        }
+
+        function ime_findchar(inputStr, begin)
+        {
+            ime_unicodeVector.clearUnicode();
+            for(var i = 0; i < inputStr.length; i++)
+            {
+                ime_unicodeVector.appendUnicode(inputStr.charCodeAt(i));
+            }
+            ime_count = ime_g_setting.aPI_IQQI_GetCandidateCount(ime_unicodeVector);
+
+            if(ime_count <= 0)
+            {
+                for(var i=0;(i<1) &&(i<ime_MAX_NUM_LINE);i++)
+                {
+                    ime_mulCharList[i].innerHTML=replaceT(inputStr);
+                }
+                for(var i=1;i<ime_MAX_NUM_LINE;i++)
+                {
+                    ime_mulCharList[i].innerHTML="";
+                }
+                ime_count = 1;
+            }else if(ime_count <= ime_MAX_NUM_LINE - 1)
+            {
+                ime_getEID("ime_keyboard_leftarrow").style.display = "none";
+                ime_getEID("ime_keyboard_rightarrow").style.display = "none";
+                ime_Stringlist = ime_g_setting.aPI_IQQI_GetCandidate(ime_unicodeVector,ime_count,0);
+                ime_mulCharList[0].innerHTML=replaceT(inputStr);
+                for(var i=0;(i<ime_count) &&(i<ime_MAX_NUM_LINE - 1);i++)
+                {
+                    var s;
+                    s=ime_Stringlist[i].substring(1 ,ime_Stringlist[i].length);
+                    s=inputStr[0] + s;
+                    ime_mulCharList[i+1].innerHTML=replaceT(s);
+                }
+                for(var i=ime_count+ 1;i<ime_MAX_NUM_LINE;i++)
+                {
+
+                    ime_mulCharList[i].innerHTML="";
+                }
+                ime_count += 1;
+            }else
+            {
+                ime_getEID("ime_keyboard_leftarrow").style.display = "block";
+                ime_getEID("ime_keyboard_rightarrow").style.display = "block";
+                if(begin == 0)
+                {
+                    ime_get_count = ime_MAX_NUM_LINE - 1;
+                    ime_Stringlist = ime_g_setting.aPI_IQQI_GetCandidate(ime_unicodeVector, ime_get_count, 0);
+                    ime_mulCharList[0].innerHTML=replaceT(inputStr);
+                    for (var i = 0; (i < ime_get_count) && (i < ime_MAX_NUM_LINE - 1); i++) {
+                        var s;
+                        s = ime_Stringlist[i].substring(1, ime_Stringlist[i].length);
+                        s = inputStr[0] + s;
+                        ime_mulCharList[i + 1].innerHTML = replaceT(s);
+                    }
+                }
+                else
+                {
+                    ime_get_count = ime_count - begin * ime_MAX_NUM_LINE + 1;
+                    if (ime_get_count > 0 && ime_get_count <= ime_MAX_NUM_LINE) {
+                        ime_Stringlist = ime_g_setting.aPI_IQQI_GetCandidate(ime_unicodeVector, ime_get_count, begin * ime_MAX_NUM_LINE - 1);
+                        for (var i = 0; (i < ime_get_count) && (i < ime_MAX_NUM_LINE); i++) {
+                            var s;
+                            s = ime_Stringlist[i].substring(1, ime_Stringlist[i].length);
+                            s = inputStr[0] + s;
+                            ime_mulCharList[i].innerHTML = replaceT(s);
+                        }
+                        for (var i = ime_get_count; i < ime_MAX_NUM_LINE; i++) {
+                            ime_mulCharList[i].innerHTML = "";
+                        }
+                    } else if (ime_get_count > 0 && ime_get_count > ime_MAX_NUM_LINE) {
+                        ime_get_count = ime_MAX_NUM_LINE;
+                        ime_Stringlist = ime_g_setting.aPI_IQQI_GetCandidate(ime_unicodeVector, ime_get_count, begin * ime_MAX_NUM_LINE - 1);
+                        for (var i = 0; (i < ime_get_count) && (i < ime_MAX_NUM_LINE); i++) {
+                            var s;
+                            s = ime_Stringlist[i].substring(1, ime_Stringlist[i].length);
+                            s = inputStr[0] + s;
+                            ime_mulCharList[i].innerHTML = replaceT(s);
+                        }
+                    }
+                }
+                ime_count += 1;
+            }
+            ime_showstring();
+        }
+
+
+
+        function ime_back()
+        {
+            ime_getEID("ime_keyboard_ui_bar").style.display = "none";
+            ime_getEID("ime_keyboard_char_focus").style.display = "none";
+            ime_Stringlist= "";
+            ime_count = 0;
+            ime_focusonmulchar = 0;
+            ime_inputstring ="";
+            for (var i = 0; i < 5; i++)
+            {
+                ime_mulCharList[i].style.overflowX = "hidden";
+                ime_mulCharList[i].style.textOverflow = "ellipsis";
+            }
+            ime_keyboard.ime_getfocus();
+        }
+
+        function ime_candidate_clear()
+        {
+            ime_Stringlist= "";
+            ime_inputstring ="";
+            ime_count = 0;
+            ime_focusonmulchar = 0;
+            ime_position = 0;
+            ime_drawposition = ime_position;
+
+        }
+
+        function ime_find_portuguese_compositeSymbol(parame)
+        {
+            switch(parame)
+            {
+                case "^":
+                    ime_j_index = 0;
+                    break;
+                case "~":
+                    ime_j_index = 1;
+                    break;
+                case "`":
+                    ime_j_index = 2;
+                    break;
+                case "\u00B4":
+                    ime_j_index = 3;
+                    break;
+                case "\u00A8":
+                    ime_j_index = 4;
+                    break;
+                case "a":
+                    ime_letterflag = 1;
+                    ime_i_index = 0;
+                    break;
+                case "e":
+                    ime_letterflag = 1;
+                    ime_i_index = 1;
+                    break;
+                case "i":
+                    ime_letterflag = 1;
+                    ime_i_index = 2;
+                    break;
+                case "o":
+                    ime_letterflag = 1;
+                    ime_i_index = 3;
+                    break;
+                case "u":
+                    ime_letterflag = 1;
+                    ime_i_index = 4;
+                    break;
+                case "y":
+                    ime_letterflag = 1;
+                    ime_i_index = 5;
+                    break;
+                case "n":
+                    ime_letterflag = 1;
+                    ime_i_index = 6;
+                    break;
+                case "A":
+                    ime_letterflag = 1;
+                    ime_i_index = 0;
+                    break;
+                case "E":
+                    ime_letterflag = 2;
+                    ime_i_index = 1;
+                    break;
+                case "I":
+                    ime_letterflag = 2;
+                    ime_i_index = 2;
+                    break;
+                case "O":
+                    ime_letterflag = 2;
+                    ime_i_index = 3;
+                    break;
+                case "U":
+                    ime_letterflag = 2;
+                    ime_i_index = 4;
+                    break;
+                case "Y":
+                    ime_letterflag = 2;
+                    ime_i_index = 5;
+                    break;
+                case "N":
+                    ime_letterflag = 2;
+                    ime_i_index = 6;
+                    break;
+            }
+        }
+
+        function ime_portuguese_compositeSymbol() {
+            var lastchar = ime_inputstring.substr(ime_inputstring.length - 1, 1);
+
+            ime_find_portuguese_compositeSymbol(lastchar);
+            ime_find_portuguese_compositeSymbol(ime_littlechar);
+
+            if(ime_i_index != -1 && ime_j_index != -1 ) {
+                if (ime_letterflag == 1) {
+                    if (ime_i_index >= 5)
+                    {
+                        if (ime_i_index == 5 && ime_j_index == 3) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_smallLetterList[ime_i_index * 5];
+                        }
+                        else if (ime_i_index == 5 && ime_j_index == 4) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_smallLetterList[ime_i_index * 5 + 1];
+                        }
+                        else if (ime_i_index == 6 && ime_j_index == 1) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_smallLetterList[5 * 5 + 2];
+                        }
+                    }
+                    else
+                    {
+                        ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                        ime_littlechar = ime_portuguese_compositeSymbol_smallLetterList[ime_i_index * 5 + ime_j_index];
+                    }
+                }
+                else if (ime_letterflag == 2)
+                {
+                    if (ime_i_index >= 5)
+                    {
+                        if (ime_i_index == 5 && ime_j_index == 3) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_CaptialLetterList[ime_i_index * 5 ];
+                        }
+                        else if (ime_i_index == 5 && ime_j_index == 4) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_CaptialLetterList[ime_i_index * 5 + 1];
+                        }
+                        else if (ime_i_index == 6 && ime_j_index == 1) {
+                            ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                            ime_littlechar = ime_portuguese_compositeSymbol_CaptialLetterList[5 * 5 + 2];
+                        }
+                    }
+                    else
+                    {
+                        ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                        ime_littlechar = ime_portuguese_compositeSymbol_CaptialLetterList[ime_i_index * 5 + ime_j_index];
+                    }
+                }
+            }
+            ime_i_index = -1;
+            ime_j_index = -1;
+            ime_letterflag = -1;
+        }
+
+
+        function ime_french_compositeSymbol()
+        {
+            ime_portuguese_compositeSymbol();
+        }
+
+        function ime_keydown_bar(evt) {
+            var code = evt.keyCode;
+            switch (code) {
+                case 39:
+                    ime_candidate_moveright();
+                    break;
+                case 37://left
+                    ime_candidate_moveleft();
+                    break;
+                case 13://enter
+                    if(evt.modifiers == 0)
+                        ime_char_enter();
+                    break;
+                case 8://back
+                    ime_back();
+                    break;
+                case 40://down
+                case 38://up
+                {
+                    ime_getEID("ime_keyboard_char_focus").style.display = "none";
+                    ime_mulCharList[ime_drawposition].style.overflowX = "hidden";
+                    ime_mulCharList[ime_drawposition].style.textOverflow = "ellipsis";
+                    ime_mulCharList[ime_drawposition].innerHTML = replaceT(ime_mulCharList[ime_drawposition].innerHTML);
+                    ime_focusonmulchar = 0;
+                    ime_position = 0;
+                    ime_drawposition = ime_position;
+                    ime_keyboard.ime_getfocus();
+                }
+                    break;
+                default:
+                    if (evt.modifiers & 0x100 ) {
+                        code = code | 0x200;
+                        ime_language_hardKeyBoard(code);
+                    }
+                    else if (evt.modifiers & 0x2000 )
+                    {
+                        ime_language_specialHardKeyBoard(code)
+                        if(ime_specialflag == 0)
+                        {
+                            ime_language_hardKeyBoard(code);
+                        }
+                    }
+                    else
+                    {
+                        ime_language_hardKeyBoard(code);
+                    }
+
+            }
+        }
+
+        function ime_candidateWordsGetFocus()
+        {
+            ime_getEID("ime_keyboard_char_focus").style.display = "block";
+            ime_getEID("ime_keyboard_char_focus").style.left =  ((ime_drawposition+1) * 284 )+"px";
+            ime_focusonmulchar = 1;
+ //           ime_showstring();
+        }
+
+
+        function replaceT(s)
+        {
+            var key=s;
+            //console.log("string="+s);
+            //key=key.replace(/\u00B0/g,"&deg;");
+            //console.log("key15="+key);
+            return key;
+        }
+
+        function ime_submitString()
+        {
+            // ime_unicodeVector.clearUnicode();
+            for(var i = 0; i < ime_inputstring.length; i++)
+            {
+                //   ime_unicodeVector.appendUnicode(ime_inputstring.charCodeAt(i));
+                Util.sendKeyboardCHNEvent(ime_inputstring.charCodeAt(i));
+            }
+            ime_back();
+        }
+
+        function ime_deleteString()
+        {
+            if (ime_inputstring.length > 0) {
+                ime_inputstring = ime_inputstring.substr(0, ime_inputstring.length - 1);
+                if (ime_inputstring.length == 0) {
+                    ime_getEID("ime_keyboard_ui_bar").style.display = "none";
+                    ime_getEID("ime_keyboard_char_focus").style.display = "none";
+                }
+                else
+                    ime_findchar(ime_inputstring, 0);
+            }
+            else
+            {
+                ime_editprestring = document.activeElement.value;
+                ime_editprestring = ime_editprestring.substr(0, ime_editprestring.length - 1);
+                document.activeElement.value = ime_editprestring;
+            }
+        }
+
+        function ime_candidateInit(letter)
+        {
+            ime_getEID("ime_keyboard_ui_bar").style.display = "block";
+            ime_position = 0;
+            ime_drawposition = ime_position;
+            ime_focusonmulchar = 0;
+            ime_editprestring = document.activeElement.value;
+            ime_littlechar = letter;
+        }
+
+        function ime_getInputString()
+        {
+            return ime_inputstring;
+        }
+
+        function ime_candidate_IsDisplay()
+        {
+            return ime_focusonmulchar?true:false;
+        }
+
+
+        /**
+         * \u66B4\u9732\u7684public\u65B9\u6CD5\u548C\u5C5E\u6027
+         */
+        return{
+            ime_drawCandidateBar:ime_drawCandidateBar,//\u7ED8\u5236candidate
+            ime_submitString:ime_submitString, //\u4ECEcandidate\u63D0\u4EA4\u5230\u8F93\u5165\u6846
+            ime_deleteString:ime_deleteString,//delete\u6309\u952E\u529F\u80FD
+            ime_back:ime_back,//candidate\u6D88\u5931
+            _ime_findchar:_ime_findchar,//\u6B64\u65B9\u6CD5\u540E\u7EED\u8981\u4F18\u5316
+            ime_candidateInit:ime_candidateInit,//\u6B64\u65B9\u6CD5\u540E\u7EED\u8981\u4F18\u5316
+            ime_french_compositeSymbol:ime_french_compositeSymbol,
+            ime_portuguese_compositeSymbol:ime_portuguese_compositeSymbol,
+            ime_keydown_bar:ime_keydown_bar,
+            ime_candidateWordsGetFocus:ime_candidateWordsGetFocus,
+            ime_candidate_IsDisplay:ime_candidate_IsDisplay,
+            ime_candidate_clear:ime_candidate_clear,
+            ime_setCurLanguage:ime_setCurLanguage,
+            ime_getInputString:ime_getInputString
+        };
+
+    }
+
+    /**
+     * \u5B9E\u4F8B\u5BB9\u5668
+     */
+    var instance;
+
+    return {
+        getInstance: function ()
+        {
+            if (instance === undefined)
+            {
+                instance =  candidate();
+            }
+            return instance;
+        }
+    };
+})();
+
+function initSetRegion()
+{
+	imagepath = ime_g_setting.getProperty("ro.sita.model.Apps.ui_branch", "file:///system/ui_tcl/framework.html");
+    imagepath = prefix.replace("framework.html", "");
+}
+//\u952E\u76D8\u521D\u59CB\u5316\u51FD\u6570
+function ime_keyboard_Onload()
+{
+    initSetRegion();
+    ime_button_proxy = new IME_Button_Proxy();
+
+    ime_candidate = ime_Candidate.getInstance();
+
+    ime_g_setting.aPI_IQQI_Init_InputEngine("/system/tbrowser/libs/Index","/data/Index");
+
+    //\u8C03\u7528\u952E\u76D8\u7C7B
+    ime_keyboard = ime_Keyboard.getInstance(ime_button_proxy);
+
+    ime_notice_change_language = new IME_Notice();
+    ime_set_press_language.ime_regist(ime_notice_change_language);
+    ime_display_language.ime_regist(ime_notice_change_language);
+
+    //setting\u7C7B
+    ime_setting = ime_Setting.getInstance(ime_notice_change_language, ime_g_setting);
+
+    if(ime_g_setting.getProperty(ime_is_tv_first_on,"0")=="0")
+    {
+        //window.alert("first tv on");
+        ime_notice_change_language.ime_notice(ime_Languages.getLanguage("ENGLISH"));
+        ime_g_setting.setProperty(ime_Languages.getLanguagePropertyNames()[0],"1");
+        ime_g_setting.setProperty(ime_is_tv_first_on,"1");
+        ime_g_setting.setProperty(ime_setting.getCurCountry(),0);
+
+    }else
+    {
+        //\u542F\u52A8\u952E\u76D8\u65F6\u83B7\u53D6\u4FDD\u5B58\u7684\u5F53\u524D\u8BED\u8A00
+        ime_notice_change_language.ime_notice(ime_Languages.getLanguagesArray()[ime_g_setting.getProperty(ime_setting.getCurCountry(),0)]);
+    }
+
+    ime_setting.ime_checkKeyBoardEnable();//\u663E\u793A\u952E\u76D8\u65F6\u68C0\u7D22\u54EA\u4E9B\u8BED\u8A00\u88AB\u9009\u4E2D\u4E86
+}
+
+
+
+function ime_keyDown(evt)
+{
+    if(ime_hostSystemevent)
+    {
+        ime_hostSystemevent(evt);
+    }
+    var code = evt.keyCode || evt.which;
+    if(ime_candidate != undefined && ime_candidate.ime_candidate_IsDisplay())
+    {
+        ime_candidate.ime_keydown_bar(evt);
+        return;
+    }
+
+    switch(code){
+        case 1001:
+            Util.setEnv("TBROWSER_IME_STATE", "1");
+            ime_keyboard_Onload();
+            break;
+        case 39:
+            ime_keyboard.ime_right();
+            break;
+        case 37://left
+            ime_keyboard.ime_left();
+            break;
+        case 40://down
+            if (ime_getEID("ime_keyboard_ui_bar").style.display == "block") {
+                if (ime_keyboard.ime_cur_row() == ime_keyboard.ime_cur_rownum() - 1)
+                {
+                    ime_keyboard.ime_lostfocus();
+                    ime_candidate.ime_candidateWordsGetFocus();
+                }
+                else
+                    ime_keyboard.ime_down();
+            }
+            else
+                ime_keyboard.ime_down();
+            break;
+        case 38://up
+            if (ime_getEID("ime_keyboard_ui_bar").style.display == "block")
+            {
+                if (ime_keyboard.ime_cur_row() == 0)
+                {
+                    ime_keyboard.ime_lostfocus();
+                    ime_candidate.ime_candidateWordsGetFocus();
+                }
+                else
+                    ime_keyboard.ime_up();
+            }
+            else
+                ime_keyboard.ime_up();
+            break;
+        case 13://enter
+            if(evt.modifiers == 0)
+                ime_keyboard.ime_enter();
+            else
+            {
+                if (ime_repeatTimerIndex != 0)
+                {
+                    clearInterval(ime_repeatTimerIndex);
+                    ime_repeatTimerIndex = 0;
+                }
+            }
+            break;
+        case 8 ://back
+            ime_closeKeyBoard();
+            break;
+        default:
+            if (evt.modifiers & 0x100 ) {
+                code = code | 0x200;
+                ime_language_hardKeyBoard(code);
+            }
+            else if (evt.modifiers & 0x2000 )
+            {
+                ime_language_specialHardKeyBoard(code)
+                if(ime_specialflag == 0)
+                {
+                    ime_language_hardKeyBoard(code);
+                }
+            }
+            else
+            {
+                ime_language_hardKeyBoard(code);
+            }
+
+    }
+}
+
+function ime_closeKeyBoard()//\u9000\u51FA\u591A\u529F\u80FD\u8F93\u5165\u6CD5
+{
+    ime_candidate.ime_candidate_clear();//\u6E05\u695A\u72B6\u6001
+
+    ime_lastKeyboardType = 0;
+
+    document.body.removeChild(ime_getEID("ime_keyboard_ui"));
+     document.body.removeChild(ime_getEID("keboardTransport"));
+    ime_keyboard.ime_destoryKeyboard();
+    Util.setEnv("TBROWSER_IME_STATE", "0");
+    ime_g_setting.aPI_IQQI_Deinitial();
+}

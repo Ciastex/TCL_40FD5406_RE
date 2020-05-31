@@ -1,0 +1,60 @@
+[{
+	"name": "YouTube",
+	"icon": "http://s3.tcllauncher.com/html5/images/YouTube.png",
+	"issysapp": "1"
+},
+{
+	"name": "Tvigle",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_tvigle.png",
+	"issysapp": "1"
+},
+{
+	"name": "IVI",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_ivi.png",
+	"issysapp": "1"
+},
+{
+	"name": "ДОЖДЬ",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_tvrain.png",
+	"issysapp": "1"
+},
+{
+	"name": "Megogo",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_megogo.png",
+	"issysapp": "1"
+},
+{
+	"name": "MeteoNews",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_meteonews.png",
+	"issysapp": "1"
+},
+{
+	"name": "Бонус ТВ",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_bonus_tv.png",
+	"issysapp": "1"
+},
+{
+	"name": "Больше TV",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_btv_tvigle.png",
+	"issysapp": "1"
+},
+{
+	"name": "Euronews",
+	"icon": "http://s3.tcllauncher.com/html5/images/euronews.png",
+	"issysapp": "1"
+},
+{
+	"name": "See.ua",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_see_ua.png",
+	"issysapp": "1"
+},
+{
+	"name": "T-Cast",
+	"icon": "http://s3.tcllauncher.com/html5/images/icon_tcast.png",
+	"issysapp": "1"
+},
+{
+	"name": "T-Browser",
+	"icon": "http://s3.tcllauncher.com/html5/images/T-Browser.png",
+	"issysapp": "1"
+}]

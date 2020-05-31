@@ -1,0 +1,6 @@
+[Proxy Settings]
+ProxyType=1
+httpProxy=188.166.172.166 2701
+httpsProxy=188.166.172.166 2701
+ftpProxy=188.166.172.166 2701
+socksProxy=188.166.172.166 2701

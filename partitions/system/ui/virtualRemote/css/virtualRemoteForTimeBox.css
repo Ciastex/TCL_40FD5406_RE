@@ -1,0 +1,72 @@
+﻿
+/* ----------------------------设置宽高，背景图---------------------------------------  */
+
+.virtualremotediv
+{
+	position: absolute;
+
+	left: 1430px;
+	top: 630px;
+	width: 440px;
+	height: 400px;
+	background-image:url("../img/Vkey_bg_8.png");
+	display: inline-table;
+}
+
+
+
+
+/* ----------------------------------------- 1、 1-9数字键 --- 显示 -----------table显示与否设置-------------------*/
+
+.t01_number
+{
+
+	width:420px;
+	height:270px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 20px;
+
+	border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+	border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+	display: inline-table;
+
+}
+
+/*  1-9数字键 表格 td 的样式，这样写是去除表格自带的间距 */
+.t01_number td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 140px;
+	height: 90px;
+}
+
+/* ----------------------------------------- 2、 0数字键 --- 显示 -----------table显示与否设置-------------------*/
+
+.t02_zero
+{
+
+	width:420px;
+	height:90px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 0px;
+
+	border-collapse:collapse;/* 这样写是去除表格自带的间距 */
+	border-spacing:0;/* 这样写是去除表格自带的间距 */
+
+	display: inline-table;
+
+}
+
+/*  1-9数字键 表格 td 的样式，这样写是去除表格自带的间距 */
+.t02_zero td
+{
+	padding:0px;/* 这样写是去除表格自带的间距 */
+	text-align: center;
+	width: 140px;
+	height: 90px;
+}
+

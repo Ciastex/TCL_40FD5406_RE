@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="InputMethod" xmlns:tvos="tvos" >
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <set-env>
+        <env tvos:name="LD_LIBRARY_PATH" tvos:mode="front">/system/tbrowser2/lib</env>
+    </set-env>
+    <application tvos:persistet="true">
+        <service tvos:name="InputMethodServer" >
+            <intent-filter>
+                <action tvos:name="tvos.ime.service" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

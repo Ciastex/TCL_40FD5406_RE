@@ -1,0 +1,27 @@
+/* CSS Document */
+
+body 
+{
+	background:#F6F6F6;
+	margin: 0px;
+}
+
+a
+{
+	text-decoration:none;
+}
+
+span
+{
+	font-family: "微软雅黑";
+}
+
+label
+{
+	font-family:"微软雅黑";
+}
+
+input
+{
+	font-family:"微软雅黑";
+}

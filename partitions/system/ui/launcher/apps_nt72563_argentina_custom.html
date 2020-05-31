@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" id="theme" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+<script type="text/javascript">
+
+function setFocusId(id)
+{
+	parent.FocusId(id)
+}
+
+document.onmousemove = function()
+{
+	parent.focus();
+}
+document.onclick = function()
+{
+	if(top.$("otherPage").src.indexOf("connectNetworkRemind.html")==-1)
+	{
+		parent.focus();
+	}
+}
+
+</script>
+</head>
+<body class="body_comm">
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+        <div id="appsPage" name="subwindow" class="window" style="display: block; left: 0px; top: 160px;">
+            <div class="appicon" id="apps_01" name="focusBlock" data-up="0" data-down="0" data-left="-1" data-right="apps_02" data-leftPage="tv_03" data-rightPage="tv_12" data-focus_id="border_apps_01" style="top: 63px; left: 95px; height: 572px; width: 572px;" onclick="jumpToApp('foxxum-nt72563-la');setFocusId('apps_01');actionFive_Click('5','0_au_apps01_0','App Store','')">
+                <img src="images/APP_store.png?md5=fdabd820f19a486bc1024f9df9819803" class='app_background'/> 
+                <span class="elem_block_title" style="width: 572px;"></span>
+            </div>
+            <div class="elem_border border" id="border_apps_01" style="top: 38px; left: 70px; visibility: hidden; height: 559px; width: 559px;" onclick="jumpToApp('foxxum-nt72563-la')"></div>
+            <div class="appicon" id="apps_02" name="apps_02" data-up="0" data-down="apps_03" data-left="apps_01" data-right="apps_04" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_02" style="top: 63px; left: 677px;" onclick="jumpToApp('netflix');setFocusId('apps_02');actionFive_Click('5','0_au_apps02_0','netflix','')">
+                <img src="images/netflixl_maxi.png?md5=456c7bc2dacf2190adc011f653616c36" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">Netflix</span>
+            </div>
+            <div class="elem_border border" id="border_apps_02" style="top:38px; left: 652px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('netflix')"></div>
+            <div class="appicon" id="apps_03" name="apps_03" data-up="apps_02" data-down="0" data-left="apps_01" data-right="apps_05" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_03" style="top: 353px; left: 677px;" onclick="jumpToApp('youtube');setFocusId('apps_03');actionFive_Click('5','0_au_apps03_0','youtube','')">
+                <img src="images/youtubel_maxi.png?md5=7b176544a74bf963e84722690d58e3d6" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">YouTube</span>
+            </div>
+            <div class="elem_border border" id="border_apps_03" style="top: 328px; left: 652px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('youtube')"></div>
+            <div class="appicon" id="apps_04" name="apps_04" data-up="0" data-down="apps_05" data-left="apps_02" data-right="apps_100" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_04" style="top:63px; left:968px;" onclick="jumpToApp('Crackle');setFocusId('apps_04');actionFive_Click('5','0_au_apps04_0','Crackle','')">
+                <img src="images/cracklel_maxi.png?md5=85fa9b9a079f39b3931b3efddeb7b214" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">Crackle</span>
+            </div>
+            <div class="elem_border border" id="border_apps_04" style="top: 38px; left: 943px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('Crackle')"></div>
+            <div class="appicon" id="apps_05" name="apps_05" data-up="apps_04" data-down="0" data-left="apps_03" data-right="apps_101" data-leftPage="apps_03" data-rightPage="apps_03" data-focus_id="border_apps_05" style="top: 353px; left: 968px;" onclick="jumpLocalApps('tcast');setFocusId('apps_05');actionFive_Click('5','0_au_apps05_0','T-Cast','')">
+                <img src="images/icon_tcast_maxi.png?md5=f845ef5b3efeb9ec65acc6e443d2f61" class='app_background'/> 
+                <span class="elem_block_title" style="bottom: 6px;">T-Cast</span>
+            </div>
+            <div class="elem_border border" id="border_apps_05" style="top: 328px; left: 943px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpLocalApps('tcast')"></div>
+            <div class="appicon" id="apps_100" name="apps_100" data-up="0" data-down="apps_101" data-left="apps_04" data-right="-1" data-leftPage="apps_03" data-rightPage="home_01" data-focus_id="border_apps_100" style="top: 63px; left: 1259px;" onclick="jumpToApp('lanacion');setFocusId('apps_100');actionFive_Click('5','0_au_apps100_0','Lanacion','')">
+                <img src="images/lanacion_maxi.png?md5=3071e9995b14ca02d0d18c7a8b700458" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">Lanacion</span>
+            </div>
+            <div class="elem_border border" id="border_apps_100" style="top: 38px; left: 1234px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('lanacion')"></div>
+            <div class="appicon" id="apps_101" name="apps_101" data-up="apps_100" data-down="0" data-left="apps_05" data-right="-1" data-leftPage="apps_03" data-rightPage="home_02" data-focus_id="border_apps_101" style="top: 353px; left: 1259px;" onclick="jumpToApp('browser');setFocusId('apps_101');actionFive_Click('5','0_au_apps101_0','T-Browser','')">
+                <img src="images/t_browser_maxi.png?md5=302ecc01863e4434f602a04456aa8b02" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">T-Browser</span>
+            </div>
+            <div class="elem_border border" id="border_apps_101" style="top: 328px; left: 1234px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('browser')"></div>
+            <!-->
+			<div class="appicon" id="apps_101" name="apps_101" data-up="0" data-down="apps_100" data-left="apps_06" data-right="-1" data-leftPage="apps_03" data-rightPage="home_01" data-focus_id="border_apps_08" style="top:63px; left:1550px;" onclick="jumpToApp('browser');setFocusId('apps_08');actionFive_Click('5','0_au_apps08_0','T-Browser','')">
+                <img src="images/t_browser_maxi.png?md5=302ecc01863e4434f602a04456aa8b02" class='app_background'/>
+                <span class="elem_block_title" style="bottom: 6px;">T-Browser</span>
+            </div>
+            <div class="elem_border border" id="border_apps_08" style="top: 38px; left: 1525px; visibility: hidden; width: 268px; height: 268px;" onclick="jumpToApp('browser')"></div>
+			<-->
+             </div>
+    </div>
+</body>
+<script>
+updateZeasn();
+</script>
+<!-- ar,bz,bo,br,cl,cr,ec,sv,gt,ni,py,pe,uy,ve -->
+</html>
+

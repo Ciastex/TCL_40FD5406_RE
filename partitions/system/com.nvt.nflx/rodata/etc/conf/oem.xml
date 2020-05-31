@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_root>
+    <config_data>
+        <capabilities>
+            <gibbon>
+                <splash>
+                    <device>true</device>
+                </splash>
+            </gibbon>
+        </capabilities>
+  </config_data>
+</config_root>

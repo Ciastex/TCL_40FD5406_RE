@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest package="crossui" xmlns:tvos="tvos" >
+
+    <uses-sdk tvos:targetSdkVersion="1" ></uses-sdk>
+    <set-env>
+        <env tvos:name="LD_LIBRARY_PATH" tvos:mode="front">/system/tbrowser/libs</env>
+    </set-env>
+    <application tvos:persistet="true">
+        <activity
+            tvos:name="CrossUi" >
+            <intent-filter>
+                <action tvos:name="tvos.crossui" />
+                <category tvos:name="tvos.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

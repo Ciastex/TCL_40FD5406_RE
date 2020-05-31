@@ -1,0 +1,53 @@
+system=fbdev
+module-dir=/system/lib/dfb/directfb-1.7-1
+
+# GLES partial updates
+#no-hardware-layer=6
+#wm-fullscreen-updates-layer=1
+#small-update-size=65536
+
+# Handle TCL/Netflix logo clear issue
+wm-init-no-update
+surface-clear
+no-layers-clear
+surface-clear-mode
+
+#Fixed virtual address for TCL crossui special request
+lock-va-fixed
+
+# Ginga
+sync-callbuffer
+font-premult
+# Mode must match the primary layer size by project spec
+mode=1920x1080
+pixelformat=ARGB
+
+# Never create a cursor or handle it
+#no-cursor
+cursor
+
+wm=sawman
+
+init-layer=0
+layer-stacking=middle
+
+init-layer=1
+layer-stacking=lower
+
+init-layer=2
+layer-stacking=upper
+bg-none
+
+#always-flush-callbuffer
+no-neon
+
+#select key mapping dynamically
+#1: For TCL
+key-mapping-index=1 
+
+# For debugging
+no-trace
+#no-debug
+#log-file=/dev/null
+#log-file=/tmp/log.log
+#mem-pool-record

@@ -1,0 +1,27 @@
+#tcl_messageBox {
+	font-family: Arial;
+	box-sizing: border-box;
+	position: fixed;
+	width: 350px;
+	height: 80px;
+	left: 465px;
+	top: 605px;
+	z-index: 999;
+	padding-left: 12px;
+	padding-top: 22px;
+	background-image: url("file:///system/tbrowser/resources/Pages/TclBrowser/tclResources/img_1280/messageBox.png");
+}
+
+#tcl_messageBox p {
+	font-size: 20px;
+	color: #FFFFFF;
+	padding-left: 25px;
+	margin: 0px;
+}
+
+#tcl_messageBox span {
+	color: #FF7100;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 25px;
+}

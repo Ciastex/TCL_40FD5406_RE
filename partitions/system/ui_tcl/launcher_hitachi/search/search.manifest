@@ -1,0 +1,23 @@
+CACHE MANIFEST 
+
+#version 5.28
+
+CACHE:
+http://s3.tcllauncher.com/html5/search/search.css
+http://s3.tcllauncher.com/html5/search/search.js
+
+http://s3.tcllauncher.com/html5/images/theme/focus_402x402.png
+http://s3.tcllauncher.com/html5/images/theme/focus_402x402.png
+http://s3.tcllauncher.com/html5/images/theme/focus_402x402.png
+http://s3.tcllauncher.com/html5/images/theme/focus_402x402.png
+http://s3.tcllauncher.com/html5/images/theme/focus_402x402.png
+
+http://s3.tcllauncher.com/html5/images/searchInput.png
+http://s3.tcllauncher.com/html5/images/theme/focus_1049x108.png
+http://s3.tcllauncher.com/html5/images/searchButton.png
+http://s3.tcllauncher.com/html5/images/theme/focus_160x74.png
+http://s3.tcllauncher.com/html5/images/Line_1.png
+
+
+NETWORK:
+*

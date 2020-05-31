@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="theme_thomson.css" />
+<link rel="stylesheet" type="text/css" href="main.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+<script type="text/javascript" src="generalFun.js"></script>
+<script type="text/javascript" src="reportDataForTab.js"></script>
+<script type="text/javascript">
+function setFocusId(id)
+{
+	parent.FocusId(id)
+}
+
+document.onmousemove = function()
+{
+	parent.focus();
+}
+document.onclick = function()
+{
+	if(top.$("otherPage").src.indexOf("connectNetworkRemind.html")==-1)
+	{
+		parent.focus();
+	}
+}
+var videosPageWords = [top.videosPageWords[0],top.videosPageWords[1],top.videosPageWords[2],top.videosPageWords[3],top.videosPageWords[4],top.videosPageWords[5],top.videosPageWords[6]];
+function initSpanName()
+{
+	var needTranslateSpans = document.getElementsByName("needTranslate");
+	for(var i = 0; i < needTranslateSpans.length; i++)
+	{
+		needTranslateSpans[i].innerHTML = videosPageWords[i];
+	}
+	
+}
+</script>
+</head>
+<body onload="initSpanName()" class="body_comm" oncontextmenu='return false' ondragstart='return false' onselectstart='return false' onbeforecopy='return false'>
+
+    <div style="position:absolute;left:0px;top:0px;width:1920px;height:1080px;overflow:hidden;">
+	<div id="videosPage" name="subwindow" class="window" style="display: block; left: 0px; top: 160px;">
+
+		<div class="elem" id="videos_01" name="focusBlock"
+		    onclick="setFocusId('videos_01');actionFive_Click('4','111_231_333_444','Movie','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=Movies&tplid=location&ids=0_0_0_0');"
+			data-up="0" data-right="videos_02" data-down="0" data-left="-1" data-leftPage="home_06" data-rightPage="top:57px;left:90px;"
+			data-focus_id="border_videos_01" style="top: 63px; left: 95px; height: 572px; width: 572px;">
+			
+			<img src="images/THOMOSON_01.png?md5=644697c408175b1c1855e85de01cdf72" />
+			<img src="images/zhezhao_621x621.png?md5=866ca284238dc1907e61c88d27cb90b8" />
+            <span class="elem_block_title" name = "needTranslate" style="width: 572px;">Movie</span>
+		</div>
+		<div class="elem_border themeImg_621x621" id="border_videos_01" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=Movies&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_333_444','Movie','');"
+			style="top: 39px; left: 70px; visibility: hidden; height: 621px; width: 621px;">
+		</div>
+
+		<div class="elem" id="videos_02"  name="videos_02"
+			onclick="setFocusId('videos_02');actionFive_Click('4','111_231_334_445','Sport','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=Sports&tplid=location&ids=0_0_0_0')"
+			data-up="0" data-right="videos_05" data-down="videos_03"
+			data-left="videos_01" data-leftPage="videos_03" data-rightPage="videos_03" data-focus_id="border_videos_02"
+			style="top: 63px; left: 677px; height: 281px; width: 572px;">
+			<img src="images/THOMOSON_02.png?md5=052a6e55461798c560fa3011ed170a51" /> 
+            <img src="images/zhezhao_621x330.png?md5=2a5dbf3c60688d369a4efd54a57f564e" />
+            <span class="elem_block_title"  name = "needTranslate" style="width: 572px;">Sport</span>
+		</div>
+		<div class="elem_border themeImg_621x330" id="border_videos_02" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=Sports&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_334_445','Sport','');"
+			style="top: 39px; left: 653px; visibility: hidden; height: 330px; width: 621px;">
+		</div>
+        
+        <div class="elem" id="videos_03"  name="videos_03"
+			onclick="setFocusId('videos_03');actionFive_Click('4','111_231_335_446','Music','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=Music&tplid=location&ids=0_0_0_0')"
+			data-up="videos_02" data-right="videos_06" data-down="0"
+			data-left="videos_01" data-leftPage="videos_03" data-rightPage="videos_03" data-focus_id="border_videos_03"
+			style="top: 353px; left: 677px; height: 281px; width: 572px;">
+			<img src="images/THOMOSON_03.png?md5=6eb9143e328d2975856bafe6da2fbb38" />
+            <img src="images/zhezhao_621x330.png?md5=2a5dbf3c60688d369a4efd54a57f564e" />
+            <span class="elem_block_title"  name = "needTranslate" style="width: 572px;">Music</span>
+		</div>
+		<div class="elem_border themeImg_621x330" id="border_videos_03" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=Music&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_335_446','Music','');"
+			style="top: 330px; left: 653px; visibility: hidden; height: 330px; width: 621px;">
+		</div>
+
+		<div class="elem" id="videos_05" name="videos_05"
+			onclick="setFocusId('videos_05');actionFive_Click('4','111_231_337_448','Popular','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=PopularOnYouTube&tplid=location&ids=0_0_0_0')"
+			data-up="0" data-right="videos_07" data-down="videos_06" data-left="videos_02" data-leftPage="videos_03"
+			data-rightPage="videos_03" data-focus_id="border_videos_05" style="top: 63px; left: 1259px; height: 281px; width: 281px;">
+			<img src="images/theme/THOMOSON_04.png?md5=768109648f705ea20330353bfc07ff95" /> 
+            <img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+            <span  class="elem_block_title" name = "needTranslate" style="width: 281px;">Popular</span>
+		</div>
+		<div class="elem_border themeImg_330x330" id="border_videos_05" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=PopularOnYouTube&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_337_448','Popular','');"
+			style="top: 39px; left: 1235px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+		<div class="elem" id="videos_06" name="videos_06"
+			onclick="setFocusId('videos_06');actionFive_Click('4','111_231_338_449','Game','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=Gaming&tplid=location&ids=0_0_0_0')"
+			data-up="videos_05" data-right="videos_08" data-down="0" data-left="videos_03" data-leftPage="videos_03"
+			data-rightPage="videos_03" data-focus_id="border_videos_06" style="top: 353px; left: 1259px; height: 281px; width: 281px;">
+			<img src="images/theme/THOMOSON_05.png?md5=4c017834d7f37919d54c54ae2179246d" /> 
+            <img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+            <span  class="elem_block_title" name = "needTranslate" style="width: 281px;">Game</span>
+		</div>
+		<div class="elem_border themeImg_330x330" id="border_videos_06" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=Gaming&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_338_449','Game','');"
+			style="top: 330px; left: 1235px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+		<div class="elem" id="videos_07" name="videos_07"
+			onclick="setFocusId('videos_07');actionFive_Click('4','111_231_339_443','Education','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=Education&tplid=location&ids=0_0_0_0')"
+			data-up="0" data-right="-1" data-down="videos_08" data-left="videos_05" data-leftPage="videos_03"
+			data-rightPage="tv_00" data-focus_id="border_videos_07" style="top: 63px; left: 1550px; height: 281px; width: 281px;">
+			<img src="images/theme/THOMOSON_06n.png?md5=69e503bd52994af4c0cc228a7eca7517" /> 
+            <img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+            <span  class="elem_block_title" name = "needTranslate" style="width: 281px;">Education</span>
+		</div>
+		<div class="elem_border themeImg_330x330" id="border_videos_07" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=Education&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_339_443','Education','');"
+			style="top: 39px; left: 1526px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+		<div class="elem" id="videos_08" name="videos_08"
+			onclick="setFocusId('videos_08');actionFive_Click('4','111_231_330_442','News','');jumpToSubpage('channelVideo/channelVideo.html?channelKey=News_Politics&tplid=location&ids=0_0_0_0')"
+			data-up="videos_07" data-right="-1" data-down="0" data-left="videos_06" data-leftPage="videos_03"
+			data-rightPage="tv_00" data-focus_id="border_videos_08" style="top: 353px; left: 1550px; height: 281px; width: 281px;">
+			<img src="images/theme/THOMOSON_07.png?md5=1aa0fce5f4b7bb60b147921e41534e00" /> 
+            <img src="images/zhezhao_330x330.png?md5=74410cc9cabdccfe9e8d65e08338aee1" />
+            <span  class="elem_block_title" name = "needTranslate" style="width: 281px;">News</span>
+		</div>
+		<div class="elem_border themeImg_330x330" id="border_videos_08" onclick="jumpToSubpage('channelVideo/channelVideo.html?channelKey=News_Politics&tplid=location&ids=0_0_0_0');actionFive_Click('4','111_231_330_442','News','');"
+			style="top: 330px; left: 1526px; visibility: hidden; width: 330px; height: 330px;">
+		</div>
+
+	</div>
+    </div>
+
+
+
+</body>
+
+</html>

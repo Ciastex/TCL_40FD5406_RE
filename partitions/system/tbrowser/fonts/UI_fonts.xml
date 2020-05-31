@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    System Fonts
+
+    This file lists the font families that will be used by default for all supported glyphs.
+    Each entry consists of a family, various names that are supported by that family, and
+    up to four font files. The font files are listed in the order of the styles which they
+    support: regular, bold, italic and bold-italic. If less than four styles are listed, then
+    the styles with no associated font file will be supported by the other font files listed.
+
+    The first family is also the default font, which handles font request that have not specified
+    specific font names.
+
+    Any glyph that is not handled by the system fonts will cause a search of the fallback fonts.
+    The default fallback fonts are specified in the file /system/etc/fallback_fonts.xml, and there
+    is an optional file which may be supplied by vendors to specify other fallback fonts to use
+    in /vendor/etc/fallback_fonts.xml.
+-->
+<familyset>
+    <family>
+        <nameset>
+            <name>helvetica</name>
+        </nameset>
+        <fileset>
+            <file>HelveticaWorld-Regular.ttf</file>
+            <file>DevanagariOTS.ttf</file>
+            <file>HelveticaNeueLTGE-Regular.ttf</file>
+            <file>MTXc3kp.ttf</file>
+            <file>MyanmarOTS.ttf</file>
+            <file>ThaiOTS.ttf</file>
+            <file>tahoma.ttf</file>
+            <file>YDGothic130.ttf</file>
+            <file>MYingHei_B5HK-M_subset.ttf</file>
+            <file>MYingHei_18030-M_subset.ttf</file>
+        </fileset>
+    </family>
+</familyset>

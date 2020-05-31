@@ -1,0 +1,244 @@
+﻿/* channelVideos */
+.videoBody
+{
+	background-image:url('images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c'); 
+	border:none;
+	padding:0;
+	margin:0;
+	background-repeat:no-repeat;
+}
+.focusFrameVideo
+{
+	position:absolute;
+	left:-24px;
+	top:-24px;
+	height:402px;
+	width:402px;
+	background-image:url('images/theme_tcl/focus_402x402.png?md5=576eaf56a65471a39dfd32afd931da04');
+	display:none;
+}
+
+/* history 4 */
+.historyBG
+{
+	background-image: url("images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c");
+}
+
+.itemPic
+{
+	position:absolute;
+	top:-6px;
+	left:-4px;
+	height:378px;
+	width:378px;
+	background-image: url("images/theme_tcl/focus_378x378.png?md5=f9c0aa7b8513aa8cab58e4d4d3770d8a");
+}
+
+
+
+.delOneCss_focus
+{
+	position:absolute;
+	display:inline;
+	z-index:201;
+	left:640px;
+	top:10px;
+	width:240px;
+	text-align:center;
+	line-height:94px;
+	height:94px;
+	font-size:36px;
+	background-image:url('images/theme_tcl/button_240x94.png?md5=84a4177a2f04941f0bbc6e75959d7d65');
+	color:#ffffff;
+	
+}
+
+
+.delALLCss_focus
+{
+	position:absolute;
+	display:inline;
+	z-index:201;
+	left:1040px;
+	top:10px;
+	width:240px;
+	text-align:center;
+	line-height:94px;
+	height:94px;
+	font-size:36px;
+	background-image:url('images/theme_tcl/button_240x94.png?md5=84a4177a2f04941f0bbc6e75959d7d65');
+	color:#aaaaaa;
+	
+}
+
+/* player */
+
+/*焦点样式*/
+.imgfocus
+{
+	background-image:url('images/theme_tcl/focus_132x94.png?md5=471284b122da6b56b0e2d153d368a431'); 
+	background-repeat:no-repeat;
+}
+
+
+/* resultsearch  */
+.resultsearchBody 
+{
+	background-image:url('images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c'); 
+	border:none;
+	padding:0;
+	margin:0;
+	background-repeat:no-repeat;
+} 
+
+.focusFrameSearch
+{
+	position:absolute;
+	left:-24px;
+	top:-24px;
+	height:402px;
+	width:402px;
+	background-size:100% 100%;	
+	background-image:url('images/theme_tcl/focus_402x402.png?md5=576eaf56a65471a39dfd32afd931da04');
+	display:none;
+	z-index:10;
+}
+
+
+/* search */
+.searchBody
+{
+	background:url('images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c');
+	width:1920px;
+	height:1080px;
+	background-repeat:no-repeat;
+	
+}
+
+.backgroundPic_pop
+{
+	display:inline;
+	position:absolute;
+	left:-24px;
+	top:-24px;
+	height:402px;
+	width:402px;
+	background-image: url("images/theme_tcl/focus_402x402.png?md5=576eaf56a65471a39dfd32afd931da04");
+}
+
+.backgroundPic_search
+{
+	display:inline;
+	position:absolute;
+	left:340px;
+	top:331px;
+	width:1049px;
+	height:108px;
+	background-image: url("images/theme_tcl/focus_1049x108.png?md5=99cf9652cfad0231af8429937b16a266");
+}
+
+.backgroundPic_button
+{
+	display:inline;
+	position:absolute;
+	left:-14px;
+	top:-14px;
+	width:199px;
+	height:108px;
+	background-image: url("images/theme_tcl/focus_160x74.png?md5=08ac91b905056d5fd3a0e9955afe889d");
+}
+
+
+
+/* index 3 */
+
+.btn 
+{
+	background: url(images/theme_tcl/button_353x112.png?md5=2cb700a37055756ac082fd090f707f66) no-repeat;
+	font-family: 'Helvetica World';
+	color: #fff;
+}
+
+.mainFocusActive 
+{
+    background: url(images/theme_tcl/Tabfocus.png?md5=dcc10ba417ffe7a72ee281bc458c4612) no-repeat center; 
+}
+
+.historyDelcheckedbtn 
+{
+	display: inline;
+	background-image: url(images/theme_tcl/button_240x94.png?md5=84a4177a2f04941f0bbc6e75959d7d65);
+	font-family: 'Helvetica World';
+	font-size: 5px;
+	text-decoration: none;
+	color: #172E06;
+}
+
+/* main 7 */
+
+.body_comm
+{
+    margin:0px;
+    background:url(images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c) no-repeat;
+}
+
+.body_tv
+{
+    margin:0px;
+    background:url(images/theme_tcl/background_tv.png?md5=a60c568322afdff026b232e0a66acd52) no-repeat;
+}
+
+/* 增加对焦点图的修饰css */
+.themeImg_330x330
+{
+	background-image: url("images/theme_tcl/focus_330x330.png?md5=34f11d96b9fc3662d8c39148da785430");
+}
+
+.themeImg_621x621
+{
+	background-image: url("images/theme_tcl/focus_621x621.png?md5=6780587d1dfd627aaa7f8b8eed71ec45");
+}
+
+
+.themeImg_621x330
+{
+	background-image: url("images/theme_tcl/focus_621x330.png?md5=87df78a8c03fa681d87bb03f59beaa60");
+}
+
+.themeImg_330x621
+{
+	background-image: url("images/theme_tcl/focus_330x621.png?md5=f2d92962d44fba00a8f95d6898490241");
+}
+
+
+.themeImg_1066x621
+{
+	background-image: url("images/theme_tcl/focus_1066x621.png?md5=9d11051de20c52c7cd0e2488154b5295");
+}
+
+
+.themeImg_234x233
+{
+	background-image: url("images/theme_tcl/focus_234x233.png?md5=dff91ca5faf4124e446ea536033a2964");
+}
+
+.groupfocus
+{
+    width: 707px;
+    height: 81px;
+    background: url(images/theme_tcl/focus_schedule.png?md5=a62a6bda4a3e3f6c27952ded181d23db) no-repeat;
+}
+
+.teamfocus
+{
+    position: absolute;
+    width: 141px;
+    height: 141px;
+    background: url(images/theme_tcl/focus_team.png?md5=3751c6eceade0fb22e9c826d74f4658d) no-repeat;
+}
+
+.sportsBody
+{
+	background: url('images/theme_tcl/background_body.png?md5=1cf3b337b923b0fe1d54b4b7294c2f6c') no-repeat; 
+}
+
