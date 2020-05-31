@@ -1,0 +1,104 @@
+#!/bin/sh
+echo "/etc/rc.local start"
+
+# mount ramdisk 
+mount -n -t proc proc /proc
+mount -n -t sysfs sysfs /sys
+#mount -t devtmpfs none /dev
+#mount -t tmpfs tmpfs /dtv -o size=40M,mode=1777
+mount -t tmpfs tmpfs /tmp -o size=36M,mode=1777
+mount -t tmpfs tmpfs /media -o size=100,mode=1777
+#mount -t tmpfs tmpfs /freesia -o size=2M,mode=1777
+#mount -t tmpfs tmpfs /core -o size=30M,mode=1777
+#mount -t tmpfs tmpfs /var/run -o size=1M,mode=1777
+
+#
+# USB
+#
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+/sbin/mdev -s 
+#
+# Flash partition : check & mount                                                                                                                   
+#
+source /etc/profile_emmc
+
+#cd /etc
+#source run.sh
+
+
+echo "[BOOT] recovery run.sh start"
+export GA_BUF_SIZE=0x3100000
+
+#show boot logo.
+echo "[BOOT] show boot logo"
+cd /etc/bootlogo
+./bootlogo -p 1712128@/dev/mmcblk0p1 -a 512 -f /nvtdata/bootlogo/bootlogo.jpg -t 5 -i 1 -b 147849216 -m 0 &
+cd
+
+# insert ko
+export NVT_DTB_PATH=lib/modules/memory.dtb
+cd /etc                        
+./install_fpga.sh
+#cd /etc
+echo "cur path 111 is $PWD"
+
+echo "run.sh call install_fpga.sh finish"
+
+
+# environment
+#export DFBHOME=/lib/modules/lib
+#export DFBLIBS=/lib/modules/lib/lib/dfb/directfb-1.7-1
+#export LD_LIBRARY_PATH=/lib:lib/modules/lib/lib:lib/modules/lib/lib/dfb:lib/modules/lib/lib/libs:lib/modules/lib/lib/client
+#export LD_PRELOAD="/lib/modules/lib/lib/libs/libz.so.1 /lib/modules/lib/lib/libs/libjpeg.so.9 /lib/modules/lib/lib/libs/libpng16.so.16 /lib/modules/lib/lib/libs/libfreetype.so"
+
+export DFBHOME=$PWD
+export LD_LIBRARY_PATH=$PWD/lib:$PWD/lib/dfb:$PWD/lib/libs
+export LD_PRELOAD="$PWD/lib/libs/libz.so.1 $PWD/lib/libs/libjpeg.so.9 $PWD/lib/libs/libpng16.so.16 $PWD/lib/libs/libfreetype.so" 
+
+# for directfb
+#export DFB_CLEAR_FB=2
+#export PANEL_WIDTH=1920
+#export PANEL_HEIGHT=1080
+#export DFB_PALETTE_LAYER=2
+#export NVT_MMAP_PATH="$PWD/nvt_mmap.conf"
+
+
+echo "run.sh export finish"
+echo "insmod kernel driver begin"
+echo "cur folder 222 is $PWD"
+
+cd /lib/modules
+
+
+
+echo "insmod kernel driver finish"
+
+./install_usb.sh
+
+
+echo "/etc/rc.local finish"
+cd /etc
+
+
+sleep 4
+#./DFBTest/blend/blend 0 5 data/rose.png data/smokey_light.jpg
+#./DFBTest/blend/blend 0 5 data/rose.png data/wood_andi.png
+#./DFBTest/sawman_demo/sawman_demo 0 2 data/wood_andi.png data/rose.png 
+#./DFBTest/penguin/penguin 0 data/tux_alpha.png
+#./DFBTest/init/init 0 data/wood_andi.png data/rose.png 
+#./dok --size 256x256 &
+#./dok_7 --size 256x256 &
+#./DFBTest/init/init 0 &
+
+umount /nvtdata
+echo "umount nvtdata finish"
+
+cd /etc
+./nvt_function
+./tclfwupdate
+
+#/bin/emmc_phase_test.sh
+#micom usb_gpio
+#sh /bin/start.sh &
+
+

@@ -1,0 +1,195 @@
+# /etc/profile_emmc
+echo "/etc/profile start"
+
+# partition information
+TCL_MISC=/dev/nvt-part-name/misc
+TCL_IMPDATA=/dev/nvt-part-name/impdata
+TCL_USERDATA=/dev/nvt-part-name/userdata
+TCL_CONFIG=/dev/nvt-part-name/tclconfig
+TCL_CACHE=/dev/nvt-part-name/cache
+TCL_TVOS=/dev/nvt-part-name/tvos
+TCL_SYSTEM=/dev/nvt-part-name/system
+TCL_DATA=/dev/nvt-part-name/data
+TCL_PERSIST=/dev/nvt-part-name/persist
+TCL_NVTDATA=/dev/nvt-part-name/nvtdata
+
+# local functions
+func_mount_ext4() {
+	echo "++++mount $1 start ++++"
+	while [ ! -e $1 ]; do
+		sleep 0.1
+	done
+	e2fsck -y $1
+	RET_VAR=$?
+	echo "RET_VAR is $RET_VAR"
+	if [ $RET_VAR = 2 ] || [ $RET_VAR = 4 ] || [ $RET_VAR = 8 ]; then
+		mkfs.ext4 $1
+	fi		
+
+	while [ ! -d $2 ]; do 
+		sleep 0.1
+	done
+	
+	RETRY=0
+	while [ $RETRY -lt 4 ]; do
+		mount -t ext4 $1 /$2
+		RET_VAR=$?
+		if [ $RET_VAR = 0 ]; then
+			RETRY=4
+		else
+			RETRY=$((RETRY+1))
+			sleep 1
+		fi
+	done
+
+	if [ $RET_VAR != 0 ]; then
+		echo "!!! mount $2 fail !!!"
+	fi
+	
+	#echo "- mount $2 ($1)"
+}
+
+func_mount_ro_ext4() {
+	echo "++++mount $1 start ++++"
+	while [ ! -e $1 ]; do
+		sleep 0.1
+	done
+	e2fsck -y $1
+	RET_VAR=$?
+	echo "RET_VAR is $RET_VAR"
+	if [ $RET_VAR = 2 ] || [ $RET_VAR = 4 ] || [ $RET_VAR = 8 ]; then
+		#mkfs.ext4 $1
+		echo "!!! e2fsck $2 fail !!!"
+	fi		
+
+	while [ ! -d $2 ]; do 
+		sleep 0.1
+	done
+
+	RETRY=0
+	while [ $RETRY -lt 4 ]; do
+		mount -t ext4 -o ro $1 /$2
+		RET_VAR=$?
+		if [ $RET_VAR = 0 ]; then
+			RETRY=4
+		else
+			RETRY=$((RETRY+1))
+			sleep 1
+		fi
+	done
+
+	if [ $RET_VAR != 0 ]; then
+		echo "!!! mount $2 fail !!!"
+	fi
+	
+	#echo "- mount $2 ($1)"
+}
+
+func_check_and_mount_ext4() {
+	echo "++++mount $1 start ++++"
+	while [ ! -e $1 ]; do
+		sleep 0.1
+	done
+	VAL1=$(dd if=$1 bs=16 count=1 | grep ERASEDB)
+	if [ -n "$VAL1" ]; then
+		dd if=/dev/zero of=$1 bs=16 count=1
+		mkfs.ext4 $1
+	else
+		e2fsck -y $1
+		RET_VAR=$?
+		echo "RET_VAR is $RET_VAR"
+		if [ $RET_VAR = 2 ] || [ $RET_VAR = 4 ] || [ $RET_VAR = 8 ]; then
+			mkfs.ext4 $1
+		fi
+	fi
+
+	while [ ! -d $2 ]; do 
+		sleep 0.1
+	done
+
+	RETRY=0
+	while [ $RETRY -lt 4 ]; do
+		mount -t ext4 $1 /$2
+		RET_VAR=$?
+		if [ $RET_VAR = 0 ]; then
+			RETRY=4
+		else
+			RETRY=$((RETRY+1))
+			sleep 1
+		fi
+	done
+
+	if [ $RET_VAR != 0 ]; then
+		echo "!!! mount $2 fail !!!"
+	fi
+	
+	echo "- mount $2 ($1)"
+}
+
+func_check_and_mount_ext4_ro() {
+	echo "++++mount $1 start ++++"
+	while [ ! -e $1 ]; do
+		sleep 0.1
+	done
+	VAL1=$(dd if=$1 bs=16 count=1 | grep ERASEDB)
+	if [ -n "$VAL1" ]; then
+		dd if=/dev/zero of=$1 bs=16 count=1
+		mkfs.ext4 $1
+	else
+		e2fsck -y $1
+		RET_VAR=$?
+		echo "RET_VAR is $RET_VAR"
+		if [ $RET_VAR = 2 ] || [ $RET_VAR = 4 ] || [ $RET_VAR = 8 ]; then
+			#mkfs.ext4 $1
+			echo "!!! e2fsck $2 fail !!!"
+		fi
+	fi
+
+	while [ ! -d $2 ]; do 
+		sleep 0.1
+	done
+
+	RETRY=0
+	while [ $RETRY -lt 4 ]; do
+		mount -t ext4 -o ro $1 /$2
+		RET_VAR=$?
+		if [ $RET_VAR = 0 ]; then
+			RETRY=4
+		else
+			RETRY=$((RETRY+1))
+			sleep 1
+		fi
+	done
+
+	if [ $RET_VAR != 0 ]; then
+		echo "!!! mount $2 fail !!!"
+	fi
+#echo "- mount $2 ($1)"
+}
+
+func_check_and_fomat_ext4() {
+	echo "++++ check $1 start ++++"
+	while [ ! -e $1 ]; do
+		sleep 0.1
+	done
+	VAL1=$(dd if=$1 bs=16 count=1 | grep ERASEDB)
+	if [ -n "$VAL1" ]; then
+		dd if=/dev/zero of=$1 bs=16 count=1
+		mkfs.ext4 $1
+	fi
+	echo "----check $1 finish----"
+}
+
+# mount
+func_check_and_fomat_ext4 ${TCL_IMPDATA}
+#func_mount_ro_ext4 ${TCL_CONFIG} tclconfig
+#func_mount_ro_ext4 ${TCL_TVOS} tvos
+
+#func_mount_ext4 ${TCL_MISC} misc
+func_check_and_fomat_ext4 ${TCL_USERDATA}
+#func_check_and_mount_ext4 ${TCL_CACHE} cache
+#func_mount_ro_ext4 ${TCL_SYSTEM} system
+func_check_and_fomat_ext4 ${TCL_DATA}
+func_check_and_fomat_ext4 ${TCL_PERSIST}
+func_check_and_mount_ext4 ${TCL_NVTDATA} nvtdata
+echo "/etc/profile end"

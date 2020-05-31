@@ -1,0 +1,8 @@
+base:0x10000000
+ramdisk_addr:0x11000000
+second_addr:0x10f00000
+tags_addr:0x10000100
+page_size:0x800
+name:
+cmdline:
+padding_size:0x800

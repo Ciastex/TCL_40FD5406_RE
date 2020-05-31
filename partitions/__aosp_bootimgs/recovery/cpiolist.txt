@@ -1,0 +1,688 @@
+compress_level:6
+dir . 0777
+slink mtd_apdat /mtd_rwarea/apdat 0777
+dir usb 0775
+dir share 0775
+dir share/info 0775
+file share/info/libext2fs.info.gz initrd/share\info\libext2fs.info.gz 0664
+dir share/locale 0775
+dir share/locale/tr 0775
+dir share/locale/tr/LC_MESSAGES 0775
+file share/locale/tr/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\tr\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/cs 0775
+dir share/locale/cs/LC_MESSAGES 0775
+file share/locale/cs/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\cs\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/sv 0775
+dir share/locale/sv/LC_MESSAGES 0775
+file share/locale/sv/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\sv\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/nl 0775
+dir share/locale/nl/LC_MESSAGES 0775
+file share/locale/nl/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\nl\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/de 0775
+dir share/locale/de/LC_MESSAGES 0775
+file share/locale/de/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\de\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/ca 0775
+dir share/locale/ca/LC_MESSAGES 0775
+file share/locale/ca/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\ca\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/vi 0775
+dir share/locale/vi/LC_MESSAGES 0775
+file share/locale/vi/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\vi\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/zh_CN 0775
+dir share/locale/zh_CN/LC_MESSAGES 0775
+file share/locale/zh_CN/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\zh_CN\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/it 0775
+dir share/locale/it/LC_MESSAGES 0775
+file share/locale/it/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\it\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/id 0775
+dir share/locale/id/LC_MESSAGES 0775
+file share/locale/id/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\id\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/fr 0775
+dir share/locale/fr/LC_MESSAGES 0775
+file share/locale/fr/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\fr\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/pl 0775
+dir share/locale/pl/LC_MESSAGES 0775
+file share/locale/pl/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\pl\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/locale/es 0775
+dir share/locale/es/LC_MESSAGES 0775
+file share/locale/es/LC_MESSAGES/e2fsprogs.mo initrd/share\locale\es\LC_MESSAGES\e2fsprogs.mo 0664
+dir share/man 0775
+dir share/man/man3 0775
+file share/man/man3/mhash.3 initrd/share\man\man3\mhash.3 0664
+dir share/man/man1 0775
+file share/man/man1/lsattr.1 initrd/share\man\man1\lsattr.1 0664
+file share/man/man1/chattr.1 initrd/share\man\man1\chattr.1 0664
+file share/man/man1/uuidgen.1 initrd/share\man\man1\uuidgen.1 0664
+dir share/man/man5 0775
+file share/man/man5/ext4.5 initrd/share\man\man5\ext4.5 0664
+file share/man/man5/mke2fs.conf.5 initrd/share\man\man5\mke2fs.conf.5 0664
+file share/man/man5/e2fsck.conf.5 initrd/share\man\man5\e2fsck.conf.5 0664
+file share/man/man5/ext3.5 initrd/share\man\man5\ext3.5 0664
+file share/man/man5/ext2.5 initrd/share\man\man5\ext2.5 0664
+dir share/man/man8 0775
+file share/man/man8/mkfs.ext4.8 initrd/share\man\man8\mkfs.ext4.8 0664
+file share/man/man8/e2image.8 initrd/share\man\man8\e2image.8 0664
+file share/man/man8/e2undo.8 initrd/share\man\man8\e2undo.8 0664
+file share/man/man8/fsck.ext3.8 initrd/share\man\man8\fsck.ext3.8 0664
+file share/man/man8/fsck.ext2.8 initrd/share\man\man8\fsck.ext2.8 0664
+file share/man/man8/dumpe2fs.8 initrd/share\man\man8\dumpe2fs.8 0664
+file share/man/man8/tune2fs.8 initrd/share\man\man8\tune2fs.8 0664
+file share/man/man8/mkfs.ext4dev.8 initrd/share\man\man8\mkfs.ext4dev.8 0664
+file share/man/man8/fsck.ext4.8 initrd/share\man\man8\fsck.ext4.8 0664
+file share/man/man8/findfs.8 initrd/share\man\man8\findfs.8 0664
+file share/man/man8/e2label.8 initrd/share\man\man8\e2label.8 0664
+file share/man/man8/fsck.ext4dev.8 initrd/share\man\man8\fsck.ext4dev.8 0664
+file share/man/man8/e4defrag.8 initrd/share\man\man8\e4defrag.8 0664
+file share/man/man8/logsave.8 initrd/share\man\man8\logsave.8 0664
+file share/man/man8/blkid.8 initrd/share\man\man8\blkid.8 0664
+file share/man/man8/filefrag.8 initrd/share\man\man8\filefrag.8 0664
+file share/man/man8/mkfs.ext3.8 initrd/share\man\man8\mkfs.ext3.8 0664
+file share/man/man8/uuidd.8 initrd/share\man\man8\uuidd.8 0664
+file share/man/man8/fsck.8 initrd/share\man\man8\fsck.8 0664
+file share/man/man8/badblocks.8 initrd/share\man\man8\badblocks.8 0664
+file share/man/man8/mklost+found.8 initrd/share\man\man8\mklost+found.8 0664
+file share/man/man8/debugfs.8 initrd/share\man\man8\debugfs.8 0664
+file share/man/man8/e2freefrag.8 initrd/share\man\man8\e2freefrag.8 0664
+file share/man/man8/mkfs.ext2.8 initrd/share\man\man8\mkfs.ext2.8 0664
+file share/man/man8/mke2fs.8 initrd/share\man\man8\mke2fs.8 0664
+file share/man/man8/e2fsck.8 initrd/share\man\man8\e2fsck.8 0664
+file share/man/man8/resize2fs.8 initrd/share\man\man8\resize2fs.8 0664
+dir key 0775
+file key/keys initrd/key\keys 0664
+dir bin 0775
+slink bin/watch busybox 0777
+slink bin/mkdir busybox 0777
+slink bin/more busybox 0777
+slink bin/gunzip busybox 0777
+slink bin/fsync busybox 0777
+slink bin/umount busybox 0777
+slink bin/mknod busybox 0777
+slink bin/tar busybox 0777
+slink bin/egrep busybox 0777
+slink bin/mount busybox 0777
+slink bin/sync busybox 0777
+file bin/start.sh initrd/bin\start.sh 0775
+file bin/progressBar.png initrd/bin\progressBar.png 0775
+file bin/RamTest initrd/bin\RamTest 0775
+slink bin/dumpkmap busybox 0777
+slink bin/su busybox 0777
+slink bin/chown busybox 0777
+file bin/nvt_fwupdate initrd/bin\nvt_fwupdate 0775
+slink bin/date busybox 0777
+slink bin/false busybox 0777
+slink bin/ping busybox 0777
+file bin/micom initrd/bin\micom 0775
+slink bin/dnsdomainname busybox 0777
+slink bin/zcat busybox 0777
+slink bin/mountpoint busybox 0777
+slink bin/netstat busybox 0777
+slink bin/stat busybox 0777
+slink bin/setserial busybox 0777
+file bin/misMatchFail.png initrd/bin\misMatchFail.png 0775
+slink bin/pidof busybox 0777
+slink bin/catv busybox 0777
+slink bin/uname busybox 0777
+slink bin/reformime busybox 0777
+slink bin/rev busybox 0777
+slink bin/ash busybox 0777
+slink bin/nice busybox 0777
+slink bin/chmod busybox 0777
+file bin/emmc_stresstest.sh initrd/bin\emmc_stresstest.sh 0775
+slink bin/iostat busybox 0777
+file bin/ntfs-3g initrd/bin\ntfs-3g 0775
+file bin/updating.png initrd/bin\updating.png 0775
+slink bin/chattr busybox 0777
+slink bin/hush busybox 0777
+file bin/end.png initrd/bin\end.png 0775
+file bin/emmc_phase_test.sh initrd/bin\emmc_phase_test.sh 0775
+slink bin/sed busybox 0777
+slink bin/cttyhack busybox 0777
+slink bin/ionice busybox 0777
+file bin/fail.png initrd/bin\fail.png 0775
+slink bin/chgrp busybox 0777
+slink bin/df busybox 0777
+slink bin/vi busybox 0777
+slink bin/dmesg busybox 0777
+slink bin/fatattr busybox 0777
+file bin/uuidgen initrd/bin\uuidgen 0775
+slink bin/usleep busybox 0777
+slink bin/scriptreplay busybox 0777
+slink bin/ipcalc busybox 0777
+slink bin/dd busybox 0777
+slink bin/ed busybox 0777
+slink bin/kill busybox 0777
+slink bin/run-parts busybox 0777
+slink bin/rmdir busybox 0777
+slink bin/lsattr busybox 0777
+slink bin/fdflush busybox 0777
+slink bin/ping6 busybox 0777
+slink bin/login busybox 0777
+file bin/iozone initrd/bin\iozone 0775
+slink bin/mt busybox 0777
+slink bin/mpstat busybox 0777
+slink bin/pwd busybox 0777
+slink bin/mktemp busybox 0777
+slink bin/pipe_progress busybox 0777
+file bin/fio initrd/bin\fio 0775
+slink bin/base64 busybox 0777
+slink bin/kbd_mode busybox 0777
+slink bin/ls busybox 0777
+slink bin/makemime busybox 0777
+slink bin/getopt busybox 0777
+slink bin/ln busybox 0777
+slink bin/sleep busybox 0777
+slink bin/hostname busybox 0777
+slink bin/true busybox 0777
+slink bin/rm busybox 0777
+slink bin/mv busybox 0777
+file bin/nvtmemtester initrd/bin\nvtmemtester 0775
+file bin/emmc_phase_scan initrd/bin\emmc_phase_scan 0775
+slink bin/rpm busybox 0777
+slink bin/conspy busybox 0777
+file bin/busybox initrd/bin\busybox 0775
+slink bin/echo busybox 0777
+slink bin/setarch busybox 0777
+slink bin/touch busybox 0777
+slink bin/linux64 busybox 0777
+slink bin/grep busybox 0777
+slink bin/printenv busybox 0777
+file bin/success.png initrd/bin\success.png 0775
+slink bin/linux32 busybox 0777
+slink bin/stty busybox 0777
+slink bin/gzip busybox 0777
+slink bin/ps busybox 0777
+slink bin/fgrep busybox 0777
+slink bin/cp busybox 0777
+slink bin/cpio busybox 0777
+slink bin/lzop busybox 0777
+file bin/checkFail.png initrd/bin\checkFail.png 0775
+slink bin/cat busybox 0777
+slink bin/sh busybox 0777
+dir mnt 0775
+dir proc 0775
+dir mtd_rwarea 0775
+dir lib 0775
+file lib/libpthread-2.19-2014.08.so initrd/lib\libpthread-2.19-2014.08.so 0775
+file lib/libdl-2.19-2014.08.so initrd/lib\libdl-2.19-2014.08.so 0775
+slink lib/libdl.so.2 libdl-2.19-2014.08.so 0777
+file lib/libnss_files-2.19-2014.08.so initrd/lib\libnss_files-2.19-2014.08.so 0775
+slink lib/libnss_nis.so.2 libnss_nis-2.19-2014.08.so 0777
+file lib/libnsl-2.19-2014.08.so initrd/lib\libnsl-2.19-2014.08.so 0775
+slink lib/libutil.so.1 libutil-2.19-2014.08.so 0777
+file lib/libnss_nisplus-2.19-2014.08.so initrd/lib\libnss_nisplus-2.19-2014.08.so 0775
+slink lib/libpthread.so.0 libpthread-2.19-2014.08.so 0777
+slink lib/libmhash.so.2 libmhash.so.2.0.1 0777
+file lib/ld-2.19-2014.08.so initrd/lib\ld-2.19-2014.08.so 0775
+slink lib/libnsl.so.1 libnsl-2.19-2014.08.so 0777
+slink lib/libc.so.6 libc-2.19-2014.08.so 0777
+file lib/libstdc++.so.6.0.20 initrd/lib\libstdc++.so.6.0.20 0775
+file lib/libmhash.so.2.0.1 initrd/lib\libmhash.so.2.0.1 0775
+file lib/libm-2.19-2014.08.so initrd/lib\libm-2.19-2014.08.so 0775
+slink lib/ld-linux-armhf.so.3 ld-2.19-2014.08.so 0777
+file lib/libresolv-2.19-2014.08.so initrd/lib\libresolv-2.19-2014.08.so 0775
+dir lib/modules 0775
+file lib/modules/usbcore.ko initrd/lib\modules\usbcore.ko 0775
+file lib/modules/install_usb.sh initrd/lib\modules\install_usb.sh 0775
+file lib/modules/ehci-hcd.ko initrd/lib\modules\ehci-hcd.ko 0775
+file lib/modules/memory.dtb initrd/lib\modules\memory.dtb 0775
+file lib/modules/usb-storage.ko initrd/lib\modules\usb-storage.ko 0775
+file lib/modules/nvtmem.ko initrd/lib\modules\nvtmem.ko 0664
+file lib/modules/usb-common.ko initrd/lib\modules\usb-common.ko 0775
+file lib/libnss_compat-2.19-2014.08.so initrd/lib\libnss_compat-2.19-2014.08.so 0775
+file lib/libnss_dns-2.19-2014.08.so initrd/lib\libnss_dns-2.19-2014.08.so 0775
+file lib/libuuid.a initrd/lib\libuuid.a 0664
+file lib/libuuid.so.1.0.0 initrd/lib\libuuid.so.1.0.0 0775
+file lib/libstdc++.so.6.0.20-gdb.py initrd/lib\libstdc++.so.6.0.20-gdb.py 0664
+slink lib/libnss_dns.so.2 libnss_dns-2.19-2014.08.so 0777
+slink lib/libthread_db.so.1 libthread_db-1.0.so 0777
+file lib/liblzo2.a initrd/lib\liblzo2.a 0664
+file lib/libuuid.la initrd/lib\libuuid.la 0775
+slink lib/libuuid.so libuuid.so.1.0.0 0777
+file lib/libanl-2.19-2014.08.so initrd/lib\libanl-2.19-2014.08.so 0775
+file lib/libgcc_s.so.1 initrd/lib\libgcc_s.so.1 0664
+file lib/libmemusage.so initrd/lib\libmemusage.so 0775
+file lib/libSegFault.so initrd/lib\libSegFault.so 0775
+file lib/libnss_db-2.19-2014.08.so initrd/lib\libnss_db-2.19-2014.08.so 0775
+slink lib/arm-linux-gnueabihf . 0777
+file lib/libz.so.1.2.8 initrd/lib\libz.so.1.2.8 0775
+file lib/libemmcfwup.so initrd/lib\libemmcfwup.so 0775
+file lib/libBrokenLocale-2.19-2014.08.so initrd/lib\libBrokenLocale-2.19-2014.08.so 0775
+slink lib/libssp.so libssp.so.0.0.0 0777
+slink lib/libanl.so.1 libanl-2.19-2014.08.so 0777
+file lib/libmhash.a initrd/lib\libmhash.a 0664
+slink lib/librt.so.1 librt-2.19-2014.08.so 0777
+slink lib/libz.so libz.so.1.2.8 0777
+slink lib/libnss_hesiod.so.2 libnss_hesiod-2.19-2014.08.so 0777
+slink lib/libstdc++.so libstdc++.so.6.0.20 0777
+slink lib/libuuid.so.1 libuuid.so.1.0.0 0777
+file lib/libmhash.la initrd/lib\libmhash.la 0775
+file lib/libz.a initrd/lib\libz.a 0664
+slink lib/libnss_compat.so.2 libnss_compat-2.19-2014.08.so 0777
+file lib/libutil-2.19-2014.08.so initrd/lib\libutil-2.19-2014.08.so 0775
+slink lib/libnss_db.so.2 libnss_db-2.19-2014.08.so 0777
+file lib/libnss_hesiod-2.19-2014.08.so initrd/lib\libnss_hesiod-2.19-2014.08.so 0775
+file lib/libnss_nis-2.19-2014.08.so initrd/lib\libnss_nis-2.19-2014.08.so 0775
+slink lib/libmhash.so libmhash.so.2.0.1 0777
+file lib/libc-2.19-2014.08.so initrd/lib\libc-2.19-2014.08.so 0775
+file lib/libssp.so.0.0.0 initrd/lib\libssp.so.0.0.0 0775
+file lib/libcrypt-2.19-2014.08.so initrd/lib\libcrypt-2.19-2014.08.so 0775
+slink lib/libnss_files.so.2 libnss_files-2.19-2014.08.so 0777
+file lib/libpcprofile.so initrd/lib\libpcprofile.so 0775
+slink lib/libresolv.so.2 libresolv-2.19-2014.08.so 0777
+slink lib/libBrokenLocale.so.1 libBrokenLocale-2.19-2014.08.so 0777
+slink lib/libm.so.6 libm-2.19-2014.08.so 0777
+slink lib/libz.so.1 libz.so.1.2.8 0777
+file lib/e2initrd_helper initrd/lib\e2initrd_helper 0775
+slink lib/libstdc++.so.6 libstdc++.so.6.0.20 0777
+slink lib/libnss_nisplus.so.2 libnss_nisplus-2.19-2014.08.so 0777
+slink lib/libcrypt.so.1 libcrypt-2.19-2014.08.so 0777
+file lib/librt-2.19-2014.08.so initrd/lib\librt-2.19-2014.08.so 0775
+file lib/libthread_db-1.0.so initrd/lib\libthread_db-1.0.so 0775
+file lib/liblzo2.la initrd/lib\liblzo2.la 0775
+slink lib/libssp.so.0 libssp.so.0.0.0 0777
+slink init bin/busybox 0777
+dir nvtdata 0775
+file nvtdata/.gitignore initrd/nvtdata\.gitignore 0775
+dir sbin 0775
+slink sbin/pivot_root ../bin/busybox 0777
+slink sbin/iproute ../bin/busybox 0777
+slink sbin/ifconfig ../bin/busybox 0777
+file sbin/logsave initrd/sbin\logsave 0775
+slink sbin/setconsole ../bin/busybox 0777
+slink sbin/mdev ../bin/busybox 0777
+slink sbin/mkfs.vfat ../bin/busybox 0777
+slink sbin/blockdev ../bin/busybox 0777
+slink sbin/mkdosfs ../bin/busybox 0777
+slink sbin/hdparm ../bin/busybox 0777
+slink sbin/klogd ../bin/busybox 0777
+slink sbin/poweroff ../bin/busybox 0777
+slink sbin/zcip ../bin/busybox 0777
+file sbin/mklost+found initrd/sbin\mklost+found 0775
+file sbin/fsck.ext4dev initrd/sbin\fsck.ext4dev 0775
+slink sbin/ifenslave ../bin/busybox 0777
+slink sbin/reboot ../bin/busybox 0777
+slink sbin/ifup ../bin/busybox 0777
+file sbin/badblocks initrd/sbin\badblocks 0775
+slink sbin/tunctl ../bin/busybox 0777
+file sbin/mkfs.ext4dev initrd/sbin\mkfs.ext4dev 0775
+slink sbin/mke2fs ../bin/busybox 0777
+file sbin/e2label initrd/sbin\e2label 0775
+slink sbin/loadkmap ../bin/busybox 0777
+file sbin/e2freefrag initrd/sbin\e2freefrag 0775
+file sbin/fsck.ext3 initrd/sbin\fsck.ext3 0775
+slink sbin/nameif ../bin/busybox 0777
+slink sbin/logread ../bin/busybox 0777
+slink sbin/ip ../bin/busybox 0777
+file sbin/mkfs.ext4 initrd/sbin\mkfs.ext4 0775
+slink sbin/insmod ../bin/busybox 0777
+file sbin/filefrag initrd/sbin\filefrag 0775
+slink sbin/vconfig ../bin/busybox 0777
+slink sbin/iptunnel ../bin/busybox 0777
+file sbin/debugfs initrd/sbin\debugfs 0775
+slink sbin/rmmod ../bin/busybox 0777
+slink sbin/ipaddr ../bin/busybox 0777
+slink sbin/swapoff ../bin/busybox 0777
+slink sbin/modinfo ../bin/busybox 0777
+slink sbin/devmem ../bin/busybox 0777
+file sbin/dumpe2fs initrd/sbin\dumpe2fs 0775
+file sbin/e2image initrd/sbin\e2image 0775
+slink sbin/getty ../bin/busybox 0777
+slink sbin/fstrim ../bin/busybox 0777
+slink sbin/freeramdisk ../bin/busybox 0777
+slink sbin/arp ../bin/busybox 0777
+slink sbin/watchdog ../bin/busybox 0777
+slink sbin/bootchartd ../bin/busybox 0777
+slink sbin/fdisk ../bin/busybox 0777
+file sbin/tune2fs initrd/sbin\tune2fs 0775
+slink sbin/sysctl ../bin/busybox 0777
+slink sbin/fbsplash ../bin/busybox 0777
+slink sbin/udhcpc ../bin/busybox 0777
+slink sbin/init ../bin/busybox 0777
+file sbin/fsck.ext2 initrd/sbin\fsck.ext2 0775
+slink sbin/route ../bin/busybox 0777
+slink sbin/losetup ../bin/busybox 0777
+slink sbin/mkfs.minix ../bin/busybox 0777
+slink sbin/swapon ../bin/busybox 0777
+slink sbin/iplink ../bin/busybox 0777
+file sbin/fsck.ext4 initrd/sbin\fsck.ext4 0775
+slink sbin/modprobe ../bin/busybox 0777
+file sbin/e2undo initrd/sbin\e2undo 0775
+slink sbin/makedevs ../bin/busybox 0777
+file sbin/e4defrag initrd/sbin\e4defrag 0775
+slink sbin/start-stop-daemon ../bin/busybox 0777
+slink sbin/findfs ../bin/busybox 0777
+slink sbin/fsck.minix ../bin/busybox 0777
+slink sbin/switch_root ../bin/busybox 0777
+slink sbin/mkfs.ext2 ../bin/busybox 0777
+slink sbin/syslogd ../bin/busybox 0777
+file sbin/e2fsck initrd/sbin\e2fsck 0775
+slink sbin/iprule ../bin/busybox 0777
+slink sbin/lsmod ../bin/busybox 0777
+file sbin/resize2fs initrd/sbin\resize2fs 0775
+file sbin/uuidd initrd/sbin\uuidd 0775
+slink sbin/fsck ../bin/busybox 0777
+slink sbin/acpid ../bin/busybox 0777
+slink sbin/hwclock ../bin/busybox 0777
+slink sbin/sulogin ../bin/busybox 0777
+slink sbin/mkswap ../bin/busybox 0777
+slink sbin/halt ../bin/busybox 0777
+slink sbin/raidautorun ../bin/busybox 0777
+slink sbin/ifdown ../bin/busybox 0777
+slink sbin/uevent ../bin/busybox 0777
+slink sbin/runlevel ../bin/busybox 0777
+slink sbin/slattach ../bin/busybox 0777
+slink sbin/adjtimex ../bin/busybox 0777
+file sbin/mkfs.ext3 initrd/sbin\mkfs.ext3 0775
+slink sbin/depmod ../bin/busybox 0777
+slink sbin/blkid ../bin/busybox 0777
+dir sys 0775
+dir data 0775
+file data/keys initrd/data\keys 0664
+dir mtd_apexe 0775
+dir media 0775
+slink linuxrc bin/busybox 0777
+dir tmp 0775
+dir dev 0775
+dir nvtpipe 0775
+dir usr 0775
+dir usr/share 0775
+dir usr/share/usb 0775
+file usr/share/usb/autoscript.sh initrd/usr\share\usb\autoscript.sh 0775
+dir usr/share/nvt 0775
+file usr/share/nvt/ubi_part_name.sh initrd/usr\share\nvt\ubi_part_name.sh 0775
+file usr/share/nvt/part_name.sh initrd/usr\share\nvt\part_name.sh 0775
+file usr/share/nvt/mmc_part_name.sh initrd/usr\share\nvt\mmc_part_name.sh 0775
+file usr/share/nvt/ubiblk_part_name.sh initrd/usr\share\nvt\ubiblk_part_name.sh 0775
+file usr/share/nvt/mtd_part_name.sh initrd/usr\share\nvt\mtd_part_name.sh 0775
+dir usr/share/udhcpc 0775
+file usr/share/udhcpc/default.script initrd/usr\share\udhcpc\default.script 0775
+dir usr/bin 0775
+slink usr/bin/microcom ../../bin/busybox 0777
+slink usr/bin/xz ../../bin/busybox 0777
+slink usr/bin/clear ../../bin/busybox 0777
+slink usr/bin/awk ../../bin/busybox 0777
+slink usr/bin/mkfifo ../../bin/busybox 0777
+slink usr/bin/patch ../../bin/busybox 0777
+slink usr/bin/script ../../bin/busybox 0777
+slink usr/bin/wall ../../bin/busybox 0777
+slink usr/bin/tr ../../bin/busybox 0777
+slink usr/bin/setuidgid ../../bin/busybox 0777
+slink usr/bin/lsusb ../../bin/busybox 0777
+slink usr/bin/rpm2cpio ../../bin/busybox 0777
+slink usr/bin/pmap ../../bin/busybox 0777
+slink usr/bin/lzma ../../bin/busybox 0777
+slink usr/bin/which ../../bin/busybox 0777
+slink usr/bin/wc ../../bin/busybox 0777
+slink usr/bin/expand ../../bin/busybox 0777
+slink usr/bin/crontab ../../bin/busybox 0777
+slink usr/bin/split ../../bin/busybox 0777
+slink usr/bin/vlock ../../bin/busybox 0777
+slink usr/bin/readlink ../../bin/busybox 0777
+slink usr/bin/ftpput ../../bin/busybox 0777
+slink usr/bin/sha3sum ../../bin/busybox 0777
+slink usr/bin/xargs ../../bin/busybox 0777
+slink usr/bin/uudecode ../../bin/busybox 0777
+slink usr/bin/envuidgid ../../bin/busybox 0777
+slink usr/bin/chpst ../../bin/busybox 0777
+slink usr/bin/unxz ../../bin/busybox 0777
+slink usr/bin/who ../../bin/busybox 0777
+slink usr/bin/head ../../bin/busybox 0777
+slink usr/bin/truncate ../../bin/busybox 0777
+slink usr/bin/nc ../../bin/busybox 0777
+slink usr/bin/shuf ../../bin/busybox 0777
+slink usr/bin/sv ../../bin/busybox 0777
+slink usr/bin/unix2dos ../../bin/busybox 0777
+slink usr/bin/nmeter ../../bin/busybox 0777
+slink usr/bin/lzopcat ../../bin/busybox 0777
+slink usr/bin/unlink ../../bin/busybox 0777
+slink usr/bin/unzip ../../bin/busybox 0777
+slink usr/bin/find ../../bin/busybox 0777
+slink usr/bin/unexpand ../../bin/busybox 0777
+slink usr/bin/lzcat ../../bin/busybox 0777
+slink usr/bin/seq ../../bin/busybox 0777
+slink usr/bin/dirname ../../bin/busybox 0777
+slink usr/bin/setsid ../../bin/busybox 0777
+slink usr/bin/xzcat ../../bin/busybox 0777
+slink usr/bin/passwd ../../bin/busybox 0777
+slink usr/bin/ipcrm ../../bin/busybox 0777
+slink usr/bin/openvt ../../bin/busybox 0777
+slink usr/bin/uptime ../../bin/busybox 0777
+slink usr/bin/udpsvd ../../bin/busybox 0777
+slink usr/bin/reset ../../bin/busybox 0777
+slink usr/bin/whoami ../../bin/busybox 0777
+slink usr/bin/sha256sum ../../bin/busybox 0777
+slink usr/bin/deallocvt ../../bin/busybox 0777
+slink usr/bin/tcpsvd ../../bin/busybox 0777
+slink usr/bin/cryptpw ../../bin/busybox 0777
+slink usr/bin/tac ../../bin/busybox 0777
+slink usr/bin/dc ../../bin/busybox 0777
+slink usr/bin/fuser ../../bin/busybox 0777
+slink usr/bin/sha512sum ../../bin/busybox 0777
+slink usr/bin/resize ../../bin/busybox 0777
+slink usr/bin/cksum ../../bin/busybox 0777
+slink usr/bin/tty ../../bin/busybox 0777
+slink usr/bin/test ../../bin/busybox 0777
+slink usr/bin/du ../../bin/busybox 0777
+slink usr/bin/cmp ../../bin/busybox 0777
+slink usr/bin/sum ../../bin/busybox 0777
+slink usr/bin/wget ../../bin/busybox 0777
+slink usr/bin/traceroute6 ../../bin/busybox 0777
+slink usr/bin/last ../../bin/busybox 0777
+slink usr/bin/pkill ../../bin/busybox 0777
+slink usr/bin/volname ../../bin/busybox 0777
+slink usr/bin/bunzip2 ../../bin/busybox 0777
+slink usr/bin/dos2unix ../../bin/busybox 0777
+slink usr/bin/envdir ../../bin/busybox 0777
+slink usr/bin/pwdx ../../bin/busybox 0777
+slink usr/bin/md5sum ../../bin/busybox 0777
+slink usr/bin/runsvdir ../../bin/busybox 0777
+slink usr/bin/printf ../../bin/busybox 0777
+slink usr/bin/unlzop ../../bin/busybox 0777
+slink usr/bin/uuencode ../../bin/busybox 0777
+slink usr/bin/cal ../../bin/busybox 0777
+slink usr/bin/lpr ../../bin/busybox 0777
+slink usr/bin/lpq ../../bin/busybox 0777
+slink usr/bin/hostid ../../bin/busybox 0777
+slink usr/bin/nslookup ../../bin/busybox 0777
+slink usr/bin/mesg ../../bin/busybox 0777
+slink usr/bin/comm ../../bin/busybox 0777
+slink usr/bin/id ../../bin/busybox 0777
+slink usr/bin/sort ../../bin/busybox 0777
+slink usr/bin/pstree ../../bin/busybox 0777
+slink usr/bin/smemcap ../../bin/busybox 0777
+slink usr/bin/renice ../../bin/busybox 0777
+slink usr/bin/killall ../../bin/busybox 0777
+slink usr/bin/hd ../../bin/busybox 0777
+slink usr/bin/uniq ../../bin/busybox 0777
+slink usr/bin/groups ../../bin/busybox 0777
+slink usr/bin/nohup ../../bin/busybox 0777
+slink usr/bin/pgrep ../../bin/busybox 0777
+slink usr/bin/strings ../../bin/busybox 0777
+slink usr/bin/basename ../../bin/busybox 0777
+slink usr/bin/eject ../../bin/busybox 0777
+slink usr/bin/rx ../../bin/busybox 0777
+slink usr/bin/fgconsole ../../bin/busybox 0777
+slink usr/bin/fold ../../bin/busybox 0777
+slink usr/bin/flock ../../bin/busybox 0777
+slink usr/bin/yes ../../bin/busybox 0777
+slink usr/bin/setkeycodes ../../bin/busybox 0777
+slink usr/bin/users ../../bin/busybox 0777
+slink usr/bin/traceroute ../../bin/busybox 0777
+slink usr/bin/timeout ../../bin/busybox 0777
+slink usr/bin/pscan ../../bin/busybox 0777
+slink usr/bin/mkpasswd ../../bin/busybox 0777
+slink usr/bin/realpath ../../bin/busybox 0777
+slink usr/bin/beep ../../bin/busybox 0777
+slink usr/bin/man ../../bin/busybox 0777
+slink usr/bin/tftp ../../bin/busybox 0777
+slink usr/bin/[ ../../bin/busybox 0777
+slink usr/bin/less ../../bin/busybox 0777
+slink usr/bin/install ../../bin/busybox 0777
+slink usr/bin/unlzma ../../bin/busybox 0777
+slink usr/bin/showkey ../../bin/busybox 0777
+slink usr/bin/sha1sum ../../bin/busybox 0777
+slink usr/bin/tee ../../bin/busybox 0777
+slink usr/bin/free ../../bin/busybox 0777
+slink usr/bin/lsof ../../bin/busybox 0777
+slink usr/bin/bzcat ../../bin/busybox 0777
+slink usr/bin/ftpget ../../bin/busybox 0777
+slink usr/bin/hexdump ../../bin/busybox 0777
+slink usr/bin/time ../../bin/busybox 0777
+slink usr/bin/expr ../../bin/busybox 0777
+slink usr/bin/chvt ../../bin/busybox 0777
+slink usr/bin/od ../../bin/busybox 0777
+slink usr/bin/ipcs ../../bin/busybox 0777
+slink usr/bin/tail ../../bin/busybox 0777
+slink usr/bin/env ../../bin/busybox 0777
+slink usr/bin/cut ../../bin/busybox 0777
+slink usr/bin/dumpleases ../../bin/busybox 0777
+slink usr/bin/[[ ../../bin/busybox 0777
+slink usr/bin/diff ../../bin/busybox 0777
+slink usr/bin/telnet ../../bin/busybox 0777
+slink usr/bin/ttysize ../../bin/busybox 0777
+slink usr/bin/softlimit ../../bin/busybox 0777
+slink usr/bin/lspci ../../bin/busybox 0777
+slink usr/bin/bzip2 ../../bin/busybox 0777
+slink usr/bin/top ../../bin/busybox 0777
+slink usr/bin/runsv ../../bin/busybox 0777
+slink usr/bin/whois ../../bin/busybox 0777
+slink usr/bin/logname ../../bin/busybox 0777
+slink usr/bin/logger ../../bin/busybox 0777
+slink usr/bin/chrt ../../bin/busybox 0777
+dir usr/sbin 0775
+slink usr/sbin/chat ../../bin/busybox 0777
+slink usr/sbin/deluser ../../bin/busybox 0777
+file usr/sbin/docfdisk initrd/usr\sbin\docfdisk 0775
+file usr/sbin/ubiformat initrd/usr\sbin\ubiformat 0775
+file usr/sbin/flash_otp_info initrd/usr\sbin\flash_otp_info 0775
+file usr/sbin/flashcp initrd/usr\sbin\flashcp 0775
+slink usr/sbin/httpd ../../bin/busybox 0777
+slink usr/sbin/add-shell ../../bin/busybox 0777
+slink usr/sbin/telnetd ../../bin/busybox 0777
+file usr/sbin/sumtool initrd/usr\sbin\sumtool 0775
+file usr/sbin/ftl_check initrd/usr\sbin\ftl_check 0775
+file usr/sbin/mtdinfo initrd/usr\sbin\mtdinfo 0775
+slink usr/sbin/i2cget ../../bin/busybox 0777
+slink usr/sbin/powertop ../../bin/busybox 0777
+slink usr/sbin/brctl ../../bin/busybox 0777
+slink usr/sbin/svlogd ../../bin/busybox 0777
+slink usr/sbin/udhcpd ../../bin/busybox 0777
+file usr/sbin/ubiupdatevol initrd/usr\sbin\ubiupdatevol 0775
+slink usr/sbin/crond ../../bin/busybox 0777
+file usr/sbin/nftldump initrd/usr\sbin\nftldump 0775
+file usr/sbin/ubinfo initrd/usr\sbin\ubinfo 0775
+file usr/sbin/nandtest initrd/usr\sbin\nandtest 0775
+slink usr/sbin/readprofile ../../bin/busybox 0777
+file usr/sbin/flash_otp_lock initrd/usr\sbin\flash_otp_lock 0775
+file usr/sbin/mkfs.ubifs initrd/usr\sbin\mkfs.ubifs 0775
+slink usr/sbin/i2cset ../../bin/busybox 0777
+slink usr/sbin/ntpd ../../bin/busybox 0777
+slink usr/sbin/killall5 ../../bin/busybox 0777
+slink usr/sbin/rtcwake ../../bin/busybox 0777
+slink usr/sbin/dhcprelay ../../bin/busybox 0777
+file usr/sbin/flash_eraseall initrd/usr\sbin\flash_eraseall 0775
+file usr/sbin/flash_unlock initrd/usr\sbin\flash_unlock 0775
+file usr/sbin/ubinize initrd/usr\sbin\ubinize 0775
+slink usr/sbin/fakeidentd ../../bin/busybox 0777
+file usr/sbin/mkfs.jffs2 initrd/usr\sbin\mkfs.jffs2 0775
+file usr/sbin/recv_image initrd/usr\sbin\recv_image 0775
+file usr/sbin/jffs2reader initrd/usr\sbin\jffs2reader 0775
+file usr/sbin/ftl_format initrd/usr\sbin\ftl_format 0775
+slink usr/sbin/lpd ../../bin/busybox 0777
+file usr/sbin/mtdpart initrd/usr\sbin\mtdpart 0775
+slink usr/sbin/chpasswd ../../bin/busybox 0777
+file usr/sbin/jffs2dump initrd/usr\sbin\jffs2dump 0775
+slink usr/sbin/setfont ../../bin/busybox 0777
+slink usr/sbin/nbd-client ../../bin/busybox 0777
+slink usr/sbin/fbset ../../bin/busybox 0777
+slink usr/sbin/fdformat ../../bin/busybox 0777
+slink usr/sbin/setlogcons ../../bin/busybox 0777
+file usr/sbin/ubirename initrd/usr\sbin\ubirename 0775
+slink usr/sbin/remove-shell ../../bin/busybox 0777
+file usr/sbin/flash_otp_dump initrd/usr\sbin\flash_otp_dump 0775
+slink usr/sbin/inetd ../../bin/busybox 0777
+file usr/sbin/flash_otp_write initrd/usr\sbin\flash_otp_write 0775
+slink usr/sbin/readahead ../../bin/busybox 0777
+file usr/sbin/flash_erase initrd/usr\sbin\flash_erase 0775
+slink usr/sbin/tftpd ../../bin/busybox 0777
+slink usr/sbin/sendmail ../../bin/busybox 0777
+file usr/sbin/ubiblock initrd/usr\sbin\ubiblock 0775
+slink usr/sbin/popmaildir ../../bin/busybox 0777
+file usr/sbin/mtd_debug initrd/usr\sbin\mtd_debug 0775
+slink usr/sbin/i2cdump ../../bin/busybox 0777
+file usr/sbin/core_helper.sh initrd/usr\sbin\core_helper.sh 0775
+file usr/sbin/ubirmvol initrd/usr\sbin\ubirmvol 0775
+file usr/sbin/serve_image initrd/usr\sbin\serve_image 0775
+file usr/sbin/ubicrc32 initrd/usr\sbin\ubicrc32 0775
+slink usr/sbin/ether-wake ../../bin/busybox 0777
+slink usr/sbin/dnsd ../../bin/busybox 0777
+file usr/sbin/ubiattach initrd/usr\sbin\ubiattach 0775
+slink usr/sbin/arping ../../bin/busybox 0777
+slink usr/sbin/chroot ../../bin/busybox 0777
+file usr/sbin/nftl_format initrd/usr\sbin\nftl_format 0775
+slink usr/sbin/nanddump ../../bin/busybox 0777
+slink usr/sbin/addgroup ../../bin/busybox 0777
+slink usr/sbin/rdate ../../bin/busybox 0777
+file usr/sbin/ubidetach initrd/usr\sbin\ubidetach 0775
+file usr/sbin/ubirsvol initrd/usr\sbin\ubirsvol 0775
+file usr/sbin/rfddump initrd/usr\sbin\rfddump 0775
+slink usr/sbin/ifplugd ../../bin/busybox 0777
+slink usr/sbin/delgroup ../../bin/busybox 0777
+file usr/sbin/flash_lock initrd/usr\sbin\flash_lock 0775
+slink usr/sbin/i2cdetect ../../bin/busybox 0777
+file usr/sbin/ubimkvol initrd/usr\sbin\ubimkvol 0775
+file usr/sbin/doc_loadbios initrd/usr\sbin\doc_loadbios 0775
+slink usr/sbin/ftpd ../../bin/busybox 0777
+slink usr/sbin/adduser ../../bin/busybox 0777
+slink usr/sbin/loadfont ../../bin/busybox 0777
+file usr/sbin/rfdformat initrd/usr\sbin\rfdformat 0775
+slink usr/sbin/nandwrite ../../bin/busybox 0777
+slink usr/sbin/rdev ../../bin/busybox 0777
+dir mtd_roarea 0775
+dir etc 0775
+file etc/tclfwupdate initrd/etc\tclfwupdate 0775
+file etc/standalone_osd.ko initrd/etc\standalone_osd.ko 0775
+file etc/install_fpga.sh initrd/etc\install_fpga.sh 0775
+dir etc/bootlogo 0775
+file etc/bootlogo/bootlogo initrd/etc\bootlogo\bootlogo 0775
+file etc/decker.ttf initrd/etc\decker.ttf 0775
+file etc/nvt_function initrd/etc\nvt_function 0775
+file etc/mdev.conf initrd/etc\mdev.conf 0775
+file etc/mke2fs.conf initrd/etc\mke2fs.conf 0775
+dir etc/lib 0775
+dir etc/lib/libs 0775
+file etc/lib/libs/libpng16.so.16 initrd/etc\lib\libs\libpng16.so.16 0775
+file etc/lib/libs/libfreetype.so initrd/etc\lib\libs\libfreetype.so 0775
+file etc/lib/libs/libjpeg.so.9 initrd/etc\lib\libs\libjpeg.so.9 0775
+file etc/lib/libs/libz.so.1 initrd/etc\lib\libs\libz.so.1 0775
+dir etc/lib/dfb 0775
+file etc/lib/dfb/libsawman-1.7.so.1 initrd/etc\lib\dfb\libsawman-1.7.so.1 0775
+file etc/lib/dfb/libfusion-1.7.so.1 initrd/etc\lib\dfb\libfusion-1.7.so.1 0775
+file etc/lib/dfb/libdirect-1.7.so.1 initrd/etc\lib\dfb\libdirect-1.7.so.1 0775
+dir etc/lib/dfb/directfb-1.7-1 0775
+dir etc/lib/dfb/directfb-1.7-1/wm 0775
+file etc/lib/dfb/directfb-1.7-1/wm/libdirectfbwm_default.so initrd/etc\lib\dfb\directfb-1.7-1\wm\libdirectfbwm_default.so 0775
+dir etc/lib/dfb/directfb-1.7-1/systems 0775
+file etc/lib/dfb/directfb-1.7-1/systems/libdirectfb_fbdev.so initrd/etc\lib\dfb\directfb-1.7-1\systems\libdirectfb_fbdev.so 0775
+dir etc/lib/dfb/directfb-1.7-1/gfxdrivers 0775
+file etc/lib/dfb/directfb-1.7-1/gfxdrivers/directfb_nvt72668.so initrd/etc\lib\dfb\directfb-1.7-1\gfxdrivers\directfb_nvt72668.so 0775
+dir etc/lib/dfb/directfb-1.7-1/interfaces 0775
+dir etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBImageProvider 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_gif.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBImageProvider\libidirectfbimageprovider_gif.so 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_bmp.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBImageProvider\libidirectfbimageprovider_bmp.so 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_png.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBImageProvider\libidirectfbimageprovider_png.so 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_jpeg.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBImageProvider\libidirectfbimageprovider_jpeg.so 0775
+dir etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBVideoProvider 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_gif.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBVideoProvider\libidirectfbvideoprovider_gif.so 0775
+dir etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBFont 0775
+file etc/lib/dfb/directfb-1.7-1/interfaces/IDirectFBFont/libidirectfbfont_ft2.so initrd/etc\lib\dfb\directfb-1.7-1\interfaces\IDirectFBFont\libidirectfbfont_ft2.so 0775
+file etc/lib/dfb/libdirectfb-1.7.so.1 initrd/etc\lib\dfb\libdirectfb-1.7.so.1 0775
+dir etc/lib/client 0775
+file etc/lib/client/libnpcvolmgr.so initrd/etc\lib\client\libnpcvolmgr.so 0775
+file etc/lib/libstdc++.so.6 initrd/etc\lib\libstdc++.so.6 0775
+file etc/inittab initrd/etc\inittab 0775
+file etc/profile_emmc initrd/etc\profile_emmc 0775
+file etc/.directfbrc initrd/etc\.directfbrc 0775
+file etc/run.sh initrd/etc\run.sh 0775
+dir etc/ifplugd 0775
+file etc/ifplugd/ifplugd.action initrd/etc\ifplugd\ifplugd.action 0775
+file etc/rc.local initrd/etc\rc.local 0775

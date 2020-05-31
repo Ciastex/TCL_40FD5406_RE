@@ -1,0 +1,25 @@
+system=fbdev
+no-trace
+#no-debug
+#log-file=/dev/null
+
+#debug
+#wm-fullscreen-updates
+
+module-dir=/etc/lib/dfb/directfb-1.7-1
+# Mode must match the primary layer size by project spec
+mode=1280x720
+pixelformat=ARGB
+# Never create a cursor or handle it
+#no-cursor
+cursor
+
+wm=default
+no-init-layer=0
+no-init-layer=1
+init-layer=2
+
+#always-flush-callbuffer
+
+no-hardware
+no-neon
