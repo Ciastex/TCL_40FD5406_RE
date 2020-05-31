@@ -1,0 +1,5 @@
+﻿{  
+	"children_lock":"true",/*是否开启儿童锁功能*/
+	"shop_clear_list":["com.tcl.usercenter","com.audiocn.kalaok.tv","com.tcl.vod","com.golive.advert","com.golive.cinema","com.tcl.gamecenter","com.rainbowex","com.android.providers.settings","com.atet.tvgamepad","com.sxhl.tcltvmarket","com.huan.edu.lexue.frontend","com.tcl.tshop","com.smit.livevideo","com.dongle.server"],/*shop时，清除的应用列表包名*/
+	"pictrue_preset_hdr":["HDR10_BRIGHT","HDR10_SOFT","HDR10_ECO","HDR10_USER"]/*图效中HDR时开启哪些功能项*/
+}

@@ -1,0 +1,48 @@
+﻿{  
+	"children_lock":"true",/*是否开启儿童锁功能*/
+	"shop_clear_list":["com.tcl.usercenter","com.audiocn.kalaok.tv","com.tcl.vod","com.golive.advert","com.golive.cinema","com.tcl.gamecenter","com.rainbowex","com.android.providers.settings","com.atet.tvgamepad","com.sxhl.tcltvmarket","com.huan.edu.lexue.frontend","com.tcl.tshop","com.smit.livevideo","com.dongle.server"],/*shop时，清除的应用列表包名*/
+	"pictrue_preset_hdr":["HDR10_BRIGHT","HDR10_SOFT","HDR10_ECO","HDR10_USER"],/*图效中HDR时开启哪些功能项*/
+	
+	"pvr": "FALSE",//pvr开关 需大写
+	"fullySportsMode": "FALSE",//SportsMode开关 需大写
+	
+	"ginga_enable" : "0",//Ginga开关 0：关 1：开
+	
+	"standbyMusic" : "",//单独听
+	
+	"setting_country" : "FALSE",//配置LA system菜单里的国家选项 需大写
+	
+	"ATVSerach_type":["Antenna","Cable"],//ATV搜台模式Antenna、Cable
+	
+	"eManual_branch":"TCL_LA",//Emanuel配置 TCL_LA、TCL_EU
+	"ui_style": "blue",//UI样式配置 red、blue
+	"ui_branch": "file:///system/ui_tcl/framework.html",
+	"launcher_branch": "file:///system/ui_tcl/launcher_odm_purple/index.html",
+	"launcher_server":"",
+	"forSCBC":"true",
+	"mediaPictureOnly":"true",
+	
+	"ttsMenu":"on",//support TTS
+	"countryForUI":"US",//for America Crackle link was differnt
+	
+	"Esticker":"Esticker_scbc.xml",//配置Esticker
+	"Esticker_video_path":"/data/misc/EstickerRes/TCL",//演示体系内置视频路径
+	
+	//menu_option配置 EManual、ESticker、TVRemote、TCast、WiFiDisplay、
+	//ContactUs、NetworkedStandby、SmartTVPortal、AutoSource、RemoteDiagnosis、InstantPowerOn、HBBTV
+	"menu_option":[
+		"ESticker",
+		//"WiFiDisplay",
+		"AutoSource",
+		"InstantPowerOn",
+		"NetworkedStandby"
+	 ],
+	 
+	 "memc":"",//运动补偿 1：开 0：关
+	 "motion_clarity_enable":"",//预留，On、Off
+	 "bootAction":"",//预留，
+	 "panelFrequency":"",//预留，频率 60、50
+	 "lightSensorSupport":"",//预留， 1：开 0：关
+	 "LocalDimming_enable":"",//LocalDim选项，预留， 1：开 0：关
+	 "mixDim":""//MixDim选项 //预留， 1：开 0：关
+}
