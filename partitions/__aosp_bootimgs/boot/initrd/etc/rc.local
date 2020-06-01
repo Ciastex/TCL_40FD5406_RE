@@ -1,0 +1,55 @@
+#!/bin/sh
+echo "/etc/rc.local start"
+
+# mount ramdisk 
+mount -n -t proc proc /proc
+mount -n -t sysfs sysfs /sys
+mount -t devtmpfs none /dev
+#mount -t tmpfs tmpfs /dtv -o size=40M,mode=1777
+mount -t tmpfs tmpfs /tmp -o size=36M,mode=1777
+mount -t tmpfs tmpfs /media -o size=100,mode=1777
+#mount -t tmpfs tmpfs /freesia -o size=2M,mode=1777
+#mount -t tmpfs tmpfs /core -o size=30M,mode=1777
+mount -t tmpfs tmpfs /var/run -o size=1M,mode=1777
+
+#
+# USB
+#
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+# /sbin/mdev -s
+#
+# Flash partition : check & mount                                                                                                                   
+#
+source /etc/profile_emmc
+
+#
+# Make default folder 
+#
+#mkdir -p /system/etc &
+#mkdir -p /system/etc/wifi &
+#mkdir -p /system/etc/logger &
+#mkdir -p /system/browser &
+#mkdir -p /system/logger &
+#mkdir -p /system/apdat &
+#mkdir -p /system/usr/opera &
+
+#
+# Core dump
+#
+echo "| /usr/sbin/core_helper.sh  gzip  %p %e %t"  > /proc/sys/kernel/core_pattern
+
+cd /system
+source run.sh
+
+chmod o+x /bin/sh
+
+chown root /bin/sitadebug
+chgrp shell /bin/sitadebug
+chmod 4750 /bin/sitadebug
+
+chmod o-x /bin/busybox
+
+echo "/etc/rc.local finish"
+
+
+

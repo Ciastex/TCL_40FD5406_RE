@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# udhcpc script edited by Tim Riker <Tim@Rikers.org>
+[ -z "$1" ] && echo "Error: should be called from udhcpc" && exit 1
+
+RESOLV_CONF="/etc/resolv.conf"
+
+[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+[ -n "$subnet" ] && NETMASK="netmask $subnet"
+
+case "$1" in
+        deconfig)
+                /sbin/ifconfig $interface 0.0.0.0
+                ;;
+
+        renew|bound)
+                /sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+
+                if [ -n "$router" ] ; then
+                        echo "deleting routers"
+                        while route del default gw 0.0.0.0 dev $interface ; do
+                                :
+                        done
+
+                        metric=0
+                        for i in $router ; do
+                                route add default gw $i dev $interface metric $((metric++))
+                        done
+                fi
+
+                echo -n > $RESOLV_CONF
+                [ -n "$domain" ] && echo search $domain >> $RESOLV_CONF
+                for i in $dns ; do
+                        echo adding dns $i
+                        echo nameserver $i >> $RESOLV_CONF
+                done
+				
+				echo nameserver "8.8.8.8" >> $RESOLV_CONF
+				echo nameserver "114.114.114.114" >> $RESOLV_CONF
+				
+				( echo "NETWORK_CONNECTED" > /data/misc/net_fifo ) &
+
+                if [ $interface = "eth0" ]; then
+                        { echo "2" > /nvtpipe/linkstat & } &
+                fi
+
+                if [ $interface = "wlan0" ]; then
+                        { echo "4" > /nvtpipe/linkstat & } &
+                fi
+                ;;
+
+        leasefail)
+				if [ -n "$router" ] ; then
+						echo "deleting routers"
+						while route del default gw 0.0.0.0 dev $interface ; do
+								:
+						done
+				fi
+					
+				auto_ip=$(ifconfig | awk -F'addr:|Bcast' '/Bcast/{print $2}')
+				##auto_ip_in=$(busybox expr substr "${auto_ip}" 1 7)
+				auto_ip_in=$(echo "${auto_ip}" | awk -F '.' '{printf("%s.%s\n",$1,$2)}')
+				echo ayto_ip=$auto_ip
+				echo  auto_ip_in=$auto_ip_in
+				if [ "${auto_ip_in}" != "169.254" ]; then      
+				auto_ip=169.254.$(($RANDOM % 255 + 1)).$(($RANDOM % 255 + 1))
+				/sbin/ifconfig $interface $auto_ip
+				echo "ip is changed"
+				fi
+				
+				/bin/echo "write net_fifo NETWORK_DISCONNECTED"
+				( echo "$interface" "NETWORK_DISCONNECTED" > /data/misc/net_fifo ) &
+
+				##route add -net 0.0.0.0  netmask 0.0.0.0 eth0
+				   
+				if [ $interface = "eth0" ]; then
+                        { echo "3" > /nvtpipe/linkstat & } &
+                fi
+
+                if [ $interface = "wlan0" ]; then
+                        { echo "5" > /nvtpipe/linkstat & } &
+                fi
+                ;;
+				
+
+esac
+
+exit 0
